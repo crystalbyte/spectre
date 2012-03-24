@@ -1,0 +1,215 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Crystalbyte.Chocolate
+{
+    public static class CSharpCodeConverter
+    {
+        private static string StripUnnecessarySymbols(string input) {
+            input = input.Trim(';').Trim();
+            var noExport = input.Replace("CEF_EXPORT", string.Empty);
+            var noConst = noExport.Replace("const", string.Empty);
+            var noStruct = noConst.Replace("struct", string.Empty);
+            var noNewLine = noStruct.Replace("\n", string.Empty).Replace("\r", string.Empty);
+            var noEnum = noNewLine.Replace("enum", string.Empty);
+            var noBrackets = noEnum.Replace("(", " ").Replace(")", " ").Replace(",", string.Empty).Trim();
+            return noBrackets;
+        }
+
+        public static string ExtractStructName(string input) {
+            input = input.Trim();
+            var splitBySpace = input.Split(' ');
+            var name = splitBySpace.Last().TrimEnd(';');
+            return ConvertTypeName(name);
+        }
+
+        private static string AdjustArgumentName(string name) {
+            name = name.FirstToLower();
+            if (name == "string") {
+                return "@string";
+            }
+            return name;
+        }
+
+        public static string ConvertMethod(string input, out string name) {
+            input = StripUnnecessarySymbols(input);
+            var splitBySpace = input.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+            var returnValue = splitBySpace.First();
+            name = splitBySpace[1];
+            var args = new List<string>();
+
+            if (splitBySpace.Length > 2) {
+                for (var i = 2; i < splitBySpace.Length; i++) {
+                    var argumentType = ConvertType(splitBySpace[i++]);
+                    var argument = ConvertType(splitBySpace[i], true);
+                    args.Add(argumentType + " " + AdjustArgumentName(argument));
+                }
+            }
+
+            using (var sw = new StringWriter()) {
+                sw.Write("public static extern ");
+                sw.Write(ConvertType(returnValue));
+                sw.Write(" ");
+                sw.Write(ConvertTypeName(name));
+                sw.Write("(");
+                foreach (var arg in args) {
+                    sw.Write(arg);
+                    sw.Write(", ");
+                }
+                if (args.Count > 0) {
+                    sw.GetStringBuilder().Remove(sw.GetStringBuilder().Length - 2, 2);    
+                }
+                sw.Write(")");
+                sw.Write(";");
+                return sw.ToString();
+            }
+        }
+
+        public static string ConvertTypeName(string typeName)
+        {
+            var name = string.Empty;
+            var parts = typeName.Split('_');
+            var result = parts.Where(part => part != "t").Aggregate(name, (current, part) => current + " " + part.ToLower());
+            result = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result.ToLower());
+            return result.Replace(" ", string.Empty);
+        }
+
+        public static string ConvertFileName(string filename)
+        {
+            var name = string.Empty;
+            var parts = filename.Split('_');
+            var result = parts.Where(part => part != "t").Aggregate(name, (current, part) => current + " " + part.ToLower());
+            result = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result.ToLower());
+            return result.Replace(" ", "").Replace(".H", ".cs");
+        }
+
+        private static string ConvertType(string type, bool isIdent = false) {
+            if (type.Contains("*")) {
+                return "IntPtr";
+            }
+
+            if (type == "time_t") {
+                return "long";
+            }
+
+            if (type == "size") {
+                return isIdent ? "size" : "int";
+            }
+
+            if (type == "size_t") {
+                return "int";
+            }
+
+            if (type == "bool") {
+                return "bool";
+            }
+
+            if (type == "int") {
+                return "int";
+            }
+
+            if (type == "int32") {
+                return "int";
+            }
+
+            if (type == "int64") {
+                return "long";
+            }
+
+            if (type == "void") {
+                return "void";
+            }
+
+            if (type == "cef_window_handle_t") {
+                return "IntPtr";
+            }
+
+            if (type == "CefString") {
+                return "CefStringUtf8";
+            }
+
+            return ConvertTypeName(type);
+        }
+
+        internal static string ConvertMember(string member, out bool isFunctionPointer)
+        {
+            if (member.Contains("(")) {
+                isFunctionPointer = true;
+                var name = ExtractFunctionPointerName(member);
+                return string.Format("IntPtr {0};", name);
+            }
+            else {
+                isFunctionPointer = false;
+                var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
+                var type = ConvertType(splitBySpace.First());
+                var name = ConvertTypeName(splitBySpace.Last());
+                return string.Format("{0} {1};", type, name);
+            }
+        }
+
+        private static string ExtractFunctionPointerName(string member) {
+            var match = Regex.Match(member, @"\(CEF_CALLBACK(\s|\w|\*)*\)");
+            Debug.Assert(match.Success);
+            var value = match.Value.Trim(new []{'(',')'});
+            var splitBySpace = value.Split(' ');
+            var pointer = splitBySpace.Last();
+            var name = pointer.Replace("*", string.Empty);
+            return ConvertTypeName(name);
+
+        }
+
+        internal static string CreateDelegate(string del) {
+            del = StripUnnecessarySymbols(del);
+            var splitBySpace = del.Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries);
+            var returnValue = ConvertType(splitBySpace.First());
+            var name = ConvertTypeName(splitBySpace[2].Replace("*", string.Empty)) + "Callback";
+            var args = new List<string>();
+
+            if (splitBySpace.Length > 3) {
+                for (var i = 3; i < splitBySpace.Length; i++) {
+                    var argumentType = ConvertType(splitBySpace[i++]);
+                    var argument = ConvertType(splitBySpace[i], true);
+                    args.Add(argumentType + " " + AdjustArgumentName(argument));
+                }
+            }
+
+            using (var sw = new StringWriter()) {
+                sw.Write("public delegate ");
+                sw.Write(returnValue);
+                sw.Write(" ");
+                sw.Write(name);
+                sw.Write("(");
+                foreach (var arg in args) {
+                    sw.Write(arg);
+                    sw.Write(", ");
+                }
+                if (args.Count > 0) {
+                    sw.GetStringBuilder().Remove(sw.GetStringBuilder().Length - 2, 2);
+                }
+                sw.Write(")");
+                sw.Write(";");
+                return sw.ToString();
+            }
+        }
+
+        internal static string ExtractEnumName(string @enum) {
+            var splitBySpace = @enum.Split(' ');
+            return ConvertTypeName(splitBySpace[1]);
+        }
+
+        internal static string ConvertEnumEntry(string entry) {
+            if (!entry.Contains("=")) {
+                return ConvertTypeName(entry);
+            }
+            var splitByEqual = entry.Split('=');
+            var name = splitByEqual.First().ToLower().Replace("_", string.Empty);
+            name = ConvertTypeName(name);
+            return string.Format("{0} = {1}", name, splitByEqual[1]);
+        }
+    }
+}
