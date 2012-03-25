@@ -89,7 +89,66 @@ namespace Crystalbyte.Chocolate
         }
 
         private static string ConvertType(string type, bool isIdent = false) {
+
+            type = type.ToLower();
+
             if (type.Contains("*")) {
+                return "IntPtr";
+            }
+
+            if (type == "cef_window_handle_t") {
+                return "IntPtr";
+            }
+
+            if (type == "dword") {
+                return "int";
+            }
+
+            if (type == "hinstance") {
+                return "IntPtr";
+            }
+
+            if (type == "cef_string_userfree_t") {
+                return "IntPtr";
+            }
+
+            if (type == "cef_string_map_t") {
+                return "IntPtr";
+            }
+
+            if (type == "cef_string_multimap_t") {
+                return "IntPtr";
+            }
+
+            if (type.StartsWith("cef_string_userfree_wide_t")) {
+                return "IntPtr";
+            }
+
+            if (type.StartsWith("cef_string_userfree_utf8_t")) {
+                return "IntPtr";
+            }
+
+            if (type.StartsWith("cef_string_userfree_utf16_t")) {
+                return "IntPtr";
+            }
+
+            if (type == "bool") {
+                return "bool";
+            }
+
+            if (type == "hmenu") {
+                return "IntPtr";
+            }
+
+            if (type == "cef_string_list_t") {
+                return "IntPtr";
+            }
+
+            if (type == "cef_string_t") {
+                return "CefStringUtf8";
+            }
+
+            if (type == "cef_string_list_t") {
                 return "IntPtr";
             }
 
@@ -129,32 +188,35 @@ namespace Crystalbyte.Chocolate
                 return "IntPtr";
             }
 
-            if (type == "CefString") {
-                return "CefStringUtf8";
-            }
-
             return ConvertTypeName(type);
         }
 
-        internal static string ConvertMember(string member, out bool isFunctionPointer)
-        {
+        private static string AdjustFunctionName(string name) {
+            return name == "GetType" ? "GetElementType" : name;
+        }
+
+        internal static string ConvertMember(string member, out bool isFunctionPointer) {
             if (member.Contains("(")) {
                 isFunctionPointer = true;
                 var name = ExtractFunctionPointerName(member);
-                return string.Format("IntPtr {0};", name);
+                return string.Format("IntPtr {0};", AdjustFunctionName(name));
             }
             else {
                 isFunctionPointer = false;
                 var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
                 var type = ConvertType(splitBySpace.First());
                 var name = ConvertTypeName(splitBySpace.Last());
-                return string.Format("{0} {1};", type, name);
+                return string.Format("{0} {1};", type, AdjustFunctionName(name));
             }
         }
 
         private static string ExtractFunctionPointerName(string member) {
             var match = Regex.Match(member, @"\(CEF_CALLBACK(\s|\w|\*)*\)");
-            Debug.Assert(match.Success);
+            if (!match.Success) {
+                var matches = Regex.Matches(member, @"\((\s|\w|\*)*\)");
+                var d =  matches[0].Value.Replace("*", string.Empty).Trim(new[] {'(', ')'}).Trim();
+                return ConvertTypeName(d);
+            }
             var value = match.Value.Trim(new []{'(',')'});
             var splitBySpace = value.Split(' ');
             var pointer = splitBySpace.Last();
@@ -163,15 +225,17 @@ namespace Crystalbyte.Chocolate
 
         }
 
-        internal static string CreateDelegate(string del) {
+        internal static string CreateDelegate(string del, out string name) {
             del = StripUnnecessarySymbols(del);
             var splitBySpace = del.Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries);
             var returnValue = ConvertType(splitBySpace.First());
-            var name = ConvertTypeName(splitBySpace[2].Replace("*", string.Empty)) + "Callback";
+            name = ConvertTypeName(splitBySpace[2].Replace("*", string.Empty)) + "Callback";
             var args = new List<string>();
 
-            if (splitBySpace.Length > 3) {
-                for (var i = 3; i < splitBySpace.Length; i++) {
+            var begin = del.Contains("CEF_CALLBACK") ? 3 : 2;
+
+            if (splitBySpace.Length > begin) {
+                for (var i = begin; i < splitBySpace.Length; i++) {
                     var argumentType = ConvertType(splitBySpace[i++]);
                     var argument = ConvertType(splitBySpace[i], true);
                     args.Add(argumentType + " " + AdjustArgumentName(argument));
@@ -204,12 +268,12 @@ namespace Crystalbyte.Chocolate
 
         internal static string ConvertEnumEntry(string entry) {
             if (!entry.Contains("=")) {
-                return ConvertTypeName(entry);
+                return ConvertTypeName(entry) + ",";
             }
-            var splitByEqual = entry.Split('=');
-            var name = splitByEqual.First().ToLower().Replace("_", string.Empty);
-            name = ConvertTypeName(name);
-            return string.Format("{0} = {1}", name, splitByEqual[1]);
+            var splitByEqual = entry.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
+            var name = splitByEqual.First().ToLower().Trim();
+            name = ConvertTypeName(name).Replace("_", string.Empty);
+            return string.Format("{0} = {1},", name, splitByEqual[1].Trim());
         }
     }
 }

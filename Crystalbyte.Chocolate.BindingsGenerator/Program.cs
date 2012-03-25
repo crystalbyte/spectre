@@ -1,25 +1,34 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Crystalbyte.Chocolate
 {
     class Program
     {
         static void Main(string[] args) {
-            var settings = new GeneratorSettings() {
-                RootDirectory = new DirectoryInfo("include/capi"),
-                OutputDirectory = new DirectoryInfo("bindings"),
-                Namespace = "Crystalbyte.Chocolate.Bindings"
-            }; 
-            var generator = new BindingsGenerator(settings);
-            generator.Generate();
 
-            var settings2 = new GeneratorSettings() {
-                RootDirectory = new DirectoryInfo("include/internal"),
-                OutputDirectory = new DirectoryInfo("bindings/internal"),
-                Namespace = "Crystalbyte.Chocolate.Bindings"
-            };
-            var generator2 = new BindingsGenerator(settings2);
-            generator2.Generate();
+            var created = false;
+            var dirs = new List<string> {"include/capi", "include/internal"};
+            foreach (var dir in dirs) {
+                
+                var settings = new GeneratorSettings() {
+                    RootDirectory = new DirectoryInfo(dir),
+                    OutputDirectory = new DirectoryInfo("out/" + dir),
+                    Namespace = "Crystalbyte.Chocolate.Bindings"
+                };
+                if (dir.EndsWith("internal")) {
+                    settings.ClassNameSuffix = "Class";
+                    settings.Namespace = "Crystalbyte.Chocolate.Bindings.Internal";
+                }
+                var generator = new BindingsGenerator(settings);
+                generator.Generate();
+
+                if (created) {
+                    continue;
+                }
+                generator.GenerateAssemblyFile();
+                created = true;
+            }
         }
     }
 }

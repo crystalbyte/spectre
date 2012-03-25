@@ -10,6 +10,7 @@ namespace Crystalbyte.Chocolate
         private readonly GeneratorSettings _settings;
         public BindingsGenerator(GeneratorSettings settings) {
             _settings = settings;
+            _delegeteArchive = new Dictionary<string, string>();
         }
 
         public void Generate() {
@@ -17,7 +18,6 @@ namespace Crystalbyte.Chocolate
                 _settings.OutputDirectory.Delete(true);
             }
             _settings.OutputDirectory.Create();
-            GenerateAssemblyFile();
             var service = new DiscoveryService(_settings);
             var files = service.Discover();
             foreach (var file in files) {
@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate
             }
         }
 
-        private void GenerateAssemblyFile()
+        public void GenerateAssemblyFile()
         {
             using (var fs = GenerateOutputFile("CefAssembly.cs")) {
                 using (var cs = new CSharpCodeWriter(fs)) {
@@ -51,9 +51,10 @@ namespace Crystalbyte.Chocolate
                 using (var cw = new CSharpCodeWriter(fs)) {
                     cw.WriteDefaultUsingDirectives();
                     cw.BeginNamespace(_settings.Namespace);
+
                     var methods = FindNativeMethods(content);
                     if (methods.Count > 0) {
-                        GenerateClass(cw, methods, name);
+                        GenerateClass(cw, methods, name, _settings.ClassNameSuffix);
                         cw.WriteLine(string.Empty);
                     }
 
@@ -83,10 +84,7 @@ namespace Crystalbyte.Chocolate
                 var entries = FindEnumEntries(@enum);
                 foreach (var entry in entries) {
                     var convert = CSharpCodeConverter.ConvertEnumEntry(entry);
-                    cw.WriteLine(entry);
-                    if (entry != entries.Last()) {
-                        cw.WriteLine(entry);
-                    }
+                    cw.WriteLine(convert);
                 }
 
                 cw.EndEnum();
@@ -97,7 +95,7 @@ namespace Crystalbyte.Chocolate
             var splitByComma = @enum.Split('\n');
             for (var i = 1; i < splitByComma.Length - 1; i++) {
                 var line = splitByComma[i];
-                if (!line.Trim().StartsWith("//")) {
+                if (!line.Trim().StartsWith("//") && !string.IsNullOrWhiteSpace(line)) {
                     yield return line.Trim(',');
                 }
             }
@@ -111,7 +109,9 @@ namespace Crystalbyte.Chocolate
             return (from Match match in matches select match.Value).ToList();
         }
 
-        private static void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs) {
+        private readonly Dictionary<string,string> _delegeteArchive;
+
+        private void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs) {
             var delegates = new List<string>();
             foreach (var @struct in structs) {
                 var name = CSharpCodeConverter.ExtractStructName(@struct);
@@ -126,18 +126,24 @@ namespace Crystalbyte.Chocolate
                         delegates.Add(member);
                     }
                 }
+
                 cw.EndStruct();
                 cw.WriteLine(string.Empty);
             }
 
             foreach (var @delegate in delegates) {
-                var @d = CSharpCodeConverter.CreateDelegate(@delegate);
+                string name;
+                var @d = CSharpCodeConverter.CreateDelegate(@delegate, out name);
+                if (_delegeteArchive.ContainsKey(name)) {
+                    continue;
+                }
                 cw.WriteLine(@d);
+                _delegeteArchive.Add(name, @delegate);
             }
         }
 
-        private static void GenerateClass(CSharpCodeWriter cw, IEnumerable<string> methods, string name) {
-            cw.BeginClass(name.Split('.')[0]);
+        private static void GenerateClass(CSharpCodeWriter cw, IEnumerable<string> methods, string name, string suffix) {
+            cw.BeginClass(name.Split('.')[0], true, suffix);
             foreach (var method in methods) {
                 cw.WriteMethod(method);
                 if (methods.Last() != method) {
@@ -155,7 +161,7 @@ namespace Crystalbyte.Chocolate
             //const string memberPattern = 
             //    @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\(CEF_CALLBACK\s+\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s+\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)";
             const string memberPattern =
-                @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\((CEF_CALLBACK)*\s+\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s+\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)";
+                @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\((CEF_CALLBACK)*\s*\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s*\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)";
             var matches = Regex.Matches(content, memberPattern, RegexOptions.Multiline);
             return (from Match match in matches select match.Value).ToList();
         }
