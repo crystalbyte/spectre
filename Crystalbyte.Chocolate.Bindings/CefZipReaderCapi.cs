@@ -14,19 +14,19 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefZipReader {
-		CefBase Base;
-		IntPtr MoveToFirstFile;
-		IntPtr MoveToNextFile;
-		IntPtr MoveToFile;
-		IntPtr Close;
-		IntPtr GetFileName;
-		IntPtr GetFileSize;
-		IntPtr GetFileLastModified;
-		IntPtr OpenFile;
-		IntPtr CloseFile;
-		IntPtr ReadFile;
-		IntPtr Tell;
-		IntPtr Eof;
+		public CefBase Base;
+		public IntPtr MoveToFirstFile;
+		public IntPtr MoveToNextFile;
+		public IntPtr MoveToFile;
+		public IntPtr Close;
+		public IntPtr GetFileName;
+		public IntPtr GetFileSize;
+		public IntPtr GetFileLastModified;
+		public IntPtr OpenFile;
+		public IntPtr CloseFile;
+		public IntPtr ReadFile;
+		public IntPtr Tell;
+		public IntPtr Eof;
 	}
 	
 	public delegate int MoveToFirstFileCallback(IntPtr self);

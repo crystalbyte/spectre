@@ -8,30 +8,30 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefFrame {
-		CefBase Base;
-		IntPtr IsValid;
-		IntPtr Undo;
-		IntPtr Redo;
-		IntPtr Cut;
-		IntPtr Copy;
-		IntPtr Paste;
-		IntPtr Del;
-		IntPtr SelectAll;
-		IntPtr Print;
-		IntPtr ViewSource;
-		IntPtr GetSource;
-		IntPtr GetText;
-		IntPtr LoadRequest;
-		IntPtr LoadUrl;
-		IntPtr LoadString;
-		IntPtr ExecuteJavaScript;
-		IntPtr IsMain;
-		IntPtr IsFocused;
-		IntPtr GetName;
-		IntPtr GetIdentifier;
-		IntPtr GetParent;
-		IntPtr GetUrl;
-		IntPtr GetBrowser;
+		public CefBase Base;
+		public IntPtr IsValid;
+		public IntPtr Undo;
+		public IntPtr Redo;
+		public IntPtr Cut;
+		public IntPtr Copy;
+		public IntPtr Paste;
+		public IntPtr Del;
+		public IntPtr SelectAll;
+		public IntPtr Print;
+		public IntPtr ViewSource;
+		public IntPtr GetSource;
+		public IntPtr GetText;
+		public IntPtr LoadRequest;
+		public IntPtr LoadUrl;
+		public IntPtr LoadString;
+		public IntPtr ExecuteJavaScript;
+		public IntPtr IsMain;
+		public IntPtr IsFocused;
+		public IntPtr GetName;
+		public IntPtr GetIdentifier;
+		public IntPtr GetParent;
+		public IntPtr GetUrl;
+		public IntPtr GetBrowser;
 	}
 	
 	public delegate int IsValidCallback(IntPtr self);

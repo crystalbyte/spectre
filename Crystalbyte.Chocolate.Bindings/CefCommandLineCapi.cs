@@ -14,21 +14,21 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefCommandLine {
-		CefBase Base;
-		IntPtr InitFromString;
-		IntPtr Reset;
-		IntPtr GetCommandLineString;
-		IntPtr GetProgram;
-		IntPtr SetProgram;
-		IntPtr HasSwitches;
-		IntPtr HasSwitch;
-		IntPtr GetSwitchValue;
-		IntPtr GetSwitches;
-		IntPtr AppendSwitch;
-		IntPtr AppendSwitchWithValue;
-		IntPtr HasArguments;
-		IntPtr GetArguments;
-		IntPtr AppendArgument;
+		public CefBase Base;
+		public IntPtr InitFromString;
+		public IntPtr Reset;
+		public IntPtr GetCommandLineString;
+		public IntPtr GetProgram;
+		public IntPtr SetProgram;
+		public IntPtr HasSwitches;
+		public IntPtr HasSwitch;
+		public IntPtr GetSwitchValue;
+		public IntPtr GetSwitches;
+		public IntPtr AppendSwitch;
+		public IntPtr AppendSwitchWithValue;
+		public IntPtr HasArguments;
+		public IntPtr GetArguments;
+		public IntPtr AppendArgument;
 	}
 	
 	public delegate void InitFromStringCallback(IntPtr self, IntPtr commandLine);

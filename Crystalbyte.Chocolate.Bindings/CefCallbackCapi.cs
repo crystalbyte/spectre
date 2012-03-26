@@ -8,9 +8,9 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefCallback {
-		CefBase Base;
-		IntPtr Cont;
-		IntPtr Cancel;
+		public CefBase Base;
+		public IntPtr Cont;
+		public IntPtr Cancel;
 	}
 	
 	public delegate void ContCallback(IntPtr self);

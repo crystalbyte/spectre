@@ -8,18 +8,18 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefAuthCallback {
-		CefBase Base;
-		IntPtr Cont;
-		IntPtr Cancel;
+		public CefBase Base;
+		public IntPtr Cont;
+		public IntPtr Cancel;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefRequestHandler {
-		CefBase Base;
-		IntPtr OnBeforeResourceLoad;
-		IntPtr GetResourceHandler;
-		IntPtr OnResourceRedirect;
-		IntPtr GetAuthCredentials;
+		public CefBase Base;
+		public IntPtr OnBeforeResourceLoad;
+		public IntPtr GetResourceHandler;
+		public IntPtr OnResourceRedirect;
+		public IntPtr GetAuthCredentials;
 	}
 	
 	public delegate int OnBeforeResourceLoadCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr request);

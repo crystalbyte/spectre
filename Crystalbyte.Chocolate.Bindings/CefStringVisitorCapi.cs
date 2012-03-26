@@ -8,8 +8,8 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefStringVisitor {
-		CefBase Base;
-		IntPtr Visit;
+		public CefBase Base;
+		public IntPtr Visit;
 	}
 	
 	public delegate void VisitCallback(IntPtr self, IntPtr @string);

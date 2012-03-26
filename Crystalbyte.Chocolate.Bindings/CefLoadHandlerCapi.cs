@@ -8,9 +8,9 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefLoadHandler {
-		CefBase Base;
-		IntPtr OnLoadStart;
-		IntPtr OnLoadEnd;
+		public CefBase Base;
+		public IntPtr OnLoadStart;
+		public IntPtr OnLoadEnd;
 	}
 	
 	public delegate void OnLoadStartCallback(IntPtr self, IntPtr browser, IntPtr frame);

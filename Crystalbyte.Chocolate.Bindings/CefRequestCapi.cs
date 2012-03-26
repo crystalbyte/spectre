@@ -20,41 +20,41 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefRequest {
-		CefBase Base;
-		IntPtr GetUrl;
-		IntPtr SetUrl;
-		IntPtr GetMethod;
-		IntPtr SetMethod;
-		IntPtr GetPostData;
-		IntPtr SetPostData;
-		IntPtr GetHeaderMap;
-		IntPtr SetHeaderMap;
-		IntPtr Set;
-		IntPtr GetFlags;
-		IntPtr GetFirstPartyForCookies;
-		IntPtr SetFirstPartyForCookies;
+		public CefBase Base;
+		public IntPtr GetUrl;
+		public IntPtr SetUrl;
+		public IntPtr GetMethod;
+		public IntPtr SetMethod;
+		public IntPtr GetPostData;
+		public IntPtr SetPostData;
+		public IntPtr GetHeaderMap;
+		public IntPtr SetHeaderMap;
+		public IntPtr Set;
+		public IntPtr GetFlags;
+		public IntPtr GetFirstPartyForCookies;
+		public IntPtr SetFirstPartyForCookies;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefPostData {
-		CefBase Base;
-		IntPtr GetElementCount;
-		IntPtr GetElements;
-		IntPtr RemoveElement;
-		IntPtr AddElement;
-		IntPtr RemoveElements;
+		public CefBase Base;
+		public IntPtr GetElementCount;
+		public IntPtr GetElements;
+		public IntPtr RemoveElement;
+		public IntPtr AddElement;
+		public IntPtr RemoveElements;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefPostDataElement {
-		CefBase Base;
-		IntPtr SetToEmpty;
-		IntPtr SetToFile;
-		IntPtr SetToBytes;
-		IntPtr GetElementType;
-		IntPtr GetFile;
-		IntPtr GetBytesCount;
-		IntPtr GetBytes;
+		public CefBase Base;
+		public IntPtr SetToEmpty;
+		public IntPtr SetToFile;
+		public IntPtr SetToBytes;
+		public IntPtr GetElementType;
+		public IntPtr GetFile;
+		public IntPtr GetBytesCount;
+		public IntPtr GetBytes;
 	}
 	
 	public delegate void SetUrlCallback(IntPtr self, IntPtr url);

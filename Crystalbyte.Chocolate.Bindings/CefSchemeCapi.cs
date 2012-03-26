@@ -20,8 +20,8 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefSchemeHandlerFactory {
-		CefBase Base;
-		IntPtr Create;
+		public CefBase Base;
+		public IntPtr Create;
 	}
 	
 	public delegate IntPtr CreateCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr schemeName, IntPtr request);

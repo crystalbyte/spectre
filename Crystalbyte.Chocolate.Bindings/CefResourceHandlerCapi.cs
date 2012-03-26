@@ -8,11 +8,11 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefResourceHandler {
-		CefBase Base;
-		IntPtr ProcessRequest;
-		IntPtr GetResponseHeaders;
-		IntPtr ReadResponse;
-		IntPtr Cancel;
+		public CefBase Base;
+		public IntPtr ProcessRequest;
+		public IntPtr GetResponseHeaders;
+		public IntPtr ReadResponse;
+		public IntPtr Cancel;
 	}
 	
 	public delegate int ProcessRequestCallback(IntPtr self, IntPtr request, IntPtr callback);

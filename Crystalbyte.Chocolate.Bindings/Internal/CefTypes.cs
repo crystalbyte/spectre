@@ -8,84 +8,84 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefSettings {
-		int Size;
-		bool SingleProcess;
-		CefStringUtf8 BrowserSubprocessPath;
-		bool MultiThreadedMessageLoop;
-		bool CommandLineArgsDisabled;
-		CefStringUtf8 CachePath;
-		CefStringUtf8 UserAgent;
-		CefStringUtf8 ProductVersion;
-		CefStringUtf8 Locale;
-		IntPtr ExtraPluginPaths;
-		CefStringUtf8 LogFile;
-		CefLogSeverity LogSeverity;
-		CefGraphicsImplementation GraphicsImplementation;
-		CefStringUtf8 JavascriptFlags;
-		bool AutoDetectProxySettingsEnabled;
-		CefStringUtf8 PackFilePath;
-		CefStringUtf8 LocalesDirPath;
-		bool PackLoadingDisabled;
+		public int Size;
+		public bool SingleProcess;
+		public CefStringUtf8 BrowserSubprocessPath;
+		public bool MultiThreadedMessageLoop;
+		public bool CommandLineArgsDisabled;
+		public CefStringUtf8 CachePath;
+		public CefStringUtf8 UserAgent;
+		public CefStringUtf8 ProductVersion;
+		public CefStringUtf8 Locale;
+		public IntPtr ExtraPluginPaths;
+		public CefStringUtf8 LogFile;
+		public CefLogSeverity LogSeverity;
+		public CefGraphicsImplementation GraphicsImplementation;
+		public CefStringUtf8 JavascriptFlags;
+		public bool AutoDetectProxySettingsEnabled;
+		public CefStringUtf8 PackFilePath;
+		public CefStringUtf8 LocalesDirPath;
+		public bool PackLoadingDisabled;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefUrlparts {
-		CefStringUtf8 Spec;
-		CefStringUtf8 Scheme;
-		CefStringUtf8 Username;
-		CefStringUtf8 Password;
-		CefStringUtf8 Host;
-		CefStringUtf8 Port;
-		CefStringUtf8 Path;
-		CefStringUtf8 Query;
+		public CefStringUtf8 Spec;
+		public CefStringUtf8 Scheme;
+		public CefStringUtf8 Username;
+		public CefStringUtf8 Password;
+		public CefStringUtf8 Host;
+		public CefStringUtf8 Port;
+		public CefStringUtf8 Path;
+		public CefStringUtf8 Query;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefCookie {
-		CefStringUtf8 Name;
-		CefStringUtf8 Value;
-		CefStringUtf8 Domain;
-		CefStringUtf8 Path;
-		bool Secure;
-		bool Httponly;
-		CefTime Creation;
-		CefTime LastAccess;
-		bool HasExpires;
-		CefTime Expires;
+		public CefStringUtf8 Name;
+		public CefStringUtf8 Value;
+		public CefStringUtf8 Domain;
+		public CefStringUtf8 Path;
+		public bool Secure;
+		public bool Httponly;
+		public CefTime Creation;
+		public CefTime LastAccess;
+		public bool HasExpires;
+		public CefTime Expires;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefRect {
-		int X;
-		int Y;
-		int Width;
-		int Height;
+		public int X;
+		public int Y;
+		public int Width;
+		public int Height;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefPopupFeatures {
-		int X;
-		bool Xset;
-		int Y;
-		bool Yset;
-		int Width;
-		bool Widthset;
-		int Height;
-		bool Heightset;
-		bool Menubarvisible;
-		bool Statusbarvisible;
-		bool Toolbarvisible;
-		bool Locationbarvisible;
-		bool Scrollbarsvisible;
-		bool Resizable;
-		bool Fullscreen;
-		bool Dialog;
-		IntPtr Additionalfeatures;
+		public int X;
+		public bool Xset;
+		public int Y;
+		public bool Yset;
+		public int Width;
+		public bool Widthset;
+		public int Height;
+		public bool Heightset;
+		public bool Menubarvisible;
+		public bool Statusbarvisible;
+		public bool Toolbarvisible;
+		public bool Locationbarvisible;
+		public bool Scrollbarsvisible;
+		public bool Resizable;
+		public bool Fullscreen;
+		public bool Dialog;
+		public IntPtr Additionalfeatures;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefProxyInfo {
-		CefStringUtf8 Proxylist;
+		public CefStringUtf8 Proxylist;
 	}
 	
 	

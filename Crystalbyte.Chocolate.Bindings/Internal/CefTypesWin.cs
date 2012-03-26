@@ -8,22 +8,22 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefMainArgs {
-		IntPtr Instance;
+		public IntPtr Instance;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefWindowInfo {
-		int ExStyle;
-		CefStringUtf8 WindowName;
-		int Style;
-		int X;
-		int Y;
-		int Width;
-		int Height;
-		IntPtr ParentWindow;
-		IntPtr Menu;
-		bool TransparentPainting;
-		IntPtr Window;
+		public int ExStyle;
+		public CefStringUtf8 WindowName;
+		public int Style;
+		public int X;
+		public int Y;
+		public int Width;
+		public int Height;
+		public IntPtr ParentWindow;
+		public IntPtr Menu;
+		public bool TransparentPainting;
+		public IntPtr Window;
 	}
 	
 	

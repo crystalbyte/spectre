@@ -199,14 +199,14 @@ namespace Crystalbyte.Chocolate
             if (member.Contains("(")) {
                 isFunctionPointer = true;
                 var name = ExtractFunctionPointerName(member);
-                return string.Format("IntPtr {0};", AdjustFunctionName(name));
+                return string.Format("public IntPtr {0};", AdjustFunctionName(name));
             }
             else {
                 isFunctionPointer = false;
                 var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
                 var type = ConvertType(splitBySpace.First());
                 var name = ConvertTypeName(splitBySpace.Last());
-                return string.Format("{0} {1};", type, AdjustFunctionName(name));
+                return string.Format("public {0} {1};", type, AdjustFunctionName(name));
             }
         }
 

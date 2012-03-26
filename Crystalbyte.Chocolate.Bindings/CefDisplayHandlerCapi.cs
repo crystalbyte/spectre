@@ -8,12 +8,12 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefDisplayHandler {
-		CefBase Base;
-		IntPtr OnLoadingStateChange;
-		IntPtr OnAddressChange;
-		IntPtr OnTitleChange;
-		IntPtr OnTooltip;
-		IntPtr OnConsoleMessage;
+		public CefBase Base;
+		public IntPtr OnLoadingStateChange;
+		public IntPtr OnAddressChange;
+		public IntPtr OnTitleChange;
+		public IntPtr OnTooltip;
+		public IntPtr OnConsoleMessage;
 	}
 	
 	public delegate void OnLoadingStateChangeCallback(IntPtr self, IntPtr browser, int isloading, int cangoback, int cangoforward);

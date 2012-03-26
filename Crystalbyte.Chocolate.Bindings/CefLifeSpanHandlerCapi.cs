@@ -8,12 +8,12 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefLifeSpanHandler {
-		CefBase Base;
-		IntPtr OnBeforePopup;
-		IntPtr OnAfterCreated;
-		IntPtr RunModal;
-		IntPtr DoClose;
-		IntPtr OnBeforeClose;
+		public CefBase Base;
+		public IntPtr OnBeforePopup;
+		public IntPtr OnAfterCreated;
+		public IntPtr RunModal;
+		public IntPtr DoClose;
+		public IntPtr OnBeforeClose;
 	}
 	
 	public delegate int OnBeforePopupCallback(IntPtr self, IntPtr parentbrowser, IntPtr popupfeatures, IntPtr windowinfo, IntPtr url, IntPtr client, IntPtr settings);

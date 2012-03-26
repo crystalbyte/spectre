@@ -8,8 +8,8 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefProxyHandler {
-		CefBase Base;
-		IntPtr GetProxyForUrl;
+		public CefBase Base;
+		public IntPtr GetProxyForUrl;
 	}
 	
 	public delegate void GetProxyForUrlCallback(IntPtr self, IntPtr url, IntPtr proxyInfo);

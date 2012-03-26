@@ -7,12 +7,9 @@ using System.Security;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
-{
-    public static class Platform
-    {
-        static Platform()
-        {
+namespace Crystalbyte.Chocolate {
+    public static class Platform {
+        static Platform() {
             // we will just assume the os does not change at runtime ...
             IsWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
             IsMacOS = !IsWindows && CheckForMacOS();
@@ -27,8 +24,7 @@ namespace Crystalbyte.Chocolate
 
         public static bool IsMacOS { get; private set; }
 
-        private static bool CheckForMacOS()
-        {
+        private static bool CheckForMacOS() {
             var buffer = IntPtr.Zero;
             try {
                 buffer = Marshal.AllocHGlobal(8192);
@@ -39,10 +35,12 @@ namespace Crystalbyte.Chocolate
                     }
                 }
                 return false;
-            } catch (DllNotFoundException ex) {
+            }
+            catch (DllNotFoundException ex) {
                 Debug.WriteLine(ex.ToString());
                 return false;
-            } finally {
+            }
+            finally {
                 if (buffer != IntPtr.Zero) {
                     Marshal.FreeHGlobal(buffer);
                 }
@@ -52,8 +50,7 @@ namespace Crystalbyte.Chocolate
         #region Nested type: NativeMethods
 
         [SuppressUnmanagedCodeSecurity]
-        private static class NativeMethods
-        {
+        private static class NativeMethods {
             [DllImport("libc", EntryPoint = "uname")]
             public static extern int UName(IntPtr buf);
         }

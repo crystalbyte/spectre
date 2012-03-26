@@ -20,8 +20,8 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefTask {
-		CefBase Base;
-		IntPtr Execute;
+		public CefBase Base;
+		public IntPtr Execute;
 	}
 	
 	public delegate void ExecuteCallback(IntPtr self, CefThreadId threadid);

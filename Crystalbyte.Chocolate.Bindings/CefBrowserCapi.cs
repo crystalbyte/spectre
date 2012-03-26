@@ -17,37 +17,37 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefBrowser {
-		CefBase Base;
-		IntPtr ParentWindowWillClose;
-		IntPtr CloseBrowser;
-		IntPtr CanGoBack;
-		IntPtr GoBack;
-		IntPtr CanGoForward;
-		IntPtr GoForward;
-		IntPtr IsLoading;
-		IntPtr Reload;
-		IntPtr ReloadIgnoreCache;
-		IntPtr StopLoad;
-		IntPtr SetFocus;
-		IntPtr GetWindowHandle;
-		IntPtr GetOpenerWindowHandle;
-		IntPtr IsPopup;
-		IntPtr HasDocument;
-		IntPtr GetClient;
-		IntPtr GetMainFrame;
-		IntPtr GetFocusedFrame;
-		IntPtr GetFrameByident;
-		IntPtr GetFrame;
-		IntPtr GetFrameCount;
-		IntPtr GetFrameIdentifiers;
-		IntPtr GetFrameNames;
-		IntPtr Find;
-		IntPtr StopFinding;
-		IntPtr GetZoomLevel;
-		IntPtr SetZoomLevel;
-		IntPtr ClearHistory;
-		IntPtr ShowDevTools;
-		IntPtr CloseDevTools;
+		public CefBase Base;
+		public IntPtr ParentWindowWillClose;
+		public IntPtr CloseBrowser;
+		public IntPtr CanGoBack;
+		public IntPtr GoBack;
+		public IntPtr CanGoForward;
+		public IntPtr GoForward;
+		public IntPtr IsLoading;
+		public IntPtr Reload;
+		public IntPtr ReloadIgnoreCache;
+		public IntPtr StopLoad;
+		public IntPtr SetFocus;
+		public IntPtr GetWindowHandle;
+		public IntPtr GetOpenerWindowHandle;
+		public IntPtr IsPopup;
+		public IntPtr HasDocument;
+		public IntPtr GetClient;
+		public IntPtr GetMainFrame;
+		public IntPtr GetFocusedFrame;
+		public IntPtr GetFrameByident;
+		public IntPtr GetFrame;
+		public IntPtr GetFrameCount;
+		public IntPtr GetFrameIdentifiers;
+		public IntPtr GetFrameNames;
+		public IntPtr Find;
+		public IntPtr StopFinding;
+		public IntPtr GetZoomLevel;
+		public IntPtr SetZoomLevel;
+		public IntPtr ClearHistory;
+		public IntPtr ShowDevTools;
+		public IntPtr CloseDevTools;
 	}
 	
 	public delegate void ParentWindowWillCloseCallback(IntPtr self);

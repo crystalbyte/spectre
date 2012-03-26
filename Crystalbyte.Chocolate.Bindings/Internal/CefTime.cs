@@ -23,14 +23,14 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefTime {
-		int Year;
-		int Month;
-		int DayOfWeek;
-		int DayOfMonth;
-		int Hour;
-		int Minute;
-		int Second;
-		int Millisecond;
+		public int Year;
+		public int Month;
+		public int DayOfWeek;
+		public int DayOfMonth;
+		public int Hour;
+		public int Minute;
+		public int Second;
+		public int Millisecond;
 	}
 	
 	

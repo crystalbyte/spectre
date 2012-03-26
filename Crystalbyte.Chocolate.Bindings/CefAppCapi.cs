@@ -29,9 +29,9 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefApp {
-		CefBase Base;
-		IntPtr OnBeforeCommandLineProcessing;
-		IntPtr GetProxyHandler;
+		public CefBase Base;
+		public IntPtr OnBeforeCommandLineProcessing;
+		public IntPtr GetProxyHandler;
 	}
 	
 	public delegate void OnBeforeCommandLineProcessingCallback(IntPtr self, IntPtr processType, IntPtr commandLine);

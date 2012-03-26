@@ -80,23 +80,23 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefStringWide {
-		IntPtr Str;
-		int Length;
-		IntPtr Dtor;
+		public IntPtr Str;
+		public int Length;
+		public IntPtr Dtor;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefStringUtf8 {
-		IntPtr Str;
-		int Length;
-		IntPtr Dtor;
+		public IntPtr Str;
+		public int Length;
+		public IntPtr Dtor;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefStringUtf16 {
-		IntPtr Str;
-		int Length;
-		IntPtr Dtor;
+		public IntPtr Str;
+		public int Length;
+		public IntPtr Dtor;
 	}
 	
 	public delegate void WcharCallback(IntPtr str);

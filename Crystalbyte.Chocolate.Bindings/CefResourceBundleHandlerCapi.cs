@@ -8,9 +8,9 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefResourceBundleHandler {
-		CefBase Base;
-		IntPtr GetLocalizedString;
-		IntPtr GetDataResource;
+		public CefBase Base;
+		public IntPtr GetLocalizedString;
+		public IntPtr GetDataResource;
 	}
 	
 	public delegate int GetLocalizedStringCallback(IntPtr self, int messageId, IntPtr @string);

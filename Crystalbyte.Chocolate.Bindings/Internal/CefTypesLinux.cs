@@ -8,14 +8,14 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefMainArgs {
-		int Argc;
-		IntPtr Argv;
+		public int Argc;
+		public IntPtr Argv;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefWindowInfo {
-		IntPtr ParentWidget;
-		IntPtr Widget;
+		public IntPtr ParentWidget;
+		public IntPtr Widget;
 	}
 	
 	

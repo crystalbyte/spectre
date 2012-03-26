@@ -8,11 +8,11 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefClient {
-		CefBase Base;
-		IntPtr GetLifeSpanHandler;
-		IntPtr GetLoadHandler;
-		IntPtr GetRequestHandler;
-		IntPtr GetDisplayHandler;
+		public CefBase Base;
+		public IntPtr GetLifeSpanHandler;
+		public IntPtr GetLoadHandler;
+		public IntPtr GetRequestHandler;
+		public IntPtr GetDisplayHandler;
 	}
 	
 	public delegate IntPtr GetLifeSpanHandlerCallback(IntPtr self);

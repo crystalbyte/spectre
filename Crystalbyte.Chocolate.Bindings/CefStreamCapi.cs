@@ -26,38 +26,38 @@ namespace Crystalbyte.Chocolate.Bindings
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefReadHandler {
-		CefBase Base;
-		IntPtr Read;
-		IntPtr Seek;
-		IntPtr Tell;
-		IntPtr Eof;
+		public CefBase Base;
+		public IntPtr Read;
+		public IntPtr Seek;
+		public IntPtr Tell;
+		public IntPtr Eof;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefStreamReader {
-		CefBase Base;
-		IntPtr Read;
-		IntPtr Seek;
-		IntPtr Tell;
-		IntPtr Eof;
+		public CefBase Base;
+		public IntPtr Read;
+		public IntPtr Seek;
+		public IntPtr Tell;
+		public IntPtr Eof;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefWriteHandler {
-		CefBase Base;
-		IntPtr Write;
-		IntPtr Seek;
-		IntPtr Tell;
-		IntPtr Flush;
+		public CefBase Base;
+		public IntPtr Write;
+		public IntPtr Seek;
+		public IntPtr Tell;
+		public IntPtr Flush;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefStreamWriter {
-		CefBase Base;
-		IntPtr Write;
-		IntPtr Seek;
-		IntPtr Tell;
-		IntPtr Flush;
+		public CefBase Base;
+		public IntPtr Write;
+		public IntPtr Seek;
+		public IntPtr Tell;
+		public IntPtr Flush;
 	}
 	
 	public delegate int ReadCallback(IntPtr self, IntPtr ptr, int size, int n);

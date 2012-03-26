@@ -158,8 +158,6 @@ namespace Crystalbyte.Chocolate
         }
 
         private static IEnumerable<string> FindStructMembers(string content) {
-            //const string memberPattern = 
-            //    @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\(CEF_CALLBACK\s+\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s+\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)";
             const string memberPattern =
                 @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\((CEF_CALLBACK)*\s*\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s*\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)";
             var matches = Regex.Matches(content, memberPattern, RegexOptions.Multiline);
@@ -167,8 +165,6 @@ namespace Crystalbyte.Chocolate
         }
 
         private static IList<string> FindStructures(string content) {
-            //const string structPattern =
-            //    @"typedef(\s)+struct(\s)+(\w)+(\s)+\{(\w|\n|\s|[\.:; /-\|-\(\*\),'""])+}(\s)+(\w)+;";
             const string structPattern =
                 @"typedef(\s)+struct(\s)+(\w)+(\s)+\{(\w|\n|\s|[\.:; /-\|-\(\*\),'""#=!])+}(\s)+(\w)+;";
             var matches = Regex.Matches(content, structPattern, RegexOptions.Multiline);
@@ -176,8 +172,6 @@ namespace Crystalbyte.Chocolate
         }
 
         private static IList<string> FindNativeMethods(string content) {
-            //const string exportPattern =
-            //    @"CEF_EXPORT(\s)+(\w|\*)+(\s)+(\w)+(\(\)|\((\s)*((const|struct)(\s)+)*(\w)+(\*)?(\s)+(\w)+(,(\s)+((const|struct)(\s)+)*(\w)+(\*)?(\s)+(\w)+)*\)(\s)*);";
             const string exportPattern =
                 @"CEF_EXPORT(\s)+(\w|\*)+(\s)+(\w)+(\(\)|\((\s)*((const|struct)(\s)+)*(\w)+(\*)?(\s)+(\w)+(,(\s)+((const|struct)(\s)+)*(\w)+(\*)?(\s)+(\w)+)*\)(\s)*);";
             var matches = Regex.Matches(content, exportPattern, RegexOptions.Multiline);

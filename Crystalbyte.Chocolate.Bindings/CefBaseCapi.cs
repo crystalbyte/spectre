@@ -8,10 +8,10 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefBase {
-		int Size;
-		IntPtr AddRef;
-		IntPtr Release;
-		IntPtr GetRefct;
+		public int Size;
+		public IntPtr AddRef;
+		public IntPtr Release;
+		public IntPtr GetRefct;
 	}
 	
 	public delegate int AddRefCallback(IntPtr self);

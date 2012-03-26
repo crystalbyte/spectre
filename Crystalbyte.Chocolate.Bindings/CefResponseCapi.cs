@@ -8,16 +8,16 @@ namespace Crystalbyte.Chocolate.Bindings
 {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefResponse {
-		CefBase Base;
-		IntPtr GetStatus;
-		IntPtr SetStatus;
-		IntPtr GetStatusText;
-		IntPtr SetStatusText;
-		IntPtr GetMimeType;
-		IntPtr SetMimeType;
-		IntPtr GetHeader;
-		IntPtr GetHeaderMap;
-		IntPtr SetHeaderMap;
+		public CefBase Base;
+		public IntPtr GetStatus;
+		public IntPtr SetStatus;
+		public IntPtr GetStatusText;
+		public IntPtr SetStatusText;
+		public IntPtr GetMimeType;
+		public IntPtr SetMimeType;
+		public IntPtr GetHeader;
+		public IntPtr GetHeaderMap;
+		public IntPtr SetHeaderMap;
 	}
 	
 	public delegate int GetStatusCallback(IntPtr self);

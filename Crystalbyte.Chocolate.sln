@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Bindi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Bindings", "Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj", "{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Application.Windows", "Crystalbyte.Chocolate.Application.Windows\Crystalbyte.Chocolate.Application.Windows.csproj", "{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|x86.ActiveCfg = Debug|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|x86.Build.0 = Debug|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|Any CPU.ActiveCfg = Release|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|x86.ActiveCfg = Release|x86
+		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
