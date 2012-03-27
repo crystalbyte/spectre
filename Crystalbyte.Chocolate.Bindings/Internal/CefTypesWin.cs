@@ -13,9 +13,9 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefWindowInfo {
-		public int ExStyle;
+		public uint ExStyle;
 		public CefStringUtf8 WindowName;
-		public int Style;
+		public uint Style;
 		public int X;
 		public int Y;
 		public int Width;

@@ -101,7 +101,7 @@ namespace Crystalbyte.Chocolate
             }
 
             if (type == "dword") {
-                return "int";
+                return "uint";
             }
 
             if (type == "hinstance") {

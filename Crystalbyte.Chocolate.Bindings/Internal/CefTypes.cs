@@ -29,6 +29,63 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
+	public struct CefBrowserSettings {
+		public int Size;
+		public bool DragDropDisabled;
+		public bool LoadDropsDisabled;
+		public bool HistoryDisabled;
+		public CefStringUtf8 StandardFontFamily;
+		public CefStringUtf8 FixedFontFamily;
+		public CefStringUtf8 SerifFontFamily;
+		public CefStringUtf8 SansSerifFontFamily;
+		public CefStringUtf8 CursiveFontFamily;
+		public CefStringUtf8 FantasyFontFamily;
+		public int DefaultFontSize;
+		public int DefaultFixedFontSize;
+		public int MinimumFontSize;
+		public int MinimumLogicalFontSize;
+		public bool RemoteFontsDisabled;
+		public CefStringUtf8 DefaultEncoding;
+		public bool EncodingDetectorEnabled;
+		public bool JavascriptDisabled;
+		public bool JavascriptOpenWindowsDisallowed;
+		public bool JavascriptCloseWindowsDisallowed;
+		public bool JavascriptAccessClipboardDisallowed;
+		public bool DomPasteDisabled;
+		public bool CaretBrowsingEnabled;
+		public bool JavaDisabled;
+		public bool PluginsDisabled;
+		public bool UniversalAccessFromFileUrlsAllowed;
+		public bool FileAccessFromFileUrlsAllowed;
+		public bool WebSecurityDisabled;
+		public bool XssAuditorEnabled;
+		public bool ImageLoadDisabled;
+		public bool ShrinkStandaloneImagesToFit;
+		public bool SiteSpecificQuirksDisabled;
+		public bool TextAreaResizeDisabled;
+		public bool PageCacheDisabled;
+		public bool TabToLinksDisabled;
+		public bool HyperlinkAuditingDisabled;
+		public bool UserStyleSheetEnabled;
+		public CefStringUtf8 UserStyleSheetLocation;
+		public bool AuthorAndUserStylesDisabled;
+		public bool LocalStorageDisabled;
+		public bool DatabasesDisabled;
+		public bool ApplicationCacheDisabled;
+		public bool WebglDisabled;
+		public bool AcceleratedCompositingDisabled;
+		public bool ThreadedCompositingEnabled;
+		public bool AcceleratedLayersDisabled;
+		public bool AcceleratedVideoDisabled;
+		public bool Accelerated2DCanvasDisabled;
+		public bool AcceleratedPaintingEnabled;
+		public bool AcceleratedFiltersEnabled;
+		public bool AcceleratedPluginsDisabled;
+		public bool DeveloperToolsDisabled;
+		public bool FullscreenEnabled;
+	}
+	
+	[StructLayout(LayoutKind.Sequential)]
 	public struct CefUrlparts {
 		public CefStringUtf8 Spec;
 		public CefStringUtf8 Scheme;

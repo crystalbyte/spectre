@@ -7,6 +7,7 @@ using System;
 namespace Crystalbyte.Chocolate.UI {
     public interface IRenderTarget {
         IntPtr Handle { get; }
+        Size StartSize { get; }
         Uri StartupUri { get; }
         event EventHandler<SizeChangedEventArgs> SizeChanged;
         event EventHandler Closed;

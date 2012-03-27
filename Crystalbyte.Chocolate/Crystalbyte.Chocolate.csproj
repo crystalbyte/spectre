@@ -51,10 +51,11 @@
     <Compile Include="Reference.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
-    <Compile Include="UI\App.cs" />
-    <Compile Include="UI\AppContext.cs" />
+    <Compile Include="UI\Application.cs" />
+    <Compile Include="UI\BrowserArgs.cs" />
+    <Compile Include="UI\Rectangle.cs" />
     <Compile Include="UI\ViewDelegate.cs" />
-    <Compile Include="UI\AppSettings.cs" />
+    <Compile Include="UI\ApplicationSettings.cs" />
     <Compile Include="UI\Browser.cs" />
     <Compile Include="UI\ClientHandler.cs" />
     <Compile Include="UI\IRenderTarget.cs" />
@@ -62,6 +63,10 @@
     <Compile Include="UI\Size.cs" />
     <Compile Include="UI\SizeChangedEventArgs.cs" />
     <Compile Include="UI\View.cs" />
+    <Compile Include="UI\ViewSettings.cs" />
+    <Compile Include="UI\WindowInfo.cs" />
+    <Compile Include="UI\WindowResizer.cs" />
+    <Compile Include="UI\WindowStyles.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj">

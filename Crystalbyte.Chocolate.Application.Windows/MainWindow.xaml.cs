@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using Crystalbyte.Chocolate.UI;
+using Application = Crystalbyte.Chocolate.UI.Application;
 using Size = Crystalbyte.Chocolate.UI.Size;
 using SizeChangedEventArgs = Crystalbyte.Chocolate.UI.SizeChangedEventArgs;
 
@@ -14,7 +16,23 @@ namespace orgAnice.Chocolate
         private readonly WindowInteropHelper _interopHelper;
         public MainWindow() {
             InitializeComponent();
+            Loaded += OnWindowLoaded;
             _interopHelper = new WindowInteropHelper(this);
+        }
+
+        private void OnWindowLoaded(object sender, RoutedEventArgs e) {
+            _interopHelper.EnsureHandle();
+            Application.Register(new View(this, new WindowDelegate()));
+            Dispatcher.Hooks.DispatcherInactive += OnDispatcherInactive;
+            Dispatcher.Hooks.OperationCompleted += OnOperationCompleted;
+        }
+
+        private void OnOperationCompleted(object sender, DispatcherHookEventArgs e) {
+            Application.IterateMessageLoop();
+        }
+
+        private void OnDispatcherInactive(object sender, EventArgs e) {
+            Application.IterateMessageLoop();
         }
 
         public IntPtr Handle {
@@ -26,13 +44,17 @@ namespace orgAnice.Chocolate
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo) {
-            NotifySizeChanged(new Size((int) ActualWidth, (int) ActualHeight));
+            NotifySizeChanged(GetActualSize());
             base.OnRenderSizeChanged(sizeInfo);
         }
 
         protected override void OnClosed(EventArgs e) {
             NotifyClosed();
             base.OnClosed(e);
+        }
+
+        private Size GetActualSize() {
+            return new Size((int) ActualWidth, (int) ActualHeight);
         }
 
         public new event EventHandler<SizeChangedEventArgs> SizeChanged;
@@ -51,10 +73,9 @@ namespace orgAnice.Chocolate
             }
         }
 
-        protected override void OnInitialized(EventArgs e) {
-            base.OnInitialized(e);
-            var context = (WindowModelView) DataContext;
-            context.Run();
+        public Size StartSize
+        {
+            get { return GetActualSize(); }
         }
     }
 }

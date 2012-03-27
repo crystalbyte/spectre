@@ -13,8 +13,8 @@ namespace Crystalbyte.Chocolate {
     ///   Memory is released once the reference counter reaches zero.
     /// </summary>
     public abstract class CountedAdapter : Adapter {
-        private readonly ReleaseCallback _decrementDelegate;
         private readonly CefBase _dedicatedBase;
+        private readonly ReleaseCallback _decrementDelegate;
         private readonly GetRefctCallback _getRefCountDelegate;
         private readonly AddRefCallback _incrementDelegate;
         private readonly object _mutex;

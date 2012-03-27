@@ -166,7 +166,7 @@ namespace Crystalbyte.Chocolate
 
         private static IList<string> FindStructures(string content) {
             const string structPattern =
-                @"typedef(\s)+struct(\s)+(\w)+(\s)+\{(\w|\n|\s|[\.:; /-\|-\(\*\),'""#=!])+}(\s)+(\w)+;";
+                @"typedef(\s)+struct(\s)+\w+\s+\{(\w|\n|\s|[\.&:; /-\|-\(\*\),'""#=!])+}\s+\w+;";
             var matches = Regex.Matches(content, structPattern, RegexOptions.Multiline);
             return (from Match match in matches select match.Value).ToList();
         }
