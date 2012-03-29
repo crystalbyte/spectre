@@ -8,18 +8,19 @@ namespace Crystalbyte.Chocolate.UI
         public WindowInfo(IRenderTarget target)
             : base(typeof(CefWindowInfo)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
-            MarshalToNative(new CefWindowInfo {
+            var info = new CefWindowInfo {
                 ParentWindow = target.Handle,
-                Style = (uint) (WindowStyles.ChildWindow 
-                | WindowStyles.ClipChildren 
-                | WindowStyles.ClipSiblings
-                | WindowStyles.TabStop
-                | WindowStyles.Visible),
+                Style = (uint) (WindowStyles.ChildWindow
+                                | WindowStyles.ClipChildren
+                                | WindowStyles.ClipSiblings
+                                | WindowStyles.TabStop
+                                | WindowStyles.Visible),
                 X = 0,
                 Y = 0,
                 Width = target.StartSize.Width,
                 Height = target.StartSize.Height
-            });
+            };
+            MarshalToNative(info);
         }
 
         public IntPtr WindowHandle {

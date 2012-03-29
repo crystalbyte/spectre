@@ -51,7 +51,6 @@ namespace Crystalbyte.Chocolate {
             VerifyHandle(self);
             lock (_mutex) {
                 _referenceCounter++;
-                //Debug.WriteLine(string.Format("incrementing {0}, now at {1}", GetType().Name, _referenceCounter));
                 return _referenceCounter;
             }
         }
@@ -68,7 +67,6 @@ namespace Crystalbyte.Chocolate {
             int refCount;
             lock (_mutex) {
                 refCount = _referenceCounter--;
-                //Debug.WriteLine(string.Format("decrementing {0}, now at {1}", GetType().Name, _referenceCounter));
             }
             if (refCount < 1) {
                 Free();
@@ -91,7 +89,7 @@ namespace Crystalbyte.Chocolate {
 
         // ReSharper disable UnusedParameter.Local
         private void VerifyHandle(IntPtr handle) {
-            // ReSharper restore UnusedParameter.Local
+        // ReSharper restore UnusedParameter.Local
             if (handle != NativeHandle) {
                 throw new ChocolateException("invalid handle.");
             }

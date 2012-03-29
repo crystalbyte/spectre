@@ -10,7 +10,6 @@ namespace Crystalbyte.Chocolate.UI {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefSettings {
                 Size = NativeSize,
-                SingleProcess = true,
                 LogSeverity = CefLogSeverity.LogseverityVerbose
             });
         }
@@ -27,32 +26,38 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public LogSeverity LogSeverity
-        {
-            get
-            {
+        public LogSeverity LogSeverity {
+            get {
                 var reflection = MarshalFromNative<CefSettings>();
                 return (LogSeverity)reflection.LogSeverity;
             }
-            set
-            {
+            set {
                 var reflection = MarshalFromNative<CefSettings>();
                 reflection.LogSeverity = (CefLogSeverity)value;
                 MarshalToNative(reflection);
             }
         }
 
-        public bool IsMessageLoopMultiThreaded
-        {
-            get
-            {
+        public bool IsMessageLoopMultiThreaded {
+            get {
                 var reflection = MarshalFromNative<CefSettings>();
                 return reflection.MultiThreadedMessageLoop;
             }
-            set
-            {
+            set {
                 var reflection = MarshalFromNative<CefSettings>();
                 reflection.MultiThreadedMessageLoop = value;
+                MarshalToNative(reflection);
+            }
+        }
+
+        public bool IsSingleProcess {
+            get {
+                var reflection = MarshalFromNative<CefSettings>();
+                return reflection.SingleProcess;
+            }
+            set {
+                var reflection = MarshalFromNative<CefSettings>();
+                reflection.SingleProcess= value;
                 MarshalToNative(reflection);
             }
         }

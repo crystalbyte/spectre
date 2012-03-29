@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using Crystalbyte.Chocolate.UI;
 
-namespace orgAnice.Chocolate
+namespace Crystalbyte.Chocolate
 {
     public sealed class WindowDelegate : ViewDelegate
     {
-
     }
 }

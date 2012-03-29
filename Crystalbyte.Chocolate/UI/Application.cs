@@ -1,41 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate.UI {
     public static class Application {
         private static bool _isInitialized;
-        private static readonly AppContext _app; 
+        private static readonly App _app; 
         private static readonly Dictionary<IRenderTarget, View> _views;
         private static readonly ApplicationSettings _settings;
 
         static Application() {
-            _app = new AppContext();
+            _app = new App();
             _settings = new ApplicationSettings();
             _views = new Dictionary<IRenderTarget, View>();
         }
 
-        public static ApplicationSettings Settings { get { return _settings; } }
+        public static ApplicationSettings Settings {
+            get { return _settings; }
+        }
 
         public static void IterateMessageLoop() {
             CefAppCapi.CefDoMessageLoopWork();
         }
 
-        public static void Register(View view) {
-            var module = view.RenderTarget.GetType().Module;
-            var hInstance = Marshal.GetHINSTANCE(module);
-            Register(hInstance, view);
+        public static void RunMessageLoop() {
+            CefAppCapi.CefRunMessageLoop();
         }
 
-        private static void Initialize(IntPtr hInstance) {
+        public static void Initialize(Module module) {
+            var hInstance = Marshal.GetHINSTANCE(module);
             var appHandle = _app.NativeHandle;
-            var argsHandle = MarshalInstance(hInstance);
+            var argsHandle = MarshalMainArgs(hInstance);
+
+            var exitCode = CefAppCapi.CefExecuteProcess(argsHandle, IntPtr.Zero);
+            if (exitCode >= 0) {
+                return;
+            }
+
             var settingsHandle = _settings.NativeHandle;
-            // CefApp null for now
             var result = CefAppCapi.CefInitialize(argsHandle, settingsHandle, appHandle);
             _isInitialized = Convert.ToBoolean(result);
         }
@@ -45,13 +50,17 @@ namespace Crystalbyte.Chocolate.UI {
             _isInitialized = false;
         }
 
-        private static void Register(IntPtr hInstance, View view) {
-            if (!_isInitialized) {
-                Initialize(hInstance);
-            }
+        public static void Register(View view) {
+            
             _views.Add(view.RenderTarget, view);
             view.RenderTarget.TargetClosing += OnRenderTargetClosed;
             view.CreateBrowser();
+        }
+
+        public static void LaunchProcess(Module host) {
+            if (!_isInitialized) {
+                Initialize(host);
+            }
         }
 
         private static void OnRenderTargetClosed(object sender, EventArgs e) {
@@ -68,7 +77,7 @@ namespace Crystalbyte.Chocolate.UI {
             GC.Collect();
         }
 
-        private static IntPtr MarshalInstance(IntPtr hInstance) {
+        private static IntPtr MarshalMainArgs(IntPtr hInstance) {
             var mainArgs = new CefMainArgs {
                 Instance = hInstance
             };

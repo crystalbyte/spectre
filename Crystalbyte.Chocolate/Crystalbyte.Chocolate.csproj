@@ -53,7 +53,7 @@
     <Compile Include="Reference.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
-    <Compile Include="UI\AppContext.cs" />
+    <Compile Include="UI\App.cs" />
     <Compile Include="UI\Application.cs" />
     <Compile Include="UI\BrowserArgs.cs" />
     <Compile Include="UI\Rectangle.cs" />
