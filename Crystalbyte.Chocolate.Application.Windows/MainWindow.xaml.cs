@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using Crystalbyte.Chocolate.UI;
-using Application = Crystalbyte.Chocolate.UI.Application;
 using Size = Crystalbyte.Chocolate.UI.Size;
+using Application = Crystalbyte.Chocolate.UI.Application;
 using SizeChangedEventArgs = Crystalbyte.Chocolate.UI.SizeChangedEventArgs;
 
 namespace orgAnice.Chocolate
@@ -13,26 +14,36 @@ namespace orgAnice.Chocolate
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : IRenderTarget {
+        private readonly DispatcherTimer _timer;
         private readonly WindowInteropHelper _interopHelper;
+
         public MainWindow() {
             InitializeComponent();
             Loaded += OnWindowLoaded;
             _interopHelper = new WindowInteropHelper(this);
+            // 60 FPS
+            var interval = TimeSpan.FromMilliseconds(1000.0f / 60.0f);
+            const DispatcherPriority priority = DispatcherPriority.Normal;
+            _timer = new DispatcherTimer(interval, priority, OnTimerElapsed, Dispatcher.CurrentDispatcher);
+        }
+
+        private static void OnTimerElapsed(object sender, EventArgs e) {
+            Application.IterateMessageLoop();
         }
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e) {
-            _interopHelper.EnsureHandle();
             Application.Register(new View(this, new WindowDelegate()));
-            Dispatcher.Hooks.DispatcherInactive += OnDispatcherInactive;
-            Dispatcher.Hooks.OperationCompleted += OnOperationCompleted;
+            _timer.Start();
         }
 
-        private void OnOperationCompleted(object sender, DispatcherHookEventArgs e) {
-            Application.IterateMessageLoop();
+        protected override void OnClosing(CancelEventArgs e){
+            NotifyTargetClosing();
+            base.OnClosing(e);
         }
 
-        private void OnDispatcherInactive(object sender, EventArgs e) {
-            Application.IterateMessageLoop();
+        protected override void OnClosed(EventArgs e) {
+            NotifySizeClosed();            
+            base.OnClosed(e);
         }
 
         public IntPtr Handle {
@@ -40,7 +51,7 @@ namespace orgAnice.Chocolate
         }
 
         public Uri StartupUri {
-            get { return new Uri("http://www.google.de"); }
+            get { return new Uri("http://peacekeeper.futuremark.com/"); }
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo) {
@@ -48,34 +59,37 @@ namespace orgAnice.Chocolate
             base.OnRenderSizeChanged(sizeInfo);
         }
 
-        protected override void OnClosed(EventArgs e) {
-            NotifyClosed();
-            base.OnClosed(e);
-        }
-
         private Size GetActualSize() {
             return new Size((int) ActualWidth, (int) ActualHeight);
         }
 
-        public new event EventHandler<SizeChangedEventArgs> SizeChanged;
+        public event EventHandler<SizeChangedEventArgs> TargetSizeChanged;
         public void NotifySizeChanged(Size size) {
-            var handler = SizeChanged;
+            var handler = TargetSizeChanged;
             if (handler != null) {
                 handler(this, new SizeChangedEventArgs(size));
             }
         }
 
-        public new event EventHandler Closed;
-        public void NotifyClosed() {
-            var handler = Closed;
+        public event EventHandler TargetClosed;
+        public void NotifySizeClosed() {
+            var handler = TargetClosed;
             if (handler != null) {
                 handler(this, EventArgs.Empty);
             }
         }
 
-        public Size StartSize
-        {
+        public Size StartSize {
             get { return GetActualSize(); }
+        }
+
+        public event EventHandler TargetClosing;
+        public void NotifyTargetClosing()
+        {
+            var handler = TargetClosing;
+            if (handler != null) {
+                handler(this, EventArgs.Empty);
+            }
         }
     }
 }

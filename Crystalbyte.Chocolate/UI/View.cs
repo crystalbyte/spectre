@@ -8,33 +8,44 @@ namespace Crystalbyte.Chocolate.UI
         private readonly IRenderTarget _target;
         private readonly ViewSettings _settings;
         private readonly WindowResizer _resizer;
-        private WindowInfo _windowInfo;
         private Browser _browser;
 
         public View(IRenderTarget target, ViewDelegate @delegate) {
             _target = target;
-            _target.Closed += OnTargetClosed;
-            _target.SizeChanged += OnTargetSizeChanged;
+            _target.TargetClosing += OnTargetClosed;
+            _target.TargetSizeChanged += OnTargetSizeChanged;
             _handler = new ClientHandler(@delegate);
             _settings = new ViewSettings();
             _resizer = new WindowResizer();
         }
 
+        protected override void DisposeManaged() {
+            _target.TargetClosing -= OnTargetClosing;
+            _target.TargetClosed -= OnTargetClosed;
+            _target.TargetSizeChanged -= OnTargetSizeChanged;
+            _browser.Dispose();
+            base.DisposeManaged();
+        }
+
+        private void OnTargetClosing(object sender, EventArgs e) {
+            _browser.ParentWindowWillClose();                                   
+        }
+
         private void OnTargetClosed(object sender, EventArgs e) {
-            
+            // nothing yet
         }
 
         private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e) {
-            _resizer.Resize(_windowInfo.WindowHandle, new Rectangle(0, 0, e.Size.Width, e.Size.Height));
+            var bounds = new Rectangle(0, 0, e.Size.Width, e.Size.Height);
+            _resizer.Resize(_browser.WindowHandle, bounds);
         }
 
         internal void CreateBrowser() {
-            _windowInfo = new WindowInfo(_target);
             _browser = new Browser(new BrowserArgs {
                 ClientHandler = _handler,
                 Settings = _settings,
                 StartUri = _target.StartupUri,
-                WindowInfo = _windowInfo
+                WindowInfo = new WindowInfo(_target)
             });
         }
 

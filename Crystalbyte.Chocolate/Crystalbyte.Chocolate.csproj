@@ -44,13 +44,16 @@
     <Compile Include="ChocolateException.cs" />
     <Compile Include="CountedAdapter.cs" />
     <Compile Include="DisposableObject.cs" />
+    <Compile Include="GraphicsImplementation.cs" />
     <Compile Include="ISealedCollection.cs" />
     <Compile Include="IValueCollection.cs" />
+    <Compile Include="LogSeverity.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reference.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
+    <Compile Include="UI\AppContext.cs" />
     <Compile Include="UI\Application.cs" />
     <Compile Include="UI\BrowserArgs.cs" />
     <Compile Include="UI\Rectangle.cs" />

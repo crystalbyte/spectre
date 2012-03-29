@@ -145,7 +145,7 @@ namespace Crystalbyte.Chocolate
             }
 
             if (type == "cef_string_t") {
-                return "CefStringUtf8";
+                return "CefStringUtf16";
             }
 
             if (type == "cef_string_list_t") {
@@ -201,13 +201,22 @@ namespace Crystalbyte.Chocolate
                 var name = ExtractFunctionPointerName(member);
                 return string.Format("public IntPtr {0};", AdjustFunctionName(name));
             }
-            else {
-                isFunctionPointer = false;
-                var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
+
+            isFunctionPointer = false;
+            var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
+            if (splitBySpace.Length == 2) {
                 var type = ConvertType(splitBySpace.First());
                 var name = ConvertTypeName(splitBySpace.Last());
-                return string.Format("public {0} {1};", type, AdjustFunctionName(name));
+                return string.Format("public {0} {1};", type, AdjustFunctionName(name));    
             }
+            if (splitBySpace.Length == 3) {
+                var prefix = splitBySpace[0] == "enum" ? string.Empty : "u";
+                var type = ConvertType(splitBySpace[1]);
+                var name = ConvertTypeName(splitBySpace[2]);
+                return string.Format("public {0}{1} {2};", prefix, type, AdjustFunctionName(name));    
+            }
+
+            throw new ApplicationException("unknown format");
         }
 
         private static string ExtractFunctionPointerName(string member) {
@@ -222,7 +231,6 @@ namespace Crystalbyte.Chocolate
             var pointer = splitBySpace.Last();
             var name = pointer.Replace("*", string.Empty);
             return ConvertTypeName(name);
-
         }
 
         internal static string CreateDelegate(string del, out string name) {

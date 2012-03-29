@@ -159,7 +159,7 @@ namespace Crystalbyte.Chocolate
 
         private static IEnumerable<string> FindStructMembers(string content) {
             const string memberPattern =
-                @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\((CEF_CALLBACK)*\s*\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s*\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)";
+                @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\((CEF_CALLBACK)*\s*\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s*\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)|(^\s*\w+(\s+\w+)+;)";
             var matches = Regex.Matches(content, memberPattern, RegexOptions.Multiline);
             return (from Match match in matches select match.Value).ToList();
         }

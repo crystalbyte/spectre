@@ -9,10 +9,12 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.UI {
     public static class Application {
         private static bool _isInitialized;
+        private static readonly AppContext _app; 
         private static readonly Dictionary<IRenderTarget, View> _views;
         private static readonly ApplicationSettings _settings;
 
         static Application() {
+            _app = new AppContext();
             _settings = new ApplicationSettings();
             _views = new Dictionary<IRenderTarget, View>();
         }
@@ -29,23 +31,32 @@ namespace Crystalbyte.Chocolate.UI {
             Register(hInstance, view);
         }
 
+        private static void Initialize(IntPtr hInstance) {
+            var appHandle = _app.NativeHandle;
+            var argsHandle = MarshalInstance(hInstance);
+            var settingsHandle = _settings.NativeHandle;
+            // CefApp null for now
+            var result = CefAppCapi.CefInitialize(argsHandle, settingsHandle, appHandle);
+            _isInitialized = Convert.ToBoolean(result);
+        }
+
+        public static void Shutdown() {
+            CefAppCapi.CefShutdown();
+            _isInitialized = false;
+        }
+
         private static void Register(IntPtr hInstance, View view) {
             if (!_isInitialized) {
-                var argsHandle = MarshalInstance(hInstance);
-                var settingsHandle = _settings.NativeHandle;
-                // CefApp null for now
-                var result = CefAppCapi.CefInitialize(argsHandle, settingsHandle, IntPtr.Zero);
-                _isInitialized = Convert.ToBoolean(result);
+                Initialize(hInstance);
             }
-
             _views.Add(view.RenderTarget, view);
-            view.RenderTarget.Closed += OnRenderTargetClosed;
+            view.RenderTarget.TargetClosing += OnRenderTargetClosed;
             view.CreateBrowser();
         }
 
         private static void OnRenderTargetClosed(object sender, EventArgs e) {
             var target = (IRenderTarget) sender;
-            target.Closed -= OnRenderTargetClosed;
+            target.TargetClosing -= OnRenderTargetClosed;
             if (!_views.ContainsKey(target)) {
                 return;
             }
@@ -55,11 +66,6 @@ namespace Crystalbyte.Chocolate.UI {
             GC.Collect();
             // call finalizers
             GC.Collect();
-            if (_views.Count >= 1) {
-                return;
-            }
-            CefAppCapi.CefShutdown();
-            _isInitialized = false;
         }
 
         private static IntPtr MarshalInstance(IntPtr hInstance) {

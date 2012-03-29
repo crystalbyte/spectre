@@ -1,8 +1,5 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Security;
-using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate.Bindings.Internal
 {
@@ -10,21 +7,23 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	public struct CefSettings {
 		public int Size;
 		public bool SingleProcess;
-		public CefStringUtf8 BrowserSubprocessPath;
+		public CefStringUtf16 BrowserSubprocessPath;
 		public bool MultiThreadedMessageLoop;
 		public bool CommandLineArgsDisabled;
-		public CefStringUtf8 CachePath;
-		public CefStringUtf8 UserAgent;
-		public CefStringUtf8 ProductVersion;
-		public CefStringUtf8 Locale;
+		public CefStringUtf16 CachePath;
+		public CefStringUtf16 UserAgent;
+		public CefStringUtf16 ProductVersion;
+		public CefStringUtf16 Locale;
 		public IntPtr ExtraPluginPaths;
-		public CefStringUtf8 LogFile;
+		public CefStringUtf16 LogFile;
 		public CefLogSeverity LogSeverity;
 		public CefGraphicsImplementation GraphicsImplementation;
-		public CefStringUtf8 JavascriptFlags;
+		public uint LocalStorageQuota;
+		public uint SessionStorageQuota;
+		public CefStringUtf16 JavascriptFlags;
 		public bool AutoDetectProxySettingsEnabled;
-		public CefStringUtf8 PackFilePath;
-		public CefStringUtf8 LocalesDirPath;
+		public CefStringUtf16 PackFilePath;
+		public CefStringUtf16 LocalesDirPath;
 		public bool PackLoadingDisabled;
 	}
 	
@@ -34,18 +33,18 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 		public bool DragDropDisabled;
 		public bool LoadDropsDisabled;
 		public bool HistoryDisabled;
-		public CefStringUtf8 StandardFontFamily;
-		public CefStringUtf8 FixedFontFamily;
-		public CefStringUtf8 SerifFontFamily;
-		public CefStringUtf8 SansSerifFontFamily;
-		public CefStringUtf8 CursiveFontFamily;
-		public CefStringUtf8 FantasyFontFamily;
+		public CefStringUtf16 StandardFontFamily;
+		public CefStringUtf16 FixedFontFamily;
+		public CefStringUtf16 SerifFontFamily;
+		public CefStringUtf16 SansSerifFontFamily;
+		public CefStringUtf16 CursiveFontFamily;
+		public CefStringUtf16 FantasyFontFamily;
 		public int DefaultFontSize;
 		public int DefaultFixedFontSize;
 		public int MinimumFontSize;
 		public int MinimumLogicalFontSize;
 		public bool RemoteFontsDisabled;
-		public CefStringUtf8 DefaultEncoding;
+		public CefStringUtf16 DefaultEncoding;
 		public bool EncodingDetectorEnabled;
 		public bool JavascriptDisabled;
 		public bool JavascriptOpenWindowsDisallowed;
@@ -67,7 +66,7 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 		public bool TabToLinksDisabled;
 		public bool HyperlinkAuditingDisabled;
 		public bool UserStyleSheetEnabled;
-		public CefStringUtf8 UserStyleSheetLocation;
+		public CefStringUtf16 UserStyleSheetLocation;
 		public bool AuthorAndUserStylesDisabled;
 		public bool LocalStorageDisabled;
 		public bool DatabasesDisabled;
@@ -87,22 +86,22 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefUrlparts {
-		public CefStringUtf8 Spec;
-		public CefStringUtf8 Scheme;
-		public CefStringUtf8 Username;
-		public CefStringUtf8 Password;
-		public CefStringUtf8 Host;
-		public CefStringUtf8 Port;
-		public CefStringUtf8 Path;
-		public CefStringUtf8 Query;
+		public CefStringUtf16 Spec;
+		public CefStringUtf16 Scheme;
+		public CefStringUtf16 Username;
+		public CefStringUtf16 Password;
+		public CefStringUtf16 Host;
+		public CefStringUtf16 Port;
+		public CefStringUtf16 Path;
+		public CefStringUtf16 Query;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefCookie {
-		public CefStringUtf8 Name;
-		public CefStringUtf8 Value;
-		public CefStringUtf8 Domain;
-		public CefStringUtf8 Path;
+		public CefStringUtf16 Name;
+		public CefStringUtf16 Value;
+		public CefStringUtf16 Domain;
+		public CefStringUtf16 Path;
 		public bool Secure;
 		public bool Httponly;
 		public CefTime Creation;
@@ -142,7 +141,8 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefProxyInfo {
-		public CefStringUtf8 Proxylist;
+		public CefProxyType Proxytype;
+		public CefStringUtf16 Proxylist;
 	}
 	
 	
