@@ -1,45 +1,30 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 
-namespace Crystalbyte.Chocolate.UI
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     internal sealed class Browser : Adapter {
-        public Browser(BrowserArgs a) 
-            : base(typeof(CefBrowser), true) {
-            var uri = new StringUtf16(a.StartUri.AbsoluteUri);
-            Reference.Increment(a.ClientHandler.NativeHandle);
-            NativeHandle =
-                CefBrowserCapi.CefBrowserCreateSync(
-                    a.WindowInfo.NativeHandle,
-                    a.ClientHandler.NativeHandle,
-                    uri.NativeHandle,
-                    a.Settings.NativeHandle);
+        private Browser(IntPtr handle)
+            : base(typeof (CefBrowser), true) {
+            NativeHandle = handle;
         }
 
-        public Browser(IntPtr handle)
-            : base(typeof(CefBrowser), true) {
-                NativeHandle = handle;
-        }
-
-        public void ParentWindowWillClose() {
-            var reflection = MarshalFromNative<CefBrowser>();
-            var action =
-                    (ParentWindowWillCloseCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.ParentWindowWillClose,
-                                                          typeof(ParentWindowWillCloseCallback));
-            action(NativeHandle);
-        }
-
-        public IntPtr WindowHandle {
+        public BrowserHost Host {
             get {
                 var reflection = MarshalFromNative<CefBrowser>();
-                var function =
-                    (GetWindowHandleCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetWindowHandle,
-                                                          typeof(GetWindowHandleCallback));
-                return function(NativeHandle);
+                var function = (GetHostCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetHost, typeof (GetHostCallback));
+                var handle = function(NativeHandle);
+                return BrowserHost.FromHandle(handle);
             }
+        }
+
+        public static Browser FromHandle(IntPtr handle) {
+            return new Browser(handle);
         }
     }
 }

@@ -1,8 +1,11 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
 using System.IO;
 
-namespace Crystalbyte.Chocolate
-{
+#endregion
+
+namespace Crystalbyte.Chocolate {
     public sealed class CSharpCodeWriter : IDisposable {
         private readonly StreamWriter _writer;
         private int _indent;
@@ -12,9 +15,13 @@ namespace Crystalbyte.Chocolate
             _writer = new StreamWriter(stream);
         }
 
+        #region IDisposable Members
+
         public void Dispose() {
             _writer.Dispose();
         }
+
+        #endregion
 
         public void WriteDefaultUsingDirectives() {
             WriteUsingDirective("System");
@@ -26,7 +33,7 @@ namespace Crystalbyte.Chocolate
         }
 
         public void WriteUsingDirective(string namepace) {
-            _writer.WriteLine(string.Format("using {0};", namepace));   
+            _writer.WriteLine(string.Format("using {0};", namepace));
         }
 
         public void BeginNamespace(string namepace) {
@@ -42,7 +49,7 @@ namespace Crystalbyte.Chocolate
         public void BeginClass(string name, bool suppressSecurity = true, string suffix = "") {
             var line = string.Format("public static class {0}{1} {{", name, suffix);
             if (suppressSecurity) {
-                WriteLine("[SuppressUnmanagedCodeSecurity]");    
+                WriteLine("[SuppressUnmanagedCodeSecurity]");
             }
             WriteLine(line);
             _indent++;
@@ -71,7 +78,10 @@ namespace Crystalbyte.Chocolate
         public void WriteMethod(string method) {
             string name;
             var converted = CSharpCodeConverter.ConvertMethod(method, out name);
-            var dllImport = string.Format("[DllImport(CefAssembly.Name, EntryPoint = \"{0}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]", name);
+            var dllImport =
+                string.Format(
+                    "[DllImport(CefAssembly.Name, EntryPoint = \"{0}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]",
+                    name);
             WriteLine(dllImport);
             WriteLine(converted);
         }

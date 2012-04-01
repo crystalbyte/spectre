@@ -40,8 +40,10 @@
 
 #include "include/cef_base.h"
 #include "include/cef_display_handler.h"
+#include "include/cef_geolocation_handler.h"
 #include "include/cef_life_span_handler.h"
 #include "include/cef_load_handler.h"
+#include "include/cef_process_message.h"
 #include "include/cef_request_handler.h"
 
 ///
@@ -80,6 +82,27 @@ class CefClient : public virtual CefBase {
   /*--cef()--*/
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() {
     return NULL;
+  }
+
+  ///
+  // Return the handler for geolocation permissions requests. If no handler is
+  // provided geolocation access will be denied by default.
+  ///
+  /*--cef()--*/
+  virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() {
+    return NULL;
+  }
+
+  ///
+  // Called when a new message is received from a different process. Return true
+  // if the message was handled or false otherwise. Do not keep a reference to
+  // or attempt to access the message outside of this callback.
+  ///
+  /*--cef()--*/
+  virtual bool OnProcessMessageRecieved(CefRefPtr<CefBrowser> browser,
+                                        CefProcessId source_process,
+                                        CefRefPtr<CefProcessMessage> message) {
+    return false;
   }
 };
 

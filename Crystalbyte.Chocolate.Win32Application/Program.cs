@@ -1,21 +1,35 @@
-﻿using System;
-using Crystalbyte.Chocolate.UI;
-using ChocApp = Crystalbyte.Chocolate.UI.Application;
-using WinApp = System.Windows.Forms.Application;
+﻿#region Namespace Directives
 
-namespace Crystalbyte.Chocolate
-{
-    static class Program {
+using System;
+using System.Diagnostics;
+using System.Reflection;
+using Crystalbyte.Chocolate.UI;
+
+#endregion
+
+namespace Crystalbyte.Chocolate {
+    internal static class Program {
         /// <summary>
-        /// The main entry point for the application.
+        ///   The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main() {
-            var window = new Window();
-            var view = new View(window, new WindowDelegate());
-            ChocApp.Register(view);
-            window.Show();
-            ChocApp.RunMessageLoop();
+        private static void Main() {
+            var module = Assembly.GetExecutingAssembly().ManifestModule;
+            var success = Framework.Initialize(module);
+            if (!success) {
+                Debug.WriteLine("initialization failed");
+                return;
+            }
+
+            if (!Framework.IsRootProcess) {
+                return;
+            }
+
+            Framework.AttachRenderer(new Renderer(new Window(), new WindowDelegate()));
+            Framework.AttachRenderer(new Renderer(new Window(), new WindowDelegate()));
+            Framework.AttachRenderer(new Renderer(new Window(), new WindowDelegate()));
+            Framework.Run();
+            Framework.Shutdown();
         }
     }
 }

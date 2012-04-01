@@ -54,19 +54,20 @@
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="UI\App.cs" />
-    <Compile Include="UI\Application.cs" />
+    <Compile Include="UI\Browser.cs" />
+    <Compile Include="UI\Framework.cs" />
     <Compile Include="UI\BrowserArgs.cs" />
     <Compile Include="UI\Rectangle.cs" />
-    <Compile Include="UI\ViewDelegate.cs" />
-    <Compile Include="UI\ApplicationSettings.cs" />
-    <Compile Include="UI\Browser.cs" />
+    <Compile Include="UI\RenderDelegate.cs" />
+    <Compile Include="UI\FrameworkSettings.cs" />
+    <Compile Include="UI\BrowserHost.cs" />
     <Compile Include="UI\ClientHandler.cs" />
     <Compile Include="UI\IRenderTarget.cs" />
     <Compile Include="UI\Point.cs" />
     <Compile Include="UI\Size.cs" />
     <Compile Include="UI\SizeChangedEventArgs.cs" />
-    <Compile Include="UI\View.cs" />
-    <Compile Include="UI\ViewSettings.cs" />
+    <Compile Include="UI\Renderer.cs" />
+    <Compile Include="UI\RenderSettings.cs" />
     <Compile Include="UI\WindowInfo.cs" />
     <Compile Include="UI\WindowResizer.cs" />
     <Compile Include="UI\WindowStyles.cs" />
@@ -76,6 +77,9 @@
       <Project>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</Project>
       <Name>Crystalbyte.Chocolate.Bindings</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripting\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

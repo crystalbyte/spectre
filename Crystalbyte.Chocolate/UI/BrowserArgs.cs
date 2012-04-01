@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
 
-namespace Crystalbyte.Chocolate.UI
-{
+using System;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     internal sealed class BrowserArgs {
         public Uri StartUri { get; set; }
         public ClientHandler ClientHandler { get; set; }
         public WindowInfo WindowInfo { get; set; }
-        public ViewSettings Settings { get; set; }
+        public RenderSettings Settings { get; set; }
     }
 }

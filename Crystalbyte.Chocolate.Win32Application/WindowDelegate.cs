@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
+
 using Crystalbyte.Chocolate.UI;
 
-namespace Crystalbyte.Chocolate
-{
-    public sealed class WindowDelegate : ViewDelegate
-    {
-    }
+#endregion
+
+namespace Crystalbyte.Chocolate {
+    public sealed class WindowDelegate : RenderDelegate {}
 }

@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Bindi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Bindings", "Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj", "{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Application.Windows", "Crystalbyte.Chocolate.Application.Windows\Crystalbyte.Chocolate.Application.Windows.csproj", "{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.TestSuite", "Crystalbyte.Chocolate.TestSuite\Crystalbyte.Chocolate.TestSuite.csproj", "{FD7C0177-8994-4A11-B66A-5F67C7D11202}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Win32Application", "Crystalbyte.Chocolate.Win32Application\Crystalbyte.Chocolate.Win32Application.csproj", "{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}"
 EndProject
 Global
@@ -53,26 +49,6 @@ Global
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|x86.ActiveCfg = Release|Any CPU
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|x86.ActiveCfg = Debug|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Debug|x86.Build.0 = Debug|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|Any CPU.ActiveCfg = Release|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|Mixed Platforms.Build.0 = Release|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|x86.ActiveCfg = Release|x86
-		{0DD0D59C-D123-40E4-A34F-E16AC93DCED8}.Release|x86.Build.0 = Release|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Debug|x86.ActiveCfg = Debug|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Debug|x86.Build.0 = Debug|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Release|Any CPU.ActiveCfg = Release|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Release|Mixed Platforms.Build.0 = Release|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Release|x86.ActiveCfg = Release|x86
-		{FD7C0177-8994-4A11-B66A-5F67C7D11202}.Release|x86.Build.0 = Release|x86
 		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|Mixed Platforms.Build.0 = Debug|x86

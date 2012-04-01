@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
 
-namespace Crystalbyte.Chocolate.UI
-{
+using System;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     [Flags]
-    internal enum WindowStyles : uint
-    {
+    internal enum WindowStyles : uint {
         /// <summary>
         ///   The window has a thin-line border.
         /// </summary>

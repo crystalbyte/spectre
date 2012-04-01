@@ -1,46 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Namespace Directives
+
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Crystalbyte.Chocolate.UI;
-using Size = Crystalbyte.Chocolate.UI.Size;
 
-namespace Crystalbyte.Chocolate
-{
-    public partial class Window : Form, IRenderTarget
-    {
+#endregion
+
+namespace Crystalbyte.Chocolate {
+    public partial class Window : Form, IRenderTarget {
         public Window() {
             InitializeComponent();
         }
 
-        protected override void OnClosing(CancelEventArgs e){
+        #region IRenderTarget Members
+
+        public Uri StartupUri {
+            get { return new Uri("http://www.google.de"); }
+        }
+
+        public event EventHandler<SizeChangedEventArgs> TargetSizeChanged;
+        public event EventHandler TargetClosed;
+        public event EventHandler TargetClosing;
+
+        public new Size Size {
+            get { return new Size(Width, Height); }
+        }
+
+        #endregion
+
+        protected override void OnClosing(CancelEventArgs e) {
             NotifyTargetClosing();
             base.OnClosing(e);
         }
 
         protected override void OnClosed(EventArgs e) {
-            NotifySizeClosed();            
+            NotifyTargetClosed();
             base.OnClosed(e);
         }
 
-        public Uri StartupUri {
-            get { return new Uri("http://peacekeeper.futuremark.com/"); }
-        }
-
         protected override void OnSizeChanged(EventArgs e) {
-            NotifySizeChanged(GetActualSize());
+            NotifySizeChanged(Size);
             base.OnSizeChanged(e);
         }
 
-        private Size GetActualSize() {
-            return new Size(Width, Height);
-        }
-
-        public event EventHandler<SizeChangedEventArgs> TargetSizeChanged;
         public void NotifySizeChanged(Size size) {
             var handler = TargetSizeChanged;
             if (handler != null) {
@@ -48,21 +51,14 @@ namespace Crystalbyte.Chocolate
             }
         }
 
-        public event EventHandler TargetClosed;
-        public void NotifySizeClosed() {
+        public void NotifyTargetClosed() {
             var handler = TargetClosed;
             if (handler != null) {
                 handler(this, EventArgs.Empty);
             }
         }
 
-        public Size StartSize {
-            get { return GetActualSize(); }
-        }
-
-        public event EventHandler TargetClosing;
-        public void NotifyTargetClosing()
-        {
+        public void NotifyTargetClosing() {
             var handler = TargetClosing;
             if (handler != null) {
                 handler(this, EventArgs.Empty);

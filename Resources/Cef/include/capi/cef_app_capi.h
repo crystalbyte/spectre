@@ -126,10 +126,17 @@ typedef struct _cef_app_t {
       struct _cef_command_line_t* command_line);
 
   ///
+  // Return the handler for render process events. This function is called by
+  // the render process main thread.
+  ///
+  struct _cef_render_process_handler_t* (
+      CEF_CALLBACK *get_render_process_handler)(struct _cef_app_t* self);
+
+  ///
   // Return the handler for resource bundle events. If
   // CefSettings.pack_loading_disabled is true (1) a handler must be returned.
   // If no handler is returned resources will be loaded from pack files. This
-  // function is called by the browser and renderer processes on multiple
+  // function is called by the browser and rendere processes on multiple
   // threads.
   ///
   struct _cef_resource_bundle_handler_t* (

@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿#region Namespace Directives
+
+using System.Collections.Generic;
 using System.IO;
 
-namespace Crystalbyte.Chocolate
-{
+#endregion
+
+namespace Crystalbyte.Chocolate {
     public sealed class DiscoveryService {
         private readonly GeneratorSettings _settings;
+
         public DiscoveryService(GeneratorSettings settings) {
             _settings = settings;
         }
@@ -21,6 +25,5 @@ namespace Crystalbyte.Chocolate
                 TraverseDirectory(child, files);
             }
         }
-
     }
 }

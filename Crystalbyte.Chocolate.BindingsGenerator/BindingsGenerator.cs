@@ -1,13 +1,18 @@
-﻿using System;
+﻿#region Namespace Directives
+
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Crystalbyte.Chocolate
-{
+#endregion
+
+namespace Crystalbyte.Chocolate {
     public sealed class BindingsGenerator {
+        private readonly Dictionary<string, string> _delegeteArchive;
         private readonly GeneratorSettings _settings;
+
         public BindingsGenerator(GeneratorSettings settings) {
             _settings = settings;
             _delegeteArchive = new Dictionary<string, string>();
@@ -21,12 +26,12 @@ namespace Crystalbyte.Chocolate
             var service = new DiscoveryService(_settings);
             var files = service.Discover();
             foreach (var file in files) {
+                Debug.WriteLine(file.Name);
                 ParseFile(file);
             }
         }
 
-        public void GenerateAssemblyFile()
-        {
+        public void GenerateAssemblyFile() {
             using (var fs = GenerateOutputFile("CefAssembly.cs")) {
                 using (var cs = new CSharpCodeWriter(fs)) {
                     cs.WriteDefaultUsingDirectives();
@@ -75,8 +80,7 @@ namespace Crystalbyte.Chocolate
             }
         }
 
-        private static void GenerateEnum(CSharpCodeWriter cw, IList<string> enums)
-        {
+        private static void GenerateEnum(CSharpCodeWriter cw, IList<string> enums) {
             foreach (var @enum in enums) {
                 var name = CSharpCodeConverter.ExtractEnumName(@enum);
                 cw.BeginEnum(name);
@@ -101,15 +105,12 @@ namespace Crystalbyte.Chocolate
             }
         }
 
-        private static IList<string> FindEnums(string content)
-        {
+        private static IList<string> FindEnums(string content) {
             const string enumPattern =
-                @"enum\s+\w+\s*{(\w+|[=\-_,/\.]|\s)*};";
+                @"enum\s+\w+\s*{(\n|.)+?};";
             var matches = Regex.Matches(content, enumPattern, RegexOptions.Multiline);
             return (from Match match in matches select match.Value).ToList();
         }
-
-        private readonly Dictionary<string,string> _delegeteArchive;
 
         private void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs) {
             var delegates = new List<string>();

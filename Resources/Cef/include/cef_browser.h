@@ -40,52 +40,28 @@
 
 #include "include/cef_base.h"
 #include "include/cef_frame.h"
+#include "include/cef_process_message.h"
 #include <vector>
 
+class CefBrowserHost;
 class CefClient;
 
+
 ///
-// Class used to represent a browser window. The methods of this class may be
-// called on any thread unless otherwise indicated in the comments.
+// Class used to represent a browser window. When used in the browser process
+// the methods of this class may be called on any thread unless otherwise
+// indicated in the comments. When used in the render process the methods of
+// this class may only be called on the main thread.
 ///
 /*--cef(source=library)--*/
 class CefBrowser : public virtual CefBase {
  public:
   ///
-  // Create a new browser window using the window parameters specified by
-  // |windowInfo|. All values will be copied internally and the actual window
-  // will be created on the UI thread. This method call will not block.
-  ///
-  /*--cef(optional_param=url)--*/
-  static bool CreateBrowser(const CefWindowInfo& windowInfo,
-                            CefRefPtr<CefClient> client,
-                            const CefString& url,
-                            const CefBrowserSettings& settings);
-
-  ///
-  // Create a new browser window using the window parameters specified by
-  // |windowInfo|. This method should only be called on the UI thread.
-  ///
-  /*--cef(optional_param=url)--*/
-  static CefRefPtr<CefBrowser> CreateBrowserSync(
-      const CefWindowInfo& windowInfo,
-      CefRefPtr<CefClient> client,
-      const CefString& url,
-      const CefBrowserSettings& settings);
-
-  ///
-  // Call this method before destroying a contained browser window. This method
-  // performs any internal cleanup that may be needed before the browser window
-  // is destroyed.
+  // Returns the browser host object. This method can only be called in the
+  // browser process.
   ///
   /*--cef()--*/
-  virtual void ParentWindowWillClose() =0;
-
-  ///
-  // Closes this browser window.
-  ///
-  /*--cef()--*/
-  virtual void CloseBrowser() =0;
+  virtual CefRefPtr<CefBrowserHost> GetHost() =0;
 
   ///
   // Returns true if the browser can navigate backwards.
@@ -136,25 +112,10 @@ class CefBrowser : public virtual CefBase {
   virtual void StopLoad() =0;
 
   ///
-  // Set focus for the browser window. If |enable| is true focus will be set to
-  // the window. Otherwise, focus will be removed.
+  // Returns the globally unique identifier for this browser.
   ///
   /*--cef()--*/
-  virtual void SetFocus(bool enable) =0;
-
-  ///
-  // Retrieve the window handle for this browser.
-  ///
-  /*--cef()--*/
-  virtual CefWindowHandle GetWindowHandle() =0;
-
-  ///
-  // Retrieve the window handle of the browser that opened this browser. Will
-  // return NULL for non-popup windows. This method can be used in combination
-  // with custom handling of modal windows.
-  ///
-  /*--cef()--*/
-  virtual CefWindowHandle GetOpenerWindowHandle() =0;
+  virtual int GetIdentifier() =0;
 
   ///
   // Returns true if the window is a popup window.
@@ -165,12 +126,6 @@ class CefBrowser : public virtual CefBase {
   // Returns true if a document has been loaded in the browser.
   /*--cef()--*/
   virtual bool HasDocument() =0;
-
-  ///
-  // Returns the client for this browser.
-  ///
-  /*--cef()--*/
-  virtual CefRefPtr<CefClient> GetClient() =0;
 
   ///
   // Returns the main (top-level) frame for the browser window.
@@ -214,53 +169,93 @@ class CefBrowser : public virtual CefBase {
   /*--cef()--*/
   virtual void GetFrameNames(std::vector<CefString>& names) =0;
 
-  ///
-  // Search for |searchText|. |identifier| can be used to have multiple searches
-  // running simultaniously. |forward| indicates whether to search forward or
-  // backward within the page. |matchCase| indicates whether the search should
-  // be case-sensitive. |findNext| indicates whether this is the first request
-  // or a follow-up.
+  //
+  // Send a message to the specified |target_process|. Returns true if the
+  // message was sent successfully.
   ///
   /*--cef()--*/
-  virtual void Find(int identifier, const CefString& searchText,
-                    bool forward, bool matchCase, bool findNext) =0;
+  virtual bool SendProcessMessage(CefProcessId target_process,
+                                  CefRefPtr<CefProcessMessage> message) =0;
+};
+
+
+///
+// Class used to represent the browser process aspects of a browser window. The
+// methods of this class can only be called in the browser process.
+///
+/*--cef(source=library)--*/
+class CefBrowserHost : public virtual CefBase {
+ public:
+  ///
+  // Create a new browser window using the window parameters specified by
+  // |windowInfo|. All values will be copied internally and the actual window
+  // will be created on the UI thread. This method can be called on any browser
+  // process thread and will not block.
+  ///
+  /*--cef(optional_param=url)--*/
+  static bool CreateBrowser(const CefWindowInfo& windowInfo,
+                            CefRefPtr<CefClient> client,
+                            const CefString& url,
+                            const CefBrowserSettings& settings);
 
   ///
-  // Cancel all searches that are currently going on.
+  // Create a new browser window using the window parameters specified by
+  // |windowInfo|. This method can only be called on the browser process UI
+  // thread.
   ///
-  /*--cef()--*/
-  virtual void StopFinding(bool clearSelection) =0;
+  /*--cef(optional_param=url)--*/
+  static CefRefPtr<CefBrowser> CreateBrowserSync(
+      const CefWindowInfo& windowInfo,
+      CefRefPtr<CefClient> client,
+      const CefString& url,
+      const CefBrowserSettings& settings);
 
   ///
-  // Get the zoom level.
+  // Returns the hosted browser object.
   ///
   /*--cef()--*/
-  virtual double GetZoomLevel() =0;
+  virtual CefRefPtr<CefBrowser> GetBrowser() =0;
+  
+  ///
+  // Call this method before destroying a contained browser window. This method
+  // performs any internal cleanup that may be needed before the browser window
+  // is destroyed.
+  ///
+  /*--cef()--*/
+  virtual void ParentWindowWillClose() =0;
 
   ///
-  // Change the zoom level to the specified value.
+  // Closes this browser window.
   ///
   /*--cef()--*/
-  virtual void SetZoomLevel(double zoomLevel) =0;
+  virtual void CloseBrowser() =0;
 
   ///
-  // Clear the back/forward browsing history.
+  // Set focus for the browser window. If |enable| is true focus will be set to
+  // the window. Otherwise, focus will be removed.
   ///
   /*--cef()--*/
-  virtual void ClearHistory() =0;
+  virtual void SetFocus(bool enable) =0;
 
   ///
-  // Open developer tools in its own window.
+  // Retrieve the window handle for this browser.
   ///
   /*--cef()--*/
-  virtual void ShowDevTools() =0;
+  virtual CefWindowHandle GetWindowHandle() =0;
 
   ///
-  // Explicitly close the developer tools window if one exists for this browser
-  // instance.
+  // Retrieve the window handle of the browser that opened this browser. Will
+  // return NULL for non-popup windows. This method can be used in combination
+  // with custom handling of modal windows.
   ///
   /*--cef()--*/
-  virtual void CloseDevTools() =0;
+  virtual CefWindowHandle GetOpenerWindowHandle() =0;
+
+  ///
+  // Returns the client for this browser.
+  ///
+  /*--cef()--*/
+  virtual CefRefPtr<CefClient> GetClient() =0;
 };
 
 #endif  // CEF_INCLUDE_CEF_BROWSER_H_

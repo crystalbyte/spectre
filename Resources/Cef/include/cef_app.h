@@ -42,6 +42,7 @@
 #include "include/cef_base.h"
 #include "include/cef_command_line.h"
 #include "include/cef_proxy_handler.h"
+#include "include/cef_render_process_handler.h"
 #include "include/cef_resource_bundle_handler.h"
 
 class CefApp;
@@ -130,10 +131,19 @@ class CefApp : public virtual CefBase {
   }
 
   ///
+  // Return the handler for render process events. This method is called by the
+  // render process main thread.
+  ///
+  /*--cef()--*/
+  virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() {
+    return NULL;
+  }
+
+  ///
   // Return the handler for resource bundle events. If
   // CefSettings.pack_loading_disabled is true a handler must be returned. If no
   // handler is returned resources will be loaded from pack files. This method
-  // is called by the browser and renderer processes on multiple threads.
+  // is called by the browser and rendere processes on multiple threads.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefResourceBundleHandler> GetResourceBundleHandler() {

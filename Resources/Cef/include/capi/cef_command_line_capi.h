@@ -62,6 +62,24 @@ typedef struct _cef_command_line_t {
   cef_base_t base;
 
   ///
+  // Returns true (1) if this object is valid. Do not call any other functions
+  // if this function returns false (0).
+  ///
+  int (CEF_CALLBACK *is_valid)(struct _cef_command_line_t* self);
+
+  ///
+  // Returns true (1) if the values of this object are read-only. Some APIs may
+  // expose read-only objects.
+  ///
+  int (CEF_CALLBACK *is_read_only)(struct _cef_command_line_t* self);
+
+  ///
+  // Returns a writable copy of this object.
+  ///
+  struct _cef_command_line_t* (CEF_CALLBACK *copy)(
+      struct _cef_command_line_t* self);
+
+  ///
   // Initialize the command line with the specified |argc| and |argv| values.
   // The first argument must be the name of the program. This function is only
   // supported on non-Windows platforms.
@@ -166,6 +184,12 @@ typedef struct _cef_command_line_t {
 // Create a new cef_command_line_t instance.
 ///
 CEF_EXPORT cef_command_line_t* cef_command_line_create();
+
+///
+// Returns the singleton global cef_command_line_t object. The returned object
+// will be read-only.
+///
+CEF_EXPORT cef_command_line_t* cef_command_line_get_global();
 
 
 #ifdef __cplusplus

@@ -46,9 +46,10 @@ extern "C" {
 
 
 ///
-// Structure used to represent a frame in the browser window. The functions of
-// this structure may be called on any thread unless otherwise indicated in the
-// comments.
+// Structure used to represent a frame in the browser window. When used in the
+// browser process the functions of this structure may be called on any thread
+// unless otherwise indicated in the comments. When used in the render process
+// the functions of this structure may only be called on the main thread.
 ///
 typedef struct _cef_frame_t {
   ///
@@ -97,14 +98,9 @@ typedef struct _cef_frame_t {
   void (CEF_CALLBACK *select_all)(struct _cef_frame_t* self);
 
   ///
-  // Execute printing in the this frame.  The user will be prompted with the
-  // print dialog appropriate to the operating system.
-  ///
-  void (CEF_CALLBACK *print)(struct _cef_frame_t* self);
-
-  ///
   // Save this frame's HTML source to a temporary file and open it in the
-  // default text viewing application.
+  // default text viewing application. This function can only be called from the
+  // browser process.
   ///
   void (CEF_CALLBACK *view_source)(struct _cef_frame_t* self);
 
@@ -192,6 +188,13 @@ typedef struct _cef_frame_t {
   // Returns the browser that this frame belongs to.
   ///
   struct _cef_browser_t* (CEF_CALLBACK *get_browser)(struct _cef_frame_t* self);
+
+  ///
+  // Get the V8 context associated with the frame. This function can only be
+  // called from the render process.
+  ///
+  struct _cef_v8context_t* (CEF_CALLBACK *get_v8context)(
+      struct _cef_frame_t* self);
 } cef_frame_t;
 
 

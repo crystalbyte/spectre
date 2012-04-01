@@ -47,26 +47,25 @@ extern "C" {
 
 ///
 // CEF maintains multiple internal threads that are used for handling different
-// types of tasks. The UI thread creates the browser window and is used for all
-// interaction with the WebKit rendering engine and V8 JavaScript engine (The UI
-// thread will be the same as the main application thread if cef_initialize() is
-// called with a CefSettings.multi_threaded_message_loop value of false (0).)
-// The IO thread is used for handling schema and network requests. The FILE
-// thread is used for the application cache and other miscellaneous activities.
-// This function will return true (1) if called on the specified thread.
+// types of tasks in different processes. See the cef_thread_id_t definitions in
+// cef_types.h for more information. This function will return true (1) if
+// called on the specified thread. It is an error to request a thread from the
+// wrong process.
 ///
 CEF_EXPORT int cef_currently_on(cef_thread_id_t threadId);
 
 ///
 // Post a task for execution on the specified thread. This function may be
-// called on any thread.
+// called on any thread. It is an error to request a thread from the wrong
+// process.
 ///
 CEF_EXPORT int cef_post_task(cef_thread_id_t threadId,
     struct _cef_task_t* task);
 
 ///
 // Post a task for delayed execution on the specified thread. This function may
-// be called on any thread.
+// be called on any thread. It is an error to request a thread from the wrong
+// process.
 ///
 CEF_EXPORT int cef_post_delayed_task(cef_thread_id_t threadId,
     struct _cef_task_t* task, int64 delay_ms);

@@ -61,6 +61,20 @@ typedef long long           int64;  // NOLINT(runtime/int)
 typedef unsigned long long  uint64;  // NOLINT(runtime/int)
 #endif
 
+// TODO: Remove these type guards.  These are to avoid conflicts with
+// obsolete/protypes.h in the Gecko SDK.
+#ifndef _INT32
+#define _INT32
+typedef int                 int32;
+#endif
+
+// TODO: Remove these type guards.  These are to avoid conflicts with
+// obsolete/protypes.h in the Gecko SDK.
+#ifndef _UINT32
+#define _UINT32
+typedef unsigned int       uint32;
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -213,7 +227,7 @@ typedef struct _cef_settings_t {
 
   ///
   // Set to true (1) to disable loading of pack files for resources and locales.
-  // A resource bundle handler must be provided for the browser and renderer
+  // A resource bundle handler must be provided for the browser and render
   // processes via CefApp::GetResourceBundleHandler() if loading of pack files
   // is disabled.
   ///
@@ -631,6 +645,27 @@ enum cef_handler_errorcode_t {
 };
 
 ///
+// V8 access control values.
+///
+enum cef_v8_accesscontrol_t {
+  V8_ACCESS_CONTROL_DEFAULT               = 0,
+  V8_ACCESS_CONTROL_ALL_CAN_READ          = 1,
+  V8_ACCESS_CONTROL_ALL_CAN_WRITE         = 1 << 1,
+  V8_ACCESS_CONTROL_PROHIBITS_OVERWRITING = 1 << 2
+};
+
+///
+// V8 property attribute values.
+///
+enum cef_v8_propertyattribute_t {
+  V8_PROPERTY_ATTRIBUTE_NONE       = 0,       // Writeable, Enumerable,
+                                              //   Configurable
+  V8_PROPERTY_ATTRIBUTE_READONLY   = 1 << 0,  // Not writeable
+  V8_PROPERTY_ATTRIBUTE_DONTENUM   = 1 << 1,  // Not enumerable
+  V8_PROPERTY_ATTRIBUTE_DONTDELETE = 1 << 2   // Not configurable
+};
+
+///
 // Post data elements may represent either bytes or files.
 ///
 enum cef_postdataelement_type_t {
@@ -660,30 +695,84 @@ typedef struct _cef_rect_t {
 } cef_rect_t;
 
 ///
+// Existing process IDs.
+///
+enum cef_process_id_t {
+  ///
+  // Browser process.
+  ///
+  PID_BROWSER,
+  ///
+  // Renderer process.
+  ///
+  PID_RENDERER,
+};
+
+///
 // Existing thread IDs.
 ///
 enum cef_thread_id_t {
-  // The main thread in the browser.
+// BROWSER PROCESS THREADS -- Only available in the browser process.
+
+  ///
+  // The main thread in the browser. This will be the same as the main
+  // application thread if CefInitialize() is called with a
+  // CefSettings.multi_threaded_message_loop value of false.
+  ///
   TID_UI,
 
+  ///
   // Used to interact with the database.
+  ///
   TID_DB,
 
+  ///
   // Used to interact with the file system.
+  ///
   TID_FILE,
 
+  ///
   // Used for file system operations that block user interactions.
   // Responsiveness of this thread affects users.
+  ///
   TID_FILE_USER_BLOCKING,
 
+  ///
   // Used to launch and terminate browser processes.
+  ///
   TID_PROCESS_LAUNCHER,
 
+  ///
   // Used to handle slow HTTP cache operations.
+  ///
   TID_CACHE,
 
+  ///
   // Used to process IPC and network messages.
+  ///
   TID_IO,
+
+// RENDER PROCESS THREADS -- Only available in the render process.
+
+  ///
+  // The main thread in the renderer. Used for all WebKit and V8 interaction.
+  ///
+  TID_RENDERER,
+};
+
+///
+// Supported value types.
+///
+enum cef_value_type_t {
+  VTYPE_INVALID = 0,
+  VTYPE_NULL,
+  VTYPE_BOOL,
+  VTYPE_INT,
+  VTYPE_DOUBLE,
+  VTYPE_STRING,
+  VTYPE_BINARY,
+  VTYPE_DICTIONARY,
+  VTYPE_LIST,
 };
 
 ///

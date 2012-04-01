@@ -46,8 +46,10 @@ extern "C" {
 
 
 ///
-// Structure used to represent a browser window. The functions of this structure
-// may be called on any thread unless otherwise indicated in the comments.
+// Structure used to represent a browser window. When used in the browser
+// process the functions of this structure may be called on any thread unless
+// otherwise indicated in the comments. When used in the render process the
+// functions of this structure may only be called on the main thread.
 ///
 typedef struct _cef_browser_t {
   ///
@@ -56,16 +58,11 @@ typedef struct _cef_browser_t {
   cef_base_t base;
 
   ///
-  // Call this function before destroying a contained browser window. This
-  // function performs any internal cleanup that may be needed before the
-  // browser window is destroyed.
+  // Returns the browser host object. This function can only be called in the
+  // browser process.
   ///
-  void (CEF_CALLBACK *parent_window_will_close)(struct _cef_browser_t* self);
-
-  ///
-  // Closes this browser window.
-  ///
-  void (CEF_CALLBACK *close_browser)(struct _cef_browser_t* self);
+  struct _cef_browser_host_t* (CEF_CALLBACK *get_host)(
+      struct _cef_browser_t* self);
 
   ///
   // Returns true (1) if the browser can navigate backwards.
@@ -108,24 +105,9 @@ typedef struct _cef_browser_t {
   void (CEF_CALLBACK *stop_load)(struct _cef_browser_t* self);
 
   ///
-  // Set focus for the browser window. If |enable| is true (1) focus will be set
-  // to the window. Otherwise, focus will be removed.
+  // Returns the globally unique identifier for this browser.
   ///
-  void (CEF_CALLBACK *set_focus)(struct _cef_browser_t* self, int enable);
-
-  ///
-  // Retrieve the window handle for this browser.
-  ///
-  cef_window_handle_t (CEF_CALLBACK *get_window_handle)(
-      struct _cef_browser_t* self);
-
-  ///
-  // Retrieve the window handle of the browser that opened this browser. Will
-  // return NULL for non-popup windows. This function can be used in combination
-  // with custom handling of modal windows.
-  ///
-  cef_window_handle_t (CEF_CALLBACK *get_opener_window_handle)(
-      struct _cef_browser_t* self);
+  int (CEF_CALLBACK *get_identifier)(struct _cef_browser_t* self);
 
   ///
   // Returns true (1) if the window is a popup window.
@@ -134,11 +116,6 @@ typedef struct _cef_browser_t {
 
   // Returns true (1) if a document has been loaded in the browser.
   int (CEF_CALLBACK *has_document)(struct _cef_browser_t* self);
-
-  ///
-  // Returns the client for this browser.
-  ///
-  struct _cef_client_t* (CEF_CALLBACK *get_client)(struct _cef_browser_t* self);
 
   ///
   // Returns the main (top-level) frame for the browser window.
@@ -181,66 +158,89 @@ typedef struct _cef_browser_t {
   void (CEF_CALLBACK *get_frame_names)(struct _cef_browser_t* self,
       cef_string_list_t names);
 
+  //
+  // Send a message to the specified |target_process|. Returns true (1) if the
+  // message was sent successfully.
   ///
-  // Search for |searchText|. |identifier| can be used to have multiple searches
-  // running simultaniously. |forward| indicates whether to search forward or
-  // backward within the page. |matchCase| indicates whether the search should
-  // be case-sensitive. |findNext| indicates whether this is the first request
-  // or a follow-up.
-  ///
-  void (CEF_CALLBACK *find)(struct _cef_browser_t* self, int identifier,
-      const cef_string_t* searchText, int forward, int matchCase,
-      int findNext);
-
-  ///
-  // Cancel all searches that are currently going on.
-  ///
-  void (CEF_CALLBACK *stop_finding)(struct _cef_browser_t* self,
-      int clearSelection);
-
-  ///
-  // Get the zoom level.
-  ///
-  double (CEF_CALLBACK *get_zoom_level)(struct _cef_browser_t* self);
-
-  ///
-  // Change the zoom level to the specified value.
-  ///
-  void (CEF_CALLBACK *set_zoom_level)(struct _cef_browser_t* self,
-      double zoomLevel);
-
-  ///
-  // Clear the back/forward browsing history.
-  ///
-  void (CEF_CALLBACK *clear_history)(struct _cef_browser_t* self);
-
-  ///
-  // Open developer tools in its own window.
-  ///
-  void (CEF_CALLBACK *show_dev_tools)(struct _cef_browser_t* self);
-
-  ///
-  // Explicitly close the developer tools window if one exists for this browser
-  // instance.
-  ///
-  void (CEF_CALLBACK *close_dev_tools)(struct _cef_browser_t* self);
+  int (CEF_CALLBACK *send_process_message)(struct _cef_browser_t* self,
+      enum cef_process_id_t target_process,
+      struct _cef_process_message_t* message);
 } cef_browser_t;
+
+
+///
+// Structure used to represent the browser process aspects of a browser window.
+// The functions of this structure can only be called in the browser process.
+///
+typedef struct _cef_browser_host_t {
+  ///
+  // Base structure.
+  ///
+  cef_base_t base;
+
+  ///
+  // Returns the hosted browser object.
+  ///
+  struct _cef_browser_t* (CEF_CALLBACK *get_browser)(
+      struct _cef_browser_host_t* self);
+
+  ///
+  // Call this function before destroying a contained browser window. This
+  // function performs any internal cleanup that may be needed before the
+  // browser window is destroyed.
+  ///
+  void (CEF_CALLBACK *parent_window_will_close)(
+      struct _cef_browser_host_t* self);
+
+  ///
+  // Closes this browser window.
+  ///
+  void (CEF_CALLBACK *close_browser)(struct _cef_browser_host_t* self);
+
+  ///
+  // Set focus for the browser window. If |enable| is true (1) focus will be set
+  // to the window. Otherwise, focus will be removed.
+  ///
+  void (CEF_CALLBACK *set_focus)(struct _cef_browser_host_t* self, int enable);
+
+  ///
+  // Retrieve the window handle for this browser.
+  ///
+  cef_window_handle_t (CEF_CALLBACK *get_window_handle)(
+      struct _cef_browser_host_t* self);
+
+  ///
+  // Retrieve the window handle of the browser that opened this browser. Will
+  // return NULL for non-popup windows. This function can be used in combination
+  // with custom handling of modal windows.
+  ///
+  cef_window_handle_t (CEF_CALLBACK *get_opener_window_handle)(
+      struct _cef_browser_host_t* self);
+
+  ///
+  // Returns the client for this browser.
+  ///
+  struct _cef_client_t* (CEF_CALLBACK *get_client)(
+      struct _cef_browser_host_t* self);
+} cef_browser_host_t;
 
 
 ///
 // Create a new browser window using the window parameters specified by
 // |windowInfo|. All values will be copied internally and the actual window will
-// be created on the UI thread. This function call will not block.
+// be created on the UI thread. This function can be called on any browser
+// process thread and will not block.
 ///
-CEF_EXPORT int cef_browser_create(const cef_window_info_t* windowInfo,
-    struct _cef_client_t* client, const cef_string_t* url,
-    const struct _cef_browser_settings_t* settings);
+CEF_EXPORT int cef_browser_host_create_browser(
+    const cef_window_info_t* windowInfo, struct _cef_client_t* client,
+    const cef_string_t* url, const struct _cef_browser_settings_t* settings);
 
 ///
 // Create a new browser window using the window parameters specified by
-// |windowInfo|. This function should only be called on the UI thread.
+// |windowInfo|. This function can only be called on the browser process UI
+// thread.
 ///
-CEF_EXPORT cef_browser_t* cef_browser_create_sync(
+CEF_EXPORT cef_browser_t* cef_browser_host_create_browser_sync(
     const cef_window_info_t* windowInfo, struct _cef_client_t* client,
     const cef_string_t* url, const struct _cef_browser_settings_t* settings);
 

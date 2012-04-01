@@ -1,14 +1,17 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
-namespace Crystalbyte.Chocolate.UI
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     internal sealed class WindowInfo : Adapter {
         public WindowInfo(IRenderTarget target)
-            : base(typeof(CefWindowInfo)) {
+            : base(typeof (CefWindowInfo)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
-            var info = new CefWindowInfo {
+            MarshalToNative(new CefWindowInfo {
                 ParentWindow = target.Handle,
                 Style = (uint) (WindowStyles.ChildWindow
                                 | WindowStyles.ClipChildren
@@ -17,10 +20,9 @@ namespace Crystalbyte.Chocolate.UI
                                 | WindowStyles.Visible),
                 X = 0,
                 Y = 0,
-                Width = target.StartSize.Width,
-                Height = target.StartSize.Height
-            };
-            MarshalToNative(info);
+                Width = target.Size.Width,
+                Height = target.Size.Height
+            });
         }
 
         public IntPtr WindowHandle {

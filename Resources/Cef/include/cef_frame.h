@@ -44,10 +44,13 @@
 #include "include/cef_string_visitor.h"
 
 class CefBrowser;
+class CefV8Context;
 
 ///
-// Class used to represent a frame in the browser window. The methods of this
-// class may be called on any thread unless otherwise indicated in the comments.
+// Class used to represent a frame in the browser window. When used in the
+// browser process the methods of this class may be called on any thread unless
+// otherwise indicated in the comments. When used in the render process the
+// methods of this class may only be called on the main thread.
 ///
 /*--cef(source=library)--*/
 class CefFrame : public virtual CefBase {
@@ -101,15 +104,9 @@ class CefFrame : public virtual CefBase {
   virtual void SelectAll() =0;
 
   ///
-  // Execute printing in the this frame.  The user will be prompted with the
-  // print dialog appropriate to the operating system.
-  ///
-  /*--cef()--*/
-  virtual void Print() =0;
-
-  ///
   // Save this frame's HTML source to a temporary file and open it in the
-  // default text viewing application.
+  // default text viewing application. This method can only be called from the
+  // browser process.
   ///
   /*--cef()--*/
   virtual void ViewSource() =0;
@@ -205,6 +202,13 @@ class CefFrame : public virtual CefBase {
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefBrowser> GetBrowser() =0;
+
+  ///
+  // Get the V8 context associated with the frame. This method can only be
+  // called from the render process.
+  ///
+  /*--cef()--*/
+  virtual CefRefPtr<CefV8Context> GetV8Context() =0;
 };
 
 #endif  // CEF_INCLUDE_CEF_FRAME_H_

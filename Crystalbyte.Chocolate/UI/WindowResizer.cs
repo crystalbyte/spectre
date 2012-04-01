@@ -5,12 +5,8 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI
-{
-    internal sealed class WindowResizer
-    {
-        #region IWindowResizer Members
-
+namespace Crystalbyte.Chocolate.UI {
+    internal sealed class WindowResizer {
         public void Resize(IntPtr handle, Rectangle bounds) {
             var hdwp = NativeMethods.BeginDeferWindowPos(1);
             hdwp = NativeMethods.DeferWindowPos(hdwp, handle, IntPtr.Zero, bounds.X, bounds.Y, bounds.Width,
@@ -22,8 +18,6 @@ namespace Crystalbyte.Chocolate.UI
             }
             throw new ChocolateException("error resizing window.");
         }
-
-        #endregion
 
         #region Nested type: NativeMethods
 
@@ -45,8 +39,7 @@ namespace Crystalbyte.Chocolate.UI
         #region Nested type: WindowResizeFlags
 
         [Flags]
-        private enum WindowResizeFlags : uint
-        {
+        private enum WindowResizeFlags : uint {
             DrawFrame = 0x0020,
             FrameChanged = 0x0020,
             HideWindow = 0x0080,

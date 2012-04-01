@@ -8,7 +8,6 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate {
     internal static class Reference {
-
         public static void Decrement(IntPtr handle) {
             var obj = (CefBase) Marshal.PtrToStructure(handle, typeof (CefBase));
             var function =

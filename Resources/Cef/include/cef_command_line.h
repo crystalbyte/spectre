@@ -65,6 +65,33 @@ class CefCommandLine : public virtual CefBase {
   static CefRefPtr<CefCommandLine> CreateCommandLine();
 
   ///
+  // Returns the singleton global CefCommandLine object. The returned object
+  // will be read-only.
+  ///
+  /*--cef(revision_check)--*/
+  static CefRefPtr<CefCommandLine> GetGlobalCommandLine();
+
+  ///
+  // Returns true if this object is valid. Do not call any other methods if this
+  // function returns false.
+  ///
+  /*--cef()--*/
+  virtual bool IsValid() =0;
+
+  ///
+  // Returns true if the values of this object are read-only. Some APIs may
+  // expose read-only objects.
+  ///
+  /*--cef()--*/
+  virtual bool IsReadOnly() =0;
+
+  ///
+  // Returns a writable copy of this object.
+  ///
+  /*--cef()--*/
+  virtual CefRefPtr<CefCommandLine> Copy() =0;
+
+  ///
   // Initialize the command line with the specified |argc| and |argv| values.
   // The first argument must be the name of the program. This method is only
   // supported on non-Windows platforms.
