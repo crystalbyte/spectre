@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestHandler.cs" />
     <Compile Include="WindowDelegate.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
@@ -79,14 +80,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj">
-      <Project>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</Project>
-      <Name>Crystalbyte.Chocolate.Bindings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{DC202E77-073A-4881-84C9-94B6BC7469B4}</Project>
       <Name>Crystalbyte.Chocolate</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Pages\start.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

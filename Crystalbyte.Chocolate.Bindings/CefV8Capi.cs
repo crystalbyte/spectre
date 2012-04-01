@@ -33,7 +33,7 @@ namespace Crystalbyte.Chocolate.Bindings
 		public static extern IntPtr CefV8valueCreateInt(int value);
 		
 		[DllImport(CefAssembly.Name, EntryPoint = "cef_v8value_create_uint", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
-		public static extern IntPtr CefV8valueCreateUint(Uint32 value);
+		public static extern IntPtr CefV8valueCreateUint(uint value);
 		
 		[DllImport(CefAssembly.Name, EntryPoint = "cef_v8value_create_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
 		public static extern IntPtr CefV8valueCreateDouble(Double value);
@@ -67,8 +67,9 @@ namespace Crystalbyte.Chocolate.Bindings
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefV8handler {
+	public struct CefV8Handler {
 		public CefBase Base;
+		public IntPtr Execute;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
@@ -124,7 +125,9 @@ namespace Crystalbyte.Chocolate.Bindings
 		public IntPtr DeleteValueByindex;
 		public IntPtr GetValueBykey;
 		public IntPtr GetValueByindex;
+		public IntPtr SetValueBykey;
 		public IntPtr SetValueByindex;
+		public IntPtr SetValueByaccessor;
 		public IntPtr GetKeys;
 		public IntPtr SetUserData;
 		public IntPtr GetUserData;
@@ -133,6 +136,8 @@ namespace Crystalbyte.Chocolate.Bindings
 		public IntPtr GetArrayLength;
 		public IntPtr GetFunctionName;
 		public IntPtr GetFunctionHandler;
+		public IntPtr ExecuteFunction;
+		public IntPtr ExecuteFunctionWithContext;
 	}
 	
 	public delegate IntPtr GetGlobalCallback(IntPtr self);
@@ -140,7 +145,7 @@ namespace Crystalbyte.Chocolate.Bindings
 	public delegate int ExitCallback(IntPtr self);
 	public delegate int IsSameCallback(IntPtr self, IntPtr that);
 	public delegate int EvalCallback(IntPtr self, IntPtr code, IntPtr retval, IntPtr exception);
-	public delegate int GetCallback(IntPtr self, IntPtr name, IntPtr object, IntPtr retval, IntPtr exception);
+	public delegate int GetCallback(IntPtr self, IntPtr name, IntPtr @object, IntPtr retval, IntPtr exception);
 	public delegate IntPtr GetMessageCallback(IntPtr self);
 	public delegate IntPtr GetSourceLineCallback(IntPtr self);
 	public delegate IntPtr GetScriptResourceNameCallback(IntPtr self);
@@ -162,7 +167,7 @@ namespace Crystalbyte.Chocolate.Bindings
 	public delegate int IsFunctionCallback(IntPtr self);
 	public delegate int GetBoolValueCallback(IntPtr self);
 	public delegate int GetIntValueCallback(IntPtr self);
-	public delegate Uint32 GetUintValueCallback(IntPtr self);
+	public delegate uint GetUintValueCallback(IntPtr self);
 	public delegate Double GetDoubleValueCallback(IntPtr self);
 	public delegate CefTime GetDateValueCallback(IntPtr self);
 	public delegate IntPtr GetStringValueCallback(IntPtr self);
@@ -178,7 +183,9 @@ namespace Crystalbyte.Chocolate.Bindings
 	public delegate int DeleteValueByindexCallback(IntPtr self, int index);
 	public delegate IntPtr GetValueBykeyCallback(IntPtr self, IntPtr key);
 	public delegate IntPtr GetValueByindexCallback(IntPtr self, int index);
+	public delegate int SetValueBykeyCallback(IntPtr self, IntPtr key, IntPtr value, CefV8Propertyattribute attribute);
 	public delegate int SetValueByindexCallback(IntPtr self, int index, IntPtr value);
+	public delegate int SetValueByaccessorCallback(IntPtr self, IntPtr key, CefV8Accesscontrol settings, CefV8Propertyattribute attribute);
 	public delegate int GetKeysCallback(IntPtr self, IntPtr keys);
 	public delegate int SetUserDataCallback(IntPtr self, IntPtr userData);
 	public delegate IntPtr GetUserDataCallback(IntPtr self);
@@ -187,5 +194,8 @@ namespace Crystalbyte.Chocolate.Bindings
 	public delegate int GetArrayLengthCallback(IntPtr self);
 	public delegate IntPtr GetFunctionNameCallback(IntPtr self);
 	public delegate IntPtr GetFunctionHandlerCallback(IntPtr self);
+	public delegate IntPtr ExecuteFunctionCallback(IntPtr self, IntPtr @object, int argumentscount, IntPtr arguments);
+	public delegate IntPtr ExecuteFunctionWithContextCallback(IntPtr self, IntPtr context, IntPtr @object, int argumentscount, IntPtr arguments);
+    public delegate int V8ExecuteCallback(IntPtr self, IntPtr name, IntPtr obj, int argCount, IntPtr arguments, out IntPtr retValue, IntPtr exception);
 	
 }

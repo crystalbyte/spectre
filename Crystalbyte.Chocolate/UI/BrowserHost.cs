@@ -55,7 +55,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public static Browser CreateBrowser(BrowserArgs a) {
-            var uri = new StringUtf16(a.StartUri.AbsoluteUri);
+            var uri = new StringUtf16(a.StartUri.OriginalString);
             Reference.Increment(a.ClientHandler.NativeHandle);
             var handle = CefBrowserCapi.CefBrowserHostCreateBrowserSync(
                 a.WindowInfo.NativeHandle,

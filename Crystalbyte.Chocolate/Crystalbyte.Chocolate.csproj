@@ -51,6 +51,12 @@
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reference.cs" />
+    <Compile Include="Scripting\ExecutedEventArgs.cs" />
+    <Compile Include="Scripting\ScriptingExtension.cs" />
+    <Compile Include="Scripting\ScriptingHandler.cs" />
+    <Compile Include="Scripting\ScriptingObject.cs" />
+    <Compile Include="Scripting\ScriptingObjectCollection.cs" />
+    <Compile Include="Scripting\ScriptingRuntime.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="UI\App.cs" />
@@ -78,9 +84,7 @@
       <Name>Crystalbyte.Chocolate.Bindings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripting\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

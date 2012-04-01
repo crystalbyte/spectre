@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
@@ -25,10 +26,9 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            Framework.AttachRenderer(new Renderer(new Window(), new WindowDelegate()));
-            Framework.AttachRenderer(new Renderer(new Window(), new WindowDelegate()));
-            Framework.AttachRenderer(new Renderer(new Window(), new WindowDelegate()));
-            Framework.Run();
+            ScriptingRuntime.RegisterExtension("test", new TestHandler());
+
+            Framework.Run(new Renderer(new Window(), new WindowDelegate()));
             Framework.Shutdown();
         }
     }

@@ -16,7 +16,7 @@ namespace Crystalbyte.Chocolate {
         #region IRenderTarget Members
 
         public Uri StartupUri {
-            get { return new Uri("http://www.google.de"); }
+            get { return new Uri("./Pages/start.htm", UriKind.Relative); }
         }
 
         public event EventHandler<SizeChangedEventArgs> TargetSizeChanged;
@@ -24,7 +24,7 @@ namespace Crystalbyte.Chocolate {
         public event EventHandler TargetClosing;
 
         public new Size Size {
-            get { return new Size(Width, Height); }
+            get { return new Size(Width + 1, Height); }
         }
 
         #endregion

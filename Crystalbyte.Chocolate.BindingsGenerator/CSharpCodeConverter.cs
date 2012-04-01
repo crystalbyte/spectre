@@ -31,6 +31,9 @@ namespace Crystalbyte.Chocolate {
 
         private static string AdjustArgumentName(string name) {
             name = name.FirstToLower();
+            if (name == "object") {
+                return "@object";
+            }
             if (name == "string") {
                 return "@string";
             }
@@ -246,6 +249,10 @@ namespace Crystalbyte.Chocolate {
             if (splitBySpace.Length > begin) {
                 for (var i = begin; i < splitBySpace.Length; i++) {
                     var argumentType = ConvertType(splitBySpace[i++]);
+                    var token = splitBySpace[i];
+                    if (token == "*") {
+                        i++;
+                    }
                     var argument = ConvertType(splitBySpace[i], true);
                     args.Add(argumentType + " " + AdjustArgumentName(argument));
                 }

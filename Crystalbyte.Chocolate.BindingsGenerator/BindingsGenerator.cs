@@ -136,6 +136,7 @@ namespace Crystalbyte.Chocolate {
                 string name;
                 var @d = CSharpCodeConverter.CreateDelegate(@delegate, out name);
                 if (_delegeteArchive.ContainsKey(name)) {
+                    Debug.WriteLine("skipped delegate", name);
                     continue;
                 }
                 cw.WriteLine(@d);
@@ -160,7 +161,7 @@ namespace Crystalbyte.Chocolate {
 
         private static IEnumerable<string> FindStructMembers(string content) {
             const string memberPattern =
-                @"(^\s*\w+\**\s+\w+;)|(^(\s*\w+\**\s+)*\((CEF_CALLBACK)*\s*\*\s*\w+\)\(\s*((const|struct)\s+)*\s*\w+\**\s*\w+(,\s*((const|struct)\s+)*\s*\w+\**\s+\w+)*\);)|(^\s*\w+(\s+\w+)+;)";
+                @"(^\s*\w+\**\s+\w+;)|(^(\s*(\w|\*)+\s+)+\((\n|.)+?\)\s*\((\n|.)+?\)\s*;)";
             var matches = Regex.Matches(content, memberPattern, RegexOptions.Multiline);
             return (from Match match in matches select match.Value).ToList();
         }

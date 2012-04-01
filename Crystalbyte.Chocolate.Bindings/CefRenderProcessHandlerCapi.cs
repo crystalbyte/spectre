@@ -15,6 +15,7 @@ namespace Crystalbyte.Chocolate.Bindings
 		public IntPtr OnBrowserDestroyed;
 		public IntPtr OnContextCreated;
 		public IntPtr OnContextReleased;
+		public IntPtr OnProcessMessageRecieved;
 	}
 	
 	public delegate void OnRenderThreadCreatedCallback(IntPtr self);
