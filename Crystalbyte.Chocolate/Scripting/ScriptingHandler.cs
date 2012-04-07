@@ -8,7 +8,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate.Scripting
 {
-    public class ScriptingHandler : CountedAdapter {
+    public class ScriptingHandler : OwnedAdapter {
         private readonly V8ExecuteCallback _executeCallback;
         public ScriptingHandler() 
             : base(typeof(CefV8Handler)) {

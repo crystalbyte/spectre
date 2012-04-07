@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="ChocolateException.cs" />
-    <Compile Include="CountedAdapter.cs" />
+    <Compile Include="OwnedAdapter.cs" />
     <Compile Include="DisposableObject.cs" />
     <Compile Include="GraphicsImplementation.cs" />
     <Compile Include="ISealedCollection.cs" />
@@ -61,10 +61,20 @@
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="UI\App.cs" />
     <Compile Include="UI\Browser.cs" />
+    <Compile Include="UI\BrowserEventArgs.cs" />
+    <Compile Include="UI\ConsoleMessageReceivedEventArgs.cs" />
+    <Compile Include="UI\DisplayHandler.cs" />
+    <Compile Include="UI\Frame.cs" />
     <Compile Include="UI\Framework.cs" />
-    <Compile Include="UI\BrowserArgs.cs" />
+    <Compile Include="UI\BrowserCreationArgs.cs" />
+    <Compile Include="UI\LifeSpanHandler.cs" />
+    <Compile Include="UI\NavigatedEventArgs.cs" />
+    <Compile Include="UI\BrowserClosedEventArgs.cs" />
+    <Compile Include="UI\BrowserClosingEventArgs.cs" />
+    <Compile Include="UI\PopupCreatingEventArgs.cs" />
     <Compile Include="UI\Rectangle.cs" />
-    <Compile Include="UI\RenderDelegate.cs" />
+    <Compile Include="UI\RenderProcessHandler.cs" />
+    <Compile Include="UI\ProcessDelegate.cs" />
     <Compile Include="UI\FrameworkSettings.cs" />
     <Compile Include="UI\BrowserHost.cs" />
     <Compile Include="UI\ClientHandler.cs" />
@@ -72,8 +82,8 @@
     <Compile Include="UI\Point.cs" />
     <Compile Include="UI\Size.cs" />
     <Compile Include="UI\SizeChangedEventArgs.cs" />
-    <Compile Include="UI\Renderer.cs" />
-    <Compile Include="UI\RenderSettings.cs" />
+    <Compile Include="UI\RenderProcess.cs" />
+    <Compile Include="UI\BrowserSettings.cs" />
     <Compile Include="UI\WindowInfo.cs" />
     <Compile Include="UI\WindowResizer.cs" />
     <Compile Include="UI\WindowStyles.cs" />

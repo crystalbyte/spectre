@@ -2,10 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
+using System.Threading;
 
 #endregion
 
@@ -13,12 +15,13 @@ namespace Crystalbyte.Chocolate.UI {
     public static class Framework {
         private static readonly App _app;
         private static readonly FrameworkSettings _settings;
-        private static readonly Dictionary<IRenderTarget, Renderer> _views;
+        private static readonly Dictionary<IRenderTarget, RenderProcess> _views;
 
         static Framework() {
             _app = new App();
             _settings = new FrameworkSettings();
-            _views = new Dictionary<IRenderTarget, Renderer>();
+            _views = new Dictionary<IRenderTarget, RenderProcess>();
+            QuitAfterLastViewClosed = true;
         }
 
         public static FrameworkSettings Settings {
@@ -27,6 +30,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         public static bool IsInitialized { get; private set; }
         public static bool IsRootProcess { get; private set; }
+        public static bool QuitAfterLastViewClosed { get; set; }
 
         public static void IterateMessageLoop() {
             CefAppCapi.CefDoMessageLoopWork();
@@ -51,30 +55,28 @@ namespace Crystalbyte.Chocolate.UI {
             CefAppCapi.CefShutdown();
         }
 
-        public static void AttachRenderer(Renderer renderer) {
-            _views.Add(renderer.RenderTarget, renderer);
-            renderer.RenderTarget.TargetClosing += OnRenderTargetClosed;
-            renderer.CreateBrowser();
+        public static void Attach(RenderProcess process) {
+            _views.Add(process.RenderTarget, process);
+            process.RenderTarget.TargetClosing += OnRenderTargetClosing;
+            process.RenderTarget.TargetClosed += OnRenderTargetClosed;
+            process.CreateBrowser();
+        }
+
+        private static void OnRenderTargetClosing(object sender, EventArgs e) {
+            var target = (IRenderTarget)sender;
+            target.TargetClosing -= OnRenderTargetClosing;
+            _views[target].Dispose();
+            _views.Remove(target);
+            if (QuitAfterLastViewClosed && _views.Count < 1) {
+                 CefAppCapi.CefQuitMessageLoop();
+            }
         }
 
         private static void OnRenderTargetClosed(object sender, EventArgs e) {
-            var target = (IRenderTarget) sender;
-            target.TargetClosing -= OnRenderTargetClosed;
-            if (!_views.ContainsKey(target)) {
-                return;
-            }
-            _views[target].Dispose();
-            _views.Remove(target);
-            // revive for finalization
-            GC.Collect();
-            // call finalizers
-            GC.Collect();
-
-            if (_views.Count < 1) {
-                CefAppCapi.CefQuitMessageLoop();
-            }
+            var target = (IRenderTarget)sender;
+            target.TargetClosed -= OnRenderTargetClosed;
         }
-
+   
         private static IntPtr MarshalMainArgs(IntPtr hInstance) {
             var mainArgs = new CefMainArgs {
                 Instance = hInstance
@@ -85,8 +87,8 @@ namespace Crystalbyte.Chocolate.UI {
             return handle;
         }
 
-        public static void Run(Renderer renderer) {
-            AttachRenderer(renderer);
+        public static void Run(RenderProcess process) {
+            Attach(process);
             CefAppCapi.CefRunMessageLoop();
         }
 

@@ -21,5 +21,12 @@ namespace Crystalbyte.Chocolate {
                 (AddRefCallback) Marshal.GetDelegateForFunctionPointer(obj.AddRef, typeof (AddRefCallback));
             function(handle);
         }
+
+        public static int GetReferenceCounter(IntPtr handle){
+            var obj = (CefBase)Marshal.PtrToStructure(handle, typeof(CefBase));
+            var function =
+                (AddRefCallback)Marshal.GetDelegateForFunctionPointer(obj.GetRefct, typeof(AddRefCallback));
+            return function(handle);
+        }
     }
 }

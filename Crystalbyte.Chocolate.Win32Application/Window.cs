@@ -15,16 +15,14 @@ namespace Crystalbyte.Chocolate {
 
         #region IRenderTarget Members
 
-        public Uri StartupUri {
-            get { return new Uri("./Pages/start.htm", UriKind.Relative); }
-        }
+        public Uri StartupUri { get; set; }
 
         public event EventHandler<SizeChangedEventArgs> TargetSizeChanged;
         public event EventHandler TargetClosed;
         public event EventHandler TargetClosing;
 
         public new Size Size {
-            get { return new Size(Width + 1, Height); }
+            get { return new Size(Width, Height); }
         }
 
         #endregion

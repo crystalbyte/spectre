@@ -2,6 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 #endregion
 
@@ -21,6 +22,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         #region Nested type: NativeMethods
 
+        [SuppressUnmanagedCodeSecurity]
         private static class NativeMethods {
             [DllImport("user32.dll")]
             public static extern IntPtr BeginDeferWindowPos(int windowCount);

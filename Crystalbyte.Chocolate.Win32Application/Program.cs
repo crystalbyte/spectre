@@ -2,7 +2,9 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 
@@ -26,9 +28,10 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            ScriptingRuntime.RegisterExtension("test", new TestHandler());
-
-            Framework.Run(new Renderer(new Window(), new WindowDelegate()));
+            //var index = new Uri("http://www.google.com/");
+            var index = new Uri(Environment.CurrentDirectory + "/Pages/start.htm");
+            var process = new RenderProcess(new Window { StartupUri = index }, new WindowDelegate());
+            Framework.Run(process);
             Framework.Shutdown();
         }
     }

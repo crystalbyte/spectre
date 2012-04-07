@@ -7,9 +7,8 @@ namespace Crystalbyte.Chocolate.Scripting
 {
     public sealed class ScriptingObject
     {
-        internal static ScriptingObject FromHandle(IntPtr handle)
-        {
-            throw new NotImplementedException();
+        internal static ScriptingObject FromHandle(IntPtr handle) {
+            return null;
         }
     }
 }

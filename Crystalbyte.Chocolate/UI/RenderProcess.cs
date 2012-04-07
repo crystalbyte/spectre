@@ -5,24 +5,41 @@ using System;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class Renderer : DisposableObject {
+    public sealed class RenderProcess : DisposableObject {
         private readonly ClientHandler _handler;
         private readonly WindowResizer _resizer;
-        private readonly RenderSettings _settings;
+        private readonly BrowserSettings _settings;
         private readonly IRenderTarget _target;
         private Browser _browser;
         private BrowserHost _browserHost;
 
-        public Renderer(IRenderTarget target, RenderDelegate @delegate) {
+        public RenderProcess(IRenderTarget target, ProcessDelegate @delegate) {
             _target = target;
-            _target.TargetClosing += OnTargetClosed;
+            _target.TargetClosing += OnTargetClosing;
+            _target.TargetClosed += OnTargetClosed;
             _target.TargetSizeChanged += OnTargetSizeChanged;
             _handler = new ClientHandler(@delegate);
-            _settings = new RenderSettings();
+            _settings = new BrowserSettings();
             _resizer = new WindowResizer();
         }
 
-        public RenderSettings Settings {
+        public event EventHandler Creating;
+        private void OnCreating(EventArgs e) {
+            var handler = Creating;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler Created;
+        private void OnCreated(EventArgs e) {
+            var handler = Created;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public BrowserSettings Settings {
             get { return _settings; }
         }
 
@@ -31,12 +48,13 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         protected override void DisposeManaged() {
+            base.DisposeManaged();
             _target.TargetClosing -= OnTargetClosing;
             _target.TargetClosed -= OnTargetClosed;
             _target.TargetSizeChanged -= OnTargetSizeChanged;
-            _browserHost.Dispose();
+            _handler.Dispose();
             _browser.Dispose();
-            base.DisposeManaged();
+            _browserHost.Dispose();
         }
 
         private void OnTargetClosing(object sender, EventArgs e) {
@@ -44,7 +62,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private void OnTargetClosed(object sender, EventArgs e) {
-            // nothing yet
+            // nada
         }
 
         private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e) {
@@ -53,13 +71,16 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         internal void CreateBrowser() {
-            _browser = BrowserHost.CreateBrowser(new BrowserArgs {
+            OnCreating(EventArgs.Empty);
+            // starts the browser render loop
+            _browser = BrowserHost.CreateBrowser(new BrowserCreationArgs {
                 ClientHandler = _handler,
                 Settings = _settings,
                 StartUri = _target.StartupUri,
                 WindowInfo = new WindowInfo(_target)
             });
             _browserHost = _browser.Host;
+            OnCreated(EventArgs.Empty);
             _target.Show();
         }
     }

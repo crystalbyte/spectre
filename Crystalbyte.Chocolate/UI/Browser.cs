@@ -1,19 +1,21 @@
 ﻿#region Namespace Directives
 
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    internal sealed class Browser : Adapter {
+    public sealed class Browser : Adapter {
         private Browser(IntPtr handle)
             : base(typeof (CefBrowser), true) {
             NativeHandle = handle;
+            Debug.WriteLine(string.Format("Browser: {0}", NativeHandle));
         }
 
-        public BrowserHost Host {
+        internal BrowserHost Host {
             get {
                 var reflection = MarshalFromNative<CefBrowser>();
                 var function = (GetHostCallback)
@@ -25,6 +27,10 @@ namespace Crystalbyte.Chocolate.UI {
 
         public static Browser FromHandle(IntPtr handle) {
             return new Browser(handle);
+        }
+
+        public void Navigate(string url) {
+            
         }
     }
 }

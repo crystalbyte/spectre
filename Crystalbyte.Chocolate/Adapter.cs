@@ -2,6 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 #endregion
 
@@ -10,6 +11,7 @@ namespace Crystalbyte.Chocolate {
     ///   This class is a manged access point for native objects.
     ///   This class does not manage the objects lifecycle thus not allocating any memory.
     /// </summary>
+    [DebuggerDisplay("NativeHandle = {NativeHandle}, Type = GetType()")]
     public abstract class Adapter : DisposableObject {
         protected Adapter(Type nativeType, bool isRefCounted = false) {
             if (nativeType == null) {
@@ -23,7 +25,16 @@ namespace Crystalbyte.Chocolate {
             IsRefCounted = isRefCounted;
         }
 
-        protected internal IntPtr NativeHandle { get; protected set; }
+        private IntPtr _nativeHandle;
+        protected internal IntPtr NativeHandle {
+            get { return _nativeHandle; }
+            protected set {
+                if (value != IntPtr.Zero && _nativeHandle != value) {
+                    _nativeHandle = value;
+                }
+            }
+        }
+
         protected internal int NativeSize { get; private set; }
         protected Type NativeType { get; private set; }
         public bool IsRefCounted { get; private set; }

@@ -5,7 +5,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    internal sealed class App : CountedAdapter {
+    internal sealed class App : OwnedAdapter {
         public App()
             : base(typeof (CefApp)) {
             MarshalToNative(new CefApp {

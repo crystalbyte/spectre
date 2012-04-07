@@ -9,12 +9,12 @@ namespace Crystalbyte.Chocolate
 {
     public sealed class TestHandler : ScriptingExtension {
         protected override void OnExecuted(ExecutedEventArgs e){
-            base.OnExecuted(e);
             MessageBox.Show("executed");
+            base.OnExecuted(e);
         }
 
         public override string PrototypeCode {
-            get { return "native function c();"; }
+            get { return "a = function() {  native function showMessageBox(); };"; }
         }
     }
 }

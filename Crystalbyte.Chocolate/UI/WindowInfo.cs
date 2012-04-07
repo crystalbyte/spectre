@@ -7,7 +7,8 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    internal sealed class WindowInfo : Adapter {
+    public sealed class WindowInfo : Adapter {
+        private readonly bool _isOwned;
         public WindowInfo(IRenderTarget target)
             : base(typeof (CefWindowInfo)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
@@ -23,6 +24,16 @@ namespace Crystalbyte.Chocolate.UI {
                 Width = target.Size.Width,
                 Height = target.Size.Height
             });
+            _isOwned = true;
+        }
+
+        private WindowInfo(IntPtr handle) 
+            : base(typeof(CefWindowInfo)) {
+            NativeHandle = handle;
+        }
+
+        public static WindowInfo FromHandle(IntPtr handle) {
+            return new WindowInfo(handle);
         }
 
         public IntPtr WindowHandle {
@@ -33,7 +44,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero) {
+            if (NativeHandle != IntPtr.Zero && _isOwned) {
                 Marshal.FreeHGlobal(NativeHandle);
             }
             base.DisposeNative();
