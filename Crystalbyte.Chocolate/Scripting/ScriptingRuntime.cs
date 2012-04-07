@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
+
+using System;
 using Crystalbyte.Chocolate.Bindings;
 
-namespace Crystalbyte.Chocolate.Scripting
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.Scripting {
     public static class ScriptingRuntime {
         public static bool RegisterExtension(string name, ScriptingExtension extension) {
             var n = new StringUtf16(name);

@@ -7,7 +7,7 @@ using System;
 namespace Crystalbyte.Chocolate.UI {
     [Serializable]
     public struct Size : IEquatable<Size> {
-        public static Size Empty = new Size(0, 0);
+        public static readonly Size Empty = new Size(0, 0);
         private readonly int _height;
         private readonly int _width;
 

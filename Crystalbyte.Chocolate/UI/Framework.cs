@@ -2,23 +2,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
-using System.Threading;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
     public static class Framework {
-        private static readonly App _app;
+        private static App _app;
         private static readonly FrameworkSettings _settings;
         private static readonly Dictionary<IRenderTarget, RenderProcess> _views;
 
         static Framework() {
-            _app = new App();
             _settings = new FrameworkSettings();
             _views = new Dictionary<IRenderTarget, RenderProcess>();
             QuitAfterLastViewClosed = true;
@@ -36,13 +33,17 @@ namespace Crystalbyte.Chocolate.UI {
             CefAppCapi.CefDoMessageLoopWork();
         }
 
-        public static bool Initialize(Module module) {
+        public static bool Initialize(Module module, AppDelegate appDelegate = null) {
             var hInstance = Marshal.GetHINSTANCE(module);
             var argsHandle = MarshalMainArgs(hInstance);
 
             var exitCode = CefAppCapi.CefExecuteProcess(argsHandle, IntPtr.Zero);
             IsRootProcess = exitCode < 0;
+            if (!IsRootProcess) {
+                return true;
+            }
 
+            _app = new App(appDelegate ?? new AppDelegate());
             var settingsHandle = _settings.NativeHandle;
             var appHandle = _app.NativeHandle;
 
@@ -63,20 +64,20 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private static void OnRenderTargetClosing(object sender, EventArgs e) {
-            var target = (IRenderTarget)sender;
+            var target = (IRenderTarget) sender;
             target.TargetClosing -= OnRenderTargetClosing;
             _views[target].Dispose();
             _views.Remove(target);
             if (QuitAfterLastViewClosed && _views.Count < 1) {
-                 CefAppCapi.CefQuitMessageLoop();
+                CefAppCapi.CefQuitMessageLoop();
             }
         }
 
         private static void OnRenderTargetClosed(object sender, EventArgs e) {
-            var target = (IRenderTarget)sender;
+            var target = (IRenderTarget) sender;
             target.TargetClosed -= OnRenderTargetClosed;
         }
-   
+
         private static IntPtr MarshalMainArgs(IntPtr hInstance) {
             var mainArgs = new CefMainArgs {
                 Instance = hInstance

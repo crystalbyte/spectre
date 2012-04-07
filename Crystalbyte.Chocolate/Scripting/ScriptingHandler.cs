@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using Crystalbyte.Chocolate.Bindings;
-using Crystalbyte.Chocolate.Bindings.Internal;
+﻿#region Namespace Directives
 
-namespace Crystalbyte.Chocolate.Scripting
-{
+using System;
+using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.Bindings;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.Scripting {
     public class ScriptingHandler : OwnedAdapter {
         private readonly V8ExecuteCallback _executeCallback;
-        public ScriptingHandler() 
-            : base(typeof(CefV8Handler)) {
+
+        public ScriptingHandler()
+            : base(typeof (CefV8Handler)) {
             _executeCallback = OnExecuted;
             MarshalToNative(new CefV8Handler {
                 Base = DedicatedBase,
@@ -19,19 +19,16 @@ namespace Crystalbyte.Chocolate.Scripting
             });
         }
 
-        private int OnExecuted(IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue, IntPtr exception) {
+        private int OnExecuted(IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue,
+                               IntPtr exception) {
             var functionName = StringUtf16.ReadString(name);
-            try {
-                OnExecuted(new ExecutedEventArgs());
-            }
-            catch (Exception) {
-                throw;
-            }
+            OnExecuted(new ExecutedEventArgs());
             retvalue = IntPtr.Zero;
             return 0;
         }
 
         public event EventHandler<ExecutedEventArgs> Executed;
+
         protected virtual void OnExecuted(ExecutedEventArgs e) {
             var handler = Executed;
             if (handler != null) {

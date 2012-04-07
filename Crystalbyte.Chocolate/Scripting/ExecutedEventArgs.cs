@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
 
-namespace Crystalbyte.Chocolate.Scripting
-{
-    public sealed class ExecutedEventArgs : EventArgs
-    {
+using System;
 
-    }
+#endregion
+
+namespace Crystalbyte.Chocolate.Scripting {
+    public sealed class ExecutedEventArgs : EventArgs {}
 }

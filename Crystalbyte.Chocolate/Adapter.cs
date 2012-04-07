@@ -1,8 +1,8 @@
 ﻿#region Namespace Directives
 
 using System;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 #endregion
 
@@ -13,6 +13,8 @@ namespace Crystalbyte.Chocolate {
     /// </summary>
     [DebuggerDisplay("NativeHandle = {NativeHandle}, Type = GetType()")]
     public abstract class Adapter : DisposableObject {
+        private IntPtr _nativeHandle;
+
         protected Adapter(Type nativeType, bool isRefCounted = false) {
             if (nativeType == null) {
                 throw new ArgumentNullException("nativeType");
@@ -25,7 +27,6 @@ namespace Crystalbyte.Chocolate {
             IsRefCounted = isRefCounted;
         }
 
-        private IntPtr _nativeHandle;
         protected internal IntPtr NativeHandle {
             get { return _nativeHandle; }
             protected set {

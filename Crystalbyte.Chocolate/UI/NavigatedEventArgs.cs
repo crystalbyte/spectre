@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
+
+#endregion
 
 namespace Crystalbyte.Chocolate.UI {
     public sealed class NavigatedEventArgs : EventArgs {
@@ -7,6 +11,7 @@ namespace Crystalbyte.Chocolate.UI {
             Browser = browser;
             Frame = frame;
         }
+
         public string Address { get; private set; }
         public Frame Frame { get; internal set; }
         public Browser Browser { get; internal set; }

@@ -22,7 +22,7 @@ namespace Crystalbyte.Chocolate {
         public event EventHandler TargetClosing;
 
         public new Size Size {
-            get { return new Size(Width, Height); }
+            get { return new Size(base.Size.Width, base.Size.Height); }
         }
 
         #endregion

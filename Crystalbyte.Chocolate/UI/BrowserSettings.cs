@@ -9,6 +9,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.UI {
     public sealed class BrowserSettings : Adapter {
         private readonly bool _isOwned;
+
         internal BrowserSettings()
             : base(typeof (CefBrowserSettings)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
@@ -18,12 +19,12 @@ namespace Crystalbyte.Chocolate.UI {
             _isOwned = true;
         }
 
-        private BrowserSettings(IntPtr handle) 
-            : base(typeof(CefBrowserSettings)) {
+        private BrowserSettings(IntPtr handle)
+            : base(typeof (CefBrowserSettings)) {
             NativeHandle = handle;
         }
 
-        protected override void DisposeNative(){
+        protected override void DisposeNative() {
             base.DisposeNative();
             if (NativeHandle != IntPtr.Zero && _isOwned) {
                 Marshal.FreeHGlobal(NativeHandle);

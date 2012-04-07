@@ -1,11 +1,14 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
 using Crystalbyte.Chocolate.Bindings;
 
-namespace Crystalbyte.Chocolate.UI
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     public sealed class Frame : Adapter {
         private Frame(IntPtr handle)
-            : base(typeof(CefFrame), true) {
+            : base(typeof (CefFrame), true) {
             NativeHandle = handle;
         }
 

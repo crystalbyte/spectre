@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestHandler.cs" />
-    <Compile Include="WindowDelegate.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>

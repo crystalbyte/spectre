@@ -13,7 +13,7 @@ namespace Crystalbyte.Chocolate.UI {
         private Browser _browser;
         private BrowserHost _browserHost;
 
-        public RenderProcess(IRenderTarget target, ProcessDelegate @delegate) {
+        public RenderProcess(IRenderTarget target, BrowserDelegate @delegate) {
             _target = target;
             _target.TargetClosing += OnTargetClosing;
             _target.TargetClosed += OnTargetClosed;
@@ -23,7 +23,16 @@ namespace Crystalbyte.Chocolate.UI {
             _resizer = new WindowResizer();
         }
 
+        public BrowserSettings Settings {
+            get { return _settings; }
+        }
+
+        public IRenderTarget RenderTarget {
+            get { return _target; }
+        }
+
         public event EventHandler Creating;
+
         private void OnCreating(EventArgs e) {
             var handler = Creating;
             if (handler != null) {
@@ -32,19 +41,12 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public event EventHandler Created;
+
         private void OnCreated(EventArgs e) {
             var handler = Created;
             if (handler != null) {
                 handler(this, e);
             }
-        }
-
-        public BrowserSettings Settings {
-            get { return _settings; }
-        }
-
-        public IRenderTarget RenderTarget {
-            get { return _target; }
         }
 
         protected override void DisposeManaged() {
@@ -66,7 +68,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e) {
-            var bounds = new Rectangle(0, 0, e.Size.Width, e.Size.Height);
+            var bounds = new Rectangle(0, 0, e.Size.Width - Offsets.WindowRight, e.Size.Height - Offsets.WindowBottom);
             _resizer.Resize(_browserHost.WindowHandle, bounds);
         }
 

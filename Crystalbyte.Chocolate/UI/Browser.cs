@@ -29,8 +29,6 @@ namespace Crystalbyte.Chocolate.UI {
             return new Browser(handle);
         }
 
-        public void Navigate(string url) {
-            
-        }
+        public void Navigate(string url) {}
     }
 }

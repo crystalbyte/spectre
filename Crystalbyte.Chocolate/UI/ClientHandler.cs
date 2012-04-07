@@ -1,8 +1,8 @@
 ﻿#region Namespace Directives
 
 using System;
-using Crystalbyte.Chocolate.Bindings;
 using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.Bindings;
 
 #endregion
 
@@ -10,10 +10,10 @@ namespace Crystalbyte.Chocolate.UI {
     internal sealed class ClientHandler : OwnedAdapter {
         private readonly DisplayHandler _displayHandler;
         private readonly GetDisplayHandlerCallback _displayHandlerCallback;
-        private readonly LifeSpanHandler _lifeSpanHandler;
         private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
+        private readonly LifeSpanHandler _lifeSpanHandler;
 
-        public ClientHandler(ProcessDelegate @delegate)
+        public ClientHandler(BrowserDelegate @delegate)
             : base(typeof (CefClient)) {
             _displayHandler = new DisplayHandler(@delegate);
             _displayHandlerCallback = OnGetDisplayHandler;
@@ -25,6 +25,11 @@ namespace Crystalbyte.Chocolate.UI {
                 GetDisplayHandler = Marshal.GetFunctionPointerForDelegate(_displayHandlerCallback),
                 GetLifeSpanHandler = Marshal.GetFunctionPointerForDelegate(_getLifeSpanHandlerCallback)
             });
+        }
+
+        private ClientHandler(IntPtr handle)
+            : base(typeof (CefClient)) {
+            NativeHandle = handle;
         }
 
         protected override void DisposeManaged() {
@@ -49,11 +54,6 @@ namespace Crystalbyte.Chocolate.UI {
 
             Reference.Increment(_displayHandler.NativeHandle);
             return _displayHandler.NativeHandle;
-        }
-
-        private ClientHandler(IntPtr handle)
-            : base(typeof (CefClient)) {
-            NativeHandle = handle;
         }
 
         internal static ClientHandler FromHandle(IntPtr handle) {

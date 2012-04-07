@@ -1,18 +1,19 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
-using System.Diagnostics;
-using System.Threading;
 
-namespace Crystalbyte.Chocolate.UI
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     public sealed class DisplayHandler : OwnedAdapter {
-        private readonly ProcessDelegate _delegate;
         private readonly OnAddressChangeCallback _addressChangeCallback;
         private readonly OnConsoleMessageCallback _consoleMessageCallback;
+        private readonly BrowserDelegate _delegate;
 
-        public DisplayHandler(ProcessDelegate @delegate) 
-            : base(typeof(CefDisplayHandler)) {
+        public DisplayHandler(BrowserDelegate @delegate)
+            : base(typeof (CefDisplayHandler)) {
             _delegate = @delegate;
             _addressChangeCallback = OnAddressChange;
             _consoleMessageCallback = OnConsoleMessage;

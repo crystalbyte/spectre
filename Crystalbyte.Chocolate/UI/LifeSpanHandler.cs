@@ -1,16 +1,20 @@
-﻿using System;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 
-namespace Crystalbyte.Chocolate.UI
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     public sealed class LifeSpanHandler : OwnedAdapter {
-        private readonly ProcessDelegate _delegate;
-        private readonly DoCloseCallback _doCloseCallback;
-        private readonly OnBeforePopupCallback _beforePopupCallback;
         private readonly OnBeforeCloseCallback _beforeCloseCallback;
-        public LifeSpanHandler(ProcessDelegate @delegate) 
-            : base(typeof(CefLifeSpanHandler)) {
+        private readonly OnBeforePopupCallback _beforePopupCallback;
+        private readonly BrowserDelegate _delegate;
+        private readonly DoCloseCallback _doCloseCallback;
+
+        public LifeSpanHandler(BrowserDelegate @delegate)
+            : base(typeof (CefLifeSpanHandler)) {
             _delegate = @delegate;
             _doCloseCallback = OnDoClose;
             _beforePopupCallback = OnBeforePopup;
@@ -47,7 +51,8 @@ namespace Crystalbyte.Chocolate.UI
             GC.Collect();
         }
 
-        private int OnBeforePopup(IntPtr self, IntPtr parentbrowser, IntPtr popupfeatures, IntPtr windowinfo, IntPtr url, IntPtr client, IntPtr settings) {
+        private int OnBeforePopup(IntPtr self, IntPtr parentbrowser, IntPtr popupfeatures, IntPtr windowinfo, IntPtr url,
+                                  IntPtr client, IntPtr settings) {
             var e = new PopupCreatingEventArgs {
                 Parent = Browser.FromHandle(parentbrowser),
                 Info = WindowInfo.FromHandle(windowinfo),
