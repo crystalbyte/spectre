@@ -1,9 +1,9 @@
 using System;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Chocolate.UI;
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class ScriptingContextCreatedEventArgs : EventArgs {
-        internal ScriptingContextCreatedEventArgs() {
+namespace Crystalbyte.Chocolate.Scripting {
+    public sealed class ContextEventArgs : EventArgs {
+        internal ContextEventArgs() {
             
         }
         public Browser Browser { get; internal set; }

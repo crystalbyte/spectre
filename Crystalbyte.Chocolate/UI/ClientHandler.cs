@@ -32,10 +32,10 @@ namespace Crystalbyte.Chocolate.UI {
             NativeHandle = handle;
         }
 
-        protected override void DisposeManaged() {
-            base.DisposeManaged();
+        protected override void DisposeNative() {
             _displayHandler.Dispose();
             _lifeSpanHandler.Dispose();
+            base.DisposeNative();
         }
 
         private IntPtr OnLifeSpanHandlerCallback(IntPtr self) {

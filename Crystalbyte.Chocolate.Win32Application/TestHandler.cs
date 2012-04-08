@@ -8,11 +8,11 @@ using Crystalbyte.Chocolate.Scripting;
 namespace Crystalbyte.Chocolate {
     public sealed class TestHandler : ScriptingExtension {
         public override string PrototypeCode {
-            get { return "a = function() {  native function showMessageBox(); };"; }
+            get { return "native function a();"; }
         }
 
         protected override void OnExecuted(ExecutedEventArgs e) {
-            MessageBox.Show("executed");
+            MessageBox.Show(@"Executed from Javascript.");
             base.OnExecuted(e);
         }
     }

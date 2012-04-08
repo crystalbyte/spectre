@@ -5,8 +5,8 @@ using System;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class CommandLineEventArgs : EventArgs {
-        internal CommandLineEventArgs() {}
+    public sealed class ProcessStartedEventArgs : EventArgs {
+        internal ProcessStartedEventArgs() {}
 
         public string ProcessType { get; internal set; }
         public CommandLine CommandLine { get; internal set; }

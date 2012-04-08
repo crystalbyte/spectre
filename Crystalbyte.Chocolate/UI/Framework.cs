@@ -33,27 +33,47 @@ namespace Crystalbyte.Chocolate.UI {
             CefAppCapi.CefDoMessageLoopWork();
         }
 
+        public static event EventHandler ShutdownStarted;
+        public static void OnShutdownStarted(EventArgs e) {
+            var handler = ShutdownStarted;
+            if (handler != null) {
+                handler(null, e);
+            }
+        }
+
+        public static event EventHandler ShutdownFinished;
+        public static void OnShutdownFinished(EventArgs e) {
+            var handler = ShutdownFinished;
+            if (handler != null) {
+                handler(null, e);
+            }
+        }
+
         public static bool Initialize(Module module, AppDelegate appDelegate = null) {
             var hInstance = Marshal.GetHINSTANCE(module);
             var argsHandle = MarshalMainArgs(hInstance);
 
-            var exitCode = CefAppCapi.CefExecuteProcess(argsHandle, IntPtr.Zero);
+            _app = new App(appDelegate ?? new AppDelegate());
+            var appHandle = _app.NativeHandle;
+
+            Reference.Increment(appHandle);
+            var exitCode = CefAppCapi.CefExecuteProcess(argsHandle, appHandle);
             IsRootProcess = exitCode < 0;
             if (!IsRootProcess) {
                 return true;
             }
-
-            _app = new App(appDelegate ?? new AppDelegate());
+            
             var settingsHandle = _settings.NativeHandle;
-            var appHandle = _app.NativeHandle;
-
+            Reference.Increment(appHandle);
             var result = CefAppCapi.CefInitialize(argsHandle, settingsHandle, appHandle);
             IsInitialized = Convert.ToBoolean(result);
             return IsInitialized;
         }
 
         public static void Shutdown() {
+            OnShutdownStarted(EventArgs.Empty);
             CefAppCapi.CefShutdown();
+            OnShutdownFinished(EventArgs.Empty);
         }
 
         public static void Attach(RenderProcess process) {

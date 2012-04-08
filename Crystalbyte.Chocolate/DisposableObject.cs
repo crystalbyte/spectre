@@ -1,6 +1,7 @@
 ﻿#region Namespace Directives
 
 using System;
+using System.Diagnostics;
 
 #endregion
 
@@ -18,6 +19,7 @@ namespace Crystalbyte.Chocolate {
         #endregion
 
         ~DisposableObject() {
+            Debug.WriteLine(string.Format("Finalizer called on Type: {0}. ", GetType()));
             Dispose(false);
         }
 

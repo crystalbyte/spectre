@@ -92,7 +92,7 @@ namespace Crystalbyte.Chocolate.Bindings {
 
     public delegate int GetFrameCountCallback(IntPtr self);
 
-    public delegate void GetFrameIdentifiersCallback(IntPtr self, IntPtr identifierscount, IntPtr identifiers);
+    public delegate void GetFrameIdentifiersCallback(IntPtr self, out long identifierscount, IntPtr identifiers);
 
     public delegate void GetFrameNamesCallback(IntPtr self, IntPtr names);
 
