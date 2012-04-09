@@ -11,7 +11,6 @@ namespace Crystalbyte.Chocolate {
     ///   This class is a manged access point for native objects.
     ///   This class does not manage the objects lifecycle thus not allocating any memory.
     /// </summary>
-    [DebuggerDisplay("NativeHandle = {NativeHandle}, Type = GetType()")]
     public abstract class Adapter : DisposableObject {
         private IntPtr _nativeHandle;
 

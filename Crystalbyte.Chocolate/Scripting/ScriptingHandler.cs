@@ -21,10 +21,18 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         private int OnExecuted(IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue,
                                IntPtr exception) {
-            var functionName = StringUtf16.ReadString(name);
-            OnExecuted(new ExecutedEventArgs());
-            retvalue = IntPtr.Zero;
-            return 0;
+            var e = new ExecutedEventArgs {
+                Arguments = new ScriptableObjectCollection(arguments, argcount),
+                FunctionName = StringUtf16.ReadString(name),
+                Object = ScriptableObject.FromHandle(obj)
+            };
+            var message = StringUtf16.ReadString(exception);
+            if (string.IsNullOrWhiteSpace(message)) {
+                e.Exception = new ChocolateException(message);
+            }
+            OnExecuted(e);
+            retvalue = e.Result != null ? e.Result.NativeHandle : IntPtr.Zero;
+            return Convert.ToInt32(e.IsHandled);
         }
 
         public event EventHandler<ExecutedEventArgs> Executed;

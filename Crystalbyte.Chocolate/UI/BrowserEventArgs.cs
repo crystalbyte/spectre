@@ -10,9 +10,7 @@ namespace Crystalbyte.Chocolate.UI {
             Browser = browser;
         }
 
-        internal BrowserEventArgs() {
-            
-        }
+        internal BrowserEventArgs() {}
 
         public Browser Browser { get; internal set; }
     }

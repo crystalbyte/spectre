@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
 
-namespace Crystalbyte.Chocolate.UI
-{
-    public sealed class ProxyUrlEventArgs : EventArgs
-    {
-        internal ProxyUrlEventArgs() {
-            
-        }
+using System;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
+    public sealed class ProxyUrlEventArgs : EventArgs {
+        internal ProxyUrlEventArgs() {}
 
         public string Url { get; internal set; }
     }

@@ -53,17 +53,36 @@
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reference.cs" />
-    <Compile Include="Scripting\ExecutedEventArgs.cs" />
-    <Compile Include="Scripting\ScriptingContext.cs" />
-    <Compile Include="Scripting\ScriptingExtension.cs" />
-    <Compile Include="Scripting\ScriptingHandler.cs" />
-    <Compile Include="Scripting\ScriptingObject.cs" />
-    <Compile Include="Scripting\ScriptingObjectCollection.cs" />
-    <Compile Include="Scripting\ScriptingRuntime.cs" />
+    <Compile Include="Scripting\ContextEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ExecutedEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ScriptableObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ScriptableObjectCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ScriptingError.cs" />
+    <Compile Include="Scripting\ScriptingContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ScriptingExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ScriptingHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\ScriptingRuntime.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="TaskManager.cs" />
+    <Compile Include="Time.cs" />
     <Compile Include="UI\App.cs" />
     <Compile Include="UI\AppDelegate.cs" />
     <Compile Include="UI\Browser.cs" />
@@ -91,7 +110,6 @@
     <Compile Include="UI\ClientHandler.cs" />
     <Compile Include="UI\IRenderTarget.cs" />
     <Compile Include="UI\Point.cs" />
-    <Compile Include="Scripting\ContextEventArgs.cs" />
     <Compile Include="UI\Size.cs" />
     <Compile Include="UI\SizeChangedEventArgs.cs" />
     <Compile Include="UI\RenderProcess.cs" />

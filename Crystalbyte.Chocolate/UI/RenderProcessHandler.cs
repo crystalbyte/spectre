@@ -14,9 +14,9 @@ namespace Crystalbyte.Chocolate.UI {
         private readonly OnBrowserDestroyedCallback _browserDestroyedCallback;
         private readonly OnContextCreatedCallback _contextCreatedCallback;
         private readonly OnContextReleasedCallback _contextReleasedCallback;
+        private readonly AppDelegate _delegate;
         private readonly OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
         private readonly OnWebKitInitializedCallback _webkitInitializedCallback;
-        private readonly AppDelegate _delegate;
 
         public RenderProcessHandler(AppDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {

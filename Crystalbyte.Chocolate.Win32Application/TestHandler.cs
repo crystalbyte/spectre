@@ -8,11 +8,14 @@ using Crystalbyte.Chocolate.Scripting;
 namespace Crystalbyte.Chocolate {
     public sealed class TestHandler : ScriptingExtension {
         public override string PrototypeCode {
-            get { return "native function a();"; }
+            get { return "native function sum(a, b);"; }
         }
 
         protected override void OnExecuted(ExecutedEventArgs e) {
-            MessageBox.Show(@"Executed from Javascript.");
+            var x = e.Arguments[0].ToInteger();
+            var y = e.Arguments[1].ToInteger();
+            e.IsHandled = true; 
+            e.Result = new ScriptableObject(x + y);
             base.OnExecuted(e);
         }
     }

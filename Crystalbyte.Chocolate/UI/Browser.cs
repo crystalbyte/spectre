@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 
@@ -26,29 +25,26 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public static Browser FromHandle(IntPtr handle) {
-            return new Browser(handle);
-        }
-
         public FrameCollection Frames { get; private set; }
+
         public IEnumerable<string> FrameNames {
-            get { 
-                
+            get {
                 var reflection = MarshalFromNative<CefBrowser>();
                 var action = (GetFrameNamesCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetFrameNames, typeof(GetFrameNamesCallback));
+                             Marshal.GetDelegateForFunctionPointer(reflection.GetFrameNames,
+                                                                   typeof (GetFrameNamesCallback));
                 var target = new Utf16StringCollection();
                 action(NativeHandle, target.NativeHandle);
                 return target;
             }
         }
 
-        public IEnumerable<string> FrameIds { 
+        public IEnumerable<string> FrameIds {
             get {
-
                 var reflection = MarshalFromNative<CefBrowser>();
                 var action = (GetFrameIdentifiersCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetFrameIdentifiers, typeof(GetFrameIdentifiersCallback));
+                             Marshal.GetDelegateForFunctionPointer(reflection.GetFrameIdentifiers,
+                                                                   typeof (GetFrameIdentifiersCallback));
                 var target = new Utf16StringCollection();
                 long count;
                 action(NativeHandle, out count, target.NativeHandle);
@@ -60,9 +56,10 @@ namespace Crystalbyte.Chocolate.UI {
             get {
                 var reflection = MarshalFromNative<CefBrowser>();
                 var function = (GetFocusedFrameCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetFocusedFrame, typeof(GetFocusedFrameCallback));
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetFocusedFrame,
+                                                                     typeof (GetFocusedFrameCallback));
                 var handle = function(NativeHandle);
-                return Frame.FromHandle(handle);    
+                return Frame.FromHandle(handle);
             }
         }
 
@@ -70,10 +67,15 @@ namespace Crystalbyte.Chocolate.UI {
             get {
                 var reflection = MarshalFromNative<CefBrowser>();
                 var function = (GetMainFrameCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetMainFrame, typeof(GetMainFrameCallback));
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetMainFrame,
+                                                                     typeof (GetMainFrameCallback));
                 var handle = function(NativeHandle);
                 return Frame.FromHandle(handle);
             }
+        }
+
+        public static Browser FromHandle(IntPtr handle) {
+            return new Browser(handle);
         }
     }
 }

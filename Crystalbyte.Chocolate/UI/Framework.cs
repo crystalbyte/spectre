@@ -34,6 +34,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public static event EventHandler ShutdownStarted;
+
         public static void OnShutdownStarted(EventArgs e) {
             var handler = ShutdownStarted;
             if (handler != null) {
@@ -42,6 +43,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public static event EventHandler ShutdownFinished;
+
         public static void OnShutdownFinished(EventArgs e) {
             var handler = ShutdownFinished;
             if (handler != null) {
@@ -62,7 +64,7 @@ namespace Crystalbyte.Chocolate.UI {
             if (!IsRootProcess) {
                 return true;
             }
-            
+
             var settingsHandle = _settings.NativeHandle;
             Reference.Increment(appHandle);
             var result = CefAppCapi.CefInitialize(argsHandle, settingsHandle, appHandle);

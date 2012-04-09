@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
-namespace Crystalbyte.Chocolate
-{
+#endregion
+
+namespace Crystalbyte.Chocolate {
     public sealed class Task : OwnedAdapter {
         private readonly Action _action;
         private readonly ExecuteCallback _executeCallback;
 
         public Task(Action action)
-            : base(typeof(CefTask)) {
+            : base(typeof (CefTask)) {
             _action = action;
             _executeCallback = OnExecute;
             MarshalToNative(new CefTask {

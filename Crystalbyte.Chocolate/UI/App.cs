@@ -8,12 +8,12 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate.UI {
     internal sealed class App : OwnedAdapter {
+        private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
         private readonly AppDelegate _delegate;
-        private readonly ProxyHandler _proxyHandler;
-        private readonly RenderProcessHandler _renderProcessHandler; 
         private readonly GetProxyHandlerCallback _getProxyHandlerCallback;
         private readonly GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
-        private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
+        private readonly ProxyHandler _proxyHandler;
+        private readonly RenderProcessHandler _renderProcessHandler;
 
         public App(AppDelegate @delegate)
             : base(typeof (CefApp)) {
@@ -59,8 +59,7 @@ namespace Crystalbyte.Chocolate.UI {
             _delegate.OnProcessStarted(e);
         }
 
-        protected override void DisposeNative()
-        {
+        protected override void DisposeNative() {
             _proxyHandler.Dispose();
             _renderProcessHandler.Dispose();
             base.DisposeNative();

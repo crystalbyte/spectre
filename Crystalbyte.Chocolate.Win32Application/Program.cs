@@ -3,10 +3,8 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using System.Windows.Forms;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
-using System.Threading;
 
 #endregion
 
@@ -17,8 +15,12 @@ namespace Crystalbyte.Chocolate {
         /// </summary>
         [STAThread]
         private static void Main() {
+#if (DEBUG)
+            Framework.Settings.IsSingleProcess = true;
+#endif 
             var appDelegate = new AppDelegate();
             appDelegate.Initialized += OnInitialized;
+            appDelegate.ScriptingContextCreated += OnScriptingContextCreated;
             var module = Assembly.GetExecutingAssembly().ManifestModule;
 
             var success = Framework.Initialize(module, appDelegate);
@@ -36,6 +38,10 @@ namespace Crystalbyte.Chocolate {
             var process = new RenderProcess(new Window {StartupUri = index}, new BrowserDelegate());
             Framework.Run(process);
             Framework.Shutdown();
+        }
+
+        private static void OnScriptingContextCreated(object sender, ContextEventArgs e) {
+            
         }
 
         private static void OnInitialized(object sender, EventArgs e) {

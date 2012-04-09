@@ -1,6 +1,10 @@
+#region Namespace Directives
+
 using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+
+#endregion
 
 namespace Crystalbyte.Chocolate.UI {
     public sealed class ProxyHandler : OwnedAdapter {
@@ -8,7 +12,7 @@ namespace Crystalbyte.Chocolate.UI {
         private readonly GetProxyForUrlCallback _getProxyForUrlCallback;
 
         public ProxyHandler(AppDelegate @delegate)
-            : base(typeof(CefProxyHandler)) {
+            : base(typeof (CefProxyHandler)) {
             _delegate = @delegate;
             _getProxyForUrlCallback = GetProxyForUrl;
             MarshalToNative(new CefProxyHandler {

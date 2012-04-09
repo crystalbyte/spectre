@@ -168,6 +168,10 @@ namespace Crystalbyte.Chocolate {
                 return "int";
             }
 
+            if (type == "cef_time_t") {
+                return "IntPtr";
+            }
+
             if (type == "bool") {
                 return "bool";
             }

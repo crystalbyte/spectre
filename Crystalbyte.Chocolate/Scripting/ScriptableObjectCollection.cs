@@ -7,17 +7,17 @@ using System.Runtime.InteropServices;
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    internal sealed class ScriptingObjectCollection : List<ScriptingObject> {
+    internal sealed class ScriptableObjectCollection : List<ScriptableObject>, ISealedCollection<ScriptableObject> {
         private static readonly int _pointerSize = Marshal.SizeOf(typeof (IntPtr));
 
-        public ScriptingObjectCollection(IntPtr listHandle, int argumentCount) {
+        public ScriptableObjectCollection(IntPtr listHandle, int argumentCount) {
             if (argumentCount < 1) {
                 return;
             }
             var current = listHandle;
             for (var i = 0; i < argumentCount; i++) {
                 var handle = Marshal.ReadIntPtr(current);
-                Add(ScriptingObject.FromHandle(handle));
+                Add(ScriptableObject.FromHandle(handle));
                 current = new IntPtr(current.ToInt64() + _pointerSize);
             }
         }

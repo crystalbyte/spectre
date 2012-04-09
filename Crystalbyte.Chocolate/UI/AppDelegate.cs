@@ -44,6 +44,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public event EventHandler RenderThreadCreated;
+
         protected internal virtual void OnRenderThreadCreated(EventArgs e) {
             var handler = RenderThreadCreated;
             if (handler != null) {
@@ -52,6 +53,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public event EventHandler Initialized;
+
         protected internal virtual void OnInitialized(EventArgs e) {
             var handler = Initialized;
             if (handler != null) {
@@ -60,6 +62,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public event EventHandler<BrowserEventArgs> BrowserCreated;
+
         protected internal virtual void OnBrowserCreated(BrowserEventArgs e) {
             var handler = BrowserCreated;
             if (handler != null) {
@@ -68,6 +71,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public event EventHandler<ContextEventArgs> ContextReleased;
+
         protected internal virtual void OnContextReleased(ContextEventArgs e) {
             var handler = ContextReleased;
             if (handler != null) {

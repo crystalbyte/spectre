@@ -4,11 +4,22 @@
         <title>Chocolate</title>
         <style>
             body {
+                color: white;
                 background-color: black;
             }
         </style>
+        <script>
+            var calc = function () {
+                var s = sum(4, 5);
+                var e = document.getElementById("result");
+                e.innerHTML = s;
+            };
+        </script>
     </head>
     <body>
-        <button onclick="a();">Call .NET Handler</button>
+        <div>
+            <span>4 + 5 = </span><span id="result"></span>
+        </div>
+        <button onclick="calc();">Call .NET</button>
     </body>
 </html>

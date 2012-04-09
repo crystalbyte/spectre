@@ -215,7 +215,7 @@ namespace Crystalbyte.Chocolate.Bindings {
 
     public delegate Double GetDoubleValueCallback(IntPtr self);
 
-    public delegate CefTime GetDateValueCallback(IntPtr self);
+    public delegate IntPtr GetDateValueCallback(IntPtr self);
 
     public delegate IntPtr GetStringValueCallback(IntPtr self);
 

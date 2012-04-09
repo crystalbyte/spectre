@@ -50,13 +50,13 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         protected override void DisposeManaged() {
-            base.DisposeManaged();
             _target.TargetClosing -= OnTargetClosing;
             _target.TargetClosed -= OnTargetClosed;
             _target.TargetSizeChanged -= OnTargetSizeChanged;
             _handler.Dispose();
             _browser.Dispose();
             _browserHost.Dispose();
+            base.DisposeManaged();
         }
 
         private void OnTargetClosing(object sender, EventArgs e) {
