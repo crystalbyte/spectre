@@ -381,7 +381,7 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public bool Contains(KeyValuePair<string, ScriptableObject> item) {
-            throw new NotImplementedException();
+            return ContainsKey(item.Key);
         }
 
         public void CopyTo(KeyValuePair<string, ScriptableObject>[] array, int arrayIndex) {
