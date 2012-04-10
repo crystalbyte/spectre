@@ -1,11 +1,13 @@
 ﻿#region Namespace Directives
 
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
 
@@ -40,8 +42,9 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         public ScriptableObject(string value)
             : base(typeof (CefV8value), true) {
-            var str = new StringUtf16(value);
-            NativeHandle = CefV8Capi.CefV8valueCreateString(str.NativeHandle);
+            var s = new StringUtf16(value);
+            NativeHandle = CefV8Capi.CefV8valueCreateString(s.NativeHandle);
+            s.Free();
         }
 
         public ScriptableObject(DateTime time)
@@ -52,8 +55,9 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         public ScriptableObject(string name, ScriptingHandler handler)
             : base(typeof (CefV8value), true) {
-            var n = new StringUtf16(name);
-            NativeHandle = CefV8Capi.CefV8valueCreateFunction(n.NativeHandle, handler.NativeHandle);
+            var s = new StringUtf16(name);
+            NativeHandle = CefV8Capi.CefV8valueCreateFunction(s.NativeHandle, handler.NativeHandle);
+            s.Free();
         }
 
         public static ScriptableObject Null {
@@ -81,42 +85,83 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public bool ContainsKey(string key) {
-            throw new NotImplementedException();
+            var reflection = MarshalFromNative<CefV8value>();
+            var function = (HasValueBykeyCallback)
+                Marshal.GetDelegateForFunctionPointer(reflection.HasValueBykey, typeof(HasValueBykeyCallback));
+            var s = new StringUtf16(key);
+            var contains = function(NativeHandle, s.NativeHandle);
+            s.Free();
+            return Convert.ToBoolean(contains);
         }
 
         public void Add(string key, ScriptableObject value) {
-            throw new NotImplementedException();
+            var reflection = MarshalFromNative<CefV8value>();
+            var action = (SetValueBykeyCallback) 
+                Marshal.GetDelegateForFunctionPointer(reflection.GetValueByindex, typeof(SetValueBykeyCallback));
+            var s = new StringUtf16(key);
+            action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
+            s.Free();
         }
 
         public bool Remove(string key) {
-            throw new NotImplementedException();
+            var reflection = MarshalFromNative<CefV8value>();
+            var function = (DeleteValueBykeyCallback)
+                Marshal.GetDelegateForFunctionPointer(reflection.DeleteValueBykey, typeof(DeleteValueBykeyCallback));
+            var s = new StringUtf16(key);
+            var success = function(NativeHandle, s.NativeHandle);
+            s.Free();
+            return Convert.ToBoolean(success);
         }
 
         public bool TryGetValue(string key, out ScriptableObject value) {
-            throw new NotImplementedException();
+            if (!ContainsKey(key)) {
+                value = null;
+                return false;
+            }
+            value = this[key];
+            return true;
         }
 
-        ScriptableObject IDictionary<string, ScriptableObject>.this[string key] {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+        public IValueCollection<string> Keys {
+            get {
+                var c = new StringUtf16Collection();
+                var reflection = MarshalFromNative<CefV8value>();
+                var function = (GetKeysCallback)
+                    Marshal.GetDelegateForFunctionPointer(reflection.GetKeys, typeof(GetKeysCallback));
+                function(NativeHandle, c.NativeHandle);
+                return c;
+            }
         }
 
-        public ICollection<string> Keys {
-            get { throw new NotImplementedException(); }
+        ICollection<string> IDictionary<string, ScriptableObject>.Keys {
+            get {
+                return Keys.ToList();
+            }
         }
 
-        public ICollection<ScriptableObject> Values {
-            get { throw new NotImplementedException(); }
+        ICollection<ScriptableObject> IDictionary<string, ScriptableObject>.Values {
+            get { throw new NotSupportedException(); }
         }
 
         public ScriptableObject this[string name] {
-            get {
+            get
+            {
                 var reflection = MarshalFromNative<CefV8value>();
                 var function = (GetValueBykeyCallback)
                     Marshal.GetDelegateForFunctionPointer(reflection.GetValueBykey, typeof(GetValueBykeyCallback));
-                var str = new StringUtf16(name);
-                var handle = function(NativeHandle, str.NativeHandle);
+                var s = new StringUtf16(name);
+                var handle = function(NativeHandle, s.NativeHandle);
+                s.Free();
                 return FromHandle(handle);
+            }
+            set
+            {
+                var reflection = MarshalFromNative<CefV8value>();
+                var action = (SetValueBykeyCallback)
+                    Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey, typeof(SetValueBykeyCallback));
+                var s = new StringUtf16(name);
+                action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
+                s.Free();
             }
         }
 
@@ -234,18 +279,14 @@ namespace Crystalbyte.Chocolate.Scripting {
             return new ScriptableObject(handle);
         }
 
-        public sealed class ScriptableObjectEnumerator : IEnumerator<ScriptableObject> {
-            private readonly IntPtr _handle;
-            private readonly GetValueByindexCallback _function;
+        public sealed class ScriptableObjectEnumerator : IEnumerator<KeyValuePair<string, ScriptableObject>> {
+            private readonly ScriptableObject _so;
             private readonly int _count;
             private int _index;
 
             public ScriptableObjectEnumerator(ScriptableObject so) {
-                var reflection = so.MarshalFromNative<CefV8value>();
-                _function = (GetValueByindexCallback) 
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetValueByindex, typeof (GetValueByindexCallback));
-                _handle = so.NativeHandle;
-                _count = so.Length;
+                _count = so.Keys.Count;
+                _so = so;
                 _index = 0;
             }
 
@@ -261,10 +302,12 @@ namespace Crystalbyte.Chocolate.Scripting {
                 _index = 0;
             }
 
-            public ScriptableObject Current {
+            public KeyValuePair<string, ScriptableObject> Current
+            {
                 get {
-                    var handle = _function(_handle, _index);
-                    return ScriptableObject.FromHandle(handle);
+                    var key = _so.Keys[0];
+                    var value = _so[key];
+                    return new KeyValuePair<string, ScriptableObject>(key, value);
                 }
             }
 
@@ -274,7 +317,7 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public IEnumerator<KeyValuePair<string, ScriptableObject>> GetEnumerator() {
-            throw new NotImplementedException();
+            return new ScriptableObjectEnumerator(this);
         }
 
         public override string ToString() {
@@ -325,7 +368,12 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public void Add(KeyValuePair<string, ScriptableObject> item) {
-            throw new NotImplementedException();
+            var reflection = MarshalFromNative<CefV8value>();
+            var action = (SetValueBykeyCallback)
+                Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey, typeof(SetValueBykeyCallback));
+            var s = new StringUtf16(item.Key);
+            action(NativeHandle, s.NativeHandle, item.Value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
+            s.Free();
         }
 
         public void Clear() {
@@ -341,15 +389,15 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public bool Remove(KeyValuePair<string, ScriptableObject> item) {
-            throw new NotImplementedException();
+            return Remove(item.Key);
         }
 
         public int Count {
-            get { throw new NotImplementedException(); }
+            get { return Length; }
         }
 
         public bool IsReadOnly {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Crystalbyte.Chocolate.UI {
                 var action = (GetFrameNamesCallback)
                              Marshal.GetDelegateForFunctionPointer(reflection.GetFrameNames,
                                                                    typeof (GetFrameNamesCallback));
-                var target = new Utf16StringCollection();
+                var target = new StringUtf16Collection();
                 action(NativeHandle, target.NativeHandle);
                 return target;
             }
@@ -45,7 +45,7 @@ namespace Crystalbyte.Chocolate.UI {
                 var action = (GetFrameIdentifiersCallback)
                              Marshal.GetDelegateForFunctionPointer(reflection.GetFrameIdentifiers,
                                                                    typeof (GetFrameIdentifiersCallback));
-                var target = new Utf16StringCollection();
+                var target = new StringUtf16Collection();
                 long count;
                 action(NativeHandle, out count, target.NativeHandle);
                 return target;

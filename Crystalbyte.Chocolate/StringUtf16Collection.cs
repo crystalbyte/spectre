@@ -10,8 +10,8 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate {
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class Utf16StringCollection : DisposableObject, IValueCollection<string> {
-        public Utf16StringCollection() {
+    internal sealed class StringUtf16Collection : DisposableObject, IValueCollection<string> {
+        public StringUtf16Collection() {
             NativeHandle = CefStringListClass.CefStringListAlloc();
         }
 
@@ -80,10 +80,10 @@ namespace Crystalbyte.Chocolate {
 
         private sealed class Utf16StringCollectionEnumerator : IEnumerator<string> {
             private readonly int _itemCount;
-            private readonly Utf16StringCollection _list;
+            private readonly StringUtf16Collection _list;
             private int _currentIndex = -1;
 
-            public Utf16StringCollectionEnumerator(Utf16StringCollection list) {
+            public Utf16StringCollectionEnumerator(StringUtf16Collection list) {
                 _list = list;
                 _itemCount = list.Count;
             }

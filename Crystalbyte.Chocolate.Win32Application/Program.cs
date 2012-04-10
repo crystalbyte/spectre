@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows.Forms;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 
@@ -20,7 +21,7 @@ namespace Crystalbyte.Chocolate {
 #endif 
             var appDelegate = new AppDelegate();
             appDelegate.Initialized += OnInitialized;
-            appDelegate.ScriptingContextCreated += OnScriptingContextCreated;
+            appDelegate.BrowserCreated += OnBrowserCreated;
             var module = Assembly.GetExecutingAssembly().ManifestModule;
 
             var success = Framework.Initialize(module, appDelegate);
@@ -33,15 +34,16 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            //var index = new Uri("http://www.battleshipmovie.com/");
-            var index = new Uri(Environment.CurrentDirectory + "/Pages/start.htm");
+            var index = new Uri("http://www.battleshipmovie.com/");
+            //var index = new Uri(Environment.CurrentDirectory + "/Pages/start.htm");
             var process = new RenderProcess(new Window {StartupUri = index}, new BrowserDelegate());
             Framework.Run(process);
+            MessageBox.Show("shutting down");
             Framework.Shutdown();
         }
 
-        private static void OnScriptingContextCreated(object sender, ContextEventArgs e) {
-            
+        private static void OnBrowserCreated(object sender, BrowserEventArgs e) {
+
         }
 
         private static void OnInitialized(object sender, EventArgs e) {
