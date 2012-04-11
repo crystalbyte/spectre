@@ -51,7 +51,7 @@ namespace Crystalbyte.Chocolate {
 
         public static string ReadStringAndFree(IntPtr handle) {
             if (handle == IntPtr.Zero) {
-                Debug.WriteLine("ReadStringAndRelease: handle is null");
+                Debug.WriteLine("ReadStringAndFree: handle is null");
                 return string.Empty;
             }
             var value = new StringUtf16(handle);

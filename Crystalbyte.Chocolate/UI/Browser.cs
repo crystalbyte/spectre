@@ -27,12 +27,13 @@ namespace Crystalbyte.Chocolate.UI {
 
         public FrameCollection Frames { get; private set; }
 
-        public IEnumerable<string> FrameNames {
+        public IEnumerable<string> FrameNames
+        {
             get {
                 var reflection = MarshalFromNative<CefBrowser>();
                 var action = (GetFrameNamesCallback)
                              Marshal.GetDelegateForFunctionPointer(reflection.GetFrameNames,
-                                                                   typeof (GetFrameNamesCallback));
+                                                                   typeof(GetFrameNamesCallback));
                 var target = new StringUtf16Collection();
                 action(NativeHandle, target.NativeHandle);
                 return target;

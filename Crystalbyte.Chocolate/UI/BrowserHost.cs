@@ -13,17 +13,6 @@ namespace Crystalbyte.Chocolate.UI {
             NativeHandle = handle;
         }
 
-        public ClientHandler Client {
-            get {
-                var reflection = MarshalFromNative<CefBrowserHost>();
-                var function = (GetClientCallback)
-                               Marshal.GetDelegateForFunctionPointer(reflection.GetOpenerWindowHandle,
-                                                                     typeof (GetClientCallback));
-                var handle = function(NativeHandle);
-                return ClientHandler.FromHandle(handle);
-            }
-        }
-
         public IntPtr OpenerWindowHandle {
             get {
                 var reflection = MarshalFromNative<CefBrowserHost>();

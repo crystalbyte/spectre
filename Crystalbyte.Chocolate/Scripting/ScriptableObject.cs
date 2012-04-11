@@ -144,8 +144,7 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public ScriptableObject this[string name] {
-            get
-            {
+            get {
                 var reflection = MarshalFromNative<CefV8value>();
                 var function = (GetValueBykeyCallback)
                     Marshal.GetDelegateForFunctionPointer(reflection.GetValueBykey, typeof(GetValueBykeyCallback));
@@ -154,8 +153,7 @@ namespace Crystalbyte.Chocolate.Scripting {
                 s.Free();
                 return FromHandle(handle);
             }
-            set
-            {
+            set {
                 var reflection = MarshalFromNative<CefV8value>();
                 var action = (SetValueBykeyCallback)
                     Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey, typeof(SetValueBykeyCallback));
@@ -267,6 +265,9 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         public int Length {
             get {
+                if (!IsArray) {
+                    return 0;
+                }
                 var reflection = MarshalFromNative<CefV8value>();
                 var function = (GetArrayLengthCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetArrayLength,
@@ -287,7 +288,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             public ScriptableObjectEnumerator(ScriptableObject so) {
                 _count = so.Keys.Count;
                 _so = so;
-                _index = 0;
+                _index = -1;
             }
 
             public void Dispose() {
@@ -295,17 +296,18 @@ namespace Crystalbyte.Chocolate.Scripting {
             }
 
             public bool MoveNext() {
-                return _index++ < _count;
+                _index++;
+                return _index < _count;
             }
 
             public void Reset() {
-                _index = 0;
+                _index = -1;
             }
 
             public KeyValuePair<string, ScriptableObject> Current
             {
                 get {
-                    var key = _so.Keys[0];
+                    var key = _so.Keys[_index];
                     var value = _so[key];
                     return new KeyValuePair<string, ScriptableObject>(key, value);
                 }

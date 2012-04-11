@@ -53,10 +53,11 @@ namespace Crystalbyte.Chocolate.UI {
 
         public IEnumerator<Frame> GetEnumerator() {
             throw new NotImplementedException();
+            //return new FrameCollectionEnumerator(_browser);
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         #endregion
@@ -64,6 +65,12 @@ namespace Crystalbyte.Chocolate.UI {
         #region Nested type: FrameCollectionEnumerator
 
         private sealed class FrameCollectionEnumerator : IEnumerator<Frame> {
+            private readonly Browser _browser;
+            private readonly int _count;
+            
+            public FrameCollectionEnumerator(Browser browser) {
+                _browser = browser;
+            }
             #region IEnumerator<Frame> Members
 
             public Frame Current {

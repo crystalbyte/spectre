@@ -35,7 +35,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         public IEnumerator<string> GetEnumerator() {
-            return new Utf16StringCollectionEnumerator(this);
+            return new StringUtf16CollectionEnumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
@@ -78,14 +78,15 @@ namespace Crystalbyte.Chocolate {
 
         #region Nested type: Utf16StringCollectionEnumerator
 
-        private sealed class Utf16StringCollectionEnumerator : IEnumerator<string> {
+        private sealed class StringUtf16CollectionEnumerator : IEnumerator<string> {
             private readonly int _itemCount;
             private readonly StringUtf16Collection _list;
             private int _currentIndex = -1;
 
-            public Utf16StringCollectionEnumerator(StringUtf16Collection list) {
+            public StringUtf16CollectionEnumerator(StringUtf16Collection list) {
                 _list = list;
                 _itemCount = list.Count;
+                _currentIndex = -1;
             }
 
             #region IEnumerator<string> Members
