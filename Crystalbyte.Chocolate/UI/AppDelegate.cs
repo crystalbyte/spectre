@@ -78,5 +78,14 @@ namespace Crystalbyte.Chocolate.UI {
                 handler(this, e);
             }
         }
+
+        public event EventHandler<IpcMessageReceivedEventArgs> IpcMessageReceived;
+
+        public void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
+            var handler = IpcMessageReceived;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
     }
 }

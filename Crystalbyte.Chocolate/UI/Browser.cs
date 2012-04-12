@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+using System.IO;
 
 #endregion
 
@@ -27,13 +28,12 @@ namespace Crystalbyte.Chocolate.UI {
 
         public FrameCollection Frames { get; private set; }
 
-        public IEnumerable<string> FrameNames
-        {
+        public IEnumerable<string> FrameNames {
             get {
                 var reflection = MarshalFromNative<CefBrowser>();
                 var action = (GetFrameNamesCallback)
                              Marshal.GetDelegateForFunctionPointer(reflection.GetFrameNames,
-                                                                   typeof(GetFrameNamesCallback));
+                                                                   typeof (GetFrameNamesCallback));
                 var target = new StringUtf16Collection();
                 action(NativeHandle, target.NativeHandle);
                 return target;
@@ -72,6 +72,87 @@ namespace Crystalbyte.Chocolate.UI {
                                                                      typeof (GetMainFrameCallback));
                 var handle = function(NativeHandle);
                 return Frame.FromHandle(handle);
+            }
+        }
+
+        public bool CanGoBack {
+            get { 
+                var r = MarshalFromNative<CefBrowser>();
+                var function = (CanGoBackCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.CanGoBack, typeof(CanGoBackCallback));
+                var value = function(NativeHandle);
+                return Convert.ToBoolean(value);
+            }
+        }
+
+        public bool CanGoForward {
+            get {
+                var r = MarshalFromNative<CefBrowser>();
+                var function = (CanGoForwardCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.CanGoForward, typeof(CanGoForwardCallback));
+                var value = function(NativeHandle);
+                return Convert.ToBoolean(value);
+            }
+        }
+
+        public void GoBack() {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (GoBackCallback)
+                Marshal.GetDelegateForFunctionPointer(r.GoBack, typeof(GoBackCallback));
+            action(NativeHandle);
+        }
+
+        public void GoForward() {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (GoForwardCallback)
+                Marshal.GetDelegateForFunctionPointer(r.GoForward, typeof(GoForwardCallback));
+            action(NativeHandle);
+        }
+
+        public void CancelNavigation() {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (StopLoadCallback)
+                Marshal.GetDelegateForFunctionPointer(r.StopLoad, typeof(StopLoadCallback));
+            action(NativeHandle);
+        }
+
+        public void Refresh(bool ignoreCache = false) {
+            var r = MarshalFromNative<CefBrowser>();
+            ReloadCallback action;
+            if (ignoreCache) {
+                action = (ReloadCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.ReloadIgnoreCache, typeof(ReloadCallback));    
+            }
+            else {
+                action = (ReloadCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.Reload, typeof(ReloadCallback));    
+            }
+            action(NativeHandle);
+        }
+
+        public void SendIpcMessage(ProcessType target, Stream message) {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (SendProcessMessageCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.SendProcessMessage, typeof(SendProcessMessageCallback));
+            throw new NotImplementedException("SendIpcMessage");
+        }
+
+        public bool HasDocument {
+            get {
+                var r = MarshalFromNative<CefBrowser>();
+                var function = (HasDocumentCallback)
+                             Marshal.GetDelegateForFunctionPointer(r.HasDocument, typeof(HasDocumentCallback));
+                var value = function(NativeHandle);
+                return Convert.ToBoolean(value);
+            }
+        }
+
+        public long Id {
+            get {
+                var r = MarshalFromNative<CefBrowser>();
+                var function = (GetIdentifierCallback)
+                             Marshal.GetDelegateForFunctionPointer(r.GetIdentifier, typeof(GetIdentifierCallback));
+                return function(NativeHandle);
             }
         }
 

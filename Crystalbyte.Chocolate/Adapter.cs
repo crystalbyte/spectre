@@ -1,7 +1,6 @@
 ﻿#region Namespace Directives
 
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -37,7 +36,7 @@ namespace Crystalbyte.Chocolate {
 
         protected internal int NativeSize { get; private set; }
         protected Type NativeType { get; private set; }
-        public bool IsRefCounted { get; private set; }
+        protected bool IsRefCounted { get; private set; }
 
         public override bool Equals(object obj) {
             if (ReferenceEquals(null, obj)) {

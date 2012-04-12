@@ -14,10 +14,6 @@ namespace Crystalbyte.Chocolate.Scripting {
             NativeHandle = handle;
         }
 
-        internal static ScriptingContext FromHandle(IntPtr handle) {
-            return new ScriptingContext(handle);
-        }
-
         public static ScriptingContext Current {
             get {
                 var handle = CefV8Capi.CefV8contextGetCurrentContext();
@@ -32,10 +28,45 @@ namespace Crystalbyte.Chocolate.Scripting {
             }
         }
 
+        public Browser Browser {
+            get {
+                var reflection = MarshalFromNative<CefV8context>();
+                var function = (GetBrowserCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser, typeof (GetBrowserCallback));
+                var handle = function(NativeHandle);
+                return Browser.FromHandle(handle);
+            }
+        }
+
+        public Frame Frame {
+            get {
+                var reflection = MarshalFromNative<CefV8context>();
+                var function = (GetContextFrameCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetFrame,
+                                                                     typeof (GetContextFrameCallback));
+                var handle = function(NativeHandle);
+                return Frame.FromHandle(handle);
+            }
+        }
+
+        public ScriptableObject Document {
+            get {
+                var reflection = MarshalFromNative<CefV8context>();
+                var function = (GetGlobalCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetGlobal, typeof (GetGlobalCallback));
+                var handle = function(NativeHandle);
+                return ScriptableObject.FromHandle(handle);
+            }
+        }
+
+        internal static ScriptingContext FromHandle(IntPtr handle) {
+            return new ScriptingContext(handle);
+        }
+
         public bool TryEnter() {
             var reflection = MarshalFromNative<CefV8context>();
             var function = (EnterCallback)
-                Marshal.GetDelegateForFunctionPointer(reflection.Enter, typeof(EnterCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.Enter, typeof (EnterCallback));
             var value = function(NativeHandle);
             return Convert.ToBoolean(value);
         }
@@ -57,60 +88,35 @@ namespace Crystalbyte.Chocolate.Scripting {
         public bool TryExit() {
             var reflection = MarshalFromNative<CefV8context>();
             var function = (ExitCallback)
-                Marshal.GetDelegateForFunctionPointer(reflection.Exit, typeof(ExitCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.Exit, typeof (ExitCallback));
             var value = function(NativeHandle);
             return Convert.ToBoolean(value);
         }
 
-        public Browser Browser {
-            get {
-                var reflection = MarshalFromNative<CefV8context>();
-                var function = (GetBrowserCallback) 
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser, typeof(GetBrowserCallback));
-                var handle = function(NativeHandle);
-                return Browser.FromHandle(handle);
-            }
-        }
-
-        private delegate IntPtr GetContextFrameCallback(IntPtr self);
-        public Frame Frame {
-            get {
-                var reflection = MarshalFromNative<CefV8context>();
-                var function = (GetContextFrameCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetFrame, typeof(GetContextFrameCallback));
-                var handle = function(NativeHandle);
-                return Frame.FromHandle(handle);
-            }
-        }
-
-        public ScriptableObject Document {
-            get {
-                var reflection = MarshalFromNative<CefV8context>();
-                var function = (GetGlobalCallback)
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetGlobal, typeof(GetGlobalCallback));
-                var handle = function(NativeHandle);
-                return ScriptableObject.FromHandle(handle);
-            }
-        }
-
-        public bool IsSame(ScriptingContext other) { 
+        public bool IsSame(ScriptingContext other) {
             var reflection = MarshalFromNative<CefV8context>();
             var function = (IsSameCallback)
-                Marshal.GetDelegateForFunctionPointer(reflection.IsSame, typeof(IsSameCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.IsSame, typeof (IsSameCallback));
             var value = function(NativeHandle, other.NativeHandle);
             return Convert.ToBoolean(value);
         }
 
-        public bool Evaluate(string code, out ScriptableObject result, out ScriptingError exception) {
+        public bool Evaluate(string code, out ScriptableObject result, out ScriptingException exception) {
             result = new ScriptableObject();
-            exception = new ScriptingError();
+            exception = new ScriptingException();
             var str = new StringUtf16(code);
 
             var reflection = MarshalFromNative<CefV8context>();
             var function = (EvalCallback)
-                Marshal.GetDelegateForFunctionPointer(reflection.Eval, typeof(EvalCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.Eval, typeof (EvalCallback));
             var success = function(NativeHandle, str.NativeHandle, result.NativeHandle, exception.NativeHandle);
             return Convert.ToBoolean(success);
         }
+
+        #region Nested type: GetContextFrameCallback
+
+        private delegate IntPtr GetContextFrameCallback(IntPtr self);
+
+        #endregion
     }
 }

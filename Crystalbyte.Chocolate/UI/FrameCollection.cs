@@ -42,9 +42,8 @@ namespace Crystalbyte.Chocolate.UI {
         public int Count {
             get {
                 var reflection = _browser.MarshalFromNative<CefBrowser>();
-                var function = (GetFrameCountCallback) Marshal.GetDelegateForFunctionPointer(reflection.GetFrameCount,
-                                                                                             typeof (
-                                                                                                 GetFrameCountCallback));
+                var function = (GetFrameCountCallback) 
+                    Marshal.GetDelegateForFunctionPointer(reflection.GetFrameCount, typeof (GetFrameCountCallback));
                 return function(_browser.NativeHandle);
             }
         }
@@ -52,8 +51,7 @@ namespace Crystalbyte.Chocolate.UI {
         #region IEnumerable<Frame> Members
 
         public IEnumerator<Frame> GetEnumerator() {
-            throw new NotImplementedException();
-            //return new FrameCollectionEnumerator(_browser);
+            return new FrameCollectionEnumerator(this, _browser);
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
@@ -65,32 +63,42 @@ namespace Crystalbyte.Chocolate.UI {
         #region Nested type: FrameCollectionEnumerator
 
         private sealed class FrameCollectionEnumerator : IEnumerator<Frame> {
-            private readonly Browser _browser;
+            private readonly IValueCollection<string> _frameNames;
+            private readonly FrameCollection _collection;
             private readonly int _count;
-            
-            public FrameCollectionEnumerator(Browser browser) {
-                _browser = browser;
+            private int _index;
+
+            public FrameCollectionEnumerator(FrameCollection collection, Browser browser) {
+                _frameNames = (IValueCollection<string>) browser.FrameNames;
+                _count = collection.Count;
+                _collection = collection;
+                _index = -1;
             }
+
             #region IEnumerator<Frame> Members
 
             public Frame Current {
-                get { throw new NotImplementedException(); }
+                get {
+                    var name = _frameNames[_index];
+                    return _collection[name];
+                }
             }
 
             public void Dispose() {
-                throw new NotImplementedException();
+                // nada
             }
 
             object IEnumerator.Current {
-                get { throw new NotImplementedException(); }
+                get { return Current; }
             }
 
             public bool MoveNext() {
-                throw new NotImplementedException();
+                _index++;
+                return _index < _count;
             }
 
             public void Reset() {
-                throw new NotImplementedException();
+                _index = -1;
             }
 
             #endregion

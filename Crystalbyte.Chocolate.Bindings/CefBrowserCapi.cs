@@ -76,7 +76,7 @@ namespace Crystalbyte.Chocolate.Bindings {
 
     public delegate void StopLoadCallback(IntPtr self);
 
-    public delegate int GetIdentifierCallback(IntPtr self);
+    public delegate long GetIdentifierCallback(IntPtr self);
 
     public delegate int IsPopupCallback(IntPtr self);
 

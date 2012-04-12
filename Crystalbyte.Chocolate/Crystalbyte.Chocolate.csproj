@@ -51,6 +51,7 @@
     <Compile Include="IValueCollection.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Platform.cs" />
+    <Compile Include="ProcessType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reference.cs" />
     <Compile Include="Scripting\ContextEventArgs.cs">
@@ -65,7 +66,7 @@
     <Compile Include="Scripting\ScriptableObjectCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingError.cs" />
+    <Compile Include="Scripting\ScriptingException.cs" />
     <Compile Include="Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +95,7 @@
     <Compile Include="UI\FrameCollection.cs" />
     <Compile Include="UI\Framework.cs" />
     <Compile Include="UI\BrowserCreationArgs.cs" />
+    <Compile Include="IpcMessageReceivedEventArgs.cs" />
     <Compile Include="UI\LifeSpanHandler.cs" />
     <Compile Include="UI\NavigatedEventArgs.cs" />
     <Compile Include="UI\BrowserClosedEventArgs.cs" />

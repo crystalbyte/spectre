@@ -1,10 +1,9 @@
 ﻿#region Namespace Directives
 
 using System;
-using System.Linq;
 using System.Diagnostics;
 using System.Reflection;
-using System.Windows.Forms;
+using System.Threading;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 
@@ -12,15 +11,16 @@ using Crystalbyte.Chocolate.UI;
 
 namespace Crystalbyte.Chocolate {
     internal static class Program {
+
         /// <summary>
         ///   The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main() {
 #if (DEBUG)
-            // use this only for debugging purposes
+    // use this only for debugging purposes
             Framework.Settings.IsSingleProcess = true;
-#endif 
+#endif
             var appDelegate = new AppDelegate();
             appDelegate.Initialized += OnInitialized;
             appDelegate.BrowserCreated += OnBrowserCreated;
@@ -37,11 +37,9 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            var index = new Uri("http://www.google.com/");
-            //var index = new Uri(Environment.CurrentDirectory + "/Pages/start.htm");
+            var index = new Uri("http://www.battleshipmovie.com/");
             var process = new RenderProcess(new Window {StartupUri = index}, new BrowserDelegate());
             Framework.Run(process);
-            MessageBox.Show("shutting down");
             Framework.Shutdown();
         }
 
@@ -50,15 +48,18 @@ namespace Crystalbyte.Chocolate {
         }
 
         private static void OnBrowserCreated(object sender, BrowserEventArgs e) {
-            foreach (var name in e.Browser.FrameIds) {
-                Debug.WriteLine(name);
-            }
+            //foreach (var frame in e.Browser.Frames) {
+            //    Debug.WriteLine(frame.Name);
+            //}
+
+            e.Browser.MainFrame.Navigate("http://www.google.com");
+            var document = e.Browser.MainFrame.Context.Document;
 
             Debug.Assert(e.Browser != null);
             Debug.Assert(e.Browser.FocusedFrame != null);
             Debug.Assert(e.Browser.MainFrame != null);
         }
-
+      
         private static void OnInitialized(object sender, EventArgs e) {
             ScriptingRuntime.RegisterExtension("myExtension", new TestHandler());
         }

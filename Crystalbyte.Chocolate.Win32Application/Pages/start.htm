@@ -9,17 +9,21 @@
             }
         </style>
         <script>
-            var calc = function () {
-                var s = sum(4, 5);
-                var e = document.getElementById("result");
-                e.innerHTML = s;
+            var onload = function() {
+
+            };
+            var a = { };
+            var list = window.getElementById("list");
+            a.add = function(number) {
+                var child = createElement('span');
+                child.innerHTML = number;
+                list.appendChild(child);
             };
         </script>
     </head>
-    <body>
-        <div>
-            <span>4 + 5 = </span><span id="result"></span>
+    <body onload="onload();">
+        <div id="list">
+            
         </div>
-        <button onclick="calc();">Call .NET</button>
     </body>
 </html>

@@ -76,7 +76,7 @@ namespace Crystalbyte.Chocolate {
             CefStringListClass.CefStringListClear(NativeHandle);
         }
 
-        #region Nested type: Utf16StringCollectionEnumerator
+        #region Nested type: StringUtf16CollectionEnumerator
 
         private sealed class StringUtf16CollectionEnumerator : IEnumerator<string> {
             private readonly int _itemCount;

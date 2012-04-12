@@ -42,10 +42,10 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public event EventHandler<BrowserClosedEventArgs> PopupClosed;
+        public event EventHandler<BrowserClosedEventArgs> BrowserClosed;
 
         protected internal virtual void OnBrowserClosed(BrowserClosedEventArgs e) {
-            var handler = PopupClosed;
+            var handler = BrowserClosed;
             if (handler != null) {
                 handler(this, e);
             }

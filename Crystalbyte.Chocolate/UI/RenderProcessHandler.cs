@@ -4,19 +4,21 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Bindings.Internal;
 using Crystalbyte.Chocolate.Scripting;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
     public sealed class RenderProcessHandler : OwnedAdapter {
+        private readonly AppDelegate _delegate;
         private readonly OnBrowserCreatedCallback _browserCreatedCallback;
         private readonly OnBrowserDestroyedCallback _browserDestroyedCallback;
         private readonly OnContextCreatedCallback _contextCreatedCallback;
         private readonly OnContextReleasedCallback _contextReleasedCallback;
-        private readonly AppDelegate _delegate;
         private readonly OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
         private readonly OnWebKitInitializedCallback _webkitInitializedCallback;
+        private readonly OnProcessMessageRecievedCallback _processMessageReceivedCallback;
 
         public RenderProcessHandler(AppDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {
@@ -27,6 +29,7 @@ namespace Crystalbyte.Chocolate.UI {
             _renderThreadCreatedCallback = OnRenderThreadCreated;
             _webkitInitializedCallback = OnWebKitInitialized;
             _contextReleasedCallback = OnContextReleased;
+            _processMessageReceivedCallback = OnProcessMessageReceived;
             MarshalToNative(new CefRenderProcessHandler {
                 Base = DedicatedBase,
                 OnBrowserDestroyed = Marshal.GetFunctionPointerForDelegate(_browserDestroyedCallback),
@@ -34,8 +37,19 @@ namespace Crystalbyte.Chocolate.UI {
                 OnRenderThreadCreated = Marshal.GetFunctionPointerForDelegate(_renderThreadCreatedCallback),
                 OnWebKitInitialized = Marshal.GetFunctionPointerForDelegate(_webkitInitializedCallback),
                 OnBrowserCreated = Marshal.GetFunctionPointerForDelegate(_browserCreatedCallback),
-                OnContextReleased = Marshal.GetFunctionPointerForDelegate(_contextReleasedCallback)
+                OnContextReleased = Marshal.GetFunctionPointerForDelegate(_contextReleasedCallback),
+                OnProcessMessageRecieved = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback)
             });
+        }
+
+        private int OnProcessMessageReceived(IntPtr self, IntPtr browser, CefProcessId sourceprocess, IntPtr message) {
+            var e = new IpcMessageReceivedEventArgs {
+                SourceProcess = (ProcessType) sourceprocess,
+                Browser = Browser.FromHandle(browser),
+                Message = null
+            };
+            _delegate.OnIpcMessageReceived(e);
+            return e.IsHandled ? 1 : 0;
         }
 
         private void OnContextReleased(IntPtr self, IntPtr browser, IntPtr frame, IntPtr context) {

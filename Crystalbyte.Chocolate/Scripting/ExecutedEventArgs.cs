@@ -1,7 +1,6 @@
 ﻿#region Namespace Directives
 
 using System;
-using System.Collections.Generic;
 
 #endregion
 
