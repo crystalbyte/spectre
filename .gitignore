@@ -1,5 +1,5 @@
 *.suo
-_ReSharper.Crystalbyte.Chocolate
+_ReSharper*
 bin
 obj
 *.user
