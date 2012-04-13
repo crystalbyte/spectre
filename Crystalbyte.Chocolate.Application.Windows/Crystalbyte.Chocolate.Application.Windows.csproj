@@ -92,9 +92,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Resources\Cef\binaries\Windows\x86\$(Configuration)\*" "$(TargetDir)" /s /i /y
-xcopy "$(SolutionDir)Resources\Cef\*.pak" "$(TargetDir)" /s /i /y
-xcopy "$(SolutionDir)Resources\Cef\locales\*" "$(TargetDir)\locales" /s /i /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Resources\Cef3@593\binaries\Windows\x86\$(Configuration)\*" "$(TargetDir)" /s /i /y
+xcopy "$(SolutionDir)Resources\Cef3@593\*.pak" "$(TargetDir)" /s /i /y
+xcopy "$(SolutionDir)Resources\Cef3@593\locales\*" "$(TargetDir)\locales" /s /i /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
