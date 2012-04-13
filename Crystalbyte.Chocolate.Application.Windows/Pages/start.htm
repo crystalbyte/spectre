@@ -1,0 +1,29 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>Chocolate</title>
+        <style>
+            body {
+                color: white;
+                background-color: black;
+            }
+        </style>
+        <script>
+            var onload = function() {
+
+            };
+            var a = { };
+            var list = window.getElementById("list");
+            a.add = function(number) {
+                var child = createElement('span');
+                child.innerHTML = number;
+                list.appendChild(child);
+            };
+        </script>
+    </head>
+    <body onload="onload();">
+        <div id="list">
+            
+        </div>
+    </body>
+</html>
