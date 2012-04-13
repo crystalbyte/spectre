@@ -42,10 +42,10 @@ namespace Crystalbyte.Chocolate.UI {
             // Need to call Dispose manually since the GC will not be able to free this browser instance for it will still be referenced by local scope.
             b.Dispose();
 
-            // CEF requires all objects to be freed before the window is actually closed.
-            // Since this is a non recurring event which happens only when a window is closed the GC calls should not affect performance.
-            // Let's not poke the GC more than required ;)
-            // http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
+            //// CEF requires all objects to be freed before the window is actually closed.
+            //// Since this is a non recurring event which happens only when a window is closed the GC calls should not affect performance.
+            //// Let's not poke the GC more than required ;)
+            //// http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();

@@ -21,8 +21,10 @@ namespace Crystalbyte.Chocolate {
             // use this only for debugging purposes, sp mode is not yet as stable as it should be
             Framework.Settings.IsSingleProcess = true;
 #endif
+            var a = new AppDelegate();
+            a.BrowserCreated += OnBrowserCreated;
             var module = Assembly.GetExecutingAssembly().ManifestModule;
-            var success = Framework.Initialize(module, new AppDelegate());
+            var success = Framework.Initialize(module, a);
             if (!success) {
                 Debug.WriteLine("initialization failed");
                 return;
@@ -36,6 +38,13 @@ namespace Crystalbyte.Chocolate {
             var process = new RenderProcess(new Window {StartupUri = index}, new BrowserDelegate());
             Framework.Run(process);
             Framework.Shutdown();
+        }
+
+        private static void OnBrowserCreated(object sender, BrowserEventArgs e) {
+            var names = e.Browser.FrameNames;
+            foreach (var name in names) {
+                Debug.WriteLine(name);
+            }
         }
     }
 }
