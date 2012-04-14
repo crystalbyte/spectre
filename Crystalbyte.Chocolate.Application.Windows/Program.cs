@@ -17,10 +17,11 @@ namespace Crystalbyte.Chocolate {
         /// </summary>
         [STAThread]
         private static void Main() {
-#if (DEBUG)
-            // use this only for debugging purposes, sp mode is not yet as stable as it should be
+#if DEBUG
+            //use for debugging purposes, sp mode is not yet as stable as it should be
             Framework.Settings.IsSingleProcess = true;
 #endif
+            
             var a = new AppDelegate();
             a.BrowserCreated += OnBrowserCreated;
             var module = Assembly.GetExecutingAssembly().ManifestModule;

@@ -8,12 +8,15 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate.Scripting {
     public class ScriptingHandler : OwnedAdapter {
+        private delegate int V8ExecuteCallback(IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue,
+                               IntPtr exception);
+
         private readonly V8ExecuteCallback _executeCallback;
 
         public ScriptingHandler()
-            : base(typeof (CefV8Handler)) {
+            : base(typeof (CefV8handler)) {
             _executeCallback = OnExecuted;
-            MarshalToNative(new CefV8Handler {
+            MarshalToNative(new CefV8handler {
                 Base = DedicatedBase,
                 Execute = Marshal.GetFunctionPointerForDelegate(_executeCallback)
             });

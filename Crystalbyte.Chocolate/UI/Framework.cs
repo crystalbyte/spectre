@@ -75,9 +75,7 @@ namespace Crystalbyte.Chocolate.UI {
         public static void Shutdown() {
             OnShutdownStarted(EventArgs.Empty);
 
-            // CEF requires all objects to be freed before the window is actually closed.
-            // Since this is a non recurring event which happens only when a window is closed the GC calls should not affect performance.
-            // Let's not poke the GC more than required ;)
+            // As a curtosy we will release all objects before calling shutdown, this way we will see if some are still being used.
             // http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
             GC.WaitForPendingFinalizers();

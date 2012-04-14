@@ -144,6 +144,14 @@ namespace Crystalbyte.Chocolate {
                 return "IntPtr";
             }
 
+            if (type == "uint32") {
+                return "uint";
+            }
+
+            if (type == "uint64") {
+                return "ulong";
+            }
+
             if (type == "cef_string_list_t") {
                 return "IntPtr";
             }
