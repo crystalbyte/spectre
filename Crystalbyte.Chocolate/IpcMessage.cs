@@ -50,7 +50,7 @@ namespace Crystalbyte.Chocolate
             get {
                 var r = MarshalFromNative<CefProcessMessage>();
                 var function = (GetNameCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.IsValid, typeof(GetNameCallback));
+                    Marshal.GetDelegateForFunctionPointer(r.GetName, typeof(GetNameCallback));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
@@ -72,7 +72,7 @@ namespace Crystalbyte.Chocolate
                 return bin.Data;
             }
             set {
-                 var a = Arguments;
+                var a = Arguments;
                 if (a.Count < 1) {
                     a.SetSize(1);
                 }

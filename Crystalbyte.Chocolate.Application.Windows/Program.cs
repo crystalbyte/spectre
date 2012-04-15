@@ -20,7 +20,7 @@ namespace Crystalbyte.Chocolate {
         /// </summary>
         [STAThread]
         private static void Main() {
-            Framework.Settings.IsSingleProcess = true;
+            Framework.Settings.IsSingleProcess = false;
             var a = new AppDelegate();
             a.BrowserCreated += OnBrowserCreated;
             a.IpcMessageReceived += OnIpcMessageReceived;
@@ -45,10 +45,11 @@ namespace Crystalbyte.Chocolate {
         }
 
         private static void OnPageLoaded(object sender, PageLoadedEventArgs e) {
-            const string text = "Message sent to browser process";
+            Debug.WriteLine(e.Frame.Url);
+            const string text = "This message was sent across process boundaries.";
             var bytes = Encoding.UTF8.GetBytes(text);
             var ms = new MemoryStream(bytes);
-            e.Browser.SendIpcMessage(ProcessType.Renderer, new IpcMessage("uff") {
+            e.Browser.SendIpcMessage(ProcessType.Renderer, new IpcMessage("Hello") {
                 Payload = ms
             });
         }
@@ -60,7 +61,7 @@ namespace Crystalbyte.Chocolate {
         private static void OnIpcMessageReceived(object sender, IpcMessageReceivedEventArgs e) {
             using (var sr = new StreamReader(e.Message.Payload)) {
                 var text = sr.ReadToEnd();
-                MessageBox.Show(text);
+                
             }
         }
 
