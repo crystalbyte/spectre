@@ -107,8 +107,35 @@ namespace Crystalbyte.Chocolate.UI {
 
         public event EventHandler<IpcMessageReceivedEventArgs> IpcMessageReceived;
 
-        public void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
+        protected internal virtual void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
             var handler = IpcMessageReceived;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<TitleChangedEventArgs> TitleChanged;
+
+        protected internal virtual void OnTitleChanged(TitleChangedEventArgs e) {
+            var handler = TitleChanged;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<TooltipRequestedEventArgs> TooltipRequested;
+
+        protected internal virtual void OnTooltipRequested(TooltipRequestedEventArgs e) {
+            var handler = TooltipRequested;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<StatusMessageReceivedEventArgs> StatusMessageReceived;
+
+        protected internal virtual void OnStatusMessageReceived(StatusMessageReceivedEventArgs e) {
+            var handler = StatusMessageReceived;
             if (handler != null) {
                 handler(this, e);
             }

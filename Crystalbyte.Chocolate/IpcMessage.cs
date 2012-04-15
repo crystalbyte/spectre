@@ -35,6 +35,12 @@ namespace Crystalbyte.Chocolate
                 return Convert.ToBoolean(value);
             }
         }
+        protected override void DisposeNative() {
+            // TODO: check thread for progress 
+            // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
+            return;
+            //base.DisposeNative();
+        }
 
         public bool IsValid {
             get {

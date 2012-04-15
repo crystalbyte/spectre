@@ -20,7 +20,7 @@ namespace Crystalbyte.Chocolate {
         /// </summary>
         [STAThread]
         private static void Main() {
-            Framework.Settings.IsSingleProcess = false;
+            Framework.Settings.IsSingleProcess = true;
             var a = new AppDelegate();
             a.BrowserCreated += OnBrowserCreated;
             a.IpcMessageReceived += OnIpcMessageReceived;
@@ -38,7 +38,7 @@ namespace Crystalbyte.Chocolate {
 
             var b = new MyBrowserDelegate();
             b.PageLoaded += OnPageLoaded;
-            var index = new Uri("http://www.google.com");
+            var index = new Uri("http://www.graphicscardbenchmarks.com/page/webgl");
             var renderer = new HtmlRenderer(new Window {StartupUri = index}, b);
             Framework.Run(renderer);
             Framework.Shutdown();

@@ -35,12 +35,29 @@ namespace Crystalbyte.Chocolate
             }
         }
 
+        public bool IsOwned {
+            get {
+                var r = MarshalFromNative<CefBinaryValue>();
+                var function = (IsOwnedCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.IsOwned, typeof(IsOwnedCallback));
+                var value = function(NativeHandle);
+                return Convert.ToBoolean(value);
+            }
+        }
+
         public int Size {
             get {
                 var r = MarshalFromNative<CefBinaryValue>();
                 var function = (GetSizeCallback)Marshal.GetDelegateForFunctionPointer(r.GetSize, typeof(GetSizeCallback));
                 return function(NativeHandle);
             }
+        }
+
+        protected override void DisposeNative() {
+            // TODO: check thread for progress 
+            // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
+            return;
+            //base.DisposeNative();
         }
 
         public Stream Data {

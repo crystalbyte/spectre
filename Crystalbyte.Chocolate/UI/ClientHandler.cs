@@ -40,7 +40,7 @@ namespace Crystalbyte.Chocolate.UI {
                 GetLifeSpanHandler = Marshal.GetFunctionPointerForDelegate(_getLifeSpanHandlerCallback),
                 GetLoadHandler = Marshal.GetFunctionPointerForDelegate(_getLoadHandlerCallback),
                 GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
-                OnProcessMessageRecieved = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback)
+                OnProcessMessageRecieved = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback),
             });
         }
 
