@@ -38,7 +38,12 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private void OnStatusMessage(IntPtr self, IntPtr browser, IntPtr value, CefHandlerStatustype type) {
-            var e = new StatusMessageReceivedEventArgs {};
+            var e = new StatusMessageReceivedEventArgs {
+                Browser = Browser.FromHandle(browser),
+                Message = StringUtf16.ReadString(value),
+                StatusType = (StatusType) type
+            };
+            _delegate.OnStatusMessageReceived(e);
         }
 
         private int OnTooltip(IntPtr self, IntPtr browser, IntPtr text) {
@@ -86,12 +91,5 @@ namespace Crystalbyte.Chocolate.UI {
             var e = new NavigatedEventArgs(address, b, f);
             _delegate.OnNavigated(e);
         }
-    }
-
-    public sealed class StatusMessageReceivedEventArgs : EventArgs {
-        internal StatusMessageReceivedEventArgs() { }
-        public Browser Browser { get; internal set; }
-        public string Message { get; internal set; }
-        public StatusType StatusType { get; internal set; }
     }
 }

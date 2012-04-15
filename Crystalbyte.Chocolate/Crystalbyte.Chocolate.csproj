@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="BinaryObject.cs" />
+    <Compile Include="StatusType.cs" />
     <Compile Include="ChocolateException.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="DispatcherQueue.cs" />
@@ -130,6 +131,9 @@
     <Compile Include="UI\SizeChangedEventArgs.cs" />
     <Compile Include="UI\HtmlRenderer.cs" />
     <Compile Include="UI\BrowserSettings.cs" />
+    <Compile Include="UI\StatusMessageReceivedEventArgs.cs" />
+    <Compile Include="UI\TitleChangedEventArgs.cs" />
+    <Compile Include="UI\TooltipRequestedEventArgs.cs" />
     <Compile Include="UI\WindowInfo.cs" />
     <Compile Include="UI\WindowResizer.cs" />
     <Compile Include="UI\WindowStyles.cs" />

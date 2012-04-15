@@ -31,7 +31,7 @@ namespace Crystalbyte.Chocolate.UI {
                 CefCallbackGetRenderProcessHandler =
                                 Marshal.GetFunctionPointerForDelegate(_getRenderProcessHandlerCallback),
                 GetProxyHandler =
-                                Marshal.GetFunctionPointerForDelegate(_getProxyHandlerCallback),
+                                Marshal.GetFunctionPointerForDelegate(_getProxyHandlerCallback)
             });
         }
 
