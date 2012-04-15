@@ -30,14 +30,14 @@ namespace Crystalbyte.Chocolate.UI {
         private int OnDoClose(IntPtr self, IntPtr browser) {
             var b = Browser.FromHandle(browser);
             var e = new BrowserClosingEventArgs(b);
-            _delegate.OnBrowserClosing(e);
+            _delegate.OnClosing(e);
             return e.IsCanceled ? 1 : 0;
         }
 
         private void OnBeforeClose(IntPtr self, IntPtr browser) {
             var b = Browser.FromHandle(browser);
             var e = new BrowserClosedEventArgs(b);
-            _delegate.OnBrowserClosed(e);
+            _delegate.OnClosed(e);
 
             // Need to call Dispose manually since the GC will not be able to free this browser instance for it will still be referenced by local scope.
             b.Dispose();

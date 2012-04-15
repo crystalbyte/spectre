@@ -17,11 +17,11 @@ namespace Crystalbyte.Chocolate {
         /// </summary>
         [STAThread]
         private static void Main() {
+
 #if DEBUG
-            //use for debugging purposes, sp mode is not yet as stable as it should be
             Framework.Settings.IsSingleProcess = true;
 #endif
-            
+
             var a = new AppDelegate();
             a.BrowserCreated += OnBrowserCreated;
             var module = Assembly.GetExecutingAssembly().ManifestModule;
@@ -35,14 +35,16 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            var index = new Uri("http://www.battleshipmovie.com/");
-            var process = new RenderProcess(new Window {StartupUri = index}, new BrowserDelegate());
+            var b = new BrowserDelegate();
+            var index = new Uri("http://www.google.com");
+            var process = new RenderProcess(new Window {StartupUri = index}, b);
             Framework.Run(process);
             Framework.Shutdown();
         }
 
         private static void OnBrowserCreated(object sender, BrowserEventArgs e) {
             var names = e.Browser.FrameNames;
+            var keys = e.Browser.MainFrame.Context.Document.Keys;
             foreach (var name in names) {
                 Debug.WriteLine(name);
             }

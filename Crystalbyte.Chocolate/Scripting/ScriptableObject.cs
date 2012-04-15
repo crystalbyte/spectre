@@ -13,7 +13,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
-    public sealed class ScriptableObject : Adapter, IDictionary<string, ScriptableObject> {
+    public sealed class ScriptableObject : Adapter, IEnumerable<KeyValuePair<string, ScriptableObject>> {
         private ScriptableObject(IntPtr handle)
             : base(typeof (CefV8value), true) {
             NativeHandle = handle;
@@ -87,6 +87,9 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         public IValueCollection<string> Keys {
             get {
+                if (!IsArray) {
+                    return null;
+                }
                 var c = new StringUtf16Collection();
                 var reflection = MarshalFromNative<CefV8value>();
                 var function = (GetKeysCallback)
@@ -253,14 +256,6 @@ namespace Crystalbyte.Chocolate.Scripting {
             return true;
         }
 
-        ICollection<string> IDictionary<string, ScriptableObject>.Keys {
-            get { return Keys.ToList(); }
-        }
-
-        ICollection<ScriptableObject> IDictionary<string, ScriptableObject>.Values {
-            get { throw new NotSupportedException(); }
-        }
-
         public ScriptableObject this[string name] {
             get {
                 var reflection = MarshalFromNative<CefV8value>();
@@ -300,16 +295,8 @@ namespace Crystalbyte.Chocolate.Scripting {
             s.Free();
         }
 
-        public void Clear() {
-            throw new NotImplementedException();
-        }
-
         public bool Contains(KeyValuePair<string, ScriptableObject> item) {
             return ContainsKey(item.Key);
-        }
-
-        public void CopyTo(KeyValuePair<string, ScriptableObject>[] array, int arrayIndex) {
-            throw new NotImplementedException();
         }
 
         public bool Remove(KeyValuePair<string, ScriptableObject> item) {

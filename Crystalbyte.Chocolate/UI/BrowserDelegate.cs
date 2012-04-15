@@ -33,19 +33,46 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public event EventHandler<BrowserClosingEventArgs> BrowserClosing;
+        public event EventHandler<BrowserClosingEventArgs> Closing;
 
-        protected internal virtual void OnBrowserClosing(BrowserClosingEventArgs e) {
-            var handler = BrowserClosing;
+        protected internal virtual void OnClosing(BrowserClosingEventArgs e) {
+            var handler = Closing;
             if (handler != null) {
                 handler(this, e);
             }
         }
 
-        public event EventHandler<BrowserClosedEventArgs> BrowserClosed;
+        public event EventHandler<BrowserClosedEventArgs> Closed;
 
-        protected internal virtual void OnBrowserClosed(BrowserClosedEventArgs e) {
-            var handler = BrowserClosed;
+        protected internal virtual void OnClosed(BrowserClosedEventArgs e) {
+            var handler = Closed;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<BrowserLoadedEventArgs> Loaded;
+
+        protected internal virtual void OnLoaded(BrowserLoadedEventArgs e) {
+            var handler = Loaded;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<BrowserLoadingEventArgs> Loading;
+
+        protected internal virtual void OnLoading(BrowserLoadingEventArgs e) {
+            var handler = Loading;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<LoadingFailedEventArgs> LoadingFailed;
+
+        protected internal virtual void OnLoadingFailed(LoadingFailedEventArgs e) {
+            var handler = LoadingFailed;
             if (handler != null) {
                 handler(this, e);
             }

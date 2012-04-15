@@ -44,6 +44,7 @@
     <Compile Include="ChocolateException.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="DispatcherQueue.cs" />
+    <Compile Include="ErrorCode.cs" />
     <Compile Include="OwnedAdapter.cs" />
     <Compile Include="DisposableObject.cs" />
     <Compile Include="GraphicsImplementation.cs" />
@@ -90,13 +91,18 @@
     <Compile Include="UI\BrowserEventArgs.cs" />
     <Compile Include="ProcessStartedEventArgs.cs" />
     <Compile Include="ConsoleMessageReceivedEventArgs.cs" />
+    <Compile Include="UI\BrowserLoadedEventArgs.cs" />
+    <Compile Include="UI\BrowserLoadingEventArgs.cs" />
     <Compile Include="UI\DisplayHandler.cs" />
     <Compile Include="UI\Frame.cs" />
     <Compile Include="UI\FrameCollection.cs" />
     <Compile Include="UI\Framework.cs" />
     <Compile Include="UI\BrowserCreationArgs.cs" />
     <Compile Include="IpcMessageReceivedEventArgs.cs" />
+    <Compile Include="UI\GetGeolocationHandler.cs" />
     <Compile Include="UI\LifeSpanHandler.cs" />
+    <Compile Include="UI\LoadHandler.cs" />
+    <Compile Include="UI\LoadingFailedEventArgs.cs" />
     <Compile Include="UI\NavigatedEventArgs.cs" />
     <Compile Include="UI\BrowserClosedEventArgs.cs" />
     <Compile Include="UI\BrowserClosingEventArgs.cs" />

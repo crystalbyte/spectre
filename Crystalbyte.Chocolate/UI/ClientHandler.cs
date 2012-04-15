@@ -8,23 +8,52 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate.UI {
     internal sealed class ClientHandler : OwnedAdapter {
+        private readonly LoadHandler _loadHandler;
         private readonly DisplayHandler _displayHandler;
-        private readonly GetDisplayHandlerCallback _displayHandlerCallback;
-        private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
         private readonly LifeSpanHandler _lifeSpanHandler;
+        private readonly GeolocationHandler _geolocationHandler;
+        private readonly GetLoadHandlerCallback _getLoadHandlerCallback;
+        private readonly GetDisplayHandlerCallback _getDisplayHandlerCallback;
+        private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
+        private readonly GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
+        
 
         public ClientHandler(BrowserDelegate @delegate)
             : base(typeof (CefClient)) {
             _displayHandler = new DisplayHandler(@delegate);
-            _displayHandlerCallback = OnGetDisplayHandler;
+            _getDisplayHandlerCallback = OnGetDisplayHandler;
             _lifeSpanHandler = new LifeSpanHandler(@delegate);
-            _getLifeSpanHandlerCallback = OnLifeSpanHandlerCallback;
+            _getLifeSpanHandlerCallback = OnGetLifeSpanHandler;
+            _loadHandler = new LoadHandler(@delegate);
+            _getLoadHandlerCallback = OnGetLoadHandler;
+            _geolocationHandler = new GeolocationHandler(@delegate);
+            _getGeolocationHandlerCallback = OnGetGeolocationHandler;
 
             MarshalToNative(new CefClient {
                 Base = DedicatedBase,
-                GetDisplayHandler = Marshal.GetFunctionPointerForDelegate(_displayHandlerCallback),
-                GetLifeSpanHandler = Marshal.GetFunctionPointerForDelegate(_getLifeSpanHandlerCallback)
+                GetDisplayHandler = Marshal.GetFunctionPointerForDelegate(_getDisplayHandlerCallback),
+                GetLifeSpanHandler = Marshal.GetFunctionPointerForDelegate(_getLifeSpanHandlerCallback),
+                GetLoadHandler = Marshal.GetFunctionPointerForDelegate(_getLoadHandlerCallback),
+                GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
             });
+        }
+
+        private IntPtr OnGetGeolocationHandler(IntPtr self) {
+            if (_geolocationHandler == null) {
+                return IntPtr.Zero;
+            }
+
+            Reference.Increment(_geolocationHandler.NativeHandle);
+            return _geolocationHandler.NativeHandle;
+        }
+
+        private IntPtr OnGetLoadHandler(IntPtr self) {
+            if (_loadHandler == null) {
+                return IntPtr.Zero;
+            }
+
+            Reference.Increment(_loadHandler.NativeHandle);
+            return _loadHandler.NativeHandle;
         }
 
         private ClientHandler(IntPtr handle)
@@ -38,7 +67,7 @@ namespace Crystalbyte.Chocolate.UI {
             base.DisposeNative();
         }
 
-        private IntPtr OnLifeSpanHandlerCallback(IntPtr self) {
+        private IntPtr OnGetLifeSpanHandler(IntPtr self) {
             if (_lifeSpanHandler == null) {
                 return IntPtr.Zero;
             }
