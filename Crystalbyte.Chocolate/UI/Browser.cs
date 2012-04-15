@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using System.IO;
+using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
 
@@ -130,11 +131,11 @@ namespace Crystalbyte.Chocolate.UI {
             action(NativeHandle);
         }
 
-        public void SendIpcMessage(ProcessType target, Stream message) {
+        public void SendIpcMessage(ProcessType target, IpcMessage message) {
             var r = MarshalFromNative<CefBrowser>();
             var action = (SendProcessMessageCallback)
                     Marshal.GetDelegateForFunctionPointer(r.SendProcessMessage, typeof(SendProcessMessageCallback));
-            throw new NotImplementedException("SendIpcMessage");
+            action(NativeHandle, (CefProcessId) target, message.NativeHandle);
         }
 
         public bool HasDocument {

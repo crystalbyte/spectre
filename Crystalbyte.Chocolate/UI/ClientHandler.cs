@@ -3,11 +3,13 @@
 using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
     internal sealed class ClientHandler : OwnedAdapter {
+        private readonly BrowserDelegate _delegate;
         private readonly LoadHandler _loadHandler;
         private readonly DisplayHandler _displayHandler;
         private readonly LifeSpanHandler _lifeSpanHandler;
@@ -16,10 +18,11 @@ namespace Crystalbyte.Chocolate.UI {
         private readonly GetDisplayHandlerCallback _getDisplayHandlerCallback;
         private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
         private readonly GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
-        
+        private readonly OnProcessMessageRecievedCallback _processMessageReceivedCallback;
 
         public ClientHandler(BrowserDelegate @delegate)
             : base(typeof (CefClient)) {
+            _delegate = @delegate;
             _displayHandler = new DisplayHandler(@delegate);
             _getDisplayHandlerCallback = OnGetDisplayHandler;
             _lifeSpanHandler = new LifeSpanHandler(@delegate);
@@ -29,13 +32,26 @@ namespace Crystalbyte.Chocolate.UI {
             _geolocationHandler = new GeolocationHandler(@delegate);
             _getGeolocationHandlerCallback = OnGetGeolocationHandler;
 
+            _processMessageReceivedCallback = OnProcessMessageReceived;
+
             MarshalToNative(new CefClient {
                 Base = DedicatedBase,
                 GetDisplayHandler = Marshal.GetFunctionPointerForDelegate(_getDisplayHandlerCallback),
                 GetLifeSpanHandler = Marshal.GetFunctionPointerForDelegate(_getLifeSpanHandlerCallback),
                 GetLoadHandler = Marshal.GetFunctionPointerForDelegate(_getLoadHandlerCallback),
                 GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
+                OnProcessMessageRecieved = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback)
             });
+        }
+
+        private int OnProcessMessageReceived(IntPtr self, IntPtr browser, CefProcessId sourceprocess, IntPtr message) {
+            var e = new IpcMessageReceivedEventArgs {
+                Browser = Browser.FromHandle(browser),
+                SourceProcess = (ProcessType) sourceprocess,
+                Message = IpcMessage.FromHandle(message)
+            };
+            _delegate.OnIpcMessageReceived(e);
+            return e.IsHandled ? 1 : 0;
         }
 
         private IntPtr OnGetGeolocationHandler(IntPtr self) {

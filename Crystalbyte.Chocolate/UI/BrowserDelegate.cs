@@ -95,5 +95,23 @@ namespace Crystalbyte.Chocolate.UI {
                 handler(this, e);
             }
         }
+
+        public event EventHandler<LoadingStateChangedEventArgs> LoadingStateChanged;
+
+        protected  internal virtual void OnLoadingStateChanged(LoadingStateChangedEventArgs e) {
+            var handler = LoadingStateChanged;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<IpcMessageReceivedEventArgs> IpcMessageReceived;
+
+        public void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
+            var handler = IpcMessageReceived;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
     }
 }

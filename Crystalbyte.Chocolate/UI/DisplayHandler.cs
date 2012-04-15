@@ -11,17 +11,30 @@ namespace Crystalbyte.Chocolate.UI {
         private readonly OnAddressChangeCallback _addressChangeCallback;
         private readonly OnConsoleMessageCallback _consoleMessageCallback;
         private readonly BrowserDelegate _delegate;
+        private readonly OnLoadingStateChangeCallback _loadingStateChangedCallback;
 
         public DisplayHandler(BrowserDelegate @delegate)
             : base(typeof (CefDisplayHandler)) {
             _delegate = @delegate;
             _addressChangeCallback = OnAddressChange;
             _consoleMessageCallback = OnConsoleMessage;
+            _loadingStateChangedCallback = OnLoadingStateChange;
             MarshalToNative(new CefDisplayHandler {
                 Base = DedicatedBase,
                 OnAddressChange = Marshal.GetFunctionPointerForDelegate(_addressChangeCallback),
-                OnConsoleMessage = Marshal.GetFunctionPointerForDelegate(_consoleMessageCallback)
+                OnConsoleMessage = Marshal.GetFunctionPointerForDelegate(_consoleMessageCallback),
+                OnLoadingStateChange = Marshal.GetFunctionPointerForDelegate(_loadingStateChangedCallback)
             });
+        }
+
+        private void OnLoadingStateChange(IntPtr self, IntPtr browser, int isloading, int cangoback, int cangoforward) {
+            var e = new LoadingStateChangedEventArgs {
+                Browser = Browser.FromHandle(browser),
+                IsLoading = Convert.ToBoolean(isloading),
+                CanGoBack = Convert.ToBoolean(cangoback),
+                CanGoForward = Convert.ToBoolean(cangoforward)
+            };
+            _delegate.OnLoadingStateChanged(e);
         }
 
         private int OnConsoleMessage(IntPtr self, IntPtr browser, IntPtr message, IntPtr source, int line) {

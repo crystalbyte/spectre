@@ -3,9 +3,12 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
+using System.IO;
 
 #endregion
 
@@ -20,6 +23,8 @@ namespace Crystalbyte.Chocolate {
             Framework.Settings.IsSingleProcess = true;
             var a = new AppDelegate();
             a.BrowserCreated += OnBrowserCreated;
+            a.IpcMessageReceived += OnIpcMessageReceived;
+            a.ProcessStarted += OnProcessStarted;
             var module = Assembly.GetExecutingAssembly().ManifestModule;
             var success = Framework.Initialize(module, a);
             if (!success) {
@@ -32,10 +37,31 @@ namespace Crystalbyte.Chocolate {
             }
 
             var b = new MyBrowserDelegate();
+            b.PageLoaded += OnPageLoaded;
             var index = new Uri("http://www.google.com");
             var renderer = new HtmlRenderer(new Window {StartupUri = index}, b);
             Framework.Run(renderer);
             Framework.Shutdown();
+        }
+
+        private static void OnPageLoaded(object sender, PageLoadedEventArgs e) {
+            const string text = "Message sent to browser process";
+            var bytes = Encoding.UTF8.GetBytes(text);
+            var ms = new MemoryStream(bytes);
+            e.Browser.SendIpcMessage(ProcessType.Renderer, new IpcMessage("uff") {
+                Payload = ms
+            });
+        }
+
+        private static void OnProcessStarted(object sender, ProcessStartedEventArgs e) {
+            
+        }
+
+        private static void OnIpcMessageReceived(object sender, IpcMessageReceivedEventArgs e) {
+            using (var sr = new StreamReader(e.Message.Payload)) {
+                var text = sr.ReadToEnd();
+                MessageBox.Show(text);
+            }
         }
 
         private static void OnBrowserCreated(object sender, BrowserEventArgs e) {

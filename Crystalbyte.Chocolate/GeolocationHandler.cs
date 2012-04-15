@@ -5,9 +5,9 @@ using Crystalbyte.Chocolate.UI;
 
 namespace Crystalbyte.Chocolate {
     internal sealed class GeolocationHandler : OwnedAdapter {
-        private BrowserDelegate _delegate;
-        private OnRequestGeolocationPermissionCallback _requestGeolocationPermission;
-        private OnCancelGeolocationPermissionCallback _cancelGeolocationPermission;
+        private readonly BrowserDelegate _delegate;
+        private readonly OnRequestGeolocationPermissionCallback _requestGeolocationPermission;
+        private readonly OnCancelGeolocationPermissionCallback _cancelGeolocationPermission;
 
         public GeolocationHandler(BrowserDelegate @delegate) 
             : base(typeof(CefGeolocationHandler)) {

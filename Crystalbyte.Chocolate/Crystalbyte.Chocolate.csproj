@@ -41,11 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter.cs" />
+    <Compile Include="BinaryObject.cs" />
     <Compile Include="ChocolateException.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="DispatcherQueue.cs" />
     <Compile Include="ErrorCode.cs" />
-    <Compile Include="GeolocationPermission.cs" />
+    <Compile Include="GeolocationRequest.cs" />
+    <Compile Include="GeolocationRequestCanceledEventArgs.cs" />
+    <Compile Include="IpcMessage.cs" />
+    <Compile Include="ObjectCollection.cs" />
     <Compile Include="OwnedAdapter.cs" />
     <Compile Include="DisposableObject.cs" />
     <Compile Include="GraphicsImplementation.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Scripting\ScriptingRuntime.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="Task.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="ProcessStartedEventArgs.cs" />
     <Compile Include="ConsoleMessageReceivedEventArgs.cs" />
     <Compile Include="GeolocationRequestedEventArgs.cs" />
+    <Compile Include="UI\LoadingStateChangedEventArgs.cs" />
     <Compile Include="UI\PageLoadedEventArgs.cs" />
     <Compile Include="UI\PageLoadingEventArgs.cs" />
     <Compile Include="UI\DisplayHandler.cs" />

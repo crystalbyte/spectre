@@ -30,6 +30,7 @@ namespace Crystalbyte.Chocolate.UI {
             _webkitInitializedCallback = OnWebKitInitialized;
             _contextReleasedCallback = OnContextReleased;
             _processMessageReceivedCallback = OnProcessMessageReceived;
+
             MarshalToNative(new CefRenderProcessHandler {
                 Base = DedicatedBase,
                 OnBrowserDestroyed = Marshal.GetFunctionPointerForDelegate(_browserDestroyedCallback),
@@ -46,7 +47,7 @@ namespace Crystalbyte.Chocolate.UI {
             var e = new IpcMessageReceivedEventArgs {
                 SourceProcess = (ProcessType) sourceprocess,
                 Browser = Browser.FromHandle(browser),
-                Message = null
+                Message = IpcMessage.FromHandle(message)
             };
             _delegate.OnIpcMessageReceived(e);
             return e.IsHandled ? 1 : 0;
