@@ -5,7 +5,7 @@ using System;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class RenderProcess : DisposableObject {
+    public sealed class HtmlRenderer : DisposableObject {
         private readonly ClientHandler _handler;
         private readonly WindowResizer _resizer;
         private readonly BrowserSettings _settings;
@@ -13,7 +13,7 @@ namespace Crystalbyte.Chocolate.UI {
         private Browser _browser;
         private BrowserHost _browserHost;
 
-        public RenderProcess(IRenderTarget target, BrowserDelegate @delegate) {
+        public HtmlRenderer(IRenderTarget target, BrowserDelegate @delegate) {
             _target = target;
             _target.TargetClosing += OnTargetClosing;
             _target.TargetClosed += OnTargetClosed;

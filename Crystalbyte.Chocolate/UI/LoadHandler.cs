@@ -30,31 +30,31 @@ namespace Crystalbyte.Chocolate.UI
         }
 
         private void OnLoadError(IntPtr self, IntPtr browser, IntPtr frame, CefHandlerErrorcode errorcode, IntPtr errortext, IntPtr failedurl) {
-            var e = new LoadingFailedEventArgs {
+            var e = new PageLoadingFailedEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
                 ErrorCode = (ErrorCode) errorcode,
                 Message = StringUtf16.ReadStringAndFree(errortext),
                 FailedUrl = StringUtf16.ReadStringAndFree(failedurl)
             };
-            _delegate.OnLoadingFailed(e);
+            _delegate.OnPageLoadingFailed(e);
         }
 
         private void OnLoadStart(IntPtr self, IntPtr browser, IntPtr frame) {
-            var e = new BrowserLoadingEventArgs {
+            var e = new PageLoadingEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame)
             };
-            _delegate.OnLoading(e);
+            _delegate.OnPageLoading(e);
         }
 
         private void OnLoadEnd(IntPtr self, IntPtr browser, IntPtr frame, int httpstatuscode) {
-            var e = new BrowserLoadedEventArgs {
+            var e = new PageLoadedEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
                 HttpStatusCode = httpstatuscode
             };
-            _delegate.OnLoaded(e);
+            _delegate.OnPageLoaded(e);
         }
     }
 }

@@ -13,11 +13,11 @@ namespace Crystalbyte.Chocolate.UI {
     public static class Framework {
         private static App _app;
         private static readonly FrameworkSettings _settings;
-        private static readonly Dictionary<IRenderTarget, RenderProcess> _views;
+        private static readonly Dictionary<IRenderTarget, HtmlRenderer> _views;
 
         static Framework() {
             _settings = new FrameworkSettings();
-            _views = new Dictionary<IRenderTarget, RenderProcess>();
+            _views = new Dictionary<IRenderTarget, HtmlRenderer>();
             QuitAfterLastViewClosed = true;
         }
 
@@ -75,21 +75,23 @@ namespace Crystalbyte.Chocolate.UI {
         public static void Shutdown() {
             OnShutdownStarted(EventArgs.Empty);
 
-            // As a curtosy we will release all objects before calling shutdown, this way we will see if some are still being used.
+            // Force collect to remove Dipose all remaining floating native objects.
+            // This is only called once, when closing the program, thus not affecting performance in the slightest.
             // http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
 
+            // If CEF does not complain beyond this point we have managed to free all previously allocated native objects.
             CefAppCapi.CefShutdown();
             OnShutdownFinished(EventArgs.Empty);
         }
 
-        public static void Attach(RenderProcess process) {
-            _views.Add(process.RenderTarget, process);
-            process.RenderTarget.TargetClosing += OnRenderTargetClosing;
-            process.RenderTarget.TargetClosed += OnRenderTargetClosed;
-            process.CreateBrowser();
+        public static void Add(HtmlRenderer renderer) {
+            _views.Add(renderer.RenderTarget, renderer);
+            renderer.RenderTarget.TargetClosing += OnRenderTargetClosing;
+            renderer.RenderTarget.TargetClosed += OnRenderTargetClosed;
+            renderer.CreateBrowser();
         }
 
         private static void OnRenderTargetClosing(object sender, EventArgs e) {
@@ -117,8 +119,8 @@ namespace Crystalbyte.Chocolate.UI {
             return handle;
         }
 
-        public static void Run(RenderProcess process) {
-            Attach(process);
+        public static void Run(HtmlRenderer renderer) {
+            Add(renderer);
             CefAppCapi.CefRunMessageLoop();
         }
 

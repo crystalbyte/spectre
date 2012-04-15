@@ -17,11 +17,7 @@ namespace Crystalbyte.Chocolate {
         /// </summary>
         [STAThread]
         private static void Main() {
-
-#if DEBUG
             Framework.Settings.IsSingleProcess = true;
-#endif
-
             var a = new AppDelegate();
             a.BrowserCreated += OnBrowserCreated;
             var module = Assembly.GetExecutingAssembly().ManifestModule;
@@ -35,10 +31,10 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            var b = new BrowserDelegate();
+            var b = new MyBrowserDelegate();
             var index = new Uri("http://www.google.com");
-            var process = new RenderProcess(new Window {StartupUri = index}, b);
-            Framework.Run(process);
+            var renderer = new HtmlRenderer(new Window {StartupUri = index}, b);
+            Framework.Run(renderer);
             Framework.Shutdown();
         }
 

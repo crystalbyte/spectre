@@ -47,7 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestHandler.cs" />
+    <Compile Include="JavascriptHandler.cs" />
+    <Compile Include="MyBrowserDelegate.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>

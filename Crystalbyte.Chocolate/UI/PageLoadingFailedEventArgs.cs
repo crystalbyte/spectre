@@ -1,7 +1,7 @@
 using System;
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class LoadingFailedEventArgs : EventArgs {
+    public sealed class PageLoadingFailedEventArgs : EventArgs {
         public Browser Browser { get; internal set; }
         public Frame Frame { get; internal set; }
         public ErrorCode ErrorCode { get; internal set; }

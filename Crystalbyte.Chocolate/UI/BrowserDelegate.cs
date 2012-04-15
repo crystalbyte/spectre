@@ -51,28 +51,46 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public event EventHandler<BrowserLoadedEventArgs> Loaded;
+        public event EventHandler<PageLoadedEventArgs> PageLoaded;
 
-        protected internal virtual void OnLoaded(BrowserLoadedEventArgs e) {
-            var handler = Loaded;
+        protected internal virtual void OnPageLoaded(PageLoadedEventArgs e) {
+            var handler = PageLoaded;
             if (handler != null) {
                 handler(this, e);
             }
         }
 
-        public event EventHandler<BrowserLoadingEventArgs> Loading;
+        public event EventHandler<PageLoadingEventArgs> PageLoading;
 
-        protected internal virtual void OnLoading(BrowserLoadingEventArgs e) {
-            var handler = Loading;
+        protected internal virtual void OnPageLoading(PageLoadingEventArgs e) {
+            var handler = PageLoading;
             if (handler != null) {
                 handler(this, e);
             }
         }
 
-        public event EventHandler<LoadingFailedEventArgs> LoadingFailed;
+        public event EventHandler<PageLoadingFailedEventArgs> PageLoadingFailed;
 
-        protected internal virtual void OnLoadingFailed(LoadingFailedEventArgs e) {
-            var handler = LoadingFailed;
+        protected internal virtual void OnPageLoadingFailed(PageLoadingFailedEventArgs e) {
+            var handler = PageLoadingFailed;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<GeolocationRequestedEventArgs> GeolocationRequested;
+
+        protected internal virtual void OnGeolocationRequested(GeolocationRequestedEventArgs e) {
+            var handler = GeolocationRequested;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<GeolocationRequestCanceledEventArgs> GeolocationRequestFailed;
+
+        protected internal virtual void OnGeolocationRequestCanceled(GeolocationRequestCanceledEventArgs e) {
+            var handler = GeolocationRequestFailed;
             if (handler != null) {
                 handler(this, e);
             }
