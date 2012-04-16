@@ -7,13 +7,13 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.Bindings.Internal
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefMainArgs {
+	public struct MacCefMainArgs {
 		public int Argc;
 		public IntPtr Argv;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefWindowInfo {
+	public struct MacCefWindowInfo {
 		public CefStringUtf16 WindowName;
 		public int X;
 		public int Y;
@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	}
 	
 	
-	public enum CefGraphicsImplementation {
+	public enum MacCefGraphicsImplementation {
 		DesktopInProcess = 0,
 		DesktopInProcessCommandBuffer,
 	}

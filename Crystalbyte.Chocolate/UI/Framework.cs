@@ -53,7 +53,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         public static bool Initialize(Module module, AppDelegate appDelegate = null) {
             var hInstance = Marshal.GetHINSTANCE(module);
-            var argsHandle = MarshalMainArgs(hInstance);
+            var argsHandle = AppArguments.Create(hInstance);
 
             _app = new App(appDelegate ?? new AppDelegate());
             var appHandle = _app.NativeHandle;
@@ -109,15 +109,7 @@ namespace Crystalbyte.Chocolate.UI {
             target.TargetClosed -= OnRenderTargetClosed;
         }
 
-        private static IntPtr MarshalMainArgs(IntPtr hInstance) {
-            var mainArgs = new CefMainArgs {
-                Instance = hInstance
-            };
-            var size = Marshal.SizeOf(typeof (CefMainArgs));
-            var handle = Marshal.AllocHGlobal(size);
-            Marshal.StructureToPtr(mainArgs, handle, false);
-            return handle;
-        }
+     
 
         public static void Run(HtmlRenderer renderer) {
             Add(renderer);

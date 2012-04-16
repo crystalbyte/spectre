@@ -7,12 +7,12 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.Bindings.Internal
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefMainArgs {
+	public struct WindowsCefMainArgs {
 		public IntPtr Instance;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefWindowInfo {
+	public struct WindowsCefWindowInfo {
 		public uint ExStyle;
 		public CefStringUtf16 WindowName;
 		public uint Style;
@@ -27,7 +27,7 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 	}
 	
 	
-	public enum CefGraphicsImplementation {
+	public enum WindowsCefGraphicsImplementation {
 		AngleInProcess = 0,
 		AngleInProcessCommandBuffer,
 		DesktopInProcess,

@@ -20,7 +20,7 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 		public IntPtr ExtraPluginPaths;
 		public CefStringUtf16 LogFile;
 		public CefLogSeverity LogSeverity;
-		public CefGraphicsImplementation GraphicsImplementation;
+		public int GraphicsImplementation;
 		public CefStringUtf16 JavascriptFlags;
 		public bool AutoDetectProxySettingsEnabled;
 		public CefStringUtf16 PackFilePath;

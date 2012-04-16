@@ -55,7 +55,7 @@ namespace Crystalbyte.Chocolate.UI {
                                   IntPtr client, IntPtr settings) {
             var e = new PopupCreatingEventArgs {
                 Parent = Browser.FromHandle(parentbrowser),
-                Info = WindowInfo.FromHandle(windowinfo),
+                Info = WindowsWindowInfo.FromHandle(windowinfo),
                 Settings = BrowserSettings.FromHandle(settings),
                 Address = StringUtf16.ReadString(url)
             };

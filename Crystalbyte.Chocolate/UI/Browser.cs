@@ -23,7 +23,7 @@ namespace Crystalbyte.Chocolate.UI {
                 var function = (GetHostCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetHost, typeof (GetHostCallback));
                 var handle = function(NativeHandle);
-                return BrowserHost.FromHandle(handle);
+                return BrowserHost.FromHandle(handle); 
             }
         }
 

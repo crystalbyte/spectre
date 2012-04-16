@@ -7,19 +7,19 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.Bindings.Internal
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefMainArgs {
+	public struct LinuxCefMainArgs {
 		public int Argc;
 		public IntPtr Argv;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
-	public struct CefWindowInfo {
+	public struct LinuxCefWindowInfo {
 		public IntPtr ParentWidget;
 		public IntPtr Widget;
 	}
 	
 	
-	public enum CefGraphicsImplementation {
+	public enum LinuxCefGraphicsImplementation {
 		DesktopInProcess = 0,
 		DesktopInProcessCommandBuffer,
 	}

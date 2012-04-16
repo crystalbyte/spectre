@@ -65,13 +65,15 @@ namespace Crystalbyte.Chocolate {
 
                     var structs = FindStructures(content);
                     if (structs.Count > 0) {
-                        GenerateStruct(cw, structs);
+                        var prefix = DeterminePrefix(name);
+                        GenerateStruct(cw, structs, prefix);
                         cw.WriteLine(string.Empty);
                     }
 
                     var enums = FindEnums(content);
                     if (enums.Count > 0) {
-                        GenerateEnum(cw, enums);
+                        var prefix = DeterminePrefix(name);
+                        GenerateEnum(cw, enums, prefix);
                         cw.WriteLine(string.Empty);
                     }
 
@@ -80,10 +82,23 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        private static void GenerateEnum(CSharpCodeWriter cw, IList<string> enums) {
+        private static string DeterminePrefix(string name) {
+            if (name.ToLower().Contains("mac")) {
+                return "Mac";
+            }
+            if (name.ToLower().Contains("linux")) {
+                return "Linux";
+            }
+            if (name.ToLower().Contains("win")) {
+                return "Windows";
+            }
+            return string.Empty;
+        }
+
+        private static void GenerateEnum(CSharpCodeWriter cw, IList<string> enums, string prefix = "") {
             foreach (var @enum in enums) {
                 var name = CSharpCodeConverter.ExtractEnumName(@enum);
-                cw.BeginEnum(name);
+                cw.BeginEnum(prefix + name);
 
                 var entries = FindEnumEntries(@enum);
                 foreach (var entry in entries) {
@@ -112,11 +127,11 @@ namespace Crystalbyte.Chocolate {
             return (from Match match in matches select match.Value).ToList();
         }
 
-        private void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs) {
+        private void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs, string prefix = "") {
             var delegates = new List<string>();
             foreach (var @struct in structs) {
                 var name = CSharpCodeConverter.ExtractStructName(@struct);
-                cw.BeginStruct(name);
+                cw.BeginStruct(prefix + name);
 
                 var members = FindStructMembers(@struct);
                 foreach (var member in members) {

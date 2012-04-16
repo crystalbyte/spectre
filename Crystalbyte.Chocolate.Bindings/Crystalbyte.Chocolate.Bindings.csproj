@@ -48,6 +48,7 @@
     <Compile Include="CefCallbackCapi.cs" />
     <Compile Include="CefClientCapi.cs" />
     <Compile Include="CefCommandLineCapi.cs" />
+    <Compile Include="CefCookieCapi.cs" />
     <Compile Include="CefDisplayHandlerCapi.cs" />
     <Compile Include="CefFrameCapi.cs" />
     <Compile Include="CefGeolocationHandlerCapi.cs" />
@@ -73,6 +74,8 @@
     <Compile Include="CefZipReaderCapi.cs" />
     <Compile Include="Internal\CefBuild.cs" />
     <Compile Include="Internal\CefExport.cs" />
+    <Compile Include="Internal\CefLinux.cs" />
+    <Compile Include="Internal\CefMac.cs" />
     <Compile Include="Internal\CefPtr.cs" />
     <Compile Include="Internal\CefString.cs" />
     <Compile Include="Internal\CefStringList.cs" />
@@ -83,6 +86,8 @@
     <Compile Include="Internal\CefTime.cs" />
     <Compile Include="Internal\CefTuple.cs" />
     <Compile Include="Internal\CefTypes.cs" />
+    <Compile Include="Internal\CefTypesLinux.cs" />
+    <Compile Include="Internal\CefTypesMac.cs" />
     <Compile Include="Internal\CefTypesWin.cs" />
     <Compile Include="Internal\CefTypesWrappers.cs" />
     <Compile Include="Internal\CefWin.cs" />

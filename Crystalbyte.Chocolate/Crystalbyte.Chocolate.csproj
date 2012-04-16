@@ -94,6 +94,7 @@
     <Compile Include="Time.cs" />
     <Compile Include="UI\App.cs" />
     <Compile Include="UI\AppDelegate.cs" />
+    <Compile Include="UI\AppArguments.cs" />
     <Compile Include="UI\Browser.cs" />
     <Compile Include="UI\BrowserEventArgs.cs" />
     <Compile Include="ProcessStartedEventArgs.cs" />
@@ -134,7 +135,7 @@
     <Compile Include="UI\StatusMessageReceivedEventArgs.cs" />
     <Compile Include="UI\TitleChangedEventArgs.cs" />
     <Compile Include="UI\TooltipRequestedEventArgs.cs" />
-    <Compile Include="UI\WindowInfo.cs" />
+    <Compile Include="UI\WindowsWindowInfo.cs" />
     <Compile Include="UI\WindowResizer.cs" />
     <Compile Include="UI\WindowStyles.cs" />
   </ItemGroup>

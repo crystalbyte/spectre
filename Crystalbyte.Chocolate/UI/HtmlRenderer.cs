@@ -79,7 +79,7 @@ namespace Crystalbyte.Chocolate.UI {
                 ClientHandler = _handler,
                 Settings = _settings,
                 StartUri = _target.StartupUri,
-                WindowInfo = new WindowInfo(_target)
+                WindowInfo = new WindowsWindowInfo(_target)
             });
             _browserHost = _browser.Host;
             OnCreated(EventArgs.Empty);
