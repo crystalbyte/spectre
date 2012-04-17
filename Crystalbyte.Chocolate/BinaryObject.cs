@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Namespace Directives
+
+using System;
 using System.IO;
-using System.IO.MemoryMappedFiles;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using Crystalbyte.Chocolate.Bindings;
 
-namespace Crystalbyte.Chocolate
-{
+#endregion
+
+namespace Crystalbyte.Chocolate {
     public sealed class BinaryObject : Adapter {
-        public BinaryObject(Stream stream) 
-            : base(typeof(CefBinaryValue), true) {
+        public BinaryObject(Stream stream)
+            : base(typeof (CefBinaryValue), true) {
             var length = (int) stream.Length;
             var handle = stream.ToUnmanagedMemory();
             NativeHandle = CefValuesCapi.CefBinaryValueCreate(handle, length);
         }
 
         public BinaryObject(IntPtr handle)
-            : base(typeof(CefBinaryValue), true) {
+            : base(typeof (CefBinaryValue), true) {
             NativeHandle = handle;
         }
 
-        internal static BinaryObject FromHandle(IntPtr handle) {
-            return new BinaryObject(handle);
-        }
-
         public bool IsValid {
-            get { 
+            get {
                 var r = MarshalFromNative<CefBinaryValue>();
-                var function = (IsValidCallback)Marshal.GetDelegateForFunctionPointer(r.IsValid, typeof(IsValidCallback));
+                var function =
+                    (IsValidCallback) Marshal.GetDelegateForFunctionPointer(r.IsValid, typeof (IsValidCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -39,7 +35,7 @@ namespace Crystalbyte.Chocolate
             get {
                 var r = MarshalFromNative<CefBinaryValue>();
                 var function = (IsOwnedCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.IsOwned, typeof(IsOwnedCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.IsOwned, typeof (IsOwnedCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -48,16 +44,10 @@ namespace Crystalbyte.Chocolate
         public int Size {
             get {
                 var r = MarshalFromNative<CefBinaryValue>();
-                var function = (GetSizeCallback)Marshal.GetDelegateForFunctionPointer(r.GetSize, typeof(GetSizeCallback));
+                var function =
+                    (GetSizeCallback) Marshal.GetDelegateForFunctionPointer(r.GetSize, typeof (GetSizeCallback));
                 return function(NativeHandle);
             }
-        }
-
-        protected override void DisposeNative() {
-            // TODO: check thread for progress 
-            // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
-            return;
-            //base.DisposeNative();
         }
 
         public Stream Data {
@@ -65,9 +55,9 @@ namespace Crystalbyte.Chocolate
                 var s = Size;
                 var r = MarshalFromNative<CefBinaryValue>();
                 var function = (GetDataCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetData, typeof(GetDataCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetData, typeof (GetDataCallback));
 
-                var byteSize = Marshal.SizeOf(typeof(byte));
+                var byteSize = Marshal.SizeOf(typeof (byte));
                 var handle = Marshal.AllocHGlobal(byteSize * s);
                 function(NativeHandle, handle, s, 0);
 
@@ -76,6 +66,17 @@ namespace Crystalbyte.Chocolate
                 Marshal.FreeHGlobal(handle);
                 return new MemoryStream(bytes);
             }
+        }
+
+        internal static BinaryObject FromHandle(IntPtr handle) {
+            return new BinaryObject(handle);
+        }
+
+        protected override void DisposeNative() {
+            // TODO: check thread for progress 
+            // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
+            return;
+            //base.DisposeNative();
         }
     }
 }

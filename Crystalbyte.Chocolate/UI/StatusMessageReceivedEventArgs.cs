@@ -1,8 +1,12 @@
+#region Namespace Directives
+
 using System;
+
+#endregion
 
 namespace Crystalbyte.Chocolate.UI {
     public sealed class StatusMessageReceivedEventArgs : EventArgs {
-        internal StatusMessageReceivedEventArgs() { }
+        internal StatusMessageReceivedEventArgs() {}
         public Browser Browser { get; internal set; }
         public string Message { get; internal set; }
         public StatusType StatusType { get; internal set; }

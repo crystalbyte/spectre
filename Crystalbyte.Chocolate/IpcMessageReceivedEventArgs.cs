@@ -1,6 +1,9 @@
+#region Namespace Directives
+
 using System;
-using System.IO;
 using Crystalbyte.Chocolate.UI;
+
+#endregion
 
 namespace Crystalbyte.Chocolate {
     public sealed class IpcMessageReceivedEventArgs : EventArgs {

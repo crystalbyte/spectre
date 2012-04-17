@@ -29,8 +29,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private WindowsWindowInfo(IntPtr handle)
-            : base(typeof(WindowsCefWindowInfo))
-        {
+            : base(typeof (WindowsCefWindowInfo)) {
             NativeHandle = handle;
         }
 

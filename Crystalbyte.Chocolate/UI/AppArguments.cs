@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
-namespace Crystalbyte.Chocolate.UI
-{
-    public static class AppArguments
-    {
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
+    public static class AppArguments {
         public static IntPtr Create(IntPtr appHandle) {
             if (Platform.IsWindows) {
                 return CreateForWindows(appHandle);
@@ -21,7 +20,7 @@ namespace Crystalbyte.Chocolate.UI
             var mainArgs = new WindowsCefMainArgs {
                 Instance = hInstance
             };
-            var size = Marshal.SizeOf(typeof(WindowsCefMainArgs));
+            var size = Marshal.SizeOf(typeof (WindowsCefMainArgs));
             var handle = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(mainArgs, handle, false);
             return handle;

@@ -10,14 +10,14 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.UI {
     internal sealed class ClientHandler : OwnedAdapter {
         private readonly BrowserDelegate _delegate;
-        private readonly LoadHandler _loadHandler;
         private readonly DisplayHandler _displayHandler;
-        private readonly LifeSpanHandler _lifeSpanHandler;
         private readonly GeolocationHandler _geolocationHandler;
-        private readonly GetLoadHandlerCallback _getLoadHandlerCallback;
         private readonly GetDisplayHandlerCallback _getDisplayHandlerCallback;
-        private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
         private readonly GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
+        private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
+        private readonly GetLoadHandlerCallback _getLoadHandlerCallback;
+        private readonly LifeSpanHandler _lifeSpanHandler;
+        private readonly LoadHandler _loadHandler;
         private readonly OnProcessMessageRecievedCallback _processMessageReceivedCallback;
 
         public ClientHandler(BrowserDelegate @delegate)
@@ -42,6 +42,11 @@ namespace Crystalbyte.Chocolate.UI {
                 GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
                 OnProcessMessageRecieved = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback),
             });
+        }
+
+        private ClientHandler(IntPtr handle)
+            : base(typeof (CefClient)) {
+            NativeHandle = handle;
         }
 
         private int OnProcessMessageReceived(IntPtr self, IntPtr browser, CefProcessId sourceprocess, IntPtr message) {
@@ -70,11 +75,6 @@ namespace Crystalbyte.Chocolate.UI {
 
             Reference.Increment(_loadHandler.NativeHandle);
             return _loadHandler.NativeHandle;
-        }
-
-        private ClientHandler(IntPtr handle)
-            : base(typeof (CefClient)) {
-            NativeHandle = handle;
         }
 
         protected override void DisposeNative() {

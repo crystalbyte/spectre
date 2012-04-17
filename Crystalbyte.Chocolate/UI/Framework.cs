@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
-using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
 
@@ -109,7 +108,6 @@ namespace Crystalbyte.Chocolate.UI {
             target.TargetClosed -= OnRenderTargetClosed;
         }
 
-     
 
         public static void Run(HtmlRenderer renderer) {
             Add(renderer);

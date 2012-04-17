@@ -13,9 +13,9 @@ namespace Crystalbyte.Chocolate.UI {
         private readonly OnConsoleMessageCallback _consoleMessageCallback;
         private readonly BrowserDelegate _delegate;
         private readonly OnLoadingStateChangeCallback _loadingStateChangedCallback;
+        private readonly OnStatusMessageCallback _statusMessageCallback;
         private readonly OnTitleChangeCallback _titleChangeCallback;
         private readonly OnTooltipCallback _tooltipCallback;
-        private readonly OnStatusMessageCallback _statusMessageCallback;
 
         public DisplayHandler(BrowserDelegate @delegate)
             : base(typeof (CefDisplayHandler)) {

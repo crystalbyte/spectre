@@ -8,9 +8,6 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate.Scripting {
     public class ScriptingHandler : OwnedAdapter {
-        private delegate int V8ExecuteCallback(IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue,
-                               IntPtr exception);
-
         private readonly V8ExecuteCallback _executeCallback;
 
         public ScriptingHandler()
@@ -46,5 +43,13 @@ namespace Crystalbyte.Chocolate.Scripting {
                 handler(this, e);
             }
         }
+
+        #region Nested type: V8ExecuteCallback
+
+        private delegate int V8ExecuteCallback(
+            IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue,
+            IntPtr exception);
+
+        #endregion
     }
 }

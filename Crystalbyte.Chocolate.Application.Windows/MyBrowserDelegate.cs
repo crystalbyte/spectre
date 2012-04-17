@@ -1,34 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region Namespace Directives
+
 using Crystalbyte.Chocolate.UI;
 
-namespace Crystalbyte.Chocolate
-{
-    class MyBrowserDelegate : BrowserDelegate
-    {
-        public MyBrowserDelegate() {
-            
-        }
+#endregion
 
-        protected override void OnGeolocationRequested(GeolocationRequestedEventArgs e)
-        {
+namespace Crystalbyte.Chocolate {
+    internal class MyBrowserDelegate : BrowserDelegate {
+        protected override void OnGeolocationRequested(GeolocationRequestedEventArgs e) {
             base.OnGeolocationRequested(e);
         }
 
-        protected override void OnPageLoading(PageLoadingEventArgs e)
-        {
+        protected override void OnPageLoading(PageLoadingEventArgs e) {
             base.OnPageLoading(e);
         }
 
-        protected override void OnPageLoaded(PageLoadedEventArgs e)
-        {
+        protected override void OnPageLoaded(PageLoadedEventArgs e) {
             base.OnPageLoaded(e);
         }
 
-        protected override void OnNavigated(NavigatedEventArgs e)
-        {
+        protected override void OnNavigated(NavigatedEventArgs e) {
             base.OnNavigated(e);
         }
     }

@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate.UI {
             set {
                 var reflection = MarshalFromNative<CefSettings>();
                 // TODO: check for out of bounds
-                reflection.GraphicsImplementation = (int)value;    
+                reflection.GraphicsImplementation = (int) value;
                 MarshalToNative(reflection);
             }
         }

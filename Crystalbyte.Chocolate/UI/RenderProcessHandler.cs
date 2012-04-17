@@ -11,14 +11,14 @@ using Crystalbyte.Chocolate.Scripting;
 
 namespace Crystalbyte.Chocolate.UI {
     public sealed class RenderProcessHandler : OwnedAdapter {
-        private readonly AppDelegate _delegate;
         private readonly OnBrowserCreatedCallback _browserCreatedCallback;
         private readonly OnBrowserDestroyedCallback _browserDestroyedCallback;
         private readonly OnContextCreatedCallback _contextCreatedCallback;
         private readonly OnContextReleasedCallback _contextReleasedCallback;
+        private readonly AppDelegate _delegate;
+        private readonly OnProcessMessageRecievedCallback _processMessageReceivedCallback;
         private readonly OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
         private readonly OnWebKitInitializedCallback _webkitInitializedCallback;
-        private readonly OnProcessMessageRecievedCallback _processMessageReceivedCallback;
 
         public RenderProcessHandler(AppDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {

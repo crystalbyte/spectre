@@ -1,16 +1,20 @@
+#region Namespace Directives
+
 using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.UI;
 
+#endregion
+
 namespace Crystalbyte.Chocolate {
     internal sealed class GeolocationHandler : OwnedAdapter {
+        private readonly OnCancelGeolocationPermissionCallback _cancelGeolocationPermission;
         private readonly BrowserDelegate _delegate;
         private readonly OnRequestGeolocationPermissionCallback _requestGeolocationPermission;
-        private readonly OnCancelGeolocationPermissionCallback _cancelGeolocationPermission;
 
-        public GeolocationHandler(BrowserDelegate @delegate) 
-            : base(typeof(CefGeolocationHandler)) {
+        public GeolocationHandler(BrowserDelegate @delegate)
+            : base(typeof (CefGeolocationHandler)) {
             _delegate = @delegate;
             _cancelGeolocationPermission = OnCancelGeolocationRequest;
             _requestGeolocationPermission = OnRequestGeolocationPermission;
@@ -30,7 +34,8 @@ namespace Crystalbyte.Chocolate {
             _delegate.OnGeolocationRequestCanceled(e);
         }
 
-        private void OnRequestGeolocationPermission(IntPtr self, IntPtr browser, IntPtr requestingurl, int requestid, IntPtr callback) {
+        private void OnRequestGeolocationPermission(IntPtr self, IntPtr browser, IntPtr requestingurl, int requestid,
+                                                    IntPtr callback) {
             var e = new GeolocationRequestedEventArgs {
                 Browser = Browser.FromHandle(browser),
                 RequestingUrl = StringUtf16.ReadString(requestingurl),

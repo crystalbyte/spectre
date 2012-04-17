@@ -1,6 +1,5 @@
 ﻿#region Namespace Directives
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -42,8 +41,9 @@ namespace Crystalbyte.Chocolate.UI {
         public int Count {
             get {
                 var reflection = _browser.MarshalFromNative<CefBrowser>();
-                var function = (GetFrameCountCallback) 
-                    Marshal.GetDelegateForFunctionPointer(reflection.GetFrameCount, typeof (GetFrameCountCallback));
+                var function = (GetFrameCountCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetFrameCount,
+                                                                     typeof (GetFrameCountCallback));
                 return function(_browser.NativeHandle);
             }
         }
@@ -63,9 +63,9 @@ namespace Crystalbyte.Chocolate.UI {
         #region Nested type: FrameCollectionEnumerator
 
         private sealed class FrameCollectionEnumerator : IEnumerator<Frame> {
-            private readonly IValueCollection<string> _frameNames;
             private readonly FrameCollection _collection;
             private readonly int _count;
+            private readonly IValueCollection<string> _frameNames;
             private int _index;
 
             public FrameCollectionEnumerator(FrameCollection collection, Browser browser) {
