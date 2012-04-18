@@ -76,7 +76,7 @@ namespace Crystalbyte.Chocolate.UI {
 		
 
         public static bool Initialize(Module module, AppDelegate del = null) {
-			if (!Platform.IsMacOS) {
+			if (!Platform.IsWindows) {
 				throw new InvalidOperationException("Platform must be Windows for this overload.");
 			}
             var hInstance = Marshal.GetHINSTANCE(module);
