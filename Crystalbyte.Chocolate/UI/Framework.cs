@@ -87,7 +87,7 @@ namespace Crystalbyte.Chocolate.UI {
         public static void Shutdown() {
             OnShutdownStarted(EventArgs.Empty);
 
-            // Force collect to remove all remaining uncollecte objects.
+            // Force collect to remove all remaining uncollected native objects.
             // This is only called once, when closing the program, thus not affecting performance in the slightest.
             // http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
