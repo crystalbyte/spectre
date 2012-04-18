@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
-namespace Crystalbyte.Chocolate.UI
-{
+#endregion
+
+namespace Crystalbyte.Chocolate.UI {
     public sealed class LoadHandler : OwnedAdapter {
         private readonly BrowserDelegate _delegate;
         private readonly OnLoadEndCallback _loadEndCallback;
-        private readonly OnLoadStartCallback _loadStartCallback;
         private readonly OnLoadErrorCallback _loadErrorCallback;
+        private readonly OnLoadStartCallback _loadStartCallback;
 
-        public LoadHandler(BrowserDelegate @delegate) 
-            : base(typeof(CefLoadHandler)) {
+        public LoadHandler(BrowserDelegate @delegate)
+            : base(typeof (CefLoadHandler)) {
             _delegate = @delegate;
             _loadEndCallback = OnLoadEnd;
             _loadStartCallback = OnLoadStart;
@@ -29,7 +29,8 @@ namespace Crystalbyte.Chocolate.UI
             });
         }
 
-        private void OnLoadError(IntPtr self, IntPtr browser, IntPtr frame, CefHandlerErrorcode errorcode, IntPtr errortext, IntPtr failedurl) {
+        private void OnLoadError(IntPtr self, IntPtr browser, IntPtr frame, CefHandlerErrorcode errorcode,
+                                 IntPtr errortext, IntPtr failedurl) {
             var e = new PageLoadingFailedEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
-using System.IO;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
@@ -23,7 +22,7 @@ namespace Crystalbyte.Chocolate.UI {
                 var function = (GetHostCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetHost, typeof (GetHostCallback));
                 var handle = function(NativeHandle);
-                return BrowserHost.FromHandle(handle); 
+                return BrowserHost.FromHandle(handle);
             }
         }
 
@@ -77,10 +76,10 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public bool CanGoBack {
-            get { 
+            get {
                 var r = MarshalFromNative<CefBrowser>();
                 var function = (CanGoBackCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.CanGoBack, typeof(CanGoBackCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.CanGoBack, typeof (CanGoBackCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -90,59 +89,17 @@ namespace Crystalbyte.Chocolate.UI {
             get {
                 var r = MarshalFromNative<CefBrowser>();
                 var function = (CanGoForwardCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.CanGoForward, typeof(CanGoForwardCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.CanGoForward, typeof (CanGoForwardCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
-        }
-
-        public void GoBack() {
-            var r = MarshalFromNative<CefBrowser>();
-            var action = (GoBackCallback)
-                Marshal.GetDelegateForFunctionPointer(r.GoBack, typeof(GoBackCallback));
-            action(NativeHandle);
-        }
-
-        public void GoForward() {
-            var r = MarshalFromNative<CefBrowser>();
-            var action = (GoForwardCallback)
-                Marshal.GetDelegateForFunctionPointer(r.GoForward, typeof(GoForwardCallback));
-            action(NativeHandle);
-        }
-
-        public void CancelNavigation() {
-            var r = MarshalFromNative<CefBrowser>();
-            var action = (StopLoadCallback)
-                Marshal.GetDelegateForFunctionPointer(r.StopLoad, typeof(StopLoadCallback));
-            action(NativeHandle);
-        }
-
-        public void Refresh(bool ignoreCache = false) {
-            var r = MarshalFromNative<CefBrowser>();
-            ReloadCallback action;
-            if (ignoreCache) {
-                action = (ReloadCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.ReloadIgnoreCache, typeof(ReloadCallback));    
-            }
-            else {
-                action = (ReloadCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.Reload, typeof(ReloadCallback));    
-            }
-            action(NativeHandle);
-        }
-
-        public void SendIpcMessage(ProcessType target, IpcMessage message) {
-            var r = MarshalFromNative<CefBrowser>();
-            var action = (SendProcessMessageCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.SendProcessMessage, typeof(SendProcessMessageCallback));
-            action(NativeHandle, (CefProcessId) target, message.NativeHandle);
         }
 
         public bool HasDocument {
             get {
                 var r = MarshalFromNative<CefBrowser>();
                 var function = (HasDocumentCallback)
-                             Marshal.GetDelegateForFunctionPointer(r.HasDocument, typeof(HasDocumentCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.HasDocument, typeof (HasDocumentCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -152,9 +109,51 @@ namespace Crystalbyte.Chocolate.UI {
             get {
                 var r = MarshalFromNative<CefBrowser>();
                 var function = (GetIdentifierCallback)
-                             Marshal.GetDelegateForFunctionPointer(r.GetIdentifier, typeof(GetIdentifierCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetIdentifier, typeof (GetIdentifierCallback));
                 return function(NativeHandle);
             }
+        }
+
+        public void GoBack() {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (GoBackCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.GoBack, typeof (GoBackCallback));
+            action(NativeHandle);
+        }
+
+        public void GoForward() {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (GoForwardCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.GoForward, typeof (GoForwardCallback));
+            action(NativeHandle);
+        }
+
+        public void CancelNavigation() {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (StopLoadCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.StopLoad, typeof (StopLoadCallback));
+            action(NativeHandle);
+        }
+
+        public void Refresh(bool ignoreCache = false) {
+            var r = MarshalFromNative<CefBrowser>();
+            ReloadCallback action;
+            if (ignoreCache) {
+                action = (ReloadCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.ReloadIgnoreCache, typeof (ReloadCallback));
+            }
+            else {
+                action = (ReloadCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.Reload, typeof (ReloadCallback));
+            }
+            action(NativeHandle);
+        }
+
+        public void SendIpcMessage(ProcessType target, IpcMessage message) {
+            var r = MarshalFromNative<CefBrowser>();
+            var action = (SendProcessMessageCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.SendProcessMessage, typeof (SendProcessMessageCallback));
+            action(NativeHandle, (CefProcessId) target, message.NativeHandle);
         }
 
         public static Browser FromHandle(IntPtr handle) {

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Crystalbyte.Chocolate
-{
-    public enum ErrorCode
-    {
+﻿namespace Crystalbyte.Chocolate {
+    public enum ErrorCode {
         ErrFailed = -2,
         ErrAborted = -3,
         ErrInvalidArgument = -4,

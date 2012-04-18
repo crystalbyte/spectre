@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
@@ -213,7 +212,47 @@ namespace Crystalbyte.Chocolate.Scripting {
             }
         }
 
-        #region IDictionary<string,ScriptableObject> Members
+        public ScriptableObject this[string name] {
+            get {
+                var reflection = MarshalFromNative<CefV8value>();
+                var function = (GetValueBykeyCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetValueBykey,
+                                                                     typeof (GetValueBykeyCallback));
+                var s = new StringUtf16(name);
+                var handle = function(NativeHandle, s.NativeHandle);
+                s.Free();
+                return FromHandle(handle);
+            }
+            set {
+                var reflection = MarshalFromNative<CefV8value>();
+                var action = (SetValueBykeyCallback)
+                             Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey,
+                                                                   typeof (SetValueBykeyCallback));
+                var s = new StringUtf16(name);
+                action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
+                s.Free();
+            }
+        }
+
+        public int Count {
+            get { return Length; }
+        }
+
+        public bool IsReadOnly {
+            get { return false; }
+        }
+
+        #region IEnumerable<KeyValuePair<string,ScriptableObject>> Members
+
+        public IEnumerator<KeyValuePair<string, ScriptableObject>> GetEnumerator() {
+            return new ScriptableObjectEnumerator(this);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
+
+        #endregion
 
         public bool ContainsKey(string key) {
             var reflection = MarshalFromNative<CefV8value>();
@@ -256,36 +295,6 @@ namespace Crystalbyte.Chocolate.Scripting {
             return true;
         }
 
-        public ScriptableObject this[string name] {
-            get {
-                var reflection = MarshalFromNative<CefV8value>();
-                var function = (GetValueBykeyCallback)
-                               Marshal.GetDelegateForFunctionPointer(reflection.GetValueBykey,
-                                                                     typeof (GetValueBykeyCallback));
-                var s = new StringUtf16(name);
-                var handle = function(NativeHandle, s.NativeHandle);
-                s.Free();
-                return FromHandle(handle);
-            }
-            set {
-                var reflection = MarshalFromNative<CefV8value>();
-                var action = (SetValueBykeyCallback)
-                             Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey,
-                                                                   typeof (SetValueBykeyCallback));
-                var s = new StringUtf16(name);
-                action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
-                s.Free();
-            }
-        }
-
-        public IEnumerator<KeyValuePair<string, ScriptableObject>> GetEnumerator() {
-            return new ScriptableObjectEnumerator(this);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
-        }
-
         public void Add(KeyValuePair<string, ScriptableObject> item) {
             var reflection = MarshalFromNative<CefV8value>();
             var action = (SetValueBykeyCallback)
@@ -302,16 +311,6 @@ namespace Crystalbyte.Chocolate.Scripting {
         public bool Remove(KeyValuePair<string, ScriptableObject> item) {
             return Remove(item.Key);
         }
-
-        public int Count {
-            get { return Length; }
-        }
-
-        public bool IsReadOnly {
-            get { return false; }
-        }
-
-        #endregion
 
         internal static ScriptableObject FromHandle(IntPtr handle) {
             return new ScriptableObject(handle);

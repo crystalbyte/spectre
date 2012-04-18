@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
-using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
 

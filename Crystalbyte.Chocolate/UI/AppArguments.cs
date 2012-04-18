@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region Namespace Directives
+
+using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using Crystalbyte.Chocolate.Bindings.Internal;
+
 
 namespace Crystalbyte.Chocolate.UI
 {
@@ -16,7 +16,7 @@ namespace Crystalbyte.Chocolate.UI
 			};
 			return Marshal<MacCefMainArgs>(mainArgs);
 		}
-
+		
         public static IntPtr CreateForWindows(IntPtr hInstance) {
             var mainArgs = new WindowsCefMainArgs {
                 Instance = hInstance

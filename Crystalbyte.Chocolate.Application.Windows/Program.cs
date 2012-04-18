@@ -3,18 +3,12 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
-using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
-using System.IO;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
     internal static class Program {
-
         /// <summary>
         ///   The main entry point for the application.
         /// </summary>

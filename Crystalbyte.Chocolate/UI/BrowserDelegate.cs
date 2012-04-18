@@ -98,7 +98,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         public event EventHandler<LoadingStateChangedEventArgs> LoadingStateChanged;
 
-        protected  internal virtual void OnLoadingStateChanged(LoadingStateChangedEventArgs e) {
+        protected internal virtual void OnLoadingStateChanged(LoadingStateChangedEventArgs e) {
             var handler = LoadingStateChanged;
             if (handler != null) {
                 handler(this, e);
