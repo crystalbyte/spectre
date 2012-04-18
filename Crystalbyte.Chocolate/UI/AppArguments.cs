@@ -4,6 +4,7 @@ using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
+#endregion
 
 namespace Crystalbyte.Chocolate.UI
 {
@@ -14,17 +15,17 @@ namespace Crystalbyte.Chocolate.UI
 				Argc = args.Length,
 				Argv = IntPtr.Zero
 			};
-			return Marshal<MacCefMainArgs>(mainArgs);
+			return MarshalArgs(mainArgs);
 		}
 		
         public static IntPtr CreateForWindows(IntPtr hInstance) {
             var mainArgs = new WindowsCefMainArgs {
                 Instance = hInstance
             };
-            return Marshal<WindowsCefMainArgs>(mainArgs);
+            return MarshalArgs(mainArgs);
         }
 		
-		private static IntPtr Marshal<T>(T mainArgs) where T : struct {
+		private static IntPtr MarshalArgs<T>(T mainArgs) where T : struct {
 			var size = Marshal.SizeOf(typeof(T));
             var handle = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(mainArgs, handle, false);
