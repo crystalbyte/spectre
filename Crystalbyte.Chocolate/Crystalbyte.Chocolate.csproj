@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Crystalbyte.Chocolate</RootNamespace>
     <AssemblyName>Crystalbyte.Chocolate</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -136,8 +135,11 @@
     <Compile Include="UI\TitleChangedEventArgs.cs" />
     <Compile Include="UI\TooltipRequestedEventArgs.cs" />
     <Compile Include="UI\WindowsWindowInfo.cs" />
-    <Compile Include="UI\WindowResizer.cs" />
     <Compile Include="UI\WindowStyles.cs" />
+    <Compile Include="UI\WindowsWindowResizer.cs" />
+    <Compile Include="UI\MacWindowInfo.cs" />
+    <Compile Include="UI\MacWindowResizer.cs" />
+    <Compile Include="UI\IWindowResizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj">

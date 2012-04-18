@@ -50,32 +50,45 @@ namespace Crystalbyte.Chocolate.UI {
                 handler(null, e);
             }
         }
-
-        public static bool Initialize(Module module, AppDelegate appDelegate = null) {
-            var hInstance = Marshal.GetHINSTANCE(module);
-            var argsHandle = AppArguments.Create(hInstance);
-
-            _app = new App(appDelegate ?? new AppDelegate());
-            var appHandle = _app.NativeHandle;
-
-            Reference.Increment(appHandle);
-            var exitCode = CefAppCapi.CefExecuteProcess(argsHandle, appHandle);
+		
+		public static bool Initialize(string[] argv, AppDelegate del = null) {
+			if (!Platform.IsMacOS) {
+				throw new InvalidOperationException("Platform must be OS X for this overload.");
+			}
+			var mainArgs = AppArguments.CreateForMac(argv);
+			return InitializeInternal(mainArgs, del);
+		}
+		
+		private static bool InitializeInternal(IntPtr mainArgs, AppDelegate del = null) {
+			_app = new App(del ?? new AppDelegate());
+			
+            Reference.Increment(_app.NativeHandle);
+            var exitCode = CefAppCapi.CefExecuteProcess(mainArgs, _app.NativeHandle);
             IsRootProcess = exitCode < 0;
             if (!IsRootProcess) {
                 return true;
             }
 
-            var settingsHandle = _settings.NativeHandle;
-            Reference.Increment(appHandle);
-            var result = CefAppCapi.CefInitialize(argsHandle, settingsHandle, appHandle);
+            Reference.Increment(_app.NativeHandle);
+            var result = CefAppCapi.CefInitialize(mainArgs, _settings.NativeHandle, _app.NativeHandle);
             IsInitialized = Convert.ToBoolean(result);
-            return IsInitialized;
+            return IsInitialized;			
+		}
+		
+
+        public static bool Initialize(Module module, AppDelegate del = null) {
+			if (!Platform.IsMacOS) {
+				throw new InvalidOperationException("Platform must be Windows for this overload.");
+			}
+            var hInstance = Marshal.GetHINSTANCE(module);
+            var mainArgs = AppArguments.CreateForWindows(hInstance);
+			return InitializeInternal(mainArgs, del);
         }
 
         public static void Shutdown() {
             OnShutdownStarted(EventArgs.Empty);
 
-            // Force collect to remove Dipose all remaining floating native objects.
+            // Force collect to remove all remaining uncollecte objects.
             // This is only called once, when closing the program, thus not affecting performance in the slightest.
             // http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
@@ -108,8 +121,6 @@ namespace Crystalbyte.Chocolate.UI {
             var target = (IRenderTarget) sender;
             target.TargetClosed -= OnRenderTargetClosed;
         }
-
-     
 
         public static void Run(HtmlRenderer renderer) {
             Add(renderer);

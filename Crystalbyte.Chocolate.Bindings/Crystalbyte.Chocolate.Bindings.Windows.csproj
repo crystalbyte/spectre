@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Crystalbyte.Chocolate.Bindings</RootNamespace>
+    <AssemblyName>Crystalbyte.Chocolate.Bindings</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CefAppCapi.cs" />
+    <Compile Include="CefAssembly.cs" />
+    <Compile Include="CefBaseCapi.cs" />
+    <Compile Include="CefBrowserCapi.cs" />
+    <Compile Include="CefCallbackCapi.cs" />
+    <Compile Include="CefClientCapi.cs" />
+    <Compile Include="CefCommandLineCapi.cs" />
+    <Compile Include="CefDisplayHandlerCapi.cs" />
+    <Compile Include="CefFrameCapi.cs" />
+    <Compile Include="CefGeolocationHandlerCapi.cs" />
+    <Compile Include="CefLifeSpanHandlerCapi.cs" />
+    <Compile Include="CefLoadHandlerCapi.cs" />
+    <Compile Include="CefOriginWhitelistCapi.cs" />
+    <Compile Include="CefProcessMessageCapi.cs" />
+    <Compile Include="CefProxyHandlerCapi.cs" />
+    <Compile Include="CefRenderProcessHandlerCapi.cs" />
+    <Compile Include="CefRequestCapi.cs" />
+    <Compile Include="CefRequestHandlerCapi.cs" />
+    <Compile Include="CefResourceBundleHandlerCapi.cs" />
+    <Compile Include="CefResourceHandlerCapi.cs" />
+    <Compile Include="CefResponseCapi.cs" />
+    <Compile Include="CefSchemeCapi.cs" />
+    <Compile Include="CefStreamCapi.cs" />
+    <Compile Include="CefStringVisitorCapi.cs" />
+    <Compile Include="CefTaskCapi.cs" />
+    <Compile Include="CefUrlCapi.cs" />
+    <Compile Include="CefV8Capi.cs" />
+    <Compile Include="CefValuesCapi.cs" />
+    <Compile Include="CefXmlReaderCapi.cs" />
+    <Compile Include="CefZipReaderCapi.cs" />
+    <Compile Include="Internal\CefBuild.cs" />
+    <Compile Include="Internal\CefExport.cs" />
+    <Compile Include="Internal\CefPtr.cs" />
+    <Compile Include="Internal\CefString.cs" />
+    <Compile Include="Internal\CefStringList.cs" />
+    <Compile Include="Internal\CefStringMap.cs" />
+    <Compile Include="Internal\CefStringMultimap.cs" />
+    <Compile Include="Internal\CefStringTypes.cs" />
+    <Compile Include="Internal\CefStringWrappers.cs" />
+    <Compile Include="Internal\CefTime.cs" />
+    <Compile Include="Internal\CefTuple.cs" />
+    <Compile Include="Internal\CefTypes.cs" />
+    <Compile Include="Internal\CefTypesWin.cs" />
+    <Compile Include="Internal\CefTypesWrappers.cs" />
+    <Compile Include="Internal\CefWin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

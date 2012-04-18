@@ -7,24 +7,28 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate.UI
 {
-    public static class AppArguments
+    internal static class AppArguments
     {
-        public static IntPtr Create(IntPtr appHandle) {
-            if (Platform.IsWindows) {
-                return CreateForWindows(appHandle);
-            }
+		public static IntPtr CreateForMac(string[] args) {
+			var mainArgs = new MacCefMainArgs {
+				Argc = args.Length,
+				Argv = IntPtr.Zero
+			};
+			return Marshal<MacCefMainArgs>(mainArgs);
+		}
 
-            throw new NotSupportedException("Runtime not supported.");
-        }
-
-        private static IntPtr CreateForWindows(IntPtr hInstance) {
+        public static IntPtr CreateForWindows(IntPtr hInstance) {
             var mainArgs = new WindowsCefMainArgs {
                 Instance = hInstance
             };
-            var size = Marshal.SizeOf(typeof(WindowsCefMainArgs));
+            return Marshal<WindowsCefMainArgs>(mainArgs);
+        }
+		
+		private static IntPtr Marshal<T>(T mainArgs) where T : struct {
+			var size = Marshal.SizeOf(typeof(T));
             var handle = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(mainArgs, handle, false);
             return handle;
-        }
+		}
     }
 }

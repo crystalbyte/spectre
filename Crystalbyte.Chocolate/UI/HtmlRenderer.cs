@@ -7,7 +7,7 @@ using System;
 namespace Crystalbyte.Chocolate.UI {
     public sealed class HtmlRenderer : DisposableObject {
         private readonly ClientHandler _handler;
-        private readonly WindowResizer _resizer;
+        private readonly IWindowResizer _resizer;
         private readonly BrowserSettings _settings;
         private readonly IRenderTarget _target;
         private Browser _browser;
@@ -20,7 +20,14 @@ namespace Crystalbyte.Chocolate.UI {
             _target.TargetSizeChanged += OnTargetSizeChanged;
             _handler = new ClientHandler(@delegate);
             _settings = new BrowserSettings();
-            _resizer = new WindowResizer();
+			
+			if (Platform.IsMacOS) {
+				_resizer = new MacWindowResizer();
+			}
+			
+			if (Platform.IsWindows) {
+				_resizer =  new WindowsWindowResizer();
+			}
         }
 
         public BrowserSettings Settings {
@@ -75,12 +82,23 @@ namespace Crystalbyte.Chocolate.UI {
         internal void CreateBrowser() {
             OnCreating(EventArgs.Empty);
             // starts the browser render loop
-            _browser = BrowserHost.CreateBrowser(new BrowserCreationArgs {
+			var a = new BrowserCreationArgs {
                 ClientHandler = _handler,
                 Settings = _settings,
-                StartUri = _target.StartupUri,
-                WindowInfo = new WindowsWindowInfo(_target)
-            });
+                StartUri = _target.StartupUri
+            };
+			
+			if (Platform.IsWindows) {
+				a.WindowInfo = new WindowsWindowInfo(_target);
+			}
+			
+			if (Platform.IsMacOS) {
+				a.WindowInfo = new MacWindowInfo(_target);
+			}
+			
+            _browser = BrowserHost.CreateBrowser(a);
+			
+			
             _browserHost = _browser.Host;
             OnCreated(EventArgs.Empty);
             _target.Show();
