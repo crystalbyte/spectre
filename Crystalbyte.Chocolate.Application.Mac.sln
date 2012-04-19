@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate", "Cr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Bindings", "Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj", "{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Application.Mac", "Crystalbyte.Chocolate.Application.Mac\Crystalbyte.Chocolate.Application.Mac.csproj", "{28CBE3A1-69CF-49B5-9583-1B636C59D18B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Application.Mac", "Crystalbyte.Chocolate.Application.Mac\Crystalbyte.Chocolate.Application.Mac.csproj", "{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,18 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Debug|x86.Build.0 = Debug|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Release|x86.ActiveCfg = Release|Any CPU
-		{28CBE3A1-69CF-49B5-9583-1B636C59D18B}.Release|x86.Build.0 = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -53,6 +41,18 @@ Global
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|x86.Build.0 = Release|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Debug|x86.Build.0 = Debug|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Crystalbyte.Chocolate.Application.Mac\Crystalbyte.Chocolate.Application.Mac.csproj

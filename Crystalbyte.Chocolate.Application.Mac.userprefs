@@ -1,22 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Crystalbyte.Chocolate.Application.Mac/MainWindowController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Crystalbyte.Chocolate.Application.Mac/app.config">
     <Files>
       <File FileName="Crystalbyte.Chocolate.Bindings/Internal/CefTypesWin.cs" Line="11" Column="7" />
       <File FileName="Crystalbyte.Chocolate.Bindings/CefBrowserCapi.cs" Line="13" Column="3" />
       <File FileName="Crystalbyte.Chocolate/GeolocationHandler.cs" Line="1" Column="1" />
-      <File FileName="Crystalbyte.Chocolate/UI/AppArguments.cs" Line="18" Column="4" />
-      <File FileName="Crystalbyte.Chocolate/UI/AppDelegate.cs" Line="12" Column="28" />
-      <File FileName="Crystalbyte.Chocolate/UI/Framework.cs" Line="68" Column="31" />
-      <File FileName="Crystalbyte.Chocolate/UI/Frame.cs" Line="34" Column="33" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/Main.cs" Line="18" Column="3" />
+      <File FileName="Crystalbyte.Chocolate/UI/AppArguments.cs" Line="13" Column="24" />
+      <File FileName="Crystalbyte.Chocolate/UI/AppDelegate.cs" Line="9" Column="1" />
+      <File FileName="Crystalbyte.Chocolate/UI/Framework.cs" Line="65" Column="1" />
+      <File FileName="Crystalbyte.Chocolate/UI/Frame.cs" Line="31" Column="16" />
       <File FileName="Crystalbyte.Chocolate/UI/App.cs" Line="1" Column="1" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/MainWindow.cs" Line="61" Column="22" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/MainWindowController.cs" Line="38" Column="3" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/ChocApplication.cs" Line="51" Column="21" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/Info.plist" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/AppDelegate.cs" Line="25" Column="4" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/MainWindow.designer.cs" Line="2" Column="44" />
       <File FileName="Crystalbyte.Chocolate/UI/Browser.cs" Line="1" Column="1" />
       <File FileName="Crystalbyte.Chocolate/UI/BrowserHost.cs" Line="50" Column="30" />
       <File FileName="Crystalbyte.Chocolate/UI/HtmlRenderer.cs" Line="96" Column="37" />
@@ -27,11 +20,15 @@
       <File FileName="Crystalbyte.Chocolate/UI/MacWindowResizer.cs" Line="10" Column="4" />
       <File FileName="Crystalbyte.Chocolate/UI/IWindowResizer.cs" Line="7" Column="3" />
       <File FileName="Crystalbyte.Chocolate/UI/BrowserCreationArgs.cs" Line="14" Column="2" />
-      <File FileName="Crystalbyte.Chocolate.Application.Mac/app.config" Line="3" Column="50" />
+      <File FileName="Crystalbyte.Chocolate.Application.Mac/Main.cs" Line="13" Column="4" />
+      <File FileName="Crystalbyte.Chocolate.Application.Mac/MainWindow.cs" Line="17" Column="3" />
+      <File FileName="Crystalbyte.Chocolate.Application.Mac/app.config" Line="4" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/krasshirsch/Development/crystalbyte/chocolate/Crystalbyte.Chocolate.Application.Mac/ChocApplication.cs" line="50" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

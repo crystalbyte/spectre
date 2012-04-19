@@ -4,6 +4,7 @@ using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
+#endregion
 
 namespace Crystalbyte.Chocolate.UI
 {
@@ -21,6 +22,7 @@ namespace Crystalbyte.Chocolate.UI
             var mainArgs = new WindowsCefMainArgs {
                 Instance = hInstance
             };
+
             return Marshal<WindowsCefMainArgs>(mainArgs);
         }
 		

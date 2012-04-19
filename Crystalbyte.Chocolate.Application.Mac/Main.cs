@@ -1,19 +1,29 @@
 using System;
-using System.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
-using MonoMac.ObjCRuntime;
+using Gtk;
 using Crystalbyte.Chocolate.UI;
+using System.Diagnostics;
 
-namespace Crystalbyte.Chocolate.Application
+namespace Crystalbyte.Chocolate.Application.Mac
 {
 	class MainClass
 	{
-		static void Main (string [] args)
+		public static void Main (string[] args)
 		{
-			NSApplication.Init ();
-			NSApplication.Main (args);
+			Gtk.Application.Init ();
+			
+			var success = Framework.Initialize(args, new AppDelegate());
+			if (!success) {
+				Debug.WriteLine("Initialization failed.");
+				return;
+			}
+			if (!Framework.IsRootProcess) {
+				return;
+			}
+			
+			var startupUri = new Uri("http://www.battleshipmovie.com/#/home"); 
+			var renderer =new HtmlRenderer(new MainWindow { StartupUri = startupUri}, new BrowserDelegate());
+			Framework.Run(renderer);
+			Framework.Shutdown();
 		}
 	}
-}	
-
+}
