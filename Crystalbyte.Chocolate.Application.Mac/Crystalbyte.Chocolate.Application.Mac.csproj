@@ -5,8 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ED4DCEC1-C3B4-4675-B118-EBCA2E8D3072}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{CA6B1BB9-8F83-4672-9D61-F282EC2F0EAD}</ProjectGuid>
+    <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Crystalbyte.Chocolate.Application.Mac</RootNamespace>
     <AssemblyName>Crystalbyte.Chocolate.Application.Mac</AssemblyName>
   </PropertyGroup>
@@ -21,7 +22,8 @@
     <ConsolePause>false</ConsolePause>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="cp -R &quot;${SolutionDir}/Dependencies/Cef3@593/binaries/Mac/x86/${ProjectConfigName}/&quot; &quot;${TargetDir}&quot;" externalConsole="true" pauseExternalConsole="true" />
+        <Command type="AfterBuild" command="cp -R &quot;${SolutionDir}/Dependencies/Cef3@593/binaries/Mac/x86/${ProjectConfigName}/&quot; &quot;${TargetDir}/${ProjectName}.app/Contents/Resources&quot;" externalConsole="true" pauseExternalConsole="true" />
+        <Command type="AfterBuild" command="cp -R &quot;${SolutionDir}/Dependencies/Cef3@593/locales/&quot; &quot;${TargetDir}/locales&quot;" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -35,34 +37,39 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="MonoMac" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MainWindow.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
+    <Compile Include="MainWindowController.cs" />
+    <Compile Include="MainWindow.designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="AppDelegate.designer.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainWindow.xib" />
+    <InterfaceDefinition Include="MainMenu.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{DC202E77-073A-4881-84C9-94B6BC7469B4}</Project>
       <Name>Crystalbyte.Chocolate</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
 </Project>

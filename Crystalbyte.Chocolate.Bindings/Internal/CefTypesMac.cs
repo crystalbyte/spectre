@@ -9,7 +9,7 @@ namespace Crystalbyte.Chocolate.Bindings.Internal {
     [StructLayout(LayoutKind.Sequential)]
     public struct MacCefMainArgs {
         public int Argc;
-        public IntPtr Argv;
+        [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.LPWStr)] public string[] Argv;
     }
 
     [StructLayout(LayoutKind.Sequential)]
