@@ -202,10 +202,8 @@ namespace Crystalbyte.Chocolate.UI {
             var s = new StringUtf16(scriptUrl);
             var c = new StringUtf16(code);
             var reflection = MarshalFromNative<CefFrame>();
-            var action = (ExecuteJavaScriptCallback) Marshal.GetDelegateForFunctionPointer(reflection.ExecuteJavaScript,
-                                                                                           typeof (
-                                                                                               ExecuteJavaScriptCallback
-                                                                                               ));
+            var action = (ExecuteJavaScriptCallback) 
+                Marshal.GetDelegateForFunctionPointer(reflection.ExecuteJavaScript, typeof (ExecuteJavaScriptCallback));
             action(NativeHandle, c.NativeHandle, s.NativeHandle, line);
             c.Free();
             s.Free();

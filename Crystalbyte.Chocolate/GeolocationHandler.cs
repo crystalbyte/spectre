@@ -27,7 +27,7 @@ namespace Crystalbyte.Chocolate {
 
         private void OnCancelGeolocationRequest(IntPtr self, IntPtr browser, IntPtr requestingurl, int requestid) {
             var e = new GeolocationRequestCanceledEventArgs {
-                Brower = Browser.FromHandle(browser),
+                Browser = Browser.FromHandle(browser),
                 RequestingUrl = StringUtf16.ReadString(requestingurl),
                 RequestId = requestid
             };

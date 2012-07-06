@@ -21,5 +21,10 @@ namespace Crystalbyte.Chocolate {
         protected override void OnNavigated(NavigatedEventArgs e) {
             base.OnNavigated(e);
         }
+
+        protected override void OnGeolocationRequestCanceled(GeolocationRequestCanceledEventArgs e)
+        {
+            base.OnGeolocationRequestCanceled(e);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            var index = new Uri("http://www.battleshipmovie.com/#/home");
+            var index = new Uri("http://trailers.apple.com/trailers/fox/prometheus/");
             var renderer = new HtmlRenderer(new Window {StartupUri = index}, new BrowserDelegate());
             Framework.Run(renderer);
             Framework.Shutdown();
