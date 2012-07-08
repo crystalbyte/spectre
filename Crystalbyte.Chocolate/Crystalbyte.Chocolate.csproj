@@ -89,7 +89,7 @@
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="TaskManager.cs" />
+    <Compile Include="TaskDispatcher.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="UI\App.cs" />
     <Compile Include="UI\AppDelegate.cs" />
@@ -147,7 +147,9 @@
       <Name>Crystalbyte.Chocolate.Bindings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

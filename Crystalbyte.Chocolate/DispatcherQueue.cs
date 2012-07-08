@@ -7,6 +7,6 @@
         ProcessLauncher,
         Cache,
         IO,
-        Renderer,
+        Renderer
     }
 }
