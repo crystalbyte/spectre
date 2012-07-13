@@ -13,9 +13,10 @@ namespace Crystalbyte.Chocolate.UI
 		public static IntPtr CreateForMac(string[] args) {
 			var mainArgs = new MacCefMainArgs {
 				Argc = args.Length,
-				Argv = args
+				//Argv = args
 			};
-			return MarshalArgs(mainArgs);
+            throw new NotImplementedException();
+			//return MarshalArgs(mainArgs);
 		}
 		
         public static IntPtr CreateForWindows(IntPtr hInstance) {

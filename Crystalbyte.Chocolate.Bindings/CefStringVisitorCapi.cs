@@ -1,14 +1,16 @@
-#region Namespace Directives
-
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Security;
+using Crystalbyte.Chocolate.Bindings.Internal;
 
-#endregion
-
-namespace Crystalbyte.Chocolate.Bindings {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CefStringVisitor {
-        public CefBase Base;
-        public IntPtr Visit;
-    }
+namespace Crystalbyte.Chocolate.Bindings
+{
+	[StructLayout(LayoutKind.Sequential)]
+	public struct CefStringVisitor {
+		public CefBase Base;
+		public IntPtr Visit;
+	}
+	
+	
 }

@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JavascriptHandler.cs" />
-    <Compile Include="MyBrowserDelegate.cs" />
+    <Compile Include="Extensions\MandelbrotExtension.cs" />
+    <Compile Include="Extensions\MultiplicationExtension.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,15 +87,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\start.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Pages\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-1.7.2.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Styles\index.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Dependencies\Cef3@593\binaries\Windows\x86\$(Configuration)\*" "$(TargetDir)" /s /i /y
-xcopy "$(SolutionDir)Dependencies\Cef3@593\*.pak" "$(TargetDir)" /s /i /y
-xcopy "$(SolutionDir)Dependencies\Cef3@593\locales\*" "$(TargetDir)\locales" /s /i /y</PostBuildEvent>
+    <PostBuildEvent>REM xcopy "$(CHROMIUM_SRC)cef\Cef3@593\binaries\Windows\x86\$(Configuration)\*" "$(TargetDir)" /s /i /y
+REM xcopy "$(SolutionDir)Dependencies\Cef3@593\*.pak" "$(TargetDir)" /s /i /y
+REM xcopy "$(SolutionDir)Dependencies\Cef3@593\locales\*" "$(TargetDir)\locales" /s /i /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

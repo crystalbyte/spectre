@@ -1,0 +1,23 @@
+﻿body
+{
+    background: black;
+}
+
+span
+{
+    color: black;
+    font-size: 5em;
+}
+
+.tile {
+    width: 250px;
+    height: 250px;
+}
+
+.center
+{
+	display:-webkit-box;
+    -webkit-box-orient:horizontal;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+}

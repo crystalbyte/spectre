@@ -29,7 +29,7 @@ namespace Crystalbyte.Chocolate.UI {
             });
         }
 
-        private void OnLoadError(IntPtr self, IntPtr browser, IntPtr frame, CefHandlerErrorcode errorcode,
+        private void OnLoadError(IntPtr self, IntPtr browser, IntPtr frame, CefErrorcode errorcode,
                                  IntPtr errortext, IntPtr failedurl) {
             var e = new PageLoadingFailedEventArgs {
                 Browser = Browser.FromHandle(browser),

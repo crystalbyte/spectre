@@ -37,6 +37,16 @@ namespace Crystalbyte.Chocolate {
             if (name == "string") {
                 return "@string";
             }
+
+            if (name == "event") {
+                return "@event";
+            }
+            if (name == "params") {
+                return "@params";
+            }
+            if (name == "checked") {
+                return "@checked";
+            }
             return name;
         }
 
@@ -148,6 +158,10 @@ namespace Crystalbyte.Chocolate {
                 return "uint";
             }
 
+            if (type == "char16") {
+                return "char";
+            }
+
             if (type == "uint64") {
                 return "ulong";
             }
@@ -198,6 +212,10 @@ namespace Crystalbyte.Chocolate {
 
             if (type == "void") {
                 return "void";
+            }
+
+            if (type == "cef_event_handle_t") {
+                return "IntPtr";
             }
 
             if (type == "cef_window_handle_t") {

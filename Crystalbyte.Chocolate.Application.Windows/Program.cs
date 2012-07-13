@@ -2,8 +2,10 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Crystalbyte.Chocolate.Extensions;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 
@@ -27,7 +29,7 @@ namespace Crystalbyte.Chocolate {
                 return;
             }
 
-            var index = new Uri("http://trailers.apple.com/trailers/fox/prometheus/");
+            var index = new Uri("file://" + Path.Combine(Environment.CurrentDirectory, "Pages", "index.html"), UriKind.Absolute);
             var renderer = new HtmlRenderer(new Window {StartupUri = index}, new BrowserDelegate());
             Framework.Run(renderer);
             Framework.Shutdown();

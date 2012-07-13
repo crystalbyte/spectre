@@ -1,38 +1,34 @@
-#region Namespace Directives
-
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Security;
+using Crystalbyte.Chocolate.Bindings.Internal;
 
-#endregion
-
-namespace Crystalbyte.Chocolate.Bindings {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CefAuthCallback {
-        public CefBase Base;
-        public IntPtr Cont;
-        public IntPtr Cancel;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CefRequestHandler {
-        public CefBase Base;
-        public IntPtr OnBeforeResourceLoad;
-        public IntPtr GetResourceHandler;
-        public IntPtr OnResourceRedirect;
-        public IntPtr GetAuthCredentials;
-        public IntPtr GetCookieManager;
-    }
-
-    public delegate int OnBeforeResourceLoadCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr request);
-
-    public delegate IntPtr GetResourceHandlerCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr request);
-
-    public delegate void OnResourceRedirectCallback(
-        IntPtr self, IntPtr browser, IntPtr frame, IntPtr oldUrl, IntPtr newUrl);
-
-    public delegate int GetAuthCredentialsCallback(
-        IntPtr self, IntPtr browser, IntPtr frame, int isproxy, IntPtr host, int port, IntPtr realm, IntPtr scheme,
-        IntPtr callback);
-
-    public delegate IntPtr GetCookieManagerCallback(IntPtr self, IntPtr browser, IntPtr mainUrl);
+namespace Crystalbyte.Chocolate.Bindings
+{
+	[StructLayout(LayoutKind.Sequential)]
+	public struct CefAuthCallback {
+		public CefBase Base;
+		public IntPtr Cont;
+		public IntPtr Cancel;
+	}
+	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct CefRequestHandler {
+		public CefBase Base;
+		public IntPtr OnBeforeResourceLoad;
+		public IntPtr GetResourceHandler;
+		public IntPtr OnResourceRedirect;
+		public IntPtr GetAuthCredentials;
+		public IntPtr GetCookieManager;
+		public IntPtr OnProtocolExecution;
+	}
+	
+	public delegate int OnBeforeResourceLoadCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr request);
+	public delegate IntPtr GetResourceHandlerCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr request);
+	public delegate void OnResourceRedirectCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr oldUrl, IntPtr newUrl);
+	public delegate int GetAuthCredentialsCallback(IntPtr self, IntPtr browser, IntPtr frame, int isproxy, IntPtr host, int port, IntPtr realm, IntPtr scheme, IntPtr callback);
+	public delegate IntPtr GetCookieManagerCallback(IntPtr self, IntPtr browser, IntPtr mainUrl);
+	public delegate void OnProtocolExecutionCallback(IntPtr self, IntPtr browser, IntPtr url, IntPtr allowOsExecution);
+	
 }

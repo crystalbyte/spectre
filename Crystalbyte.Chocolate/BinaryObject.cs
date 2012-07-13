@@ -73,7 +73,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         protected override void DisposeNative() {
-            // TODO: check thread for progress 
+            // TODO: Disposing throws AccessViolationException, object must be disposed internally
             // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
             return;
             //base.DisposeNative();

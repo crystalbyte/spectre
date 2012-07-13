@@ -18,7 +18,7 @@ namespace Crystalbyte.Chocolate.UI {
         private readonly GetLoadHandlerCallback _getLoadHandlerCallback;
         private readonly LifeSpanHandler _lifeSpanHandler;
         private readonly LoadHandler _loadHandler;
-        private readonly OnProcessMessageRecievedCallback _processMessageReceivedCallback;
+        private readonly OnProcessMessageReceivedCallback _processMessageReceivedCallback;
 
         public ClientHandler(BrowserDelegate @delegate)
             : base(typeof (CefClient)) {
@@ -40,7 +40,7 @@ namespace Crystalbyte.Chocolate.UI {
                 GetLifeSpanHandler = Marshal.GetFunctionPointerForDelegate(_getLifeSpanHandlerCallback),
                 GetLoadHandler = Marshal.GetFunctionPointerForDelegate(_getLoadHandlerCallback),
                 GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
-                OnProcessMessageRecieved = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback),
+                OnProcessMessageReceived = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback),
             });
         }
 

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Crystalbyte.Chocolate {
     /// <summary>
-    ///   This class is a manged access point for native objects.
+    ///   This class is a managed access point for native objects.
     ///   This class does not manage the objects lifecycle thus not allocating any memory.
     /// </summary>
     public abstract class Adapter : DisposableObject {
@@ -63,6 +63,7 @@ namespace Crystalbyte.Chocolate {
             if (ReferenceEquals(null, other)) {
                 return false;
             }
+            // TODO: this may not necessarily work
             return other.NativeHandle.Equals(NativeHandle)
                    && other.NativeSize == NativeSize;
         }

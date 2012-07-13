@@ -16,20 +16,7 @@ namespace Crystalbyte.Chocolate.UI {
                 LogSeverity = CefLogSeverity.LogseverityVerbose
             });
         }
-
-        public GraphicsImplementation Graphics {
-            get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return (GraphicsImplementation) reflection.GraphicsImplementation;
-            }
-            set {
-                var reflection = MarshalFromNative<CefSettings>();
-                // TODO: check for out of bounds
-                reflection.GraphicsImplementation = (int) value;
-                MarshalToNative(reflection);
-            }
-        }
-
+        
         public LogSeverity LogSeverity {
             get {
                 var reflection = MarshalFromNative<CefSettings>();
