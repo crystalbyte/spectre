@@ -100,9 +100,25 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM xcopy "$(CHROMIUM_SRC)cef\Cef3@593\binaries\Windows\x86\$(Configuration)\*" "$(TargetDir)" /s /i /y
-REM xcopy "$(SolutionDir)Dependencies\Cef3@593\*.pak" "$(TargetDir)" /s /i /y
-REM xcopy "$(SolutionDir)Dependencies\Cef3@593\locales\*" "$(TargetDir)\locales" /s /i /y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>REM build chromium &amp; cef
+devenv "$(CHROMIUM_SRC)\cef\cef.sln" /Build $(Configuration)
+
+REM copy locales &amp; pack files
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\*.pak" "$(TargetDir)" /s /i /y
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\locales\*" "$(TargetDir)\locales" /s /i /y
+
+REM copy libraries &amp; debug symbols
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\libcef.*" "$(TargetDir)" /s /i /y
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\icudt.dll" "$(TargetDir)" /s /i /y
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\libEGL.dll" "$(TargetDir)" /s /i /y
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\libEGLESv2.dll" "$(TargetDir)" /s /i /y
+
+REM copy video &amp; audio codecs
+xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\av*.dll" "$(TargetDir)" /s /i /y</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

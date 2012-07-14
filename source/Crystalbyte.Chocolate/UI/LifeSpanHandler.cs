@@ -39,7 +39,7 @@ namespace Crystalbyte.Chocolate.UI {
             var e = new BrowserClosedEventArgs(b);
             _delegate.OnClosed(e);
 
-            // Need to call Dispose manually since the GC will not be able to free this browser instance for it will still be referenced by local scope.
+            // Need to call Dispose manually, since the GC will not be able to free the browser instance b above, it is still being referenced by local scope.
             b.Dispose();
 
             //// CEF requires all objects to be freed before the window is actually closed.

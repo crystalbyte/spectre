@@ -19,7 +19,13 @@ namespace Crystalbyte.Chocolate {
         [STAThread]
         private static void Main() {
             var module = Assembly.GetExecutingAssembly().ManifestModule;
-            var success = Framework.Initialize(module, new AppDelegate());
+            var del = new AppDelegate();
+            del.Initialized += (sender, e) => 
+                ScriptingRuntime.RegisterExtension("mult", new MultiplicationExtension());
+
+            Framework.Settings.IsSingleProcess = true;
+
+            var success = Framework.Initialize(module, del);
             if (!success) {
                 Debug.WriteLine("initialization failed");
                 return;

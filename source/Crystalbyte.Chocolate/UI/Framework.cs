@@ -51,7 +51,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 		
 		public static bool Initialize(string[] argv, AppDelegate del = null) {
-			if (!Platform.IsMacOS) {
+			if (!Platform.IsOSX) {
 				throw new InvalidOperationException("Platform must be OS X for this overload.");
 			}
 			var mainArgs = AppArguments.CreateForMac(argv);

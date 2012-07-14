@@ -10,21 +10,24 @@ using System.Security;
 namespace Crystalbyte.Chocolate {
     public static class Platform {
         static Platform() {
-            // we will just assume the os does not change at runtime ...
+            // We will just assume the OS does not change at runtime, performing tests only once.
             IsWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
-            IsMacOS = !IsWindows && CheckForMacOS();
-            IsLinux = !IsWindows && Environment.OSVersion.Platform == PlatformID.Unix && !IsMacOS;
+            IsOSX = !IsWindows && CheckForOSX();
+            IsLinux = !IsWindows && Environment.OSVersion.Platform == PlatformID.Unix && !IsOSX;
         }
-
-        // http://aautar.digital-radiation.com/blog/?p=1198
 
         public static bool IsWindows { get; private set; }
 
         public static bool IsLinux { get; private set; }
 
-        public static bool IsMacOS { get; private set; }
+        public static bool IsOSX { get; private set; }
 
-        private static bool CheckForMacOS() {
+        /// <summary>
+        /// Determines whether current OS is OS X.
+        /// http://aautar.digital-radiation.com/blog/?p=1198
+        /// </summary>
+        /// <returns>True if current OS is OS X, else false.</returns>
+        private static bool CheckForOSX() {
             var buffer = IntPtr.Zero;
             try {
                 buffer = Marshal.AllocHGlobal(8192);

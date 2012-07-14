@@ -21,7 +21,7 @@ namespace Crystalbyte.Chocolate.UI {
             _handler = new ClientHandler(@delegate);
             _settings = new BrowserSettings();
 			
-			if (Platform.IsMacOS) {
+			if (Platform.IsOSX) {
 				_resizer = new MacWindowResizer();
 			}
 			
@@ -75,6 +75,7 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e) {
+            // TODO: the passed down window size is too large, therefor we subtract offsets to 
             var bounds = new Rectangle(0, 0, e.Size.Width - Offsets.WindowRight, e.Size.Height - Offsets.WindowBottom);
             _resizer.Resize(_browserHost.WindowHandle, bounds);
         }
@@ -92,12 +93,11 @@ namespace Crystalbyte.Chocolate.UI {
 				a.WindowInfo = new WindowsWindowInfo(_target);
 			}
 			
-			if (Platform.IsMacOS) {
+			if (Platform.IsOSX) {
 				a.WindowInfo = new MacWindowInfo(_target);
 			}
 			
             _browser = BrowserHost.CreateBrowser(a);
-			
 			
             _browserHost = _browser.Host;
             OnCreated(EventArgs.Empty);
