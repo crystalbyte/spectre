@@ -5,3 +5,5 @@ obj
 *.userprefs
 _ReSharper*
 .DS_Store
+_UpgradeReport_Files
+UpgradeLog.*
