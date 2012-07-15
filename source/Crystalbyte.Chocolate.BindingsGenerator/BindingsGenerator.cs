@@ -1,4 +1,16 @@
-﻿#region Namespace Directives
+﻿#region Copyright notice
+
+// Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region Namespace Directives
 
 using System;
 using System.Collections.Generic;
@@ -6,7 +18,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using EnvDTE;
 
 #endregion
 
@@ -27,26 +38,28 @@ namespace Crystalbyte.Chocolate
         {
             if (_settings.OutputDirectory.Exists)
             {
-                foreach (var file in _settings.OutputDirectory.GetFiles("*.cs")) {
+                foreach (var file in _settings.OutputDirectory.GetFiles("*.cs"))
+                {
                     if (file.Name == "AssemblyInfo.cs")
                     {
                         continue;
                     }
                     File.Delete(file.FullName);
-
                 }
-                foreach (var dir in _settings.OutputDirectory.GetDirectories()) {
+                foreach (var dir in _settings.OutputDirectory.GetDirectories())
+                {
                     if (dir.Name == "Properties")
                     {
                         continue;
                     }
                     Directory.Delete(dir.FullName, true);
                 }
-            } else
+            }
+            else
             {
                 _settings.OutputDirectory.Create();
             }
-            
+
             var service = new DiscoveryService(_settings);
             var files = service.Discover();
             foreach (var file in files)

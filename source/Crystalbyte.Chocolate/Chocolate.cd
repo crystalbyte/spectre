@@ -99,10 +99,17 @@
       <FileName>OwnedAdapter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Crystalbyte.Chocolate.Platform" Collapsed="true">
+  <Class Name="Crystalbyte.Chocolate.Platform">
     <Position X="72.5" Y="3.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Crystalbyte.Chocolate.Platform.NativeMethods" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Platform.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAIIAAACAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAIAAACAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Platform.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -245,11 +252,11 @@
   <Class Name="Crystalbyte.Chocolate.UI.App" Collapsed="true">
     <Position X="46.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAIAAgCAAAAEAAAAAAAAAAAAAACAABIACAgAAAAAAAA=</HashCode>
+      <HashCode>gAAAAACAAAAEAAAAAAAAAAAAAACAABIACAAAAAAAAAA=</HashCode>
       <FileName>UI\App.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Crystalbyte.Chocolate.UI.AppArguments" Collapsed="true">
+  <Class Name="Crystalbyte.Chocolate.UI.AppArguments">
     <Position X="69" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAEAAAAAAAAAAA=</HashCode>
@@ -358,7 +365,7 @@
   <Class Name="Crystalbyte.Chocolate.UI.FrameworkSettings" Collapsed="true">
     <Position X="37.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAACACACAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gAAAAAAAAAAAAACACACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UI\FrameworkSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -426,15 +433,15 @@
       <FileName>UI\PageLoadingEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Crystalbyte.Chocolate.UI.PageLoadingFailedEventArgs" Collapsed="true">
+  <Class Name="Crystalbyte.Chocolate.UI.PageLoadingFailedEventArgs">
     <Position X="70.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAIAAEAAE=</HashCode>
       <FileName>UI\PageLoadingFailedEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Crystalbyte.Chocolate.UI.PopupCreatingEventArgs" Collapsed="true">
-    <Position X="74.25" Y="3.5" Width="1.5" />
+  <Class Name="Crystalbyte.Chocolate.UI.PopupCreatingEventArgs">
+    <Position X="74.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACgAAAAEAAAQA=</HashCode>
       <FileName>UI\PopupCreatingEventArgs.cs</FileName>
@@ -462,7 +469,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Crystalbyte.Chocolate.UI.SizeChangedEventArgs" Collapsed="true">
-    <Position X="72.5" Y="4.5" Width="1.5" />
+    <Position X="74.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UI\SizeChangedEventArgs.cs</FileName>
@@ -542,7 +549,7 @@
       <FileName>IValueCollection.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Crystalbyte.Chocolate.IWindowResizer" Collapsed="true">
+  <Interface Name="Crystalbyte.Chocolate.UI.IWindowResizer" Collapsed="true">
     <Position X="70.75" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>

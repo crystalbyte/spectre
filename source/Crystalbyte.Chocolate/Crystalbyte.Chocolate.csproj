@@ -11,6 +11,8 @@
     <RootNamespace>Crystalbyte.Chocolate</RootNamespace>
     <AssemblyName>Crystalbyte.Chocolate</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,16 @@
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="BinaryObject.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="PostElementCollection.cs" />
+    <Compile Include="Request.cs" />
+    <Compile Include="UrlRequestFlags.cs" />
+    <Compile Include="CreateHandlerEventArgs.cs" />
+    <Compile Include="ResourceHandler.cs" />
+    <Compile Include="ResponseDataRequestedEventArgs.cs" />
+    <Compile Include="ResponseController.cs" />
+    <Compile Include="SchemeHandlerFactory.cs" />
+    <Compile Include="Scheme.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="ChocolateException.cs" />
     <Compile Include="CommandLine.cs" />
@@ -53,7 +65,7 @@
     <Compile Include="OwnedAdapter.cs" />
     <Compile Include="DisposableObject.cs" />
     <Compile Include="GraphicsImplementation.cs" />
-    <Compile Include="ISealedCollection.cs" />
+    <Compile Include="IReadOnlyCollection.cs" />
     <Compile Include="IValueCollection.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Platform.cs" />
@@ -151,6 +163,7 @@
     <None Include="Chocolate.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

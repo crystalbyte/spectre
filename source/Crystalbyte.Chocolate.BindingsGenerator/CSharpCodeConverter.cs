@@ -1,4 +1,16 @@
-﻿#region Namespace Directives
+﻿#region Copyright notice
+
+// Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region Namespace Directives
 
 using System;
 using System.Collections.Generic;
@@ -9,9 +21,12 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
-    public static class CSharpCodeConverter {
-        private static string StripUnnecessarySymbols(string input) {
+namespace Crystalbyte.Chocolate
+{
+    public static class CSharpCodeConverter
+    {
+        private static string StripUnnecessarySymbols(string input)
+        {
             input = input.Trim(';').Trim();
             var noExport = input.Replace("CEF_EXPORT", string.Empty);
             var noConst = noExport.Replace("const", string.Empty);
@@ -22,35 +37,43 @@ namespace Crystalbyte.Chocolate {
             return noBrackets;
         }
 
-        public static string ExtractStructName(string input) {
+        public static string ExtractStructName(string input)
+        {
             input = input.Trim();
             var splitBySpace = input.Split(' ');
             var name = splitBySpace.Last().TrimEnd(';');
             return ConvertTypeName(name);
         }
 
-        private static string AdjustArgumentName(string name) {
+        private static string AdjustArgumentName(string name)
+        {
             name = name.FirstToLower();
-            if (name == "object") {
+            if (name == "object")
+            {
                 return "@object";
             }
-            if (name == "string") {
+            if (name == "string")
+            {
                 return "@string";
             }
 
-            if (name == "event") {
+            if (name == "event")
+            {
                 return "@event";
             }
-            if (name == "params") {
+            if (name == "params")
+            {
                 return "@params";
             }
-            if (name == "checked") {
+            if (name == "checked")
+            {
                 return "@checked";
             }
             return name;
         }
 
-        public static string ConvertMethod(string input, out string name) {
+        public static string ConvertMethod(string input, out string name)
+        {
             input = StripUnnecessarySymbols(input);
             var splitBySpace = input.Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries);
 
@@ -58,25 +81,30 @@ namespace Crystalbyte.Chocolate {
             name = splitBySpace[1];
             var args = new List<string>();
 
-            if (splitBySpace.Length > 2) {
-                for (var i = 2; i < splitBySpace.Length; i++) {
+            if (splitBySpace.Length > 2)
+            {
+                for (var i = 2; i < splitBySpace.Length; i++)
+                {
                     var argumentType = ConvertType(splitBySpace[i++]);
                     var argument = ConvertType(splitBySpace[i], true);
                     args.Add(argumentType + " " + AdjustArgumentName(argument));
                 }
             }
 
-            using (var sw = new StringWriter()) {
+            using (var sw = new StringWriter())
+            {
                 sw.Write("public static extern ");
                 sw.Write(ConvertType(returnValue));
                 sw.Write(" ");
                 sw.Write(ConvertTypeName(name));
                 sw.Write("(");
-                foreach (var arg in args) {
+                foreach (var arg in args)
+                {
                     sw.Write(arg);
                     sw.Write(", ");
                 }
-                if (args.Count > 0) {
+                if (args.Count > 0)
+                {
                     sw.GetStringBuilder().Remove(sw.GetStringBuilder().Length - 2, 2);
                 }
                 sw.Write(")");
@@ -85,7 +113,8 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        public static string ConvertTypeName(string typeName) {
+        public static string ConvertTypeName(string typeName)
+        {
             var name = string.Empty;
             var parts = typeName.Split('_');
             var result = parts.Where(part => part != "t").Aggregate(name,
@@ -94,7 +123,8 @@ namespace Crystalbyte.Chocolate {
             return result.Replace(" ", string.Empty);
         }
 
-        public static string ConvertFileName(string filename) {
+        public static string ConvertFileName(string filename)
+        {
             var name = string.Empty;
             var parts = filename.Split('_');
             var result = parts.Where(part => part != "t").Aggregate(name,
@@ -103,134 +133,167 @@ namespace Crystalbyte.Chocolate {
             return result.Replace(" ", "").Replace(".H", ".cs");
         }
 
-        private static string ConvertType(string type, bool isIdent = false) {
+        private static string ConvertType(string type, bool isIdent = false)
+        {
             type = type.ToLower();
 
-            if (type.Contains("*")) {
+            if (type.Contains("*"))
+            {
                 return "IntPtr";
             }
 
-            if (type == "cef_window_handle_t") {
+            if (type == "cef_window_handle_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "dword") {
+            if (type == "dword")
+            {
                 return "uint";
             }
 
-            if (type == "hinstance") {
+            if (type == "hinstance")
+            {
                 return "IntPtr";
             }
 
-            if (type == "cef_string_userfree_t") {
+            if (type == "cef_string_userfree_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "cef_string_map_t") {
+            if (type == "cef_string_map_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "cef_string_multimap_t") {
+            if (type == "cef_string_multimap_t")
+            {
                 return "IntPtr";
             }
 
-            if (type.StartsWith("cef_string_userfree_wide_t")) {
+            if (type.StartsWith("cef_string_userfree_wide_t"))
+            {
                 return "IntPtr";
             }
 
-            if (type.StartsWith("cef_string_userfree_utf8_t")) {
+            if (type.StartsWith("cef_string_userfree_utf8_t"))
+            {
                 return "IntPtr";
             }
 
-            if (type.StartsWith("cef_string_userfree_utf16_t")) {
+            if (type.StartsWith("cef_string_userfree_utf16_t"))
+            {
                 return "IntPtr";
             }
 
-            if (type == "bool") {
+            if (type == "bool")
+            {
                 return "bool";
             }
 
-            if (type == "hmenu") {
+            if (type == "hmenu")
+            {
                 return "IntPtr";
             }
 
-            if (type == "uint32") {
+            if (type == "uint32")
+            {
                 return "uint";
             }
 
-            if (type == "char16") {
+            if (type == "char16")
+            {
                 return "char";
             }
 
-            if (type == "uint64") {
+            if (type == "uint64")
+            {
                 return "ulong";
             }
 
-            if (type == "cef_string_list_t") {
+            if (type == "cef_string_list_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "cef_string_t") {
+            if (type == "cef_string_t")
+            {
                 return "CefStringUtf16";
             }
 
-            if (type == "cef_string_list_t") {
+            if (type == "cef_string_list_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "time_t") {
+            if (type == "time_t")
+            {
                 return "long";
             }
 
-            if (type == "size") {
+            if (type == "size")
+            {
                 return isIdent ? "size" : "int";
             }
 
-            if (type == "size_t") {
+            if (type == "size_t")
+            {
                 return "int";
             }
 
-            if (type == "cef_time_t") {
+            if (type == "cef_time_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "bool") {
+            if (type == "bool")
+            {
                 return "bool";
             }
 
-            if (type == "int") {
+            if (type == "int")
+            {
                 return "int";
             }
 
-            if (type == "int32") {
+            if (type == "int32")
+            {
                 return "int";
             }
 
-            if (type == "int64") {
+            if (type == "int64")
+            {
                 return "long";
             }
 
-            if (type == "void") {
+            if (type == "void")
+            {
                 return "void";
             }
 
-            if (type == "cef_event_handle_t") {
+            if (type == "cef_event_handle_t")
+            {
                 return "IntPtr";
             }
 
-            if (type == "cef_window_handle_t") {
+            if (type == "cef_window_handle_t")
+            {
                 return "IntPtr";
             }
 
             return ConvertTypeName(type);
         }
 
-        private static string AdjustFunctionName(string name) {
+        private static string AdjustFunctionName(string name)
+        {
             return name == "GetType" ? "GetElementType" : name;
         }
 
-        internal static string ConvertMember(string member, out bool isFunctionPointer) {
-            if (member.Contains("(")) {
+        internal static string ConvertMember(string member, out bool isFunctionPointer)
+        {
+            if (member.Contains("("))
+            {
                 isFunctionPointer = true;
                 var name = ExtractFunctionPointerName(member);
                 return string.Format("public IntPtr {0};", AdjustFunctionName(name));
@@ -238,12 +301,14 @@ namespace Crystalbyte.Chocolate {
 
             isFunctionPointer = false;
             var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
-            if (splitBySpace.Length == 2) {
+            if (splitBySpace.Length == 2)
+            {
                 var type = ConvertType(splitBySpace.First());
                 var name = ConvertTypeName(splitBySpace.Last());
                 return string.Format("public {0} {1};", type, AdjustFunctionName(name));
             }
-            if (splitBySpace.Length == 3) {
+            if (splitBySpace.Length == 3)
+            {
                 var prefix = splitBySpace[0] == "enum" ? string.Empty : "u";
                 var type = ConvertType(splitBySpace[1]);
                 var name = ConvertTypeName(splitBySpace[2]);
@@ -253,9 +318,11 @@ namespace Crystalbyte.Chocolate {
             throw new ApplicationException("unknown format");
         }
 
-        private static string ExtractFunctionPointerName(string member) {
+        private static string ExtractFunctionPointerName(string member)
+        {
             var match = Regex.Match(member, @"\(CEF_CALLBACK(\s|\w|\*)*\)");
-            if (!match.Success) {
+            if (!match.Success)
+            {
                 var matches = Regex.Matches(member, @"\((\s|\w|\*)*\)");
                 var d = matches[0].Value.Replace("*", string.Empty).Trim(new[] {'(', ')'}).Trim();
                 return ConvertTypeName(d);
@@ -267,7 +334,8 @@ namespace Crystalbyte.Chocolate {
             return ConvertTypeName(name);
         }
 
-        internal static string CreateDelegate(string del, out string name) {
+        internal static string CreateDelegate(string del, out string name)
+        {
             del = StripUnnecessarySymbols(del);
             var splitBySpace = del.Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries);
             var returnValue = ConvertType(splitBySpace.First());
@@ -276,11 +344,14 @@ namespace Crystalbyte.Chocolate {
 
             var begin = del.Contains("CEF_CALLBACK") ? 3 : 2;
 
-            if (splitBySpace.Length > begin) {
-                for (var i = begin; i < splitBySpace.Length; i++) {
+            if (splitBySpace.Length > begin)
+            {
+                for (var i = begin; i < splitBySpace.Length; i++)
+                {
                     var argumentType = ConvertType(splitBySpace[i++]);
                     var token = splitBySpace[i];
-                    if (token == "*") {
+                    if (token == "*")
+                    {
                         i++;
                     }
                     var argument = ConvertType(splitBySpace[i], true);
@@ -288,17 +359,20 @@ namespace Crystalbyte.Chocolate {
                 }
             }
 
-            using (var sw = new StringWriter()) {
+            using (var sw = new StringWriter())
+            {
                 sw.Write("public delegate ");
                 sw.Write(returnValue);
                 sw.Write(" ");
                 sw.Write(name);
                 sw.Write("(");
-                foreach (var arg in args) {
+                foreach (var arg in args)
+                {
                     sw.Write(arg);
                     sw.Write(", ");
                 }
-                if (args.Count > 0) {
+                if (args.Count > 0)
+                {
                     sw.GetStringBuilder().Remove(sw.GetStringBuilder().Length - 2, 2);
                 }
                 sw.Write(")");
@@ -307,13 +381,16 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        internal static string ExtractEnumName(string @enum) {
+        internal static string ExtractEnumName(string @enum)
+        {
             var splitBySpace = @enum.Split(' ');
             return ConvertTypeName(splitBySpace[1]);
         }
 
-        internal static string ConvertEnumEntry(string entry) {
-            if (!entry.Contains("=")) {
+        internal static string ConvertEnumEntry(string entry)
+        {
+            if (!entry.Contains("="))
+            {
                 return ConvertTypeName(entry) + ",";
             }
             var splitByEqual = entry.Split(new[] {"="}, StringSplitOptions.RemoveEmptyEntries);
