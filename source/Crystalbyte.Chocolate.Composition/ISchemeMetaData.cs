@@ -11,8 +11,8 @@
 #endregion
 
 namespace Crystalbyte.Chocolate.Composition {
-    public interface ISchemeMetaData {
-        string SchemeName { get; set; }
-        string Domain { get; set; }
+    public interface ISchemeMetadata {
+        string SchemeName { get; }
+        string Domain { get; }
     }
 }

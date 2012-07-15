@@ -12,6 +12,7 @@
 
 #region Namespace directives
 
+using System;
 using Crystalbyte.Chocolate.Bindings;
 
 #endregion
@@ -19,6 +20,16 @@ using Crystalbyte.Chocolate.Bindings;
 namespace Crystalbyte.Chocolate {
     public static class Scheme {
         public static void Register(string scheme, string domain, SchemeHandlerFactory factory) {
+            if (scheme == null) {
+                throw new ArgumentNullException("scheme");
+            }
+            if (domain == null) {
+                throw new ArgumentNullException("domain");
+            }
+            if (factory == null) {
+                throw new ArgumentNullException("factory");
+            }
+
             var s = new StringUtf16(scheme);
             var d = new StringUtf16(domain);
 

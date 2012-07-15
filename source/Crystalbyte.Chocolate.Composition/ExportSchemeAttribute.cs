@@ -20,7 +20,7 @@ using System.ComponentModel.Composition;
 namespace Crystalbyte.Chocolate.Composition {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    public class ExportSchemeAttribute : ExportAttribute, ISchemeMetaData {
+    public class ExportSchemeAttribute : ExportAttribute, ISchemeMetadata {
         public ExportSchemeAttribute()
             : base(typeof (SchemeHandlerFactory)) {}
 

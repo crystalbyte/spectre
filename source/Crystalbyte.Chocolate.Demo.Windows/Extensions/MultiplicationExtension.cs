@@ -15,7 +15,7 @@ using Crystalbyte.Chocolate.Scripting;
 
 namespace Crystalbyte.Chocolate.Extensions
 {
-    [ExportExtension(Name = "mult")]
+    [ExportScriptingExtension(Name = "mult")]
     internal sealed class MultiplicationExtension : ScriptingExtension
     {
         public override string PrototypeCode

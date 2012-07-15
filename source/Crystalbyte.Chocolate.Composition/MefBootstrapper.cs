@@ -23,17 +23,17 @@ using Crystalbyte.Chocolate.Scripting;
 namespace Crystalbyte.Chocolate.Composition {
     public abstract class MefBootstrapper : Bootstrapper {
         [ImportMany(typeof (SchemeHandlerFactory))]
-        public IEnumerable<Lazy<SchemeHandlerFactory, ISchemeMetaData>> SchemeHandler { get; set; }
+        public IEnumerable<Lazy<SchemeHandlerFactory, ISchemeMetadata>> SchemeHandlers { get; set; }
 
         [ImportMany(typeof (ScriptingExtension))]
-        public IEnumerable<Lazy<ScriptingExtension, IExtensionMetaData>> ScriptingExtensions { get; set; }
+        public IEnumerable<Lazy<ScriptingExtension, IScriptingExtensionMetadata>> ScriptingExtensions { get; set; }
 
         protected override void ConfigureScriptingRuntime() {
             ScriptingExtensions.ForEach(x => ScriptingRuntime.RegisterExtension(x.Metadata.Name, x.Value));
         }
 
         protected override void InitializeSchemeHandlers() {
-            SchemeHandler.ForEach(x => Scheme.Register(x.Metadata.SchemeName, x.Metadata.Domain, x.Value));
+            SchemeHandlers.ForEach(x => Scheme.Register(x.Metadata.SchemeName, x.Metadata.Domain ?? string.Empty, x.Value));
         }
 
         public override void Run() {

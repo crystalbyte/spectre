@@ -16,7 +16,7 @@ using Crystalbyte.Chocolate.Scripting;
 
 namespace Crystalbyte.Chocolate.Extensions
 {
-    [ExportExtension(Name = "mandelbrot")]
+    [ExportScriptingExtension(Name = "mandelbrot")]
     internal sealed class MandelbrotExtension : ScriptingExtension
     {
         public override string PrototypeCode

@@ -43,9 +43,9 @@
   <ItemGroup>
     <Compile Include="EnumerationExtensions.cs" />
     <Compile Include="ExportSchemeAttribute.cs" />
-    <Compile Include="ExportExtensionAttribute.cs" />
-    <Compile Include="IExtensionMetaData.cs" />
-    <Compile Include="ISchemeMetaData.cs" />
+    <Compile Include="ExportScriptingExtensionAttribute.cs" />
+    <Compile Include="IScriptingExtensionMetadata.cs" />
+    <Compile Include="ISchemeMetadata.cs" />
     <Compile Include="MefBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
