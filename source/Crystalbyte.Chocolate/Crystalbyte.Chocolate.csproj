@@ -154,12 +154,6 @@
     <Compile Include="UI\IWindowResizer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj">
-      <Project>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</Project>
-      <Name>Crystalbyte.Chocolate.Bindings</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Chocolate.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -171,4 +165,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj">
+      <Project>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</Project>
+      <Name>Crystalbyte.Chocolate.Bindings</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

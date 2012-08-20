@@ -52,6 +52,9 @@ namespace Crystalbyte.Chocolate.Bindings
 		
 		[DllImport(CefAssembly.Name, EntryPoint = "cef_v8value_create_function", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
 		public static extern IntPtr CefV8valueCreateFunction(IntPtr name, IntPtr handler);
+		
+		[DllImport(CefAssembly.Name, EntryPoint = "cef_v8stack_trace_get_current", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+		public static extern IntPtr CefV8stackTraceGetCurrent(int frameLimit);
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
@@ -140,6 +143,25 @@ namespace Crystalbyte.Chocolate.Bindings
 		public IntPtr ExecuteFunctionWithContext;
 	}
 	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct CefV8stackTrace {
+		public CefBase Base;
+		public IntPtr GetFrameCount;
+		public IntPtr GetFrame;
+	}
+	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct CefV8stackFrame {
+		public CefBase Base;
+		public IntPtr GetScriptName;
+		public IntPtr GetScriptNameOrSourceUrl;
+		public IntPtr GetFunctionName;
+		public IntPtr GetLineNumber;
+		public IntPtr GetColumn;
+		public IntPtr IsEval;
+		public IntPtr IsConstructor;
+	}
+	
 	public delegate IntPtr GetGlobalCallback(IntPtr self);
 	public delegate int EnterCallback(IntPtr self);
 	public delegate int ExitCallback(IntPtr self);
@@ -195,5 +217,10 @@ namespace Crystalbyte.Chocolate.Bindings
 	public delegate IntPtr GetFunctionHandlerCallback(IntPtr self);
 	public delegate IntPtr ExecuteFunctionCallback(IntPtr self, IntPtr @object, int argumentscount, IntPtr arguments);
 	public delegate IntPtr ExecuteFunctionWithContextCallback(IntPtr self, IntPtr context, IntPtr @object, int argumentscount, IntPtr arguments);
+	public delegate IntPtr GetScriptNameCallback(IntPtr self);
+	public delegate IntPtr GetScriptNameOrSourceUrlCallback(IntPtr self);
+	public delegate int GetColumnCallback(IntPtr self);
+	public delegate int IsEvalCallback(IntPtr self);
+	public delegate int IsRuctorCallback(IntPtr self);
 	
 }

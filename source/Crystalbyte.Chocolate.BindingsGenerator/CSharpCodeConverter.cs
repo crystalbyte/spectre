@@ -130,7 +130,7 @@ namespace Crystalbyte.Chocolate
             var result = parts.Where(part => part != "t").Aggregate(name,
                                                                     (current, part) => current + " " + part.ToLower());
             result = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result.ToLower());
-            return result.Replace(" ", "").Replace(".H", ".cs");
+            return result.Replace(" ", "").Replace(".H", ".cs").Replace(".h", ".cs");
         }
 
         private static string ConvertType(string type, bool isIdent = false)

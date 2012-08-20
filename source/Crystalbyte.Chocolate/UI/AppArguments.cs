@@ -21,12 +21,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 namespace Crystalbyte.Chocolate.UI {
     internal static class AppArguments {
         public static IntPtr CreateForMac(string[] args) {
-            var mainArgs = new MacCefMainArgs {
-                Argc = args.Length,
-                //Argv = args
-            };
             throw new NotImplementedException();
-            //return MarshalArgs(mainArgs);
         }
 
         public static IntPtr CreateForWindows(IntPtr hInstance) {
