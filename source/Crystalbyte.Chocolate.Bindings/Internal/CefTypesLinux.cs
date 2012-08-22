@@ -17,6 +17,4 @@ namespace Crystalbyte.Chocolate.Bindings.Internal
 		public IntPtr ParentWidget;
 		public IntPtr Widget;
 	}
-	
-	
 }
