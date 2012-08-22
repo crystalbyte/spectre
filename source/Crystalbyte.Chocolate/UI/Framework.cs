@@ -59,15 +59,7 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public static bool Initialize(string[] argv, AppDelegate del = null) {
-            if (!Platform.IsOSX) {
-                throw new InvalidOperationException("Platform must be OS X for this overload.");
-            }
-            var mainArgs = AppArguments.CreateForMac(argv);
-            return InitializeInternal(mainArgs, del);
-        }
-
-        private static bool InitializeInternal(IntPtr mainArgs, AppDelegate del = null) {
+        private static bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
             _app = new App(del ?? new AppDelegate());
 
             Reference.Increment(_app.NativeHandle);
@@ -83,14 +75,20 @@ namespace Crystalbyte.Chocolate.UI {
             return IsInitialized;
         }
 
+        public static bool Initialize(AppDelegate del = null) {
+            
+			IntPtr handle;
+			if (Platform.IsLinux) {
+				var commandLine = Environment.GetCommandLineArgs();
+				handle = AppArguments.CreateForLinux(commandLine);
+			}
 
-        public static bool Initialize(Module module, AppDelegate del = null) {
-            if (!Platform.IsWindows) {
-                throw new InvalidOperationException("Platform must be Windows for this overload.");
-            }
-            var hInstance = Marshal.GetHINSTANCE(module);
-            var mainArgs = AppArguments.CreateForWindows(hInstance);
-            return InitializeInternal(mainArgs, del);
+			if (Platform.IsWindows) {
+				var module = Assembly.GetEntryAssembly().ManifestModule;
+				var hInstance = Marshal.GetHINSTANCE(module);
+				handle = AppArguments.CreateForWindows(hInstance);
+			}
+            return Initialize(handle, del);
         }
 
         public static void Shutdown() {

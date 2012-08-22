@@ -14,6 +14,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
@@ -28,6 +29,53 @@ namespace Crystalbyte.Chocolate.UI {
                 LogSeverity = CefLogSeverity.LogseverityVerbose
             });
         }
+
+		public string BrowserSubprocessPath {
+			get {
+				var reflection = MarshalFromNative<CefSettings> ();
+				return Marshal.PtrToStringUni(reflection.BrowserSubprocessPath.Str);
+			}
+			set {
+				var reflection = MarshalFromNative<CefSettings> ();
+				reflection.BrowserSubprocessPath = new CefStringUtf16 {
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+				MarshalToNative(reflection);
+			}
+		}
+
+		public string LocalesDirPath {
+			get {
+				var reflection = MarshalFromNative<CefSettings> ();
+				return Marshal.PtrToStringUni(reflection.LocalesDirPath.Str);
+			}
+			set {
+				var reflection = MarshalFromNative<CefSettings> ();
+				reflection.LocalesDirPath = new CefStringUtf16 {
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+				MarshalToNative(reflection);
+			}
+		}
+
+		public string PackFilePath {
+			get {
+				var reflection = MarshalFromNative<CefSettings> ();
+				return Marshal.PtrToStringUni(reflection.PackFilePath.Str);
+			}
+			set {
+				var reflection = MarshalFromNative<CefSettings> ();
+				reflection.PackFilePath = new CefStringUtf16 {
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+				MarshalToNative(reflection);
+			}
+		}
+
+		
 
         public LogSeverity LogSeverity {
             get {

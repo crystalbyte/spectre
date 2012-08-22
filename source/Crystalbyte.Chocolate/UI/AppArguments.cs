@@ -13,6 +13,7 @@
 #region Namespace directives
 
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
@@ -22,6 +23,14 @@ namespace Crystalbyte.Chocolate.UI {
     internal static class AppArguments {
         public static IntPtr CreateForMac(string[] args) {
             throw new NotImplementedException();
+        }
+
+		public static IntPtr CreateForLinux(string[] args) {
+			var mainArgs = new LinuxCefMainArgs() {
+				Argc = args.Length,
+				Argv = StringArrayToPtr(args)
+			};
+			return MarshalArgs(mainArgs);
         }
 
         public static IntPtr CreateForWindows(IntPtr hInstance) {
@@ -38,5 +47,22 @@ namespace Crystalbyte.Chocolate.UI {
             Marshal.StructureToPtr(mainArgs, handle, false);
             return handle;
         }
-    }
+		
+		public static IntPtr StringArrayToPtr (string[] stringArray)
+        {
+			var ptrSize = Marshal.SizeOf(typeof(IntPtr));
+			var arrayHandle = Marshal.AllocHGlobal(ptrSize * stringArray.Length);
+
+        	if(stringArray == null)
+            	throw new ArgumentNullException ("stringArray");
+ 
+            for (var i = 0; i < stringArray.Length; ++i) {
+				var s = stringArray[i];
+				var handle = Marshal.StringToHGlobalUni(s);
+				Marshal.WriteIntPtr(handle, arrayHandle + (i * ptrSize));                
+            }
+
+			return arrayHandle;
+        }
+	}
 }

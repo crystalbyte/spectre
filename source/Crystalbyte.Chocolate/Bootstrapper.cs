@@ -7,6 +7,7 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+using System.IO;
 
 #endregion
 
@@ -22,30 +23,26 @@ namespace Crystalbyte.Chocolate {
     public abstract class Bootstrapper {
         protected abstract IRenderTarget CreateRenderTarget();
 
-        protected virtual Module GetRootModule() {
-            return Assembly.GetEntryAssembly().ManifestModule;
-        }
-
         protected virtual AppDelegate CreateAppDelegate() {
             return new AppDelegate();
         }
-
-        protected virtual void ConfigureScriptingRuntime() {}
 
         protected virtual BrowserDelegate CreateBrowserDelegate(IRenderTarget target) {
             return new BrowserDelegate();
         }
 
         public virtual void Run() {
-            var module = GetRootModule();
             var @delegate = CreateAppDelegate();
             @delegate.Initialized += OnFrameworkInitialized;
-            Framework.Initialize(module, @delegate);
+
+			InitializeFramework();
+            Framework.Initialize(@delegate);
 
             if (!Framework.IsRootProcess) {
                 return;
             }
 
+			InitializeRenderer();
             InitializeSchemeHandlers();
 
             var target = CreateRenderTarget();
@@ -55,7 +52,11 @@ namespace Crystalbyte.Chocolate {
             Framework.Shutdown();
         }
 
-        protected virtual void InitializeSchemeHandlers() {}
+	
+		protected virtual void ConfigureScriptingRuntime() { }
+		protected virtual void InitializeFramework() { }
+		protected virtual void InitializeRenderer() { }
+        protected virtual void InitializeSchemeHandlers() { }
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
             ConfigureScriptingRuntime();

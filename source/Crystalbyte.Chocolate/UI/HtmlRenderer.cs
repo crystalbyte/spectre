@@ -33,8 +33,8 @@ namespace Crystalbyte.Chocolate.UI {
             _handler = new ClientHandler(@delegate);
             _settings = new BrowserSettings();
 
-            if (Platform.IsOSX) {
-                _resizer = new MacWindowResizer();
+            if (Platform.IsLinux) {
+                _resizer = new LinuxWindowResizer();
             }
 
             if (Platform.IsWindows) {
@@ -105,8 +105,8 @@ namespace Crystalbyte.Chocolate.UI {
                 a.WindowInfo = new WindowsWindowInfo(_target);
             }
 
-            if (Platform.IsOSX) {
-                a.WindowInfo = new MacWindowInfo(_target);
+            if (Platform.IsLinux) {
+                a.WindowInfo = new LinuxWindowInfo(_target);
             }
 
             _browser = BrowserHost.CreateBrowser(a);

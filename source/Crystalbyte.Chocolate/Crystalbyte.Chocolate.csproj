@@ -152,6 +152,8 @@
     <Compile Include="UI\MacWindowInfo.cs" />
     <Compile Include="UI\MacWindowResizer.cs" />
     <Compile Include="UI\IWindowResizer.cs" />
+    <Compile Include="UI\LinuxWindowResizer.cs" />
+    <Compile Include="UI\LinuxWindowInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Chocolate.cd" />
