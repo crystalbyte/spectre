@@ -8,6 +8,8 @@
 // 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System.IO;
+using Crystalbyte.Chocolate.Scripting;
+using System.Collections.Generic;
 
 #endregion
 
@@ -32,18 +34,21 @@ namespace Crystalbyte.Chocolate {
         }
 
         public virtual void Run() {
-            var @delegate = CreateAppDelegate();
-            @delegate.Initialized += OnFrameworkInitialized;
+            var del = CreateAppDelegate();
+            del.Initialized += OnFrameworkInitialized;
 
 			ConfigureSettings(Framework.Settings);
-            Framework.Initialize(@delegate);
+            Framework.Initialize(del);
 
             if (!Framework.IsRootProcess) {
                 return;
             }
 
-			InitializeRenderer();
-            InitializeSchemeHandlers();
+			InitializeRenderProcess();
+			var factories = ConfigureSchemeHandlers();
+			factories.ForEach(x => {
+				factories.ForEach(SchemeManager.Register);
+			});
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);
@@ -53,13 +58,32 @@ namespace Crystalbyte.Chocolate {
         }
 
 	
-		protected virtual void ConfigureScriptingRuntime() { }
-		protected virtual void ConfigureSettings(FrameworkSettings settings) { }
-		protected virtual void InitializeRenderer() { }
-        protected virtual void InitializeSchemeHandlers() { }
+		protected virtual void ConfigureSettings(FrameworkSettings settings) {
+			
+		}
+
+		protected virtual void InitializeRenderProcess() {
+		
+		}
+
+        protected virtual IList<SchemeDescriptor> ConfigureSchemeHandlers() {
+			return new List<SchemeDescriptor>();
+		}
+
+		protected virtual IList<ScriptingExtension> RegisterScriptingExtensions () {
+			return new List<ScriptingExtension>();
+		}
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
-            ConfigureScriptingRuntime();
+			var extensions = RegisterScriptingExtensions();
+			if (extensions != null) {
+				extensions.ForEach(RegisterScriptingExtension);
+			}
         }
+
+		private void RegisterScriptingExtension(ScriptingExtension extension) {
+			var name = Guid.NewGuid().ToString();
+			ScriptingRuntime.RegisterExtension(name, extension);
+		}
     }
 }

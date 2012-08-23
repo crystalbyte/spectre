@@ -14,7 +14,7 @@ namespace Crystalbyte.Chocolate.Demo.Linux
 			return new MainWindow { StartupUri =  new Uri("http://trailers.apple.com/trailers/fox/prometheus/") };
 		}
 
-		protected override void InitializeRenderer ()
+		protected override void InitializeRenderProcess ()
 		{
 			Application.Init ();
 		}
@@ -31,7 +31,6 @@ namespace Crystalbyte.Chocolate.Demo.Linux
 			settings.Locale = "de-DE";
 			settings.LocalesDirPath = Path.Combine(modulePath, "locales");
 			settings.PackFilePath = Path.Combine(modulePath);
-
 		}
 	}
 }

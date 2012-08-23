@@ -52,7 +52,6 @@
     <Compile Include="ResponseDataRequestedEventArgs.cs" />
     <Compile Include="ResponseController.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
-    <Compile Include="Scheme.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="ChocolateException.cs" />
     <Compile Include="CommandLine.cs" />
@@ -154,6 +153,9 @@
     <Compile Include="UI\IWindowResizer.cs" />
     <Compile Include="UI\LinuxWindowResizer.cs" />
     <Compile Include="UI\LinuxWindowInfo.cs" />
+    <Compile Include="EnumerationExtensions.cs" />
+    <Compile Include="SchemeDescriptor.cs" />
+    <Compile Include="SchemeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Chocolate.cd" />

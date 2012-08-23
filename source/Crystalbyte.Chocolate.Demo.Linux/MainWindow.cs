@@ -8,14 +8,13 @@ public partial class MainWindow: Gtk.Window, IRenderTarget
 		: base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
-		Resize(1280, 768);
+		Resize(1600, 900);
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
 		NotifyTargetClosing();
 		NotifyTargetClosed();
-		//Application.Quit ();
 		a.RetVal = true;
 	}
 
