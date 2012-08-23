@@ -75,9 +75,22 @@ namespace Crystalbyte.Chocolate.UI {
 			}
 		}
 
-		
+		public string Locale {
+			get {
+				var reflection = MarshalFromNative<CefSettings> ();
+				return Marshal.PtrToStringUni(reflection.Locale.Str);
+			}
+			set {
+				var reflection = MarshalFromNative<CefSettings> ();
+				reflection.Locale = new CefStringUtf16 {
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+				MarshalToNative(reflection);
+			}
+		}
 
-        public LogSeverity LogSeverity {
+		public LogSeverity LogSeverity {
             get {
                 var reflection = MarshalFromNative<CefSettings>();
                 return (LogSeverity) reflection.LogSeverity;

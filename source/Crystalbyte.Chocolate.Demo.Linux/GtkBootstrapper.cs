@@ -19,17 +19,19 @@ namespace Crystalbyte.Chocolate.Demo.Linux
 			Application.Init ();
 		}
 
-		protected override void InitializeFramework ()
+		protected override void ConfigureSettings (FrameworkSettings settings)
 		{
-			var modulePath = Assembly.GetEntryAssembly().Location;
+			var modulePath = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
 
 			// redirect sub process to the mono runtime
 			var commandLine = Environment.GetCommandLineArgs();
-			Framework.Settings.BrowserSubprocessPath = string.Format("/usr/bin/mono \"{0}\"", commandLine[0]);
+			settings.BrowserSubprocessPath = string.Format("/usr/bin/mono \"{0}\"", commandLine[0]);
 
 			// set the locale and resource locations, for they are not next to the mono executable.
-			Framework.Settings.LocalesDirPath = Path.Combine(modulePath, "locales");
-			Framework.Settings.PackFilePath = modulePath;
+			settings.Locale = "de-DE";
+			settings.LocalesDirPath = Path.Combine(modulePath, "locales");
+			settings.PackFilePath = Path.Combine(modulePath);
+
 		}
 	}
 }

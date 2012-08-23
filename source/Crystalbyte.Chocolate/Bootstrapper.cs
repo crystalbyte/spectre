@@ -35,7 +35,7 @@ namespace Crystalbyte.Chocolate {
             var @delegate = CreateAppDelegate();
             @delegate.Initialized += OnFrameworkInitialized;
 
-			InitializeFramework();
+			ConfigureSettings(Framework.Settings);
             Framework.Initialize(@delegate);
 
             if (!Framework.IsRootProcess) {
@@ -54,7 +54,7 @@ namespace Crystalbyte.Chocolate {
 
 	
 		protected virtual void ConfigureScriptingRuntime() { }
-		protected virtual void InitializeFramework() { }
+		protected virtual void ConfigureSettings(FrameworkSettings settings) { }
 		protected virtual void InitializeRenderer() { }
         protected virtual void InitializeSchemeHandlers() { }
 
