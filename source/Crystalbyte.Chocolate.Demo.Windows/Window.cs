@@ -33,8 +33,34 @@ namespace Crystalbyte.Chocolate
         public Uri StartupUri { get; set; }
 
         public event EventHandler<SizeChangedEventArgs> TargetSizeChanged;
+        public void NotifySizeChanged(Size size)
+        {
+            var handler = TargetSizeChanged;
+            if (handler != null)
+            {
+                handler(this, new SizeChangedEventArgs(size));
+            }
+        }
+
         public event EventHandler TargetClosed;
+        public void NotifyTargetClosed()
+        {
+            var handler = TargetClosed;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
         public event EventHandler TargetClosing;
+        public void NotifyTargetClosing()
+        {
+            var handler = TargetClosing;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
 
         public new Size Size
         {
@@ -59,33 +85,6 @@ namespace Crystalbyte.Chocolate
         {
             NotifySizeChanged(Size);
             base.OnSizeChanged(e);
-        }
-
-        public void NotifySizeChanged(Size size)
-        {
-            var handler = TargetSizeChanged;
-            if (handler != null)
-            {
-                handler(this, new SizeChangedEventArgs(size));
-            }
-        }
-
-        public void NotifyTargetClosed()
-        {
-            var handler = TargetClosed;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
-        public void NotifyTargetClosing()
-        {
-            var handler = TargetClosing;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
         }
     }
 }

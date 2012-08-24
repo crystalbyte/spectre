@@ -54,7 +54,7 @@ namespace Crystalbyte.Chocolate {
             }) {
                 OnResponseDataRequested(e);
                 if (e.Controller.IsPaused) {
-                    // data retrieval an be resumed, by calling Resume() on the controller
+                    // data retrieval can be resumed, by calling Resume() on the controller
                     bytesread = 0;
                     return 1;
                 }

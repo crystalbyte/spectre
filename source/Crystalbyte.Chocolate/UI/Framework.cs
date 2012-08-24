@@ -77,7 +77,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         public static bool Initialize(AppDelegate del = null) {
             
-			IntPtr handle;
+			var handle = IntPtr.Zero;
 			if (Platform.IsLinux) {
 				var commandLine = Environment.GetCommandLineArgs();
 				handle = AppArguments.CreateForLinux(commandLine);

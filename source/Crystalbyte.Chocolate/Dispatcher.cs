@@ -10,9 +10,29 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Composition {
-    public interface ISchemeMetadata {
-        string SchemeName { get; }
-        string Domain { get; }
+#region Namespace directives
+
+using System;
+using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Bindings.Internal;
+
+#endregion
+
+namespace Crystalbyte.Chocolate {
+    public static class Dispatcher {
+        public static void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
+            var task = new Task(action);
+            CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
+        }
+
+        public static void InvokeAsync(Action action, DispatcherQueue queue) {
+            var task = new Task(action);
+            CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
+        }
+
+        public static bool IsCurrentlyOn(DispatcherQueue queue) {
+            var result = CefTaskCapi.CefCurrentlyOn((CefThreadId) queue);
+            return Convert.ToBoolean(result);
+        }
     }
 }

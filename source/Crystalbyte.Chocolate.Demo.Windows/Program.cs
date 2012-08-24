@@ -13,12 +13,6 @@
 #region Namespace Directives
 
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using Crystalbyte.Chocolate.Extensions;
-using Crystalbyte.Chocolate.Scripting;
-using Crystalbyte.Chocolate.UI;
 
 #endregion
 

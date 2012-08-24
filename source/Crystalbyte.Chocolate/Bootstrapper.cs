@@ -46,9 +46,7 @@ namespace Crystalbyte.Chocolate {
 
 			InitializeRenderProcess();
 			var factories = ConfigureSchemeHandlers();
-			factories.ForEach(x => {
-				factories.ForEach(SchemeManager.Register);
-			});
+			factories.ForEach(x => factories.ForEach(SchemeManager.Register));
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);

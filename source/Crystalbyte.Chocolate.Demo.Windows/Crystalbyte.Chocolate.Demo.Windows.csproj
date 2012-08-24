@@ -48,10 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Schemes\CocoaResourceHandler.cs" />
-    <Compile Include="Schemes\CocoaSchemeHandlerFactory.cs" />
-    <Compile Include="Extensions\MandelbrotExtension.cs" />
-    <Compile Include="Extensions\MultiplicationExtension.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,7 +70,6 @@
     <EmbeddedResource Include="Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Pages\index.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -86,21 +81,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\jquery-1.7.2.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Styles\index.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Crystalbyte.Chocolate.Composition\Crystalbyte.Chocolate.Composition.csproj">
-      <Project>{29c1514b-5e44-417a-9997-8abce93f088a}</Project>
-      <Name>Crystalbyte.Chocolate.Composition</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
       <Name>Crystalbyte.Chocolate</Name>
