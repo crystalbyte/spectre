@@ -24,7 +24,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
-    public sealed class ScriptableObject : Adapter, IEnumerable<KeyValuePair<string, ScriptableObject>> {
+    public sealed class ScriptableObject : NativeObject, IEnumerable<KeyValuePair<string, ScriptableObject>> {
         private ScriptableObject(IntPtr handle)
             : base(typeof (CefV8value), true) {
             NativeHandle = handle;

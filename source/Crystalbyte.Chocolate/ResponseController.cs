@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class ResponseController : Adapter {
+    public sealed class ResponseController : NativeObject {
         private ResponseController(IntPtr handle)
             : base(typeof (CefCallback)) {
             NativeHandle = handle;

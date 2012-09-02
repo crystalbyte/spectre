@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public class ScriptingHandler : OwnedAdapter {
+    public class ScriptingHandler : RefCountedNativeObject {
         private readonly V8ExecuteCallback _executeCallback;
 
         public ScriptingHandler()

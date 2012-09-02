@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class GeolocationRequest : Adapter {
+    public sealed class GeolocationRequest : NativeObject {
         // is not auto generated due to naming collision
 
         private GeolocationRequest(IntPtr handle)

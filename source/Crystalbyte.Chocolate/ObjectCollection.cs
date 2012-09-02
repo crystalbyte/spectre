@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    internal sealed class ObjectCollection : Adapter {
+    internal sealed class ObjectCollection : NativeObject {
         public ObjectCollection()
             : base(typeof (CefListValue), true) {
             NativeHandle = CefValuesCapi.CefListValueCreate();

@@ -18,8 +18,8 @@ using Crystalbyte.Chocolate.Bindings;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    internal sealed class App : OwnedAdapter {
+namespace Crystalbyte.Chocolate {
+    internal sealed class App : RefCountedNativeObject {
         private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
         private readonly AppDelegate _delegate;
         private readonly GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;

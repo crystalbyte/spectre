@@ -15,11 +15,12 @@
 using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class LifeSpanHandler : OwnedAdapter {
+namespace Crystalbyte.Chocolate {
+    public sealed class LifeSpanHandler : RefCountedNativeObject {
         private readonly OnBeforeCloseCallback _beforeCloseCallback;
         private readonly OnBeforePopupCallback _beforePopupCallback;
         private readonly BrowserDelegate _delegate;

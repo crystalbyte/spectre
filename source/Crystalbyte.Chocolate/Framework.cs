@@ -17,10 +17,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Chocolate {
     public static class Framework {
         private static App _app;
         private static readonly Dictionary<IRenderTarget, HtmlRenderer> Views;
@@ -76,18 +77,17 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         public static bool Initialize(AppDelegate del = null) {
-            
-			var handle = IntPtr.Zero;
-			if (Platform.IsLinux) {
-				var commandLine = Environment.GetCommandLineArgs();
-				handle = AppArguments.CreateForLinux(commandLine);
-			}
+            var handle = IntPtr.Zero;
+            if (Platform.IsLinux) {
+                var commandLine = Environment.GetCommandLineArgs();
+                handle = AppArguments.CreateForLinux(commandLine);
+            }
 
-			if (Platform.IsWindows) {
-				var module = Assembly.GetEntryAssembly().ManifestModule;
-				var hInstance = Marshal.GetHINSTANCE(module);
-				handle = AppArguments.CreateForWindows(hInstance);
-			}
+            if (Platform.IsWindows) {
+                var module = Assembly.GetEntryAssembly().ManifestModule;
+                var hInstance = Marshal.GetHINSTANCE(module);
+                handle = AppArguments.CreateForWindows(hInstance);
+            }
             return Initialize(handle, del);
         }
 

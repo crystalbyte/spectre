@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class IpcMessage : Adapter {
+    public sealed class IpcMessage : NativeObject {
         public IpcMessage(string name)
             : base(typeof (CefProcessMessage), true) {
             var s = new StringUtf16(name);

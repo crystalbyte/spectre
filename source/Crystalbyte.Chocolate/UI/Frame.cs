@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Scripting;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class Frame : Adapter {
+    public sealed class Frame : NativeObject {
         private readonly StringUtf16 _aboutBlank;
 
         private Frame(IntPtr handle)

@@ -16,11 +16,12 @@ using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    internal sealed class ClientHandler : OwnedAdapter {
+namespace Crystalbyte.Chocolate {
+    internal sealed class ClientHandler : RefCountedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;
         private readonly GeolocationHandler _geolocationHandler;
@@ -89,12 +90,6 @@ namespace Crystalbyte.Chocolate.UI {
             return _loadHandler.NativeHandle;
         }
 
-        protected override void DisposeNative() {
-            _displayHandler.Dispose();
-            _lifeSpanHandler.Dispose();
-            base.DisposeNative();
-        }
-
         private IntPtr OnGetLifeSpanHandler(IntPtr self) {
             if (_lifeSpanHandler == null) {
                 return IntPtr.Zero;
@@ -111,6 +106,12 @@ namespace Crystalbyte.Chocolate.UI {
 
             Reference.Increment(_displayHandler.NativeHandle);
             return _displayHandler.NativeHandle;
+        }
+
+        protected override void DisposeNative() {
+            _displayHandler.Dispose();
+            _lifeSpanHandler.Dispose();
+            base.DisposeNative();
         }
 
         internal static ClientHandler FromHandle(IntPtr handle) {

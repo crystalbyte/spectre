@@ -21,7 +21,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class Browser : Adapter {
+    public sealed class Browser : NativeObject {
         private Browser(IntPtr handle)
             : base(typeof (CefBrowser), true) {
             Frames = new FrameCollection(this);

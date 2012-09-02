@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public abstract class ResourceHandler : OwnedAdapter {
+    public abstract class ResourceHandler : RefCountedNativeObject {
         private readonly CanSetCookieCallback _canSetCookieCallback;
         private readonly CanGetCookieCallback _canGetCookieCallback;
         private readonly CancelCallback _cancelCallback;

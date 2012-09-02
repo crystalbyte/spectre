@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class Task : OwnedAdapter {
+    public sealed class Task : RefCountedNativeObject {
         private readonly Action _action;
         private readonly ExecuteCallback _executeCallback;
 

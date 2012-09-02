@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class MacWindowInfo : Adapter {
+    public sealed class MacWindowInfo : NativeObject {
         private readonly bool _isOwned;
 
         public MacWindowInfo(IRenderTarget target)

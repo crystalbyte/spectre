@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class PostElementCollection : Adapter {
+    public sealed class PostElementCollection : NativeObject {
         public PostElementCollection()
             : base(typeof (CefPostData)) {
             NativeHandle = CefRequestCapi.CefPostDataCreate();

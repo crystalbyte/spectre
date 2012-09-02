@@ -18,7 +18,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class CommandLine : Adapter {
+    public sealed class CommandLine : NativeObject {
         public CommandLine()
             : base(typeof (CefCommandLine), true) {
             NativeHandle = CefCommandLineCapi.CefCommandLineCreate();

@@ -21,7 +21,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 
 namespace Crystalbyte.Chocolate {
     [DebuggerDisplay("Text = {Text}")]
-    internal sealed class StringUtf16 : Adapter {
+    internal sealed class StringUtf16 : NativeObject {
         public StringUtf16(string value)
             : this() {
             Text = value;
@@ -50,7 +50,9 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static void WriteString(string text, IntPtr handle) {
-            new StringUtf16(handle) {Text = text};
+            new StringUtf16(handle) {
+                Text = text
+            };
         }
 
         public static string ReadString(IntPtr handle) {

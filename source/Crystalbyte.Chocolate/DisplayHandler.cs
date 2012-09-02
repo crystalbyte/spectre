@@ -16,11 +16,12 @@ using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class DisplayHandler : OwnedAdapter {
+namespace Crystalbyte.Chocolate {
+    public sealed class DisplayHandler : RefCountedNativeObject {
         private readonly OnAddressChangeCallback _addressChangeCallback;
         private readonly OnConsoleMessageCallback _consoleMessageCallback;
         private readonly BrowserDelegate _delegate;

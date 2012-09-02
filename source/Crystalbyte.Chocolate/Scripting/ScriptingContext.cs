@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.UI;
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class ScriptingContext : Adapter {
+    public sealed class ScriptingContext : NativeObject {
         private ScriptingContext(IntPtr handle)
             : base(typeof (CefV8context), true) {
             NativeHandle = handle;

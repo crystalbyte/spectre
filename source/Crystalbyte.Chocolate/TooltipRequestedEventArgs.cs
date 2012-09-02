@@ -13,10 +13,11 @@
 #region Namespace directives
 
 using System;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Chocolate {
     public sealed class TooltipRequestedEventArgs : EventArgs {
         internal TooltipRequestedEventArgs() {}
 

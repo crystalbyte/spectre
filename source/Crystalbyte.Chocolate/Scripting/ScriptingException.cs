@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class ScriptingException : Adapter {
+    public sealed class ScriptingException : NativeObject {
         public ScriptingException()
             : base(typeof (CefV8exception)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);

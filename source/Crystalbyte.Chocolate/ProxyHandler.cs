@@ -13,15 +13,31 @@
 #region Namespace directives
 
 using System;
+using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.Bindings;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class StatusMessageReceivedEventArgs : EventArgs {
-        internal StatusMessageReceivedEventArgs() {}
+namespace Crystalbyte.Chocolate {
+    public sealed class ProxyHandler : RefCountedNativeObject {
+        private readonly AppDelegate _delegate;
+        private readonly GetProxyForUrlCallback _getProxyForUrlCallback;
 
-        public Browser Browser { get; internal set; }
-        public string Message { get; internal set; }
-        public StatusType StatusType { get; internal set; }
+        public ProxyHandler(AppDelegate @delegate)
+            : base(typeof (CefProxyHandler)) {
+            _delegate = @delegate;
+            _getProxyForUrlCallback = GetProxyForUrl;
+            MarshalToNative(new CefProxyHandler {
+                Base = DedicatedBase,
+                GetProxyForUrl = Marshal.GetFunctionPointerForDelegate(_getProxyForUrlCallback)
+            });
+        }
+
+        private void GetProxyForUrl(IntPtr self, IntPtr url, IntPtr proxyinfo) {
+            var e = new ProxyUrlEventArgs {
+                Url = StringUtf16.ReadString(url)
+            };
+            _delegate.OnProxyForUrlRequested(e);
+        }
     }
 }

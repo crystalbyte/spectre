@@ -16,11 +16,12 @@ using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Bindings;
 using Crystalbyte.Chocolate.Bindings.Internal;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class LoadHandler : OwnedAdapter {
+namespace Crystalbyte.Chocolate {
+    public sealed class LoadHandler : RefCountedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly OnLoadEndCallback _loadEndCallback;
         private readonly OnLoadErrorCallback _loadErrorCallback;

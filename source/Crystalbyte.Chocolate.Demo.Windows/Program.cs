@@ -10,16 +10,14 @@
 
 #endregion
 
-#region Namespace Directives
+#region Namespace directives
 
 using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
-{
-    internal static class Program
-    {
+namespace Crystalbyte.Chocolate {
+    internal static class Program {
         /// <summary>
         ///   The main entry point for the application.
         /// </summary>

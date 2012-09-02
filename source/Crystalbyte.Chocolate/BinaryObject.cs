@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class BinaryObject : Adapter {
+    public sealed class BinaryObject : NativeObject {
         public BinaryObject(Stream stream)
             : base(typeof (CefBinaryValue), true) {
             var length = (int) stream.Length;

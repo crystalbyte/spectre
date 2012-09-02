@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class BrowserSettings : Adapter {
+    public sealed class BrowserSettings : NativeObject {
         private readonly bool _isOwned;
 
         internal BrowserSettings()

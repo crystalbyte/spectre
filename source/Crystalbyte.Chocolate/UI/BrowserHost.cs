@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    internal sealed class BrowserHost : Adapter {
+    internal sealed class BrowserHost : NativeObject {
         private BrowserHost(IntPtr handle)
             : base(typeof (CefBrowserHost), true) {
             NativeHandle = handle;

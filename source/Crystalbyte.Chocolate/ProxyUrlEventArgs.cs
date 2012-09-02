@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -16,14 +16,10 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class BrowserEventArgs : EventArgs {
-        internal BrowserEventArgs(Browser browser) {
-            Browser = browser;
-        }
+namespace Crystalbyte.Chocolate {
+    public sealed class ProxyUrlEventArgs : EventArgs {
+        internal ProxyUrlEventArgs() {}
 
-        internal BrowserEventArgs() {}
-
-        public Browser Browser { get; internal set; }
+        public string Url { get; internal set; }
     }
 }

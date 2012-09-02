@@ -7,21 +7,18 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-using System.IO;
-using Crystalbyte.Chocolate.Scripting;
-using System.Collections.Generic;
 
 #endregion
 
 #region Namespace directives
 
 using System;
-using System.Reflection;
-using Crystalbyte.Chocolate.UI;
+using System.Collections.Generic;
+using Crystalbyte.Chocolate.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Chocolate.UI {
     public abstract class Bootstrapper {
         protected abstract IRenderTarget CreateRenderTarget();
 
@@ -34,19 +31,19 @@ namespace Crystalbyte.Chocolate {
         }
 
         public virtual void Run() {
-            var del = CreateAppDelegate();
-            del.Initialized += OnFrameworkInitialized;
+            var app = CreateAppDelegate();
+            app.Initialized += OnFrameworkInitialized;
 
-			ConfigureSettings(Framework.Settings);
-            Framework.Initialize(del);
+            ConfigureSettings(Framework.Settings);
+            Framework.Initialize(app);
 
             if (!Framework.IsRootProcess) {
                 return;
             }
 
-			InitializeRenderProcess();
-			var factories = ConfigureSchemeHandlers();
-			factories.ForEach(x => factories.ForEach(SchemeManager.Register));
+            InitializeRenderProcess();
+            var factories = ConfigureSchemeHandlers();
+            factories.ForEach(SchemeManager.Register);
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);
@@ -55,33 +52,28 @@ namespace Crystalbyte.Chocolate {
             Framework.Shutdown();
         }
 
-	
-		protected virtual void ConfigureSettings(FrameworkSettings settings) {
-			
-		}
+        protected virtual void ConfigureSettings(FrameworkSettings settings) {}
 
-		protected virtual void InitializeRenderProcess() {
-		
-		}
+        protected virtual void InitializeRenderProcess() {}
 
         protected virtual IList<SchemeDescriptor> ConfigureSchemeHandlers() {
-			return new List<SchemeDescriptor>();
-		}
-
-		protected virtual IList<ScriptingExtension> RegisterScriptingExtensions () {
-			return new List<ScriptingExtension>();
-		}
-
-        private void OnFrameworkInitialized(object sender, EventArgs e) {
-			var extensions = RegisterScriptingExtensions();
-			if (extensions != null) {
-				extensions.ForEach(RegisterScriptingExtension);
-			}
+            return new List<SchemeDescriptor>();
         }
 
-		private void RegisterScriptingExtension(ScriptingExtension extension) {
-			var name = Guid.NewGuid().ToString();
-			ScriptingRuntime.RegisterExtension(name, extension);
-		}
+        protected virtual IList<ScriptingExtension> RegisterScriptingExtensions() {
+            return new List<ScriptingExtension>();
+        }
+
+        private void OnFrameworkInitialized(object sender, EventArgs e) {
+            var extensions = RegisterScriptingExtensions();
+            if (extensions != null) {
+                extensions.ForEach(RegisterScriptingExtension);
+            }
+        }
+
+        private static void RegisterScriptingExtension(ScriptingExtension extension) {
+            var name = Guid.NewGuid().ToString();
+            ScriptingRuntime.RegisterExtension(name, extension);
+        }
     }
 }

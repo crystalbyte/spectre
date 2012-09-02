@@ -14,13 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate;
 using Crystalbyte.Chocolate.Bindings.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class FrameworkSettings : Adapter {
+namespace Crystalbyte.Chocolate {
+    public sealed class FrameworkSettings : NativeObject {
         public FrameworkSettings()
             : base(typeof (CefSettings)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
@@ -30,67 +29,67 @@ namespace Crystalbyte.Chocolate.UI {
             });
         }
 
-		public string BrowserSubprocessPath {
-			get {
-				var reflection = MarshalFromNative<CefSettings> ();
-				return Marshal.PtrToStringUni(reflection.BrowserSubprocessPath.Str);
-			}
-			set {
-				var reflection = MarshalFromNative<CefSettings> ();
-				reflection.BrowserSubprocessPath = new CefStringUtf16 {
+        public string BrowserSubprocessPath {
+            get {
+                var reflection = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(reflection.BrowserSubprocessPath.Str);
+            }
+            set {
+                var reflection = MarshalFromNative<CefSettings>();
+                reflection.BrowserSubprocessPath = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-				MarshalToNative(reflection);
-			}
-		}
+                MarshalToNative(reflection);
+            }
+        }
 
-		public string LocalesDirPath {
-			get {
-				var reflection = MarshalFromNative<CefSettings> ();
-				return Marshal.PtrToStringUni(reflection.LocalesDirPath.Str);
-			}
-			set {
-				var reflection = MarshalFromNative<CefSettings> ();
-				reflection.LocalesDirPath = new CefStringUtf16 {
+        public string LocalesDirPath {
+            get {
+                var reflection = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(reflection.LocalesDirPath.Str);
+            }
+            set {
+                var reflection = MarshalFromNative<CefSettings>();
+                reflection.LocalesDirPath = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-				MarshalToNative(reflection);
-			}
-		}
+                MarshalToNative(reflection);
+            }
+        }
 
-		public string PackFilePath {
-			get {
-				var reflection = MarshalFromNative<CefSettings> ();
-				return Marshal.PtrToStringUni(reflection.PackFilePath.Str);
-			}
-			set {
-				var reflection = MarshalFromNative<CefSettings> ();
-				reflection.PackFilePath = new CefStringUtf16 {
+        public string PackFilePath {
+            get {
+                var reflection = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(reflection.PackFilePath.Str);
+            }
+            set {
+                var reflection = MarshalFromNative<CefSettings>();
+                reflection.PackFilePath = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-				MarshalToNative(reflection);
-			}
-		}
+                MarshalToNative(reflection);
+            }
+        }
 
-		public string Locale {
-			get {
-				var reflection = MarshalFromNative<CefSettings> ();
-				return Marshal.PtrToStringUni(reflection.Locale.Str);
-			}
-			set {
-				var reflection = MarshalFromNative<CefSettings> ();
-				reflection.Locale = new CefStringUtf16 {
+        public string Locale {
+            get {
+                var reflection = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(reflection.Locale.Str);
+            }
+            set {
+                var reflection = MarshalFromNative<CefSettings>();
+                reflection.Locale = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-				MarshalToNative(reflection);
-			}
-		}
+                MarshalToNative(reflection);
+            }
+        }
 
-		public LogSeverity LogSeverity {
+        public LogSeverity LogSeverity {
             get {
                 var reflection = MarshalFromNative<CefSettings>();
                 return (LogSeverity) reflection.LogSeverity;

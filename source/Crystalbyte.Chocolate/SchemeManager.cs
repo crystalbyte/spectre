@@ -19,11 +19,9 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate {
     public static class SchemeManager {
-
-		public static void Register (SchemeDescriptor descriptor)
-		{
-			Register(descriptor.Scheme, descriptor.Domain, descriptor.Factory);
-		}
+        public static void Register(SchemeDescriptor descriptor) {
+            Register(descriptor.Scheme, descriptor.Domain, descriptor.Factory);
+        }
 
         public static void Register(string scheme, string domain, SchemeHandlerFactory factory) {
             if (scheme == null) {

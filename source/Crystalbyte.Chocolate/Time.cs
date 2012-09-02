@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class Time : Adapter {
+    public sealed class Time : NativeObject {
         private readonly bool _isOwned;
 
         public Time(DateTime time)

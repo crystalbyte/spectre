@@ -13,13 +13,15 @@
 #region Namespace directives
 
 using System;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class ProxyUrlEventArgs : EventArgs {
-        internal ProxyUrlEventArgs() {}
-
-        public string Url { get; internal set; }
+namespace Crystalbyte.Chocolate {
+    internal sealed class BrowserCreationArgs {
+        public Uri StartUri { get; set; }
+        public ClientHandler ClientHandler { get; set; }
+        public NativeObject WindowInfo { get; set; }
+        public BrowserSettings Settings { get; set; }
     }
 }

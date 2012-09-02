@@ -24,7 +24,7 @@ namespace Crystalbyte.Chocolate {
     ///   This class does manage the objects lifecycle allocating unmanaged memory on construction.
     ///   Memory is released once the reference counter reaches zero.
     /// </summary>
-    public abstract class OwnedAdapter : Adapter {
+    public abstract class RefCountedNativeObject : NativeObject {
         private readonly ReleaseCallback _decrementDelegate;
         private readonly CefBase _dedicatedBase;
         private readonly GetRefctCallback _getRefCountDelegate;
@@ -32,7 +32,7 @@ namespace Crystalbyte.Chocolate {
         private readonly object _mutex;
         private int _referenceCounter;
 
-        protected OwnedAdapter(Type nativeType)
+        protected RefCountedNativeObject(Type nativeType)
             : base(nativeType, true) {
             _mutex = new object();
             _referenceCounter = 1;

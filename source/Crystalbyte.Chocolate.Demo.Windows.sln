@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Demo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate", "Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj", "{DC202E77-073A-4881-84C9-94B6BC7469B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Web.Razor", "Crystalbyte.Chocolate.AspNet.WebStack\src\System.Web.Razor\System.Web.Razor.csproj", "{8F18041B-9410-4C36-A9C5-067813DF5F31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -50,6 +52,21 @@ Global
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|x86.ActiveCfg = Release|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.CodeCoverage|Any CPU.ActiveCfg = CodeCoverage|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.CodeCoverage|Any CPU.Build.0 = CodeCoverage|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.CodeCoverage|Mixed Platforms.ActiveCfg = CodeCoverage|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.CodeCoverage|Mixed Platforms.Build.0 = CodeCoverage|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.CodeCoverage|x86.ActiveCfg = CodeCoverage|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8F18041B-9410-4C36-A9C5-067813DF5F31}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Mixed Platforms.ActiveCfg = Release|Any CPU

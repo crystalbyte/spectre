@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class Request : Adapter {
+    public sealed class Request : NativeObject {
         public Request()
             : base(typeof (CefRequest)) {
             NativeHandle = CefRequestCapi.CefRequestCreate();

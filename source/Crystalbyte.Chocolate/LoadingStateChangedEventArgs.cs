@@ -13,16 +13,15 @@
 #region Namespace directives
 
 using System;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class BrowserClosingEventArgs : EventArgs {
-        internal BrowserClosingEventArgs(Browser browser) {
-            Browser = browser;
-        }
-
+namespace Crystalbyte.Chocolate {
+    public sealed class LoadingStateChangedEventArgs : EventArgs {
         public Browser Browser { get; internal set; }
-        public bool IsCanceled { get; set; }
+        public bool IsLoading { get; internal set; }
+        public bool CanGoForward { get; internal set; }
+        public bool CanGoBack { get; internal set; }
     }
 }

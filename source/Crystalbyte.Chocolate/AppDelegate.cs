@@ -17,7 +17,7 @@ using Crystalbyte.Chocolate.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Chocolate {
     public class AppDelegate {
         public event EventHandler<BrowserEventArgs> BrowserDestroyed;
 

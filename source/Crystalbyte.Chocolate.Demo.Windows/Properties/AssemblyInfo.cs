@@ -10,7 +10,7 @@
 
 #endregion
 
-#region Namespace Directives
+#region Namespace directives
 
 using System.Reflection;
 using System.Runtime.InteropServices;

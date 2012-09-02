@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -13,31 +13,20 @@
 #region Namespace directives
 
 using System;
-using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class ProxyHandler : OwnedAdapter {
-        private readonly AppDelegate _delegate;
-        private readonly GetProxyForUrlCallback _getProxyForUrlCallback;
-
-        public ProxyHandler(AppDelegate @delegate)
-            : base(typeof (CefProxyHandler)) {
-            _delegate = @delegate;
-            _getProxyForUrlCallback = GetProxyForUrl;
-            MarshalToNative(new CefProxyHandler {
-                Base = DedicatedBase,
-                GetProxyForUrl = Marshal.GetFunctionPointerForDelegate(_getProxyForUrlCallback)
-            });
+namespace Crystalbyte.Chocolate {
+    public sealed class NavigatedEventArgs : EventArgs {
+        internal NavigatedEventArgs(string address, Browser browser, Frame frame) {
+            Address = address;
+            Browser = browser;
+            Frame = frame;
         }
 
-        private void GetProxyForUrl(IntPtr self, IntPtr url, IntPtr proxyinfo) {
-            var e = new ProxyUrlEventArgs {
-                Url = StringUtf16.ReadString(url)
-            };
-            _delegate.OnProxyForUrlRequested(e);
-        }
+        public string Address { get; private set; }
+        public Frame Frame { get; internal set; }
+        public Browser Browser { get; internal set; }
     }
 }

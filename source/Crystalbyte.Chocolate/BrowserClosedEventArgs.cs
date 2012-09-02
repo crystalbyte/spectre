@@ -1,4 +1,4 @@
-﻿#region Copyright notice
+#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -13,19 +13,16 @@
 #region Namespace directives
 
 using System;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class NavigatedEventArgs : EventArgs {
-        internal NavigatedEventArgs(string address, Browser browser, Frame frame) {
-            Address = address;
+namespace Crystalbyte.Chocolate {
+    public sealed class BrowserClosedEventArgs : EventArgs {
+        internal BrowserClosedEventArgs(Browser browser) {
             Browser = browser;
-            Frame = frame;
         }
 
-        public string Address { get; private set; }
-        public Frame Frame { get; internal set; }
-        public Browser Browser { get; internal set; }
+        public Browser Browser { get; private set; }
     }
 }

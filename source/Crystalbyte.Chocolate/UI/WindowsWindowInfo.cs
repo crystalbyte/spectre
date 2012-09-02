@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.Bindings.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class WindowsWindowInfo : Adapter {
+    public sealed class WindowsWindowInfo : NativeObject {
         private readonly bool _isOwned;
 
         public WindowsWindowInfo(IRenderTarget target)
