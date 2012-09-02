@@ -1,7 +1,6 @@
 [submodule "source/Crystalbyte.Chocolate.AspNet.WebStack"]
 	path = source/Crystalbyte.Chocolate.AspNet.WebStack
 	url = https://git01.codeplex.com/forks/krasshirsch/chocolate
-	
 [submodule "source/AspNet.WebStack"]
 	path = source/AspNet.WebStack
 	url = https://git01.codeplex.com/aspnetwebstack.git
