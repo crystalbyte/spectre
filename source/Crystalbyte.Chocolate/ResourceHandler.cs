@@ -50,7 +50,7 @@ namespace Crystalbyte.Chocolate {
 
         private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback) {
             using (var e = new ResponseDataRequestingEventArgs {
-                Controller = ResponseController.FromHandle(callback)
+                Controller = AsyncActivityController.FromHandle(callback)
             }) {
                 OnResponseDataRequested(e);
                 if (e.Controller.IsPaused) {
@@ -73,10 +73,32 @@ namespace Crystalbyte.Chocolate {
         }
 
         private int ProcessRequest(IntPtr self, IntPtr request, IntPtr callback) {
-            return 0;
+            var e = new ResourceRequestedEventArgs {
+                 Controller = AsyncActivityController.FromHandle(callback),
+                 Request = Request.FromHandle(request)
+            };
+            OnResourceRequested(e);
+            if (e.IsCanceled) {
+                e.Controller.Cancel();
+            } else {
+                e.Controller.Continue();
+            }
+            return e.IsCanceled ? 0 : 1;
         }
 
-        private void GetResponseHeaders(IntPtr self, IntPtr response, IntPtr responselength, IntPtr redirecturl) {}
+        public event EventHandler<ResourceRequestedEventArgs> ResourceRequested;
+
+        protected virtual void OnResourceRequested(ResourceRequestedEventArgs e) {
+            var handler = ResourceRequested;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        private void GetResponseHeaders(IntPtr self, IntPtr response, IntPtr responselength, IntPtr redirecturl) {
+            
+
+        }
 
         private void Cancel(IntPtr self) {}
 

@@ -39,8 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cherry\CherryResourceHandler.cs" />
+    <Compile Include="Cherry\CherrySchemeDescriptor.cs" />
+    <Compile Include="Cherry\CherrySchemeHandlerFactory.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
+    <Compile Include="ResourceRequestedEventArgs.cs" />
     <Compile Include="UI\Bootstrapper.cs" />
     <Compile Include="PostElementCollection.cs" />
     <Compile Include="Request.cs" />
@@ -48,7 +52,7 @@
     <Compile Include="CreateHandlerEventArgs.cs" />
     <Compile Include="ResourceHandler.cs" />
     <Compile Include="ResponseDataRequestedEventArgs.cs" />
-    <Compile Include="ResponseController.cs" />
+    <Compile Include="AsyncActivityController.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
     <Compile Include="StatusType.cs" />
     <Compile Include="ChocolateException.cs" />
@@ -169,4 +173,5 @@
       <Name>Crystalbyte.Chocolate.Bindings</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>

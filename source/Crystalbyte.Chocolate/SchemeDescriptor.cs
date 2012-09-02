@@ -11,9 +11,10 @@
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class SchemeDescriptor {
+    public class SchemeDescriptor {
+
         public SchemeDescriptor(string scheme, SchemeHandlerFactory factory)
-            : this(scheme, string.Empty, factory) {}
+            : this(scheme, string.Empty, factory) { }
 
         public SchemeDescriptor(string scheme, string domain, SchemeHandlerFactory factory) {
             Scheme = scheme;
@@ -21,10 +22,12 @@ namespace Crystalbyte.Chocolate {
             Factory = factory;
         }
 
-        public string Scheme { get; private set; }
+        protected SchemeDescriptor() { }
 
-        public string Domain { get; private set; }
+        public virtual string Scheme { get; private set; }
 
-        public SchemeHandlerFactory Factory { get; private set; }
+        public virtual string Domain { get; private set; }
+
+        public virtual SchemeHandlerFactory Factory { get; private set; }
     }
 }

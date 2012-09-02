@@ -19,20 +19,20 @@ using Crystalbyte.Chocolate.Bindings;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class ResponseController : NativeObject {
-        private ResponseController(IntPtr handle)
+    public sealed class AsyncActivityController : NativeObject {
+        private AsyncActivityController(IntPtr handle)
             : base(typeof (CefCallback)) {
             NativeHandle = handle;
         }
 
-        public static ResponseController FromHandle(IntPtr handle) {
-            return new ResponseController(handle);
+        public static AsyncActivityController FromHandle(IntPtr handle) {
+            return new AsyncActivityController(handle);
         }
 
         public bool IsCanceled { get; private set; }
         public bool IsPaused { get; set; }
 
-        public void Resume() {
+        public void Continue() {
             var r = MarshalFromNative<CefCallback>();
             var action = (ContCallback) Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (ContCallback));
             action(NativeHandle);

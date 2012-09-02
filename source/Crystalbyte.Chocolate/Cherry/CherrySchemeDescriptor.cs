@@ -10,19 +10,24 @@
 
 #endregion
 
-#region Namespace directives
+namespace Crystalbyte.Chocolate.Cherry {
+    public sealed class CherrySchemeDescriptor : SchemeDescriptor {
+        private readonly SchemeHandlerFactory _factory;
 
-using System;
-using Crystalbyte.Chocolate.UI;
+        public CherrySchemeDescriptor() {
+            _factory = new CherrySchemeHandlerFactory();
+        }
 
-#endregion
+        public override string Scheme {
+            get { return "cherry"; }
+        }
 
-namespace Crystalbyte.Chocolate {
-    public sealed class WinformsBootstrapper : Bootstrapper {
-        protected override IRenderTarget CreateRenderTarget() {
-            return new Window {
-                StartupUri = new Uri("cherry://Views/Home")
-            };
+        public override SchemeHandlerFactory Factory {
+            get { return _factory; }
+        }
+
+        public override string Domain {
+            get { return "localhost"; }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         public BinaryWriter ResponseWriter { get; private set; }
-        public ResponseController Controller { get; internal set; }
+        public AsyncActivityController Controller { get; internal set; }
         public bool IsCompleted { get; set; }
 
         public void Dispose() {
