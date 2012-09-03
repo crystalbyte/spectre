@@ -44,6 +44,8 @@
     <Compile Include="Cherry\CherrySchemeHandlerFactory.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="ResponseHeadersRequestedEventArgs.cs" />
     <Compile Include="ResourceRequestedEventArgs.cs" />
     <Compile Include="UI\Bootstrapper.cs" />
     <Compile Include="PostElementCollection.cs" />

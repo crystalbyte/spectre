@@ -95,12 +95,23 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        private void GetResponseHeaders(IntPtr self, IntPtr response, IntPtr responselength, IntPtr redirecturl) {
-            
-
+        private void GetResponseHeaders(IntPtr self, IntPtr response, ref int responselength, IntPtr redirecturl) {
+            var e = new ResponseHeadersRequestedEventArgs {
+                Response = new Response()
+            };
+            OnResponseHeadersRequested(e);
+            if (e.RedirectUri != null) {
+                StringUtf16.WriteString(e.RedirectUri.AbsoluteUri, redirecturl);
+            }
         }
 
-        private void Cancel(IntPtr self) {}
+        protected virtual void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
+            
+        }
+
+        private void Cancel(IntPtr self) {
+            
+        }
 
         private int CanGetCookie(IntPtr self, IntPtr cookie) {
             return 0;
