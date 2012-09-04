@@ -10,24 +10,33 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Cherry {
-    public sealed class CherrySchemeDescriptor : SchemeDescriptor {
-        private readonly SchemeHandlerFactory _factory;
+#region Namespace directives
 
-        public CherrySchemeDescriptor() {
-            _factory = new CherrySchemeHandlerFactory();
+using System;
+using System.Reflection;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.Schemes {
+    public sealed class MvcResourceHandler : ResourceHandler {
+        protected override void OnResponseDataRequested(ResponseDataRequestingEventArgs e) {
+            e.IsCompleted = true;
         }
 
-        public override string Scheme {
-            get { return "cherry"; }
+        protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
+            base.OnResponseHeadersRequested(e);
         }
 
-        public override SchemeHandlerFactory Factory {
-            get { return _factory; }
+        protected override void OnResourceRequested(ResourceRequestedEventArgs e) {
+
+            var entryAssembly = Assembly.GetEntryAssembly();
+            
+
+            base.OnResourceRequested(e);
         }
 
-        public override string Domain {
-            get { return "localhost"; }
+        protected override void OnCanceled(EventArgs e) {
+            base.OnCanceled(e);
         }
     }
 }

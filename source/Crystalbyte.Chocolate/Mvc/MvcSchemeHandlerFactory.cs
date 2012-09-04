@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -10,16 +10,10 @@
 
 #endregion
 
-#region Namespace directives
-
-using System;
-
-#endregion
-
-namespace Crystalbyte.Chocolate {
-    public sealed class ResourceRequestedEventArgs : EventArgs {
-        public bool IsCanceled { get; set; }
-        public Request Request { get; internal set; }
-        public AsyncActivityController Controller { get; internal set; }
+namespace Crystalbyte.Chocolate.Schemes {
+    public sealed class MvcSchemeHandlerFactory : SchemeHandlerFactory {
+        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
+            return new MvcResourceHandler();
+        }
     }
 }

@@ -74,13 +74,14 @@ namespace Crystalbyte.Chocolate {
 
         private int ProcessRequest(IntPtr self, IntPtr request, IntPtr callback) {
             var e = new ResourceRequestedEventArgs {
-                 Controller = AsyncActivityController.FromHandle(callback),
-                 Request = Request.FromHandle(request)
+                Controller = AsyncActivityController.FromHandle(callback),
+                Request = Request.FromHandle(request)
             };
             OnResourceRequested(e);
             if (e.IsCanceled) {
                 e.Controller.Cancel();
-            } else {
+            }
+            else {
                 e.Controller.Continue();
             }
             return e.IsCanceled ? 0 : 1;
@@ -95,19 +96,22 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        private void GetResponseHeaders(IntPtr self, IntPtr response, ref int responselength, IntPtr redirecturl) {
+        private void GetResponseHeaders(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl) {
             var e = new ResponseHeadersRequestedEventArgs {
                 Response = new Response()
             };
+
             OnResponseHeadersRequested(e);
+
             if (e.RedirectUri != null) {
                 StringUtf16.WriteString(e.RedirectUri.AbsoluteUri, redirecturl);
             }
+
+            // We will pass the data as a stream, its length cannot be determined at this point.
+            responselength = -1;
         }
 
-        protected virtual void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
-            
-        }
+        protected virtual void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {}
 
         private void Cancel(IntPtr self) {
             

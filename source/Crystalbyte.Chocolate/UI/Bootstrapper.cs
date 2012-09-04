@@ -14,7 +14,7 @@
 
 using System;
 using System.Collections.Generic;
-using Crystalbyte.Chocolate.Cherry;
+using Crystalbyte.Chocolate.Schemes;
 using Crystalbyte.Chocolate.Scripting;
 
 #endregion
@@ -59,7 +59,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         protected virtual IList<SchemeDescriptor> ConfigureSchemeHandlers() {
             return new List<SchemeDescriptor> {
-                new CherrySchemeDescriptor()
+                new MvcSchemeDescriptor()
             };
         }
 

@@ -12,9 +12,8 @@
 
 namespace Crystalbyte.Chocolate {
     public class SchemeDescriptor {
-
         public SchemeDescriptor(string scheme, SchemeHandlerFactory factory)
-            : this(scheme, string.Empty, factory) { }
+            : this(scheme, string.Empty, factory) {}
 
         public SchemeDescriptor(string scheme, string domain, SchemeHandlerFactory factory) {
             Scheme = scheme;
@@ -22,7 +21,7 @@ namespace Crystalbyte.Chocolate {
             Factory = factory;
         }
 
-        protected SchemeDescriptor() { }
+        protected SchemeDescriptor() {}
 
         public virtual string Scheme { get; private set; }
 

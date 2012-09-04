@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -10,16 +10,24 @@
 
 #endregion
 
-#region Namespace directives
+namespace Crystalbyte.Chocolate.Schemes {
+    public sealed class MvcSchemeDescriptor : SchemeDescriptor {
+        private readonly SchemeHandlerFactory _factory;
 
-using System;
+        public MvcSchemeDescriptor() {
+            _factory = new MvcSchemeHandlerFactory();
+        }
 
-#endregion
+        public override string Scheme {
+            get { return "mvc"; }
+        }
 
-namespace Crystalbyte.Chocolate {
-    public sealed class ResourceRequestedEventArgs : EventArgs {
-        public bool IsCanceled { get; set; }
-        public Request Request { get; internal set; }
-        public AsyncActivityController Controller { get; internal set; }
+        public override SchemeHandlerFactory Factory {
+            get { return _factory; }
+        }
+
+        public override string Domain {
+            get { return "localhost"; }
+        }
     }
 }

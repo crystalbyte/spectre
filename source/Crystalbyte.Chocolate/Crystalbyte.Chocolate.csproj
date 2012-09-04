@@ -39,9 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cherry\CherryResourceHandler.cs" />
-    <Compile Include="Cherry\CherrySchemeDescriptor.cs" />
-    <Compile Include="Cherry\CherrySchemeHandlerFactory.cs" />
+    <Compile Include="Schemes\MvcResourceHandler.cs" />
+    <Compile Include="Schemes\MvcSchemeDescriptor.cs" />
+    <Compile Include="Schemes\MvcSchemeHandlerFactory.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
     <Compile Include="Response.cs" />

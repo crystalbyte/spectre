@@ -18,7 +18,7 @@ namespace Crystalbyte.Chocolate.Bindings
 	}
 	
 	public delegate int ProcessRequestCallback(IntPtr self, IntPtr request, IntPtr callback);
-    public delegate void GetResponseHeadersCallback(IntPtr self, IntPtr response, ref int responselength, IntPtr redirecturl);
+    public delegate void GetResponseHeadersCallback(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl);
 	public delegate int ReadResponseCallback(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback);
 	public delegate int CanGetCookieCallback(IntPtr self, IntPtr cookie);
 	public delegate int CanSetCookieCallback(IntPtr self, IntPtr cookie);
