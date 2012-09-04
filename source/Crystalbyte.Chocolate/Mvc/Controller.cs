@@ -7,5 +7,6 @@ namespace Crystalbyte.Chocolate.Mvc
 {
     public abstract class Controller
     {
+
     }
 }

@@ -30,6 +30,7 @@ namespace Crystalbyte.Chocolate.Schemes {
         protected override void OnResourceRequested(ResourceRequestedEventArgs e) {
 
             var entryAssembly = Assembly.GetEntryAssembly();
+
             
 
             base.OnResourceRequested(e);
