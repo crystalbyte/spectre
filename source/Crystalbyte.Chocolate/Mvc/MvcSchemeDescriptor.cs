@@ -10,24 +10,63 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Schemes {
-    public sealed class MvcSchemeDescriptor : SchemeDescriptor {
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+namespace Crystalbyte.Chocolate.Mvc
+{
+    public sealed class MvcSchemeDescriptor : SchemeDescriptor
+    {
         private readonly SchemeHandlerFactory _factory;
 
-        public MvcSchemeDescriptor() {
+        public MvcSchemeDescriptor()
+        {
             _factory = new MvcSchemeHandlerFactory();
+            _assemblyCatalog = new List<Assembly>();
         }
 
-        public override string Scheme {
+        public override string Scheme
+        {
             get { return "mvc"; }
         }
 
-        public override SchemeHandlerFactory Factory {
+        public override SchemeHandlerFactory Factory
+        {
             get { return _factory; }
         }
 
-        public override string Domain {
+        public override string Domain
+        {
             get { return "localhost"; }
+        }
+
+        private readonly List<Assembly> _assemblyCatalog;
+        public IList<Assembly> AssemblyCatalog
+        {
+            get { return _assemblyCatalog; }
+        }
+
+        public override void OnRegistered(EventArgs e) {
+            base.OnRegistered(e);
+
+            // Add entry assembly by default
+            var entryAssembly = Assembly.GetEntryAssembly();
+            if (entryAssembly != null && !AssemblyCatalog.Contains(entryAssembly)) {
+                AssemblyCatalog.Add(entryAssembly);
+            }
+
+            var controllers = QueryControllers();
+            controllers.ForEach(x => {
+                var routes = x.GetCustomAttributes(typeof (RouteAttribute), true)
+                    .Cast<RouteAttribute>();
+                routes.ForEach(r => RouteRegistrar.Register(r.Path, x));
+            });
+        }
+
+        private IEnumerable<Type> QueryControllers() {
+            return AssemblyCatalog.SelectMany(x => x.GetTypes()
+                .Where(type => typeof(ViewController).IsAssignableFrom(type)));
         }
     }
 }

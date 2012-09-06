@@ -14,7 +14,7 @@
 
 using System;
 using System.Collections.Generic;
-using Crystalbyte.Chocolate.Schemes;
+using Crystalbyte.Chocolate.Mvc;
 using Crystalbyte.Chocolate.Scripting;
 
 #endregion

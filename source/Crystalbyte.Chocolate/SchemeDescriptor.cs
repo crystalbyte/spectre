@@ -10,6 +10,8 @@
 
 #endregion
 
+using System;
+
 namespace Crystalbyte.Chocolate {
     public class SchemeDescriptor {
         public SchemeDescriptor(string scheme, SchemeHandlerFactory factory)
@@ -28,5 +30,14 @@ namespace Crystalbyte.Chocolate {
         public virtual string Domain { get; private set; }
 
         public virtual SchemeHandlerFactory Factory { get; private set; }
+
+        public event EventHandler Registered;
+
+        public virtual void OnRegistered(EventArgs e) {
+            var handler = Registered;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
     }
 }

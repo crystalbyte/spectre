@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Crystalbyte.Chocolate.Mvc
 {
-    public abstract class Controller
-    {
-
+    public abstract class ViewController {
+        public abstract IView CreateView();
     }
 }

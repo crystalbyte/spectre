@@ -13,6 +13,9 @@
 #region Namespace directives
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Crystalbyte.Chocolate.Mvc;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
@@ -21,7 +24,7 @@ namespace Crystalbyte.Chocolate {
     public sealed class WinformsBootstrapper : Bootstrapper {
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
-                StartupUri = new Uri("mvc://Views/Home")
+                StartupUri = new Uri("mvc://localhost/views/demo/windows")
             };
         }
     }

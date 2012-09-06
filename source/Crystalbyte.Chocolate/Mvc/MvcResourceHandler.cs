@@ -14,30 +14,48 @@
 
 using System;
 using System.Reflection;
+using System.Text;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Schemes {
+namespace Crystalbyte.Chocolate.Mvc {
     public sealed class MvcResourceHandler : ResourceHandler {
-        protected override void OnResponseDataRequested(ResponseDataRequestingEventArgs e) {
-            e.IsCompleted = true;
+
+        private Uri _requestRoute;
+        private Type _type;
+        private bool _isFinished;
+
+        protected override void OnResponseDataReading(ResponseDataReadingEventArgs e) {
+
+            if (_isFinished) {
+                e.IsCompleted = true;
+                return;
+            }
+
+            var controller = (ViewController) Activator.CreateInstance(_type);
+            var view = controller.CreateView();
+            var markup = view.Compose();
+
+            e.ResponseWriter.Write(markup);
+            _isFinished = true;
         }
 
         protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
-            base.OnResponseHeadersRequested(e);
+            e.Response.MimeType = "text/html";
+
+            var success = RouteRegistrar.TryGetController(_requestRoute.AbsolutePath, out _type);
+            if (!success) {
+                e.Response.StatusCode = 404;
+                e.Response.StatusText = string.Format("Document not found @ '{0}'", _requestRoute);
+                return;
+            }
+            
+            e.Response.StatusCode = 200;
+            e.Response.StatusText = "OK";
         }
 
         protected override void OnResourceRequested(ResourceRequestedEventArgs e) {
-
-            var entryAssembly = Assembly.GetEntryAssembly();
-
-            
-
-            base.OnResourceRequested(e);
-        }
-
-        protected override void OnCanceled(EventArgs e) {
-            base.OnCanceled(e);
+            _requestRoute = new Uri(e.Request.Url);
         }
     }
 }

@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Schemes {
+namespace Crystalbyte.Chocolate.Mvc {
     public sealed class MvcSchemeHandlerFactory : SchemeHandlerFactory {
         protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
             return new MvcResourceHandler();

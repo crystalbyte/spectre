@@ -49,10 +49,10 @@ namespace Crystalbyte.Chocolate {
         }
 
         private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback) {
-            using (var e = new ResponseDataRequestingEventArgs {
+            using (var e = new ResponseDataReadingEventArgs {
                 Controller = AsyncActivityController.FromHandle(callback)
             }) {
-                OnResponseDataRequested(e);
+                OnResponseDataReading(e);
                 if (e.Controller.IsPaused) {
                     // data retrieval can be resumed, by calling Resume() on the controller
                     bytesread = 0;
@@ -61,13 +61,19 @@ namespace Crystalbyte.Chocolate {
 
                 e.ResponseWriter.Flush();
                 e.ResponseWriter.Seek(0, SeekOrigin.Begin);
+
+                if (e.ResponseWriter.BaseStream.Length == 0) {
+                    bytesread = 0;
+                    return 0;    
+                }
+
                 using (var reader = new BinaryReader(e.ResponseWriter.BaseStream)) {
-                    // TODO: Will break for files larger than 4 GB, split into multiple iterations
-                    bytesread = (int) e.ResponseWriter.BaseStream.Length;
+                    // The BinaryWriter inserts the stream length into the first byte, word or unsigned int as an UTF7 encoded value.
+                    // http://msdn.microsoft.com/en-us/library/system.io.binarywriter.aspx
+                    bytesread = reader.Read7BitEncodedInt();
                     var bytes = reader.ReadBytes(bytesread);
                     Marshal.Copy(bytes, 0, dataout, bytesread);
                 }
-
                 return e.IsCompleted ? 0 : 1;
             }
         }
@@ -107,7 +113,7 @@ namespace Crystalbyte.Chocolate {
                 StringUtf16.WriteString(e.RedirectUri.AbsoluteUri, redirecturl);
             }
 
-            // We will pass the data as a stream, its length cannot be determined at this point.
+            // We will pass the data as a stream, its length will not be determined at this point.
             responselength = -1;
         }
 
@@ -134,10 +140,10 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        public event EventHandler<ResponseDataRequestingEventArgs> ResponseDataRequested;
+        public event EventHandler<ResponseDataReadingEventArgs> ResponseDataReading;
 
-        protected virtual void OnResponseDataRequested(ResponseDataRequestingEventArgs e) {
-            var handler = ResponseDataRequested;
+        protected virtual void OnResponseDataReading(ResponseDataReadingEventArgs e) {
+            var handler = ResponseDataReading;
             if (handler != null) {
                 handler(this, e);
             }

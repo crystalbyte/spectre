@@ -39,10 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mvc\Controller.cs" />
+    <Compile Include="BinaryReaderExtension.cs" />
+    <Compile Include="Mvc\RazorView.cs" />
+    <Compile Include="Mvc\RouteRegistrar.cs" />
+    <Compile Include="Mvc\ViewController.cs" />
     <Compile Include="Mvc\MvcResourceHandler.cs" />
     <Compile Include="Mvc\MvcSchemeDescriptor.cs" />
     <Compile Include="Mvc\MvcSchemeHandlerFactory.cs" />
+    <Compile Include="Mvc\RouteAttribute.cs" />
+    <Compile Include="Mvc\IView.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
     <Compile Include="Response.cs" />
@@ -54,7 +59,7 @@
     <Compile Include="UrlRequestFlags.cs" />
     <Compile Include="CreateHandlerEventArgs.cs" />
     <Compile Include="ResourceHandler.cs" />
-    <Compile Include="ResponseDataRequestedEventArgs.cs" />
+    <Compile Include="ResponseDataReadingEventArgs.cs" />
     <Compile Include="AsyncActivityController.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
     <Compile Include="StatusType.cs" />

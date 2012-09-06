@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -18,17 +18,20 @@ using System.IO;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class ResponseDataRequestingEventArgs : EventArgs, IDisposable {
-        internal ResponseDataRequestingEventArgs() {
-            ResponseWriter = new BinaryWriter(new MemoryStream());
-        }
-
-        public BinaryWriter ResponseWriter { get; private set; }
-        public AsyncActivityController Controller { get; internal set; }
-        public bool IsCompleted { get; set; }
-
-        public void Dispose() {
-            ResponseWriter.Dispose();
+    internal static class BinaryReaderExtension {
+        public static int Read7BitEncodedInt(this BinaryReader reader) {
+            byte num3;
+            var num = 0;
+            var num2 = 0;
+            do {
+                if (num2 == 0x23) {
+                    throw new FormatException("Invalid length encoded integer.");
+                }
+                num3 = reader.ReadByte();
+                num |= (num3 & 0x7f) << num2;
+                num2 += 7;
+            } while ((num3 & 0x80) != 0);
+            return num;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿#region Copyright notice
+#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -13,25 +13,23 @@
 #region Namespace directives
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.IO;
+using System.Text;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
-    internal sealed class ScriptableObjectCollection : List<ScriptableObject>, IReadOnlyCollection<ScriptableObject> {
-        private static readonly int PointerSize = Marshal.SizeOf(typeof (IntPtr));
+namespace Crystalbyte.Chocolate {
+    public sealed class ResponseDataReadingEventArgs : EventArgs, IDisposable {
+        internal ResponseDataReadingEventArgs() {
+            ResponseWriter = new BinaryWriter(new MemoryStream(), Encoding.UTF8);
+        }
 
-        public ScriptableObjectCollection(IntPtr listHandle, int argumentCount) {
-            if (argumentCount < 1) {
-                return;
-            }
-            var current = listHandle;
-            for (var i = 0; i < argumentCount; i++) {
-                var handle = Marshal.ReadIntPtr(current);
-                Add(ScriptableObject.FromHandle(handle));
-                current = new IntPtr(current.ToInt64() + PointerSize);
-            }
+        public BinaryWriter ResponseWriter { get; private set; }
+        public AsyncActivityController Controller { get; internal set; }
+        public bool IsCompleted { get; set; }
+
+        public void Dispose() {
+            ResponseWriter.Dispose();
         }
     }
 }
