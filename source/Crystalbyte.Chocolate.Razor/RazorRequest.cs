@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -10,38 +10,12 @@
 
 #endregion
 
-#region Namespace directives
-
-using System;
-
-#endregion
-
-namespace Crystalbyte.Chocolate {
-    public class SchemeDescriptor {
-        public SchemeDescriptor(string scheme, SchemeHandlerFactory factory)
-            : this(scheme, string.Empty, factory) {}
-
-        public SchemeDescriptor(string scheme, string domain, SchemeHandlerFactory factory) {
-            Scheme = scheme;
-            Domain = domain;
-            Factory = factory;
-        }
-
-        protected SchemeDescriptor() {}
-
-        public virtual string Scheme { get; private set; }
-
-        public virtual string Domain { get; private set; }
-
-        public virtual SchemeHandlerFactory Factory { get; private set; }
-
-        public event EventHandler Registered;
-
-        public virtual void OnRegistered(EventArgs e) {
-            var handler = Registered;
-            if (handler != null) {
-                handler(this, e);
-            }
-        }
+namespace Crystalbyte.Chocolate.Razor {
+    /// <summary>
+    ///   Not used at the moment - more of a placeholder for now
+    /// </summary>
+    public class RazorRequest {
+        public string TemplatePath { get; set; }
+        public string TemplateRelativePath { get; set; }
     }
 }

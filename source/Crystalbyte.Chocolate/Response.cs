@@ -25,6 +25,11 @@ namespace Crystalbyte.Chocolate {
             NativeHandle = CefResponseCapi.CefResponseCreate();
         }
 
+        private Response(IntPtr handle)
+            : base(typeof (CefResponse)) {
+            NativeHandle = handle;
+        }
+
         public bool IsReadOnly {
             get {
                 var r = MarshalFromNative<CefResponse>();
@@ -83,6 +88,10 @@ namespace Crystalbyte.Chocolate {
                              Marshal.GetDelegateForFunctionPointer(r.SetStatusText, typeof (SetStatusTextCallback));
                 action(NativeHandle, s.NativeHandle);
             }
+        }
+
+        internal static Response FromHandle(IntPtr handle) {
+            return new Response(handle);
         }
     }
 }

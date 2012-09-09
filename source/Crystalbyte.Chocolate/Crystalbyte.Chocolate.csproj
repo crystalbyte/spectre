@@ -29,6 +29,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -40,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryReaderExtension.cs" />
-    <Compile Include="Mvc\RazorView.cs" />
     <Compile Include="Mvc\RouteRegistrar.cs" />
     <Compile Include="Mvc\ViewController.cs" />
     <Compile Include="Mvc\MvcResourceHandler.cs" />
@@ -181,5 +186,7 @@
       <Name>Crystalbyte.Chocolate.Bindings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="key.snk" />
+  </ItemGroup>
 </Project>

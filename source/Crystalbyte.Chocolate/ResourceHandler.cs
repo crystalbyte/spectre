@@ -64,7 +64,7 @@ namespace Crystalbyte.Chocolate {
 
                 if (e.ResponseWriter.BaseStream.Length == 0) {
                     bytesread = 0;
-                    return 0;    
+                    return 0;
                 }
 
                 using (var reader = new BinaryReader(e.ResponseWriter.BaseStream)) {
@@ -104,7 +104,7 @@ namespace Crystalbyte.Chocolate {
 
         private void GetResponseHeaders(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl) {
             var e = new ResponseHeadersRequestedEventArgs {
-                Response = new Response()
+                Response = Response.FromHandle(response)
             };
 
             OnResponseHeadersRequested(e);
@@ -119,9 +119,7 @@ namespace Crystalbyte.Chocolate {
 
         protected virtual void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {}
 
-        private void Cancel(IntPtr self) {
-            
-        }
+        private void Cancel(IntPtr self) {}
 
         private int CanGetCookie(IntPtr self, IntPtr cookie) {
             return 0;

@@ -13,20 +13,16 @@
 #region Namespace directives
 
 using System;
-using System.Reflection;
-using System.Text;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.Mvc {
     public sealed class MvcResourceHandler : ResourceHandler {
-
         private Uri _requestRoute;
         private Type _type;
         private bool _isFinished;
 
         protected override void OnResponseDataReading(ResponseDataReadingEventArgs e) {
-
             if (_isFinished) {
                 e.IsCompleted = true;
                 return;
@@ -49,7 +45,7 @@ namespace Crystalbyte.Chocolate.Mvc {
                 e.Response.StatusText = string.Format("Document not found @ '{0}'", _requestRoute);
                 return;
             }
-            
+
             e.Response.StatusCode = 200;
             e.Response.StatusText = "OK";
         }

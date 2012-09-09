@@ -10,40 +10,39 @@
 
 #endregion
 
+#region Namespace directives
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-namespace Crystalbyte.Chocolate.Mvc
-{
-    public sealed class MvcSchemeDescriptor : SchemeDescriptor
-    {
+
+#endregion
+
+namespace Crystalbyte.Chocolate.Mvc {
+    public sealed class MvcSchemeDescriptor : SchemeDescriptor {
         private readonly SchemeHandlerFactory _factory;
 
-        public MvcSchemeDescriptor()
-        {
+        public MvcSchemeDescriptor() {
             _factory = new MvcSchemeHandlerFactory();
             _assemblyCatalog = new List<Assembly>();
         }
 
-        public override string Scheme
-        {
+        public override string Scheme {
             get { return "mvc"; }
         }
 
-        public override SchemeHandlerFactory Factory
-        {
+        public override SchemeHandlerFactory Factory {
             get { return _factory; }
         }
 
-        public override string Domain
-        {
+        public override string Domain {
             get { return "localhost"; }
         }
 
         private readonly List<Assembly> _assemblyCatalog;
-        public IList<Assembly> AssemblyCatalog
-        {
+
+        public IList<Assembly> AssemblyCatalog {
             get { return _assemblyCatalog; }
         }
 
@@ -66,7 +65,7 @@ namespace Crystalbyte.Chocolate.Mvc
 
         private IEnumerable<Type> QueryControllers() {
             return AssemblyCatalog.SelectMany(x => x.GetTypes()
-                .Where(type => typeof(ViewController).IsAssignableFrom(type)));
+                                                       .Where(type => typeof (ViewController).IsAssignableFrom(type)));
         }
     }
 }

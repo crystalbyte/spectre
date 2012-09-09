@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate {
             var num2 = 0;
             do {
                 if (num2 == 0x23) {
-                    throw new FormatException("Invalid length encoded integer.");
+                    throw new FormatException("Invalid UTF7 integer.");
                 }
                 num3 = reader.ReadByte();
                 num |= (num3 & 0x7f) << num2;

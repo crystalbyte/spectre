@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Bindings;
 
 namespace Crystalbyte.Chocolate {
     public sealed class GeolocationRequest : NativeObject {
-        // is not auto generated due to naming collision
+        
 
         private GeolocationRequest(IntPtr handle)
             : base(typeof (CefGeolocationCallback), true) {
@@ -55,6 +55,7 @@ namespace Crystalbyte.Chocolate {
 
         #region Nested type: CefPermissionContCallback
 
+        // Has not been auto generated, due to naming collision.
         private delegate void CefPermissionContCallback(IntPtr self, int allow);
 
         #endregion

@@ -51,7 +51,7 @@ namespace Crystalbyte.Chocolate {
 
         private void OnCommandLineProcessing(IntPtr self, IntPtr processtype, IntPtr commandline) {
             var e = new ProcessStartedEventArgs {
-                ProcessType = StringUtf16.ReadString(processtype),
+                ProcessType = processtype == IntPtr.Zero ? string.Empty : StringUtf16.ReadString(processtype),
                 CommandLine = CommandLine.FromHandle(commandline)
             };
             _delegate.OnProcessStarted(e);

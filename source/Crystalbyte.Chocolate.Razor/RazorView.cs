@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -12,36 +12,38 @@
 
 #region Namespace directives
 
-using System;
+
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
-    public class SchemeDescriptor {
-        public SchemeDescriptor(string scheme, SchemeHandlerFactory factory)
-            : this(scheme, string.Empty, factory) {}
+using Crystalbyte.Chocolate.Mvc;
+using System.IO;
 
-        public SchemeDescriptor(string scheme, string domain, SchemeHandlerFactory factory) {
-            Scheme = scheme;
-            Domain = domain;
-            Factory = factory;
+namespace Crystalbyte.Chocolate.Razor {
+    /// <summary>
+    ///   The RazorView class will create the html source from the razor template and a given model.
+    ///   See: http://www.west-wind.com/weblog/posts/2010/Dec/27/Hosting-the-Razor-Engine-for-Templating-in-NonWeb-Applications
+    ///   See: http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx
+    /// </summary>
+    public sealed class RazorView : IView {
+        private readonly string _templatePath;
+        private readonly object _context;
+
+        public RazorView(string templatePath, object context) {
+            _templatePath = templatePath;
+            _context = context;
         }
 
-        protected SchemeDescriptor() {}
+        public string Compose() {
+            var host = new RazorStringHostContainer {
+                UseAppDomain = false
+            };
 
-        public virtual string Scheme { get; private set; }
+            host.Start();
 
-        public virtual string Domain { get; private set; }
+            var template = File.ReadAllText(_templatePath);
 
-        public virtual SchemeHandlerFactory Factory { get; private set; }
-
-        public event EventHandler Registered;
-
-        public virtual void OnRegistered(EventArgs e) {
-            var handler = Registered;
-            if (handler != null) {
-                handler(this, e);
-            }
+            return host.RenderTemplate(template, _context);
         }
     }
 }

@@ -1,6 +1,17 @@
-﻿<html>
+﻿
+@inherits Crystalbyte.Chocolate.Razor.RazorTemplateBase
+              
+@{
+    var model = (Crystalbyte.Chocolate.Models.DemoModel) Context; 
+}
+
+<html>
     <head>
         <title>MVC Home View</title>
     </head>
-    <body></body>
+    <body>
+        <span>
+            @model.WelcomeText
+        </span>
+    </body>
 </html>
