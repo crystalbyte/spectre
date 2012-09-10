@@ -21,6 +21,7 @@ namespace Crystalbyte.Chocolate.Mvc {
         private Uri _requestRoute;
         private Type _type;
         private bool _isFinished;
+        private IResponseProvider _handler;
 
         protected override void OnResponseDataReading(ResponseDataReadingEventArgs e) {
             if (_isFinished) {
@@ -28,11 +29,28 @@ namespace Crystalbyte.Chocolate.Mvc {
                 return;
             }
 
+            // No controller has been found
+            if (_type == null) {
+                _isFinished = true;
+                return;
+            }
+
             var controller = (ViewController) Activator.CreateInstance(_type);
             var view = controller.CreateView();
-            var markup = view.Compose();
+            var result = view.Compose();
 
-            e.ResponseWriter.Write(markup);
+            if (!result.IsErrornous) {
+                e.ResponseWriter.Write(result.Markup);
+            }
+            else {
+                var v = new ViewGenerationFailedEventArgs {
+                    Errors = result.Errors
+                };
+                controller.OnViewGenerationFailed(v);
+                var markup = controller.ComposeSurrogateMarkupCode(v.Errors);
+                e.ResponseWriter.Write(markup);
+            }
+
             _isFinished = true;
         }
 
@@ -40,7 +58,8 @@ namespace Crystalbyte.Chocolate.Mvc {
             e.Response.MimeType = "text/html";
 
             var success = RouteRegistrar.TryGetController(_requestRoute.AbsolutePath, out _type);
-            if (!success) {
+            if (!success)
+            {
                 e.Response.StatusCode = 404;
                 e.Response.StatusText = string.Format("Document not found @ '{0}'", _requestRoute);
                 return;
@@ -48,6 +67,10 @@ namespace Crystalbyte.Chocolate.Mvc {
 
             e.Response.StatusCode = 200;
             e.Response.StatusText = "OK";
+        }
+
+        private static void ProcessRequest(ResponseHeadersRequestedEventArgs e) {
+            
         }
 
         protected override void OnResourceRequested(ResourceRequestedEventArgs e) {

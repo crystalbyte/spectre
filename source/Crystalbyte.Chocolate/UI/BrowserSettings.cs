@@ -14,7 +14,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings.Internal;
+using Crystalbyte.Chocolate.Projections.Internal;
 
 #endregion
 
@@ -45,6 +45,63 @@ namespace Crystalbyte.Chocolate.UI {
 
         public static BrowserSettings FromHandle(IntPtr handle) {
             return new BrowserSettings(handle);
+        }
+
+        public bool IsFileAccessfromUrlsAllowed {
+            get {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                return r.FileAccessFromFileUrlsAllowed;
+            }
+            set {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                r.FileAccessFromFileUrlsAllowed = value;
+                MarshalToNative(r);
+            }
+        }
+
+        public bool IsUniversalAccessFromFileUrlsAllowed
+        {
+            get
+            {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                return r.UniversalAccessFromFileUrlsAllowed;
+            }
+            set
+            {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                r.UniversalAccessFromFileUrlsAllowed = value;
+                MarshalToNative(r);
+            }
+        }
+
+        public bool IsWebSecurityDisabled
+        {
+            get
+            {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                return r.WebSecurityDisabled;
+            }
+            set
+            {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                r.WebSecurityDisabled = value;
+                MarshalToNative(r);
+            }
+        }
+
+        public bool IsUserStyleSheetEnabled
+        {
+            get
+            {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                return r.UserStyleSheetEnabled;
+            }
+            set
+            {
+                var r = MarshalFromNative<CefBrowserSettings>();
+                r.UserStyleSheetEnabled = value;
+                MarshalToNative(r);
+            }
         }
     }
 }

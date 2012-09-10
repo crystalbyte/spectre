@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Projections;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
@@ -25,9 +25,11 @@ namespace Crystalbyte.Chocolate {
     public static class Framework {
         private static App _app;
         private static readonly Dictionary<IRenderTarget, HtmlRenderer> Views;
+        private static readonly SchemeHandlerFactoryManager SchemeHandlerfactoryManager;
 
         static Framework() {
             Settings = new FrameworkSettings();
+            SchemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
             Views = new Dictionary<IRenderTarget, HtmlRenderer>();
             QuitAfterLastViewClosed = true;
         }
@@ -40,6 +42,12 @@ namespace Crystalbyte.Chocolate {
 
         public static void IterateMessageLoop() {
             CefAppCapi.CefDoMessageLoopWork();
+        }
+
+        public static SchemeHandlerFactoryManager SchemeFactories {
+            get {
+                return SchemeHandlerfactoryManager;
+            }
         }
 
         public static event EventHandler ShutdownStarted;

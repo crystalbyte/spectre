@@ -1,0 +1,25 @@
+﻿@inherits Crystalbyte.Chocolate.Razor.RazorTemplateBase
+              
+@using Crystalbyte.Chocolate
+@using Crystalbyte.Chocolate.Models
+@using Crystalbyte.Chocolate.Razor.Markup
+
+              
+@{
+    var model = (DesktopModel) Context; 
+}
+
+<html>
+    <head>
+        <title>Chocolate Windows Demo Application</title>
+        <link href="Styles/metro.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="header">
+            start
+        </div>
+        <span>
+            @model.WelcomeText
+        </span>
+    </body>
+</html>

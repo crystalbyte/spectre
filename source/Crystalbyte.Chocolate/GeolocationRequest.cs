@@ -14,14 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
     public sealed class GeolocationRequest : NativeObject {
-        
-
         private GeolocationRequest(IntPtr handle)
             : base(typeof (CefGeolocationCallback), true) {
             NativeHandle = handle;

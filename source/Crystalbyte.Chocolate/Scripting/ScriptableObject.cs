@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
-using Crystalbyte.Chocolate.Bindings.Internal;
+using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Chocolate.Projections.Internal;
 
 #endregion
 

@@ -1,6 +1,0 @@
-[submodule "source/Microsoft.AspNet"]
-	path = source/Microsoft.AspNet
-	url = https://git01.codeplex.com/aspnet
-[submodule "source/Microsoft.AspNet.WebStack"]
-	path = source/Microsoft.AspNet.WebStack
-	url = https://git01.codeplex.com/aspnetwebstack.git

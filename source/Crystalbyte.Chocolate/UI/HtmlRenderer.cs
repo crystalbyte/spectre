@@ -30,8 +30,15 @@ namespace Crystalbyte.Chocolate.UI {
             _target.TargetClosing += OnTargetClosing;
             _target.TargetClosed += OnTargetClosed;
             _target.TargetSizeChanged += OnTargetSizeChanged;
+
             _handler = new ClientHandler(@delegate);
-            _settings = new BrowserSettings();
+
+            _settings = new BrowserSettings {
+                IsFileAccessfromUrlsAllowed = true,
+                IsWebSecurityDisabled = true,
+                IsUniversalAccessFromFileUrlsAllowed = true,
+                IsUserStyleSheetEnabled = true
+            };
 
             if (Platform.IsLinux) {
                 _resizer = new LinuxWindowResizer();

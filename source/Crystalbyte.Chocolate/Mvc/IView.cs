@@ -12,6 +12,6 @@
 
 namespace Crystalbyte.Chocolate.Mvc {
     public interface IView {
-        string Compose();
+        CompositionResult Compose();
     }
 }

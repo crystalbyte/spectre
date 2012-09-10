@@ -3,7 +3,7 @@
 bin
 obj
 *.userprefs
-_ReSharper*
+_[Rr]eSharper*
 .DS_Store
 _UpgradeReport_Files
-UpgradeLog.*
+[Uu]pgradeLog.*

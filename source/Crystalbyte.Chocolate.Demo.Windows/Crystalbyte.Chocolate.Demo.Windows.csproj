@@ -59,6 +59,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\externals\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,8 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\DemoController.cs" />
-    <Compile Include="Models\DemoModel.cs" />
+    <Compile Include="Controllers\DesktopController.cs" />
+    <Compile Include="Models\DesktopModel.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +97,7 @@
     <EmbeddedResource Include="Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="key.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -103,22 +108,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Views\Windows.cshtml">
+    <None Include="Views\desktop.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Crystalbyte.Chocolate.Razor\Crystalbyte.Chocolate.Razor.csproj">
-      <Project>{d8ae449b-3e8c-4d37-b0c8-21fdb8dd371f}</Project>
-      <Name>Crystalbyte.Chocolate.Razor</Name>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.Razor.Hosting\Crystalbyte.Chocolate.Razor.Hosting.csproj">
+      <Project>{D8AE449B-3E8C-4D37-B0C8-21FDB8DD371F}</Project>
+      <Name>Crystalbyte.Chocolate.Razor.Hosting</Name>
     </ProjectReference>
     <ProjectReference Include="..\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
       <Name>Crystalbyte.Chocolate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Microsoft.AspNet.WebStack\src\System.Web.Razor\System.Web.Razor.csproj">
-      <Project>{8f18041b-9410-4c36-a9c5-067813df5f31}</Project>
-      <Name>System.Web.Razor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,22 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pages\browser.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\jquery-1.8.1.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Styles\metro.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

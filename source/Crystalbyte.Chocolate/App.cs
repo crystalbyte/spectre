@@ -14,16 +14,18 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
     internal sealed class App : RefCountedNativeObject {
-        private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
         private readonly AppDelegate _delegate;
-        private readonly GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
+        
         private readonly RenderProcessHandler _renderProcessHandler;
+        private readonly OnRegisterCustomSchemesCallback _registerCustomSchemeCallback;
+        private readonly GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
+        private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
 
         public App(AppDelegate @delegate)
             : base(typeof (CefApp)) {
@@ -31,6 +33,7 @@ namespace Crystalbyte.Chocolate {
             _renderProcessHandler = new RenderProcessHandler(@delegate);
             _getRenderProcessHandlerCallback = GetRenderProcessHandler;
             _beforeCommandLineProcessingCallback = OnCommandLineProcessing;
+            _registerCustomSchemeCallback = OnRegisterCustomScheme;
 
             MarshalToNative(new CefApp {
                 Base = DedicatedBase,
@@ -38,7 +41,19 @@ namespace Crystalbyte.Chocolate {
                     Marshal.GetFunctionPointerForDelegate(_beforeCommandLineProcessingCallback),
                 CefCallbackGetRenderProcessHandler =
                     Marshal.GetFunctionPointerForDelegate(_getRenderProcessHandlerCallback),
+                OnRegisterCustomSchemes = 
+                    Marshal.GetFunctionPointerForDelegate(_registerCustomSchemeCallback)
             });
+        }
+
+        private void OnRegisterCustomScheme(IntPtr self, IntPtr registrar) {
+            var e = new CustomSchemesRegisteringEventArgs();
+            _delegate.OnCustomSchemesRegistering(e);
+
+            // The SchemeRegistrar needs to be disposed immediatly, we cannot wait for the GC to do it.
+            using (var r = SchemeRegistrar.FromHandle(registrar)) {
+                e.SchemeDescriptors.ForEach(r.Register);    
+            }
         }
 
         private IntPtr GetRenderProcessHandler(IntPtr self) {

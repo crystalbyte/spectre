@@ -55,6 +55,15 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
+        public event EventHandler<CustomSchemesRegisteringEventArgs> CustomSchemesRegistering;
+
+        public void OnCustomSchemesRegistering(CustomSchemesRegisteringEventArgs e) {
+            var handler = CustomSchemesRegistering;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
         public event EventHandler RenderThreadCreated;
 
         protected internal virtual void OnRenderThreadCreated(EventArgs e) {

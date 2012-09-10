@@ -13,6 +13,7 @@
 #region Namespace directives
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Crystalbyte.Chocolate.Mvc;
 using Crystalbyte.Chocolate.Scripting;
@@ -33,6 +34,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         public virtual void Run() {
             var app = CreateAppDelegate();
+            app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
 
             ConfigureSettings(Framework.Settings);
@@ -42,9 +44,8 @@ namespace Crystalbyte.Chocolate.UI {
                 return;
             }
 
-            InitializeRenderProcess();
-            var factories = ConfigureSchemeHandlers();
-            factories.ForEach(SchemeManager.Register);
+            var factories = ConfigureSchemeHandlerFactories();
+            factories.ForEach(Framework.SchemeFactories.Register);
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);
@@ -53,9 +54,24 @@ namespace Crystalbyte.Chocolate.UI {
             Framework.Shutdown();
         }
 
-        protected virtual void ConfigureSettings(FrameworkSettings settings) {}
+        private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {
+            var descriptors = ConfigureSchemeHandlers();
+            e.SchemeDescriptors.AddRange(descriptors);
+        }
 
-        protected virtual void InitializeRenderProcess() {}
+        protected virtual void ConfigureSettings(FrameworkSettings settings) {
+#if DEBUG
+            settings.LogSeverity = LogSeverity.LogseverityVerbose;
+#else
+            settings.LogSeverity = LogSeverity.LogseverityInfo;
+#endif
+        }
+
+        protected virtual IList<SchemeHandlerFactoryDescriptor> ConfigureSchemeHandlerFactories() {
+            return new List<SchemeHandlerFactoryDescriptor> {
+                new SchemeHandlerFactoryDescriptor("mvc", "localhost", new MvcSchemeHandlerFactory())
+            };
+        }
 
         protected virtual IList<SchemeDescriptor> ConfigureSchemeHandlers() {
             return new List<SchemeDescriptor> {

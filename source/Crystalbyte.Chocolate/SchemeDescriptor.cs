@@ -18,22 +18,16 @@ using System;
 
 namespace Crystalbyte.Chocolate {
     public class SchemeDescriptor {
-        public SchemeDescriptor(string scheme, SchemeHandlerFactory factory)
-            : this(scheme, string.Empty, factory) {}
-
-        public SchemeDescriptor(string scheme, string domain, SchemeHandlerFactory factory) {
+        
+        public SchemeDescriptor(string scheme) {
             Scheme = scheme;
-            Domain = domain;
-            Factory = factory;
         }
 
         protected SchemeDescriptor() {}
 
+        public SchemeProperties SchemeProperties { get; set; }
+
         public virtual string Scheme { get; private set; }
-
-        public virtual string Domain { get; private set; }
-
-        public virtual SchemeHandlerFactory Factory { get; private set; }
 
         public event EventHandler Registered;
 

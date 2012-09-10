@@ -21,23 +21,14 @@ using System.Reflection;
 
 namespace Crystalbyte.Chocolate.Mvc {
     public sealed class MvcSchemeDescriptor : SchemeDescriptor {
-        private readonly SchemeHandlerFactory _factory;
-
         public MvcSchemeDescriptor() {
-            _factory = new MvcSchemeHandlerFactory();
             _assemblyCatalog = new List<Assembly>();
+
+            SchemeProperties = SchemeProperties.Standard | SchemeProperties.Local;
         }
 
         public override string Scheme {
             get { return "mvc"; }
-        }
-
-        public override SchemeHandlerFactory Factory {
-            get { return _factory; }
-        }
-
-        public override string Domain {
-            get { return "localhost"; }
         }
 
         private readonly List<Assembly> _assemblyCatalog;
@@ -65,7 +56,7 @@ namespace Crystalbyte.Chocolate.Mvc {
 
         private IEnumerable<Type> QueryControllers() {
             return AssemblyCatalog.SelectMany(x => x.GetTypes()
-                                                       .Where(type => typeof (ViewController).IsAssignableFrom(type)));
+                .Where(type => typeof (ViewController).IsAssignableFrom(type)));
         }
     }
 }

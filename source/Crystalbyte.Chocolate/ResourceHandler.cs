@@ -15,7 +15,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
+using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
@@ -90,6 +90,7 @@ namespace Crystalbyte.Chocolate {
             else {
                 e.Controller.Continue();
             }
+
             return e.IsCanceled ? 0 : 1;
         }
 

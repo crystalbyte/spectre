@@ -10,8 +10,33 @@
 
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace Crystalbyte.Chocolate.Mvc {
     public abstract class ViewController {
         public abstract IView CreateView();
+
+        public event EventHandler<ViewGenerationFailedEventArgs> ViewGenerationFailed;
+        public virtual void OnViewGenerationFailed(ViewGenerationFailedEventArgs e) {
+            var handler = ViewGenerationFailed;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public virtual string ComposeSurrogateMarkupCode(IEnumerable<Exception> errors) {
+            var stream = Resources.FindResource("Crystalbyte.Chocolate.Resources.ErrorTemplate.html");
+            using (var reader = new StreamReader(stream)) {
+                var markup = reader.ReadToEnd();
+
+                var error = errors.First();
+                markup = markup.Replace("{message}", error.ToString());
+                markup = markup.Replace("\t", Environment.NewLine);
+                return markup.Trim();
+            }
+        }
     }
 }

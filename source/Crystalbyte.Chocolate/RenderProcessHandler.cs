@@ -15,8 +15,8 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Bindings;
-using Crystalbyte.Chocolate.Bindings.Internal;
+using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Chocolate.Projections.Internal;
 using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 

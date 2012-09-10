@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryReaderExtension.cs" />
+    <Compile Include="CustomSchemesRegisteringEventArgs.cs" />
+    <Compile Include="Mvc\CompositionResult.cs" />
+    <Compile Include="Mvc\IResponseProvider.cs" />
+    <Compile Include="Mvc\MvcPageResponseProvider.cs" />
     <Compile Include="Mvc\RouteRegistrar.cs" />
     <Compile Include="Mvc\ViewController.cs" />
     <Compile Include="Mvc\MvcResourceHandler.cs" />
@@ -53,14 +57,19 @@
     <Compile Include="Mvc\MvcSchemeHandlerFactory.cs" />
     <Compile Include="Mvc\RouteAttribute.cs" />
     <Compile Include="Mvc\IView.cs" />
+    <Compile Include="Mvc\ViewGenerationFailedEventArgs.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
+    <Compile Include="Resources.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="ResponseHeadersRequestedEventArgs.cs" />
     <Compile Include="ResourceRequestedEventArgs.cs" />
+    <Compile Include="SchemeProperties.cs" />
+    <Compile Include="SchemeRegistrar.cs" />
     <Compile Include="UI\Bootstrapper.cs" />
     <Compile Include="PostElementCollection.cs" />
     <Compile Include="Request.cs" />
+    <Compile Include="SchemeHandlerFactoryDescriptor.cs" />
     <Compile Include="UrlRequestFlags.cs" />
     <Compile Include="CreateHandlerEventArgs.cs" />
     <Compile Include="ResourceHandler.cs" />
@@ -170,7 +179,7 @@
     <Compile Include="UI\LinuxWindowInfo.cs" />
     <Compile Include="EnumerationExtensions.cs" />
     <Compile Include="SchemeDescriptor.cs" />
-    <Compile Include="SchemeManager.cs" />
+    <Compile Include="SchemeHandlerFactoryManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -181,12 +190,15 @@
   </Target>
   -->
   <ItemGroup>
-    <ProjectReference Include="..\Crystalbyte.Chocolate.Bindings\Crystalbyte.Chocolate.Bindings.csproj">
-      <Project>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</Project>
-      <Name>Crystalbyte.Chocolate.Bindings</Name>
+    <None Include="key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.Projections\Crystalbyte.Chocolate.Projections.csproj">
+      <Project>{8ccc057c-fa77-4f49-bacd-5f6ebab13c14}</Project>
+      <Name>Crystalbyte.Chocolate.Projections</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="key.snk" />
+    <EmbeddedResource Include="Resources\ErrorTemplate.html" />
   </ItemGroup>
 </Project>
