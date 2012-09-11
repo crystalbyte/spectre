@@ -18,6 +18,8 @@
 
 using System;
 using System.IO;
+using System.Reflection;
+using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Mvc;
 
 #endregion
@@ -29,13 +31,13 @@ namespace Crystalbyte.Chocolate.Razor {
     ///   See: http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx
     /// </summary>
     public sealed class RazorView : IView {
-        private readonly string _templatePath;
+        private readonly Uri _templateUri;
         private readonly object _context;
         private readonly RazorStringHostContainer _host;
         private bool _isStarted;
 
         public RazorView(string templatePath, object context) {
-            _templatePath = templatePath;
+            _templateUri = new Uri(templatePath);
             _context = context;
             _host = new RazorStringHostContainer {
                 UseAppDomain = false
@@ -52,7 +54,12 @@ namespace Crystalbyte.Chocolate.Razor {
             }
             
             try {
-                var template = File.ReadAllText(_templatePath);
+                var info = Framework.GetResourceStream(_templateUri);
+                if (info == null) {
+                    throw new NullReferenceException(string.Format("Resource '{0}' could not be found.", _templateUri));
+                }
+
+                var template = info.Stream.ToUtf8String();
                 var markup = _host.RenderTemplate(template, _context);
 
                 return string.IsNullOrEmpty(_host.ErrorMessage) ?

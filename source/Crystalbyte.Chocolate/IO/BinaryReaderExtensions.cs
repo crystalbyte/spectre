@@ -13,33 +13,25 @@
 #region Namespace directives
 
 using System;
-using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class ScriptingException : NativeObject {
-        public ScriptingException()
-            : base(typeof (CefV8exception)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
-        }
-
-        public string Message {
-            get {
-                var reflection = MarshalFromNative<CefV8exception>();
-                var function = (GetMessageCallback)
-                               Marshal.GetDelegateForFunctionPointer(reflection.GetMessage, typeof (GetMessageCallback));
-                var handle = function(NativeHandle);
-                return StringUtf16.ReadString(handle);
-            }
-        }
-
-        protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero) {
-                Marshal.FreeHGlobal(NativeHandle);
-            }
-            base.DisposeNative();
+namespace Crystalbyte.Chocolate.IO {
+    internal static class BinaryReaderExtensions {
+        public static int Read7BitEncodedInt(this BinaryReader reader) {
+            byte num3;
+            var num = 0;
+            var num2 = 0;
+            do {
+                if (num2 == 0x23) {
+                    throw new FormatException("Invalid UTF7 integer.");
+                }
+                num3 = reader.ReadByte();
+                num |= (num3 & 0x7f) << num2;
+                num2 += 7;
+            } while ((num3 & 0x80) != 0);
+            return num;
         }
     }
 }

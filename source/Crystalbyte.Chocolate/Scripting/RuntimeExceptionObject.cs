@@ -13,32 +13,33 @@
 #region Namespace directives
 
 using System;
+using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
-    public sealed class Dispatcher {
-        private static readonly Dispatcher _dispatcher = new Dispatcher();
-
-        private Dispatcher() { }
-
-        public static Dispatcher Current { get { return _dispatcher; } }
-
-        public static void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
+namespace Crystalbyte.Chocolate.Scripting {
+    public sealed class RuntimeExceptionObject : NativeObject {
+        public RuntimeExceptionObject()
+            : base(typeof (CefV8exception)) {
+            NativeHandle = Marshal.AllocHGlobal(NativeSize);
         }
 
-        public static void InvokeAsync(Action action, DispatcherQueue queue) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
+        public string Message {
+            get {
+                var reflection = MarshalFromNative<CefV8exception>();
+                var function = (GetMessageCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetMessage, typeof (GetMessageCallback));
+                var handle = function(NativeHandle);
+                return StringUtf16.ReadString(handle);
+            }
         }
 
-        public static bool IsCurrentlyOn(DispatcherQueue queue) {
-            var result = CefTaskCapi.CefCurrentlyOn((CefThreadId) queue);
-            return Convert.ToBoolean(result);
+        protected override void DisposeNative() {
+            if (NativeHandle != IntPtr.Zero) {
+                Marshal.FreeHGlobal(NativeHandle);
+            }
+            base.DisposeNative();
         }
     }
 }

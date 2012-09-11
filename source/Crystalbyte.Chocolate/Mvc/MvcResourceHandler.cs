@@ -18,63 +18,55 @@ using System;
 
 namespace Crystalbyte.Chocolate.Mvc {
     public sealed class MvcResourceHandler : ResourceHandler {
-        private Uri _requestRoute;
-        private Type _type;
-        private bool _isFinished;
-        private IResponseProvider _handler;
+        private Uri _requestUri;
+        private IResponseDataProvider _provider;
 
         protected override void OnResponseDataReading(ResponseDataReadingEventArgs e) {
-            if (_isFinished) {
-                e.IsCompleted = true;
-                return;
-            }
-
-            // No controller has been found
-            if (_type == null) {
-                _isFinished = true;
-                return;
-            }
-
-            var controller = (ViewController) Activator.CreateInstance(_type);
-            var view = controller.CreateView();
-            var result = view.Compose();
-
-            if (!result.IsErrornous) {
-                e.ResponseWriter.Write(result.Markup);
-            }
-            else {
-                var v = new ViewGenerationFailedEventArgs {
-                    Errors = result.Errors
-                };
-                controller.OnViewGenerationFailed(v);
-                var markup = controller.ComposeSurrogateMarkupCode(v.Errors);
-                e.ResponseWriter.Write(markup);
-            }
-
-            _isFinished = true;
+            e.IsCompleted = _provider.WriteDataBlock(_requestUri, e.ResponseWriter);
         }
 
         protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
-            e.Response.MimeType = "text/html";
+            var extension = _requestUri.LocalPath.ToFileExtension();
+            e.Response.MimeType = MimeMapper.ResolveFromExtension(extension);
 
-            var success = RouteRegistrar.TryGetController(_requestRoute.AbsolutePath, out _type);
-            if (!success)
-            {
-                e.Response.StatusCode = 404;
-                e.Response.StatusText = string.Format("Document not found @ '{0}'", _requestRoute);
-                return;
+            if (RouteRegistrar.IsKnownRoute(_requestUri.AbsoluteUri)) {
+                // View routes do not necessarily correspond to the actual view files.
+                // We need to manually adjust a views mime type to text/html.
+                e.Response.MimeType = "text/html";
+
+                _provider = new ViewResponseDataProvider();
+            }
+            else {
+                _provider = new GenericResponseDataProvider();
             }
 
-            e.Response.StatusCode = 200;
-            e.Response.StatusText = "OK";
-        }
-
-        private static void ProcessRequest(ResponseHeadersRequestedEventArgs e) {
-            
+            try {
+                var state = _provider.GetResourceState(_requestUri);
+                switch (state) {
+                    case ResourceState.Valid:
+                        e.Response.StatusCode = 200;
+                        e.Response.StatusText = "OK";
+                        break;
+                    case ResourceState.Missing:
+                        e.Response.StatusCode = 404;
+                        e.Response.StatusText = string.Format("The requested resource has not been found.");
+                        break;
+                    case ResourceState.Locked:
+                        e.Response.StatusCode = 423;
+                        e.Response.StatusText = string.Format("The requested resource is locked and cannot be accessed.");
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            catch (Exception ex) {
+                e.Response.StatusCode = 500;
+                e.Response.StatusText = string.Format("Internal server error. {0}", ex);
+            }
         }
 
         protected override void OnResourceRequested(ResourceRequestedEventArgs e) {
-            _requestRoute = new Uri(e.Request.Url);
+            _requestUri = new Uri(e.Request.Url);
         }
     }
 }

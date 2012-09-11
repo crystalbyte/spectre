@@ -34,10 +34,10 @@ namespace Crystalbyte.Chocolate.UI {
             _handler = new ClientHandler(@delegate);
 
             _settings = new BrowserSettings {
-                IsFileAccessfromUrlsAllowed = true,
-                IsWebSecurityDisabled = true,
-                IsUniversalAccessFromFileUrlsAllowed = true,
-                IsUserStyleSheetEnabled = true
+                IsFileAccessfromUrlsAllowed = false,
+                IsWebSecurityDisabled = false,
+                IsUniversalAccessFromFileUrlsAllowed = false,
+                IsUserStyleSheetEnabled = false
             };
 
             if (Platform.IsLinux) {

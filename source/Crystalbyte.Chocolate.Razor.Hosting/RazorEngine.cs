@@ -89,12 +89,13 @@ namespace Crystalbyte.Chocolate.Razor {
             AssemblyCache = new Dictionary<string, Assembly>();
             ErrorMessage = string.Empty;
 
-            ReferencedNamespaces = new List<string>();
-            ReferencedNamespaces.Add("System");
-            ReferencedNamespaces.Add("System.Text");
-            ReferencedNamespaces.Add("System.Collections.Generic");
-            ReferencedNamespaces.Add("System.Linq");
-            ReferencedNamespaces.Add("System.IO");
+            ReferencedNamespaces = new List<string> {
+                "System",
+                "System.Text",
+                "System.Collections.Generic",
+                "System.Linq",
+                "System.IO"
+            };
         }
 
 
@@ -108,10 +109,11 @@ namespace Crystalbyte.Chocolate.Razor {
         protected RazorTemplateEngine CreateHost(string generatedNamespace, string generatedClass) {
             var baseClassType = typeof (TBaseTemplateType);
 
-            var host = new RazorEngineHost(new CSharpRazorCodeLanguage());
-            host.DefaultBaseClass = baseClassType.FullName;
-            host.DefaultClassName = generatedClass;
-            host.DefaultNamespace = generatedNamespace;
+            var host = new RazorEngineHost(new CSharpRazorCodeLanguage()) {
+                DefaultBaseClass = baseClassType.FullName,
+                DefaultClassName = generatedClass,
+                DefaultNamespace = generatedNamespace
+            };
 
             foreach (var ns in ReferencedNamespaces) {
                 host.NamespaceImports.Add(ns);
@@ -127,7 +129,7 @@ namespace Crystalbyte.Chocolate.Razor {
         ///   ExecuteTemplateByAssembly which picks up a cached instance of the
         ///   loaded assembly.
         /// </summary>
-        /// <param name="ReferencedAssemblies"> Any referenced assemblies by dll name only. Assemblies must be in execution path of host or in GAC. </param>
+        /// <param name="referencedAssemblies"> Any referenced assemblies by dll name only. Assemblies must be in execution path of host or in GAC. </param>
         /// <param name="templateSourceReader"> Textreader that loads the template </param>
         /// <param name="generatedNamespace"> The namespace of the class to generate from the template. null generates name. </param>
         /// <param name="generatedClassName"> The name of the class to generate from the template. null generates name. </param>
@@ -138,7 +140,7 @@ namespace Crystalbyte.Chocolate.Razor {
         /// </remarks>
         /// <returns> An assembly Id. The Assembly is cached in memory and can be used with RenderFromAssembly. </returns>
         public string ParseAndCompileTemplate(
-            string[] ReferencedAssemblies,
+            string[] referencedAssemblies,
             TextReader templateSourceReader,
             string generatedNamespace,
             string generatedClassName) {
@@ -166,7 +168,7 @@ namespace Crystalbyte.Chocolate.Razor {
                 LastGeneratedCode = writer.ToString();
             }
 
-            var compilerParameters = new CompilerParameters(ReferencedAssemblies);
+            var compilerParameters = new CompilerParameters(referencedAssemblies);
 
             // Standard Assembly References
             compilerParameters.ReferencedAssemblies.Add("System.dll");
@@ -206,7 +208,7 @@ namespace Crystalbyte.Chocolate.Razor {
         ///   ExecuteTemplateByAssembly which picks up a cached instance of the
         ///   loaded assembly.
         /// </summary>
-        /// <param name="ReferencedAssemblies"> Any referenced assemblies by dll name only. Assemblies must be in execution path of host or in GAC. </param>
+        /// <param name="referencedAssemblies"> Any referenced assemblies by dll name only. Assemblies must be in execution path of host or in GAC. </param>
         /// <param name="templateSourceReader"> Textreader that loads the template </param>
         /// <remarks>
         ///   The actual assembly isn't returned here to allow for cross-AppDomain
@@ -215,9 +217,9 @@ namespace Crystalbyte.Chocolate.Razor {
         /// </remarks>
         /// <returns> An assembly Id. The Assembly is cached in memory and can be used with RenderFromAssembly. </returns>
         public string ParseAndCompileTemplate(
-            string[] ReferencedAssemblies,
+            string[] referencedAssemblies,
             TextReader templateSourceReader) {
-            return ParseAndCompileTemplate(ReferencedAssemblies, templateSourceReader, null, null);
+            return ParseAndCompileTemplate(referencedAssemblies, templateSourceReader, null, null);
         }
 
         /// <summary>

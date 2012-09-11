@@ -13,32 +13,35 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
-    public sealed class Dispatcher {
-        private static readonly Dispatcher _dispatcher = new Dispatcher();
+namespace Crystalbyte.Chocolate.Mvc {
+    public sealed class ViewResponseDataProvider : IResponseDataProvider {
+        private Type _controllerType;
+        private bool _isFinished;
 
-        private Dispatcher() { }
-
-        public static Dispatcher Current { get { return _dispatcher; } }
-
-        public static void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
+        public bool WriteDataBlock(Uri uri, BinaryWriter writer) {
+            if (_isFinished) {
+                return true;
+            }
+            var controller = (ViewController) Activator.CreateInstance(_controllerType);
+            var view = controller.CreateView();
+            var result = view.Compose();
+            writer.Write(result.Markup);
+            _isFinished = true;
+            return false;
         }
 
-        public static void InvokeAsync(Action action, DispatcherQueue queue) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
-        }
 
-        public static bool IsCurrentlyOn(DispatcherQueue queue) {
-            var result = CefTaskCapi.CefCurrentlyOn((CefThreadId) queue);
-            return Convert.ToBoolean(result);
+        public ResourceState GetResourceState(Uri uri) {
+            var success = RouteRegistrar.TryGetController(uri.AbsoluteUri, out _controllerType);
+            if (!success) {
+                return ResourceState.Missing;
+            }
+
+            return ResourceState.Valid;
         }
     }
 }

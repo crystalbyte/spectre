@@ -13,32 +13,34 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using System.IO;
+using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
-    public sealed class Dispatcher {
-        private static readonly Dispatcher _dispatcher = new Dispatcher();
-
-        private Dispatcher() { }
-
-        public static Dispatcher Current { get { return _dispatcher; } }
-
-        public static void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
+namespace Crystalbyte.Chocolate.IO {
+    public static class StreamExtensions {
+        /// <summary>
+        ///   This method will write the contents of the stream into unmanaged memory and return its handle.
+        ///   The maximum size is currently limited to 2GB.
+        /// </summary>
+        /// <param name="stream"> The managed input stream.</param>
+        /// <returns> Handle to the unmanaged copy.</returns>
+        public static IntPtr ToUnmanagedMemory(this Stream stream) {
+            var size = Marshal.SizeOf(typeof (byte));
+            var length = (int) stream.Length;
+            var handle = Marshal.AllocHGlobal(length*size);
+            using (var br = new BinaryReader(stream)) {
+                var bytes = br.ReadBytes(length);
+                Marshal.Copy(bytes, 0, handle, length);
+            }
+            return handle;
         }
 
-        public static void InvokeAsync(Action action, DispatcherQueue queue) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
-        }
-
-        public static bool IsCurrentlyOn(DispatcherQueue queue) {
-            var result = CefTaskCapi.CefCurrentlyOn((CefThreadId) queue);
-            return Convert.ToBoolean(result);
+        public static string ToUtf8String(this Stream stream) {
+            using (var reader = new StreamReader(stream)) {
+                return reader.ReadToEnd();
+            }
         }
     }
 }

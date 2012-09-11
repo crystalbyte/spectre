@@ -29,7 +29,7 @@ namespace Crystalbyte.Chocolate.UI {
             if (success) {
                 return;
             }
-            throw new ChocolateException("error resizing window.");
+            throw new InvalidOperationException("error resizing window.");
         }
 
         #region Nested type: NativeMethods

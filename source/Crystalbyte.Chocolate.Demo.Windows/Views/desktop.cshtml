@@ -12,7 +12,7 @@
 <html>
     <head>
         <title>Chocolate Windows Demo Application</title>
-        <link href="Styles/metro.css" rel="stylesheet" />
+        @Style.Link("Styles/metro.css")
     </head>
     <body>
         <div class="header">
@@ -21,5 +21,6 @@
         <span>
             @model.WelcomeText
         </span>
+        <iframe width="640" height="360" src="http://www.youtube.com/embed/YJZxDYHBSqU?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
     </body>
 </html>

@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,11 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryReaderExtension.cs" />
+    <Compile Include="IO\BinaryReaderExtensions.cs" />
     <Compile Include="CustomSchemesRegisteringEventArgs.cs" />
+    <Compile Include="IO\Check.cs" />
+    <Compile Include="MimeMapper.cs" />
+    <Compile Include="IO\PackUriParser.cs" />
     <Compile Include="Mvc\CompositionResult.cs" />
-    <Compile Include="Mvc\IResponseProvider.cs" />
-    <Compile Include="Mvc\MvcPageResponseProvider.cs" />
+    <Compile Include="Mvc\GenericResponseDataProvider.cs" />
+    <Compile Include="Mvc\IResponseDataProvider.cs" />
+    <Compile Include="Mvc\ResourceState.cs" />
     <Compile Include="Mvc\RouteRegistrar.cs" />
     <Compile Include="Mvc\ViewController.cs" />
     <Compile Include="Mvc\MvcResourceHandler.cs" />
@@ -58,14 +63,19 @@
     <Compile Include="Mvc\RouteAttribute.cs" />
     <Compile Include="Mvc\IView.cs" />
     <Compile Include="Mvc\ViewGenerationFailedEventArgs.cs" />
+    <Compile Include="Mvc\ViewResponseDataProvider.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
+    <Compile Include="IO\PackUriHelper.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="Scripting\RuntimeException.cs" />
+    <Compile Include="StreamResourceInfo.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="ResponseHeadersRequestedEventArgs.cs" />
     <Compile Include="ResourceRequestedEventArgs.cs" />
     <Compile Include="SchemeProperties.cs" />
     <Compile Include="SchemeRegistrar.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="UI\Bootstrapper.cs" />
     <Compile Include="PostElementCollection.cs" />
     <Compile Include="Request.cs" />
@@ -77,7 +87,6 @@
     <Compile Include="AsyncActivityController.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
     <Compile Include="StatusType.cs" />
-    <Compile Include="ChocolateException.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="DispatcherQueue.cs" />
     <Compile Include="ErrorCode.cs" />
@@ -107,7 +116,7 @@
     <Compile Include="Scripting\ScriptableObjectCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingException.cs" />
+    <Compile Include="Scripting\RuntimeExceptionObject.cs" />
     <Compile Include="Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,7 +129,7 @@
     <Compile Include="Scripting\ScriptingRuntime.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="StreamExtensions.cs" />
+    <Compile Include="IO\StreamExtensions.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="Task.cs" />

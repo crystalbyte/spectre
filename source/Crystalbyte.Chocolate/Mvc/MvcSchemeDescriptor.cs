@@ -24,7 +24,8 @@ namespace Crystalbyte.Chocolate.Mvc {
         public MvcSchemeDescriptor() {
             _assemblyCatalog = new List<Assembly>();
 
-            SchemeProperties = SchemeProperties.Standard | SchemeProperties.Local;
+            //SchemeProperties = SchemeProperties.Local;
+            SchemeProperties = 0x0;
         }
 
         public override string Scheme {

@@ -19,28 +19,32 @@ using System.Collections.Generic;
 
 namespace Crystalbyte.Chocolate.Mvc {
     internal static class RouteRegistrar {
-        private static readonly Dictionary<string, Type> Types;
+        private static readonly Dictionary<string, Type> _types;
 
         static RouteRegistrar() {
-            Types = new Dictionary<string, Type>();
+            _types = new Dictionary<string, Type>();
         }
 
         public static void Register(string route, Type controller) {
-            Types.Add(route, controller);
+            _types.Add(route, controller);
         }
 
         public static Type GetController(string route) {
-            return Types[route];
+            return _types[route];
         }
 
         public static bool TryGetController(string route, out Type controller) {
-            if (Types.ContainsKey(route)) {
-                controller = Types[route];
+            if (_types.ContainsKey(route)) {
+                controller = _types[route];
                 return true;
             }
 
             controller = null;
             return false;
+        }
+
+        public static bool IsKnownRoute(string route) {
+            return _types.ContainsKey(route);
         }
     }
 }

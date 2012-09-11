@@ -86,14 +86,14 @@ namespace Crystalbyte.Chocolate.Scripting {
         public void Enter() {
             var success = TryEnter();
             if (!success) {
-                throw new ChocolateException("Failed to enter context.");
+                throw new RuntimeException("Failed to enter context.");
             }
         }
 
         public void Exit() {
             var success = TryExit();
             if (!success) {
-                throw new ChocolateException("Failed to exit context.");
+                throw new RuntimeException("Failed to exit context.");
             }
         }
 
@@ -113,9 +113,9 @@ namespace Crystalbyte.Chocolate.Scripting {
             return Convert.ToBoolean(value);
         }
 
-        public bool Evaluate(string code, out ScriptableObject result, out ScriptingException exception) {
+        public bool Evaluate(string code, out ScriptableObject result, out RuntimeExceptionObject exception) {
             result = new ScriptableObject();
-            exception = new ScriptingException();
+            exception = new RuntimeExceptionObject();
             var str = new StringUtf16(code);
 
             var reflection = MarshalFromNative<CefV8context>();

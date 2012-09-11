@@ -40,7 +40,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             };
             var message = StringUtf16.ReadString(exception);
             if (string.IsNullOrWhiteSpace(message)) {
-                e.Exception = new ChocolateException(message);
+                e.Exception = new RuntimeException(message);
             }
             OnExecuted(e);
             retvalue = e.Result != null ? e.Result.NativeHandle : IntPtr.Zero;

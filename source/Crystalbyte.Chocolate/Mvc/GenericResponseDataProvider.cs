@@ -14,24 +14,32 @@
 
 using System;
 using System.IO;
+using Crystalbyte.Chocolate.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
-    internal static class BinaryReaderExtension {
-        public static int Read7BitEncodedInt(this BinaryReader reader) {
-            byte num3;
-            var num = 0;
-            var num2 = 0;
-            do {
-                if (num2 == 0x23) {
-                    throw new FormatException("Invalid UTF7 integer.");
-                }
-                num3 = reader.ReadByte();
-                num |= (num3 & 0x7f) << num2;
-                num2 += 7;
-            } while ((num3 & 0x80) != 0);
-            return num;
+namespace Crystalbyte.Chocolate.Mvc {
+    public sealed class GenericResponseDataProvider : IResponseDataProvider {
+        private bool _isFinished;
+
+        public ResourceState GetResourceState(Uri uri) {
+            //TODO: Implement
+            return ResourceState.Valid;
+        }
+
+        public bool WriteDataBlock(Uri uri, BinaryWriter writer) {
+            if (_isFinished) {
+                return true;
+            }
+
+            var packUri = new Uri(uri.OriginalString.Replace("mvc", "pack"));
+            var info = Framework.GetResourceStream(packUri);
+
+            var text = info.Stream.ToUtf8String();
+            writer.Write(text);
+
+            _isFinished = true;
+            return false;
         }
     }
 }

@@ -14,8 +14,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Projections;
 using Crystalbyte.Chocolate.UI;
 
@@ -24,14 +26,25 @@ using Crystalbyte.Chocolate.UI;
 namespace Crystalbyte.Chocolate {
     public static class Framework {
         private static App _app;
-        private static readonly Dictionary<IRenderTarget, HtmlRenderer> Views;
-        private static readonly SchemeHandlerFactoryManager SchemeHandlerfactoryManager;
+        private static readonly Dictionary<IRenderTarget, HtmlRenderer> _views;
+        private static readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
 
         static Framework() {
+            RegisterUriScheme("mvc");
+            RegisterUriScheme("pack");
             Settings = new FrameworkSettings();
-            SchemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
-            Views = new Dictionary<IRenderTarget, HtmlRenderer>();
+            _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
+            _views = new Dictionary<IRenderTarget, HtmlRenderer>();
             QuitAfterLastViewClosed = true;
+        }
+
+        public static void RegisterUriScheme(string scheme)
+        {
+            if (!UriParser.IsKnownScheme(scheme))
+            {
+                UriParser.Register(new GenericUriParser
+                    (GenericUriParserOptions.GenericAuthority), scheme, -1);
+            }
         }
 
         public static FrameworkSettings Settings { get; private set; }
@@ -46,7 +59,7 @@ namespace Crystalbyte.Chocolate {
 
         public static SchemeHandlerFactoryManager SchemeFactories {
             get {
-                return SchemeHandlerfactoryManager;
+                return _schemeHandlerfactoryManager;
             }
         }
 
@@ -84,6 +97,42 @@ namespace Crystalbyte.Chocolate {
             return IsInitialized;
         }
 
+        public static StreamResourceInfo GetResourceStream(Uri uri) {
+            if (uri.Scheme != "pack") {
+                throw new NotSupportedException("Only pack uri's are supported.");
+            }
+            if (uri.Host.StartsWith("siteoforigin")) {
+                return GetContentStreamFromLocalPath(uri);
+            }
+            if (uri.Host.StartsWith("application")) {
+                return GetContentStreamFromAssembly(uri);
+            }
+            throw new NotSupportedException("Authority '{0}' is not supported.");
+        }
+
+        private static StreamResourceInfo GetContentStreamFromAssembly(Uri uri) {
+            throw new NotImplementedException();
+        }
+
+        private static StreamResourceInfo GetContentStreamFromLocalPath(Uri uri) {
+            var entry = Assembly.GetEntryAssembly();
+            var locationInfo = new FileInfo(entry.Location);
+            var directoryName = locationInfo.DirectoryName;
+
+            if (string.IsNullOrWhiteSpace(directoryName)) {
+                throw new NullReferenceException("DiectoryName is null.");
+            }
+
+            var localPath = uri.LocalPath.TrimStart('/');
+
+            var resourcePath = Path.Combine(directoryName, localPath);
+            var extension = resourcePath.ToFileExtension();
+            return new StreamResourceInfo {
+                ContentType = MimeMapper.ResolveFromExtension(extension),
+                Stream = new MemoryStream(File.ReadAllBytes(resourcePath))
+            };
+        }
+
         public static bool Initialize(AppDelegate del = null) {
             var handle = IntPtr.Zero;
             if (Platform.IsLinux) {
@@ -115,7 +164,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static void Add(HtmlRenderer renderer) {
-            Views.Add(renderer.RenderTarget, renderer);
+            _views.Add(renderer.RenderTarget, renderer);
             renderer.RenderTarget.TargetClosing += OnRenderTargetClosing;
             renderer.RenderTarget.TargetClosed += OnRenderTargetClosed;
             renderer.CreateBrowser();
@@ -124,9 +173,9 @@ namespace Crystalbyte.Chocolate {
         private static void OnRenderTargetClosing(object sender, EventArgs e) {
             var target = (IRenderTarget) sender;
             target.TargetClosing -= OnRenderTargetClosing;
-            Views[target].Dispose();
-            Views.Remove(target);
-            if (QuitAfterLastViewClosed && Views.Count < 1) {
+            _views[target].Dispose();
+            _views.Remove(target);
+            if (QuitAfterLastViewClosed && _views.Count < 1) {
                 CefAppCapi.CefQuitMessageLoop();
             }
         }

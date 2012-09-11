@@ -4,11 +4,11 @@ using Crystalbyte.Chocolate.Razor;
 
 namespace Crystalbyte.Chocolate.Controllers
 {
-    [Route("/windows")]
+    [Route("mvc://localhost/start")]
     public sealed class DesktopController : ViewController
     {
         public override IView CreateView() {
-            return new RazorView("Views/desktop.cshtml", new DesktopModel());
+            return new RazorView("pack://siteoforigin:,,,/Views/desktop.cshtml", new DesktopModel());
         }
     }
 }

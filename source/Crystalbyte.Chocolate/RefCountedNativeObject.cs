@@ -99,11 +99,9 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        // ReSharper disable UnusedParameter.Local
         private void VerifyHandle(IntPtr handle) {
-            // ReSharper restore UnusedParameter.Local
             if (handle != NativeHandle) {
-                throw new ChocolateException("Ref count handle is invalid.");
+                throw new InvalidOperationException("Ref count handle is invalid.");
             }
         }
 
