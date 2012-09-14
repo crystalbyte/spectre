@@ -19,17 +19,16 @@ using System.Reflection;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
-    public sealed class MvcSchemeDescriptor : SchemeDescriptor {
-        public MvcSchemeDescriptor() {
+namespace Crystalbyte.Chocolate.Routing {
+    public sealed class ChocolateSchemeDescriptor : SchemeDescriptor {
+        public ChocolateSchemeDescriptor() {
             _assemblyCatalog = new List<Assembly>();
 
-            //SchemeProperties = SchemeProperties.Local;
-            SchemeProperties = 0x0;
+            SchemeProperties = SchemeProperties.Local | SchemeProperties.DisplayIsolated;
         }
 
         public override string Scheme {
-            get { return "mvc"; }
+            get { return Schemes.Chocolate; }
         }
 
         private readonly List<Assembly> _assemblyCatalog;

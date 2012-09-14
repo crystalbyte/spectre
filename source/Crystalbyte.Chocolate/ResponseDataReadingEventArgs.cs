@@ -14,22 +14,18 @@
 
 using System;
 using System.IO;
-using System.Text;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class ResponseDataReadingEventArgs : EventArgs, IDisposable {
-        internal ResponseDataReadingEventArgs() {
-            ResponseWriter = new BinaryWriter(new MemoryStream(), Encoding.UTF8);
+    public sealed class ResponseDataReadingEventArgs : EventArgs {
+        internal ResponseDataReadingEventArgs(BinaryWriter writer) {
+            ResponseWriter = writer;
         }
 
+        public int MaxBlockSize { get; internal set; }
         public BinaryWriter ResponseWriter { get; private set; }
         public AsyncActivityController Controller { get; internal set; }
         public bool IsCompleted { get; set; }
-
-        public void Dispose() {
-            ResponseWriter.Dispose();
-        }
     }
 }

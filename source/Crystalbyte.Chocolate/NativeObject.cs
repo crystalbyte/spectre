@@ -19,13 +19,13 @@ using System.Runtime.InteropServices;
 
 namespace Crystalbyte.Chocolate {
     /// <summary>
-    ///   This class is a managed access point for native objects.
-    ///   This class does not manage the objects lifecycle thus not allocating any memory.
+    ///   This class is a managed access point for native cef objects.
+    ///   This class does not manage the object's lifecycle, thus not allocating any memory.
     /// </summary>
     public abstract class NativeObject : DisposableObject {
         private IntPtr _nativeHandle;
 
-        protected NativeObject(Type nativeType, bool isRefCounted = false) {
+        protected NativeObject(Type nativeType, bool isRefCountedExternally = false) {
             if (nativeType == null) {
                 throw new ArgumentNullException("nativeType");
             }
@@ -34,7 +34,7 @@ namespace Crystalbyte.Chocolate {
             }
             NativeType = nativeType;
             NativeSize = Marshal.SizeOf(nativeType);
-            IsRefCounted = isRefCounted;
+            IsRefCountedExternally = isRefCountedExternally;
         }
 
         protected internal IntPtr NativeHandle {
@@ -48,10 +48,10 @@ namespace Crystalbyte.Chocolate {
 
         protected internal int NativeSize { get; private set; }
         protected Type NativeType { get; private set; }
-        protected bool IsRefCounted { get; private set; }
+        protected bool IsRefCountedExternally { get; private set; }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero && IsRefCounted) {
+            if (NativeHandle != IntPtr.Zero && IsRefCountedExternally) {
                 Reference.Decrement(NativeHandle);
             }
         }

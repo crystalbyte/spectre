@@ -21,19 +21,23 @@ using Crystalbyte.Chocolate.Projections;
 namespace Crystalbyte.Chocolate {
     internal sealed class App : RefCountedNativeObject {
         private readonly AppDelegate _delegate;
-        
+
         private readonly RenderProcessHandler _renderProcessHandler;
+        private readonly BrowserProcessHandler _browserProcessHandler;
         private readonly OnRegisterCustomSchemesCallback _registerCustomSchemeCallback;
         private readonly GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
         private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
+        private readonly GetBrowserProcessHandlerCallback _getBrowserProcessHandlerCallback;
 
-        public App(AppDelegate @delegate)
+        public App(AppDelegate appDelegate)
             : base(typeof (CefApp)) {
-            _delegate = @delegate;
-            _renderProcessHandler = new RenderProcessHandler(@delegate);
+            _delegate = appDelegate;
+            _browserProcessHandler = new BrowserProcessHandler(appDelegate);
+            _renderProcessHandler = new RenderProcessHandler(appDelegate);
             _getRenderProcessHandlerCallback = GetRenderProcessHandler;
             _beforeCommandLineProcessingCallback = OnCommandLineProcessing;
             _registerCustomSchemeCallback = OnRegisterCustomScheme;
+            _getBrowserProcessHandlerCallback = OnGetBrowserProcessHandler;
 
             MarshalToNative(new CefApp {
                 Base = DedicatedBase,
@@ -41,8 +45,10 @@ namespace Crystalbyte.Chocolate {
                     Marshal.GetFunctionPointerForDelegate(_beforeCommandLineProcessingCallback),
                 CefCallbackGetRenderProcessHandler =
                     Marshal.GetFunctionPointerForDelegate(_getRenderProcessHandlerCallback),
-                OnRegisterCustomSchemes = 
-                    Marshal.GetFunctionPointerForDelegate(_registerCustomSchemeCallback)
+                OnRegisterCustomSchemes =
+                    Marshal.GetFunctionPointerForDelegate(_registerCustomSchemeCallback),
+                CefCallbackGetBrowserProcessHandler =
+                    Marshal.GetFunctionPointerForDelegate(_getBrowserProcessHandlerCallback)
             });
         }
 
@@ -50,10 +56,17 @@ namespace Crystalbyte.Chocolate {
             var e = new CustomSchemesRegisteringEventArgs();
             _delegate.OnCustomSchemesRegistering(e);
 
-            // The SchemeRegistrar needs to be disposed immediatly, we cannot wait for the GC to do it.
             using (var r = SchemeRegistrar.FromHandle(registrar)) {
-                e.SchemeDescriptors.ForEach(r.Register);    
+                e.SchemeDescriptors.ForEach(r.Register);
             }
+        }
+
+        private IntPtr OnGetBrowserProcessHandler(IntPtr self) {
+            if (_browserProcessHandler == null) {
+                return IntPtr.Zero;
+            }
+            Reference.Increment(_browserProcessHandler.NativeHandle);
+            return _browserProcessHandler.NativeHandle;
         }
 
         private IntPtr GetRenderProcessHandler(IntPtr self) {

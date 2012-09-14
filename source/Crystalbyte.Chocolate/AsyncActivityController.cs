@@ -21,7 +21,7 @@ using Crystalbyte.Chocolate.Projections;
 namespace Crystalbyte.Chocolate {
     public sealed class AsyncActivityController : NativeObject {
         private AsyncActivityController(IntPtr handle)
-            : base(typeof (CefCallback)) {
+            : base(typeof (CefCallback), true) {
             NativeHandle = handle;
         }
 
@@ -30,7 +30,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         public bool IsCanceled { get; private set; }
-        public bool IsPaused { get; set; }
+        public bool IsPaused { get; private set; }
 
         public void Continue() {
             var r = MarshalFromNative<CefCallback>();

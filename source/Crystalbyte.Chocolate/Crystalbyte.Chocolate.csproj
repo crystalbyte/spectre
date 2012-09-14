@@ -46,27 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\BinaryReaderExtensions.cs" />
+    <Compile Include="BrowserProcessHandler.cs" />
     <Compile Include="CustomSchemesRegisteringEventArgs.cs" />
-    <Compile Include="IO\Check.cs" />
     <Compile Include="MimeMapper.cs" />
-    <Compile Include="IO\PackUriParser.cs" />
-    <Compile Include="Mvc\CompositionResult.cs" />
-    <Compile Include="Mvc\GenericResponseDataProvider.cs" />
-    <Compile Include="Mvc\IResponseDataProvider.cs" />
-    <Compile Include="Mvc\ResourceState.cs" />
-    <Compile Include="Mvc\RouteRegistrar.cs" />
-    <Compile Include="Mvc\ViewController.cs" />
-    <Compile Include="Mvc\MvcResourceHandler.cs" />
-    <Compile Include="Mvc\MvcSchemeDescriptor.cs" />
-    <Compile Include="Mvc\MvcSchemeHandlerFactory.cs" />
-    <Compile Include="Mvc\RouteAttribute.cs" />
-    <Compile Include="Mvc\IView.cs" />
-    <Compile Include="Mvc\ViewGenerationFailedEventArgs.cs" />
-    <Compile Include="Mvc\ViewResponseDataProvider.cs" />
+    <Compile Include="Routing\CompositionResult.cs" />
+    <Compile Include="Routing\GenericResponseDataProvider.cs" />
+    <Compile Include="Routing\IResponseDataProvider.cs" />
+    <Compile Include="Routing\ResourceState.cs" />
+    <Compile Include="Routing\RouteRegistrar.cs" />
+    <Compile Include="Routing\Schemes.cs" />
+    <Compile Include="Routing\ViewController.cs" />
+    <Compile Include="Routing\ChocolateResourceHandler.cs" />
+    <Compile Include="Routing\ChocolateSchemeDescriptor.cs" />
+    <Compile Include="Routing\ChocolateSchemeHandlerFactory.cs" />
+    <Compile Include="Routing\RouteAttribute.cs" />
+    <Compile Include="Routing\IView.cs" />
+    <Compile Include="Routing\ViewResponseDataProvider.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
-    <Compile Include="IO\PackUriHelper.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="Scripting\RuntimeException.cs" />
     <Compile Include="StreamResourceInfo.cs" />
@@ -129,7 +126,7 @@
     <Compile Include="Scripting\ScriptingRuntime.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IO\StreamExtensions.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="Task.cs" />
@@ -159,7 +156,6 @@
     <Compile Include="NavigatedEventArgs.cs" />
     <Compile Include="BrowserClosedEventArgs.cs" />
     <Compile Include="BrowserClosingEventArgs.cs" />
-    <Compile Include="UI\Offsets.cs" />
     <Compile Include="UI\PopupCreatingEventArgs.cs" />
     <Compile Include="ProxyHandler.cs" />
     <Compile Include="ProxyUrlEventArgs.cs" />
@@ -206,8 +202,5 @@
       <Project>{8ccc057c-fa77-4f49-bacd-5f6ebab13c14}</Project>
       <Name>Crystalbyte.Chocolate.Projections</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ErrorTemplate.html" />
   </ItemGroup>
 </Project>

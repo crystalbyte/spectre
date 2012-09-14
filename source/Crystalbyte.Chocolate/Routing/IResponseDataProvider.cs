@@ -12,14 +12,14 @@
 
 #region Namespace directives
 
-using System;
 using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
+namespace Crystalbyte.Chocolate.Routing {
     internal interface IResponseDataProvider {
-        bool WriteDataBlock(Uri uri, BinaryWriter writer);
-        ResourceState GetResourceState(Uri uri);
+        void Initialize();
+        ResourceState GetResourceState();
+        bool WriteDataBlock(BinaryWriter writer, int blockSize);
     }
 }

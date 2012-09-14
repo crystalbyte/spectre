@@ -16,13 +16,18 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
-    public sealed class MvcResourceHandler : ResourceHandler {
+namespace Crystalbyte.Chocolate.Routing {
+    public sealed class ChocolateResourceHandler : ResourceHandler {
         private Uri _requestUri;
         private IResponseDataProvider _provider;
+        private bool _isInitialized;
 
         protected override void OnResponseDataReading(ResponseDataReadingEventArgs e) {
-            e.IsCompleted = _provider.WriteDataBlock(_requestUri, e.ResponseWriter);
+            if (!_isInitialized) {
+                _provider.Initialize();
+                _isInitialized = true;
+            }
+            e.IsCompleted = _provider.WriteDataBlock(e.ResponseWriter, e.MaxBlockSize);
         }
 
         protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
@@ -34,14 +39,14 @@ namespace Crystalbyte.Chocolate.Mvc {
                 // We need to manually adjust a views mime type to text/html.
                 e.Response.MimeType = "text/html";
 
-                _provider = new ViewResponseDataProvider();
+                _provider = new ViewResponseDataProvider(_requestUri);
             }
             else {
-                _provider = new GenericResponseDataProvider();
+                _provider = new GenericResponseDataProvider(_requestUri);
             }
 
             try {
-                var state = _provider.GetResourceState(_requestUri);
+                var state = _provider.GetResourceState();
                 switch (state) {
                     case ResourceState.Valid:
                         e.Response.StatusCode = 200;

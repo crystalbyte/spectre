@@ -36,7 +36,7 @@ namespace Crystalbyte.Chocolate {
                 Base = DedicatedBase,
                 OnBeforePopup = Marshal.GetFunctionPointerForDelegate(_beforePopupCallback),
                 OnBeforeClose = Marshal.GetFunctionPointerForDelegate(_beforeCloseCallback),
-                DoClose = Marshal.GetFunctionPointerForDelegate(_doCloseCallback)
+                DoClose = Marshal.GetFunctionPointerForDelegate(_doCloseCallback),
             });
         }
 
@@ -52,12 +52,11 @@ namespace Crystalbyte.Chocolate {
             var e = new BrowserClosedEventArgs(b);
             _delegate.OnClosed(e);
 
-            // Need to call Dispose manually, since the GC will not be able to free the browser instance b above, it is still being referenced by local scope.
+            // Need to call Dispose manually, since the GC will not be able to free the browser instance b above for it will be referenced by local scope.
             b.Dispose();
 
             //// CEF requires all objects to be freed before the window is actually closed.
-            //// Since this is a non recurring event which happens only when a window is closed the GC calls should not affect performance.
-            //// Let's not poke the GC more than required ;)
+            //// Since this is a non recurring event, calling the GC should not affect performance, but reclaim tons of memory.
             //// http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
             GC.WaitForPendingFinalizers();

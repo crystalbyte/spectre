@@ -10,36 +10,8 @@
 
 #endregion
 
-#region Namespace directives
-
-using System;
-using System.IO;
-using Crystalbyte.Chocolate.IO;
-
-#endregion
-
-namespace Crystalbyte.Chocolate.Mvc {
-    public sealed class GenericResponseDataProvider : IResponseDataProvider {
-        private bool _isFinished;
-
-        public ResourceState GetResourceState(Uri uri) {
-            //TODO: Implement
-            return ResourceState.Valid;
-        }
-
-        public bool WriteDataBlock(Uri uri, BinaryWriter writer) {
-            if (_isFinished) {
-                return true;
-            }
-
-            var packUri = new Uri(uri.OriginalString.Replace("mvc", "pack"));
-            var info = Framework.GetResourceStream(packUri);
-
-            var text = info.Stream.ToUtf8String();
-            writer.Write(text);
-
-            _isFinished = true;
-            return false;
-        }
+namespace Crystalbyte.Chocolate.Routing {
+    public interface IView {
+        CompositionResult Compose();
     }
 }

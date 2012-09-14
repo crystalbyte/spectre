@@ -10,41 +10,10 @@
 
 #endregion
 
-#region Namespace directives
-
-using System;
-using System.Collections.Generic;
-
-#endregion
-
-namespace Crystalbyte.Chocolate.Mvc {
-    internal static class RouteRegistrar {
-        private static readonly Dictionary<string, Type> _types;
-
-        static RouteRegistrar() {
-            _types = new Dictionary<string, Type>();
-        }
-
-        public static void Register(string route, Type controller) {
-            _types.Add(route, controller);
-        }
-
-        public static Type GetController(string route) {
-            return _types[route];
-        }
-
-        public static bool TryGetController(string route, out Type controller) {
-            if (_types.ContainsKey(route)) {
-                controller = _types[route];
-                return true;
-            }
-
-            controller = null;
-            return false;
-        }
-
-        public static bool IsKnownRoute(string route) {
-            return _types.ContainsKey(route);
+namespace Crystalbyte.Chocolate.Routing {
+    public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
+        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
+            return new ChocolateResourceHandler();
         }
     }
 }

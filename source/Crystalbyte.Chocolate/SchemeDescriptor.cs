@@ -18,7 +18,6 @@ using System;
 
 namespace Crystalbyte.Chocolate {
     public class SchemeDescriptor {
-        
         public SchemeDescriptor(string scheme) {
             Scheme = scheme;
         }

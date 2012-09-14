@@ -1,14 +1,14 @@
-﻿using Crystalbyte.Chocolate.Mvc;
-using Crystalbyte.Chocolate.Models;
+﻿using Crystalbyte.Chocolate.Models;
 using Crystalbyte.Chocolate.Razor;
+using Crystalbyte.Chocolate.Routing;
 
 namespace Crystalbyte.Chocolate.Controllers
 {
-    [Route("mvc://localhost/start")]
+    [Route("chocolate://localhost/desktop")]
     public sealed class DesktopController : ViewController
     {
         public override IView CreateView() {
-            return new RazorView("pack://siteoforigin:,,,/Views/desktop.cshtml", new DesktopModel());
+            return new RazorView("chocolate://siteoforigin:,,,/Views/desktop.cshtml", new DesktopModel());
         }
     }
 }

@@ -10,9 +10,10 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    internal static class Offsets {
-        public static readonly int WindowRight = 16;
-        public static readonly int WindowBottom = 38;
+namespace Crystalbyte.Chocolate.Routing {
+    public enum ResourceState {
+        Valid = 0,
+        Missing,
+        Locked
     }
 }

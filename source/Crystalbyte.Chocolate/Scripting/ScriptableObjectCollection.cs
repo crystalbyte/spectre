@@ -20,9 +20,10 @@ using System.Runtime.InteropServices;
 
 namespace Crystalbyte.Chocolate.Scripting {
     internal sealed class ScriptableObjectCollection : List<ScriptableObject>, IReadOnlyCollection<ScriptableObject> {
-        private static readonly int PointerSize = Marshal.SizeOf(typeof (IntPtr));
+        private static readonly int _pointerSize = Marshal.SizeOf(typeof (IntPtr));
 
         public ScriptableObjectCollection(IntPtr listHandle, int argumentCount) {
+            // FIXME: List is only populated on construction
             if (argumentCount < 1) {
                 return;
             }
@@ -30,7 +31,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             for (var i = 0; i < argumentCount; i++) {
                 var handle = Marshal.ReadIntPtr(current);
                 Add(ScriptableObject.FromHandle(handle));
-                current = new IntPtr(current.ToInt64() + PointerSize);
+                current = new IntPtr(current.ToInt64() + _pointerSize);
             }
         }
     }

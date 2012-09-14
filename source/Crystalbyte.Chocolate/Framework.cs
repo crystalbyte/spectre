@@ -17,8 +17,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Chocolate.Routing;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
@@ -30,20 +30,18 @@ namespace Crystalbyte.Chocolate {
         private static readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
 
         static Framework() {
-            RegisterUriScheme("mvc");
-            RegisterUriScheme("pack");
+            RegisterUriScheme(Schemes.Chocolate);
+            RegisterUriScheme(Schemes.Pack);
             Settings = new FrameworkSettings();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
             _views = new Dictionary<IRenderTarget, HtmlRenderer>();
             QuitAfterLastViewClosed = true;
         }
 
-        public static void RegisterUriScheme(string scheme)
-        {
-            if (!UriParser.IsKnownScheme(scheme))
-            {
+        public static void RegisterUriScheme(string scheme) {
+            if (!UriParser.IsKnownScheme(scheme)) {
                 UriParser.Register(new GenericUriParser
-                    (GenericUriParserOptions.GenericAuthority), scheme, -1);
+                                       (GenericUriParserOptions.GenericAuthority), scheme, -1);
             }
         }
 
@@ -58,9 +56,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static SchemeHandlerFactoryManager SchemeFactories {
-            get {
-                return _schemeHandlerfactoryManager;
-            }
+            get { return _schemeHandlerfactoryManager; }
         }
 
         public static event EventHandler ShutdownStarted;
@@ -98,8 +94,8 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static StreamResourceInfo GetResourceStream(Uri uri) {
-            if (uri.Scheme != "pack") {
-                throw new NotSupportedException("Only pack uri's are supported.");
+            if (uri.Scheme != Schemes.Pack && uri.Scheme != Schemes.Chocolate) {
+                throw new NotSupportedException("Only pack and choc uri's are supported.");
             }
             if (uri.Host.StartsWith("siteoforigin")) {
                 return GetContentStreamFromLocalPath(uri);
@@ -107,7 +103,7 @@ namespace Crystalbyte.Chocolate {
             if (uri.Host.StartsWith("application")) {
                 return GetContentStreamFromAssembly(uri);
             }
-            throw new NotSupportedException("Authority '{0}' is not supported.");
+            throw new NotSupportedException(string.Format("Authority '{0}' is not supported.", uri.Authority));
         }
 
         private static StreamResourceInfo GetContentStreamFromAssembly(Uri uri) {
@@ -120,7 +116,7 @@ namespace Crystalbyte.Chocolate {
             var directoryName = locationInfo.DirectoryName;
 
             if (string.IsNullOrWhiteSpace(directoryName)) {
-                throw new NullReferenceException("DiectoryName is null.");
+                throw new NullReferenceException("DirectoryName is null.");
             }
 
             var localPath = uri.LocalPath.TrimStart('/');

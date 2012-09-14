@@ -13,26 +13,24 @@
 #region Namespace directives
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
     public sealed class SchemeHandlerFactoryManager {
-        internal SchemeHandlerFactoryManager() { }
+        internal SchemeHandlerFactoryManager() {}
 
         public void Register(SchemeHandlerFactoryDescriptor descriptor) {
-            if (descriptor  == null)
-            {
+            if (descriptor == null) {
                 throw new ArgumentNullException("descriptor");
             }
 
             var s = new StringUtf16(descriptor.SchemeName);
             var d = new StringUtf16(descriptor.DomainName);
 
-            CefSchemeCapi.CefRegisterSchemeHandlerFactory(s.NativeHandle, d.NativeHandle, descriptor.Factory.NativeHandle);
+            CefSchemeCapi.CefRegisterSchemeHandlerFactory(s.NativeHandle, d.NativeHandle,
+                                                          descriptor.Factory.NativeHandle);
 
             d.Free();
             s.Free();

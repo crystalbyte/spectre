@@ -10,8 +10,9 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
-    public interface IView {
-        CompositionResult Compose();
+namespace Crystalbyte.Chocolate.Routing {
+    public static class Schemes {
+        public const string Chocolate = "chocolate";
+        public const string Pack = "pack";
     }
 }

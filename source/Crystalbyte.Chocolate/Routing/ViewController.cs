@@ -10,19 +10,8 @@
 
 #endregion
 
-#region Namespace directives
-
-using System;
-
-#endregion
-
-namespace Crystalbyte.Chocolate.Mvc {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
-    public sealed class RouteAttribute : Attribute {
-        public RouteAttribute(string path) {
-            Path = path;
-        }
-
-        public string Path { get; set; }
+namespace Crystalbyte.Chocolate.Routing {
+    public abstract class ViewController {
+        public abstract IView CreateView();
     }
 }

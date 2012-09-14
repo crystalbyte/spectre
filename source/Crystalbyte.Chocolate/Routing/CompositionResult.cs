@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -14,13 +14,30 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
-    public sealed class ViewGenerationFailedEventArgs : EventArgs {
-        internal ViewGenerationFailedEventArgs() {}
+namespace Crystalbyte.Chocolate.Routing {
+    public sealed class CompositionResult {
+        private readonly string _markup;
+        private readonly IEnumerable<Exception> _errors;
 
-        public IEnumerable<Exception> Errors { get; internal set; }
+        public CompositionResult(string markup, IEnumerable<Exception> errors = null) {
+            _markup = markup;
+            _errors = errors;
+        }
+
+        public IEnumerable<Exception> Errors {
+            get { return _errors; }
+        }
+
+        public string Markup {
+            get { return _markup; }
+        }
+
+        public bool IsErrornous {
+            get { return _errors != null && !_errors.Any(); }
+        }
     }
 }

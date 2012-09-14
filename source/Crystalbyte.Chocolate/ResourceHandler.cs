@@ -15,7 +15,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.IO;
+using System.Text;
 using Crystalbyte.Chocolate.Projections;
 
 #endregion
@@ -50,12 +50,16 @@ namespace Crystalbyte.Chocolate {
         }
 
         private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback) {
-            using (var e = new ResponseDataReadingEventArgs {
-                Controller = AsyncActivityController.FromHandle(callback)
-            }) {
+            using (var writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8)) {
+                var e = new ResponseDataReadingEventArgs(writer) {
+                    MaxBlockSize = bytestoread,
+                    Controller = AsyncActivityController.FromHandle(callback)
+                };
+
                 OnResponseDataReading(e);
+
                 if (e.Controller.IsPaused) {
-                    // data retrieval can be resumed, by calling Resume() on the controller
+                    // Data retrieval can be resumed by calling Continue() on the controller.
                     bytesread = 0;
                     return 1;
                 }
@@ -69,12 +73,11 @@ namespace Crystalbyte.Chocolate {
                 }
 
                 using (var reader = new BinaryReader(e.ResponseWriter.BaseStream)) {
-                    // The BinaryWriter inserts the stream length into the first byte, word or unsigned int as an UTF7 encoded value.
-                    // http://msdn.microsoft.com/en-us/library/system.io.binarywriter.aspx
-                    bytesread = reader.Read7BitEncodedInt();
-                    var bytes = reader.ReadBytes(bytesread);
+                    var bytes = reader.ReadBytes(e.MaxBlockSize);
+                    bytesread = bytes.Length;
                     Marshal.Copy(bytes, 0, dataout, bytesread);
                 }
+
                 return e.IsCompleted ? 0 : 1;
             }
         }
@@ -92,6 +95,7 @@ namespace Crystalbyte.Chocolate {
                 e.Controller.Continue();
             }
 
+            e.Controller.Dispose();
             return e.IsCanceled ? 0 : 1;
         }
 

@@ -166,7 +166,6 @@ namespace Crystalbyte.Chocolate.Razor {
         ///   used with the LoadedAssembly list.
         /// </summary>
         /// <param name="relativePath"> </param>
-        /// <param name="context"> </param>
         /// <returns> </returns>
         protected virtual CompiledAssemblyItem GetAssemblyFromFileAndCache(string relativePath) {
             var fileName = Path.Combine(TemplatePath, relativePath).ToLower();
@@ -248,12 +247,15 @@ namespace Crystalbyte.Chocolate.Razor {
         /// <summary>
         ///   Overridden to return a unique name based on the filename
         /// </summary>
-        /// <param name="fileName"> </param>
+        /// <param name="objectId"> </param>
         /// <returns> </returns>
         protected override string GetSafeClassName(object objectId) {
             var fileName = objectId as string;
             fileName = PathConverter.GetRelativePath(fileName, TemplatePath);
-            return Path.GetFileNameWithoutExtension(fileName).Replace("\\", "_");
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            return fileNameWithoutExtension != null 
+                ? fileNameWithoutExtension.Replace("\\", "_") 
+                : null;
         }
     }
 

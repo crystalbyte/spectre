@@ -13,25 +13,38 @@
 #region Namespace directives
 
 using System;
-using System.IO;
+using System.Collections.Generic;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
-    internal static class BinaryReaderExtensions {
-        public static int Read7BitEncodedInt(this BinaryReader reader) {
-            byte num3;
-            var num = 0;
-            var num2 = 0;
-            do {
-                if (num2 == 0x23) {
-                    throw new FormatException("Invalid UTF7 integer.");
-                }
-                num3 = reader.ReadByte();
-                num |= (num3 & 0x7f) << num2;
-                num2 += 7;
-            } while ((num3 & 0x80) != 0);
-            return num;
+namespace Crystalbyte.Chocolate.Routing {
+    internal static class RouteRegistrar {
+        private static readonly Dictionary<string, Type> _types;
+
+        static RouteRegistrar() {
+            _types = new Dictionary<string, Type>();
+        }
+
+        public static void Register(string route, Type controller) {
+            _types.Add(route, controller);
+        }
+
+        public static Type GetController(string route) {
+            return _types[route];
+        }
+
+        public static bool TryGetController(string route, out Type controller) {
+            if (_types.ContainsKey(route)) {
+                controller = _types[route];
+                return true;
+            }
+
+            controller = null;
+            return false;
+        }
+
+        public static bool IsKnownRoute(string route) {
+            return _types.ContainsKey(route);
         }
     }
 }

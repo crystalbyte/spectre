@@ -13,9 +13,8 @@
 #region Namespace directives
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Crystalbyte.Chocolate.Mvc;
+using Crystalbyte.Chocolate.Routing;
 using Crystalbyte.Chocolate.Scripting;
 
 #endregion
@@ -69,13 +68,13 @@ namespace Crystalbyte.Chocolate.UI {
 
         protected virtual IList<SchemeHandlerFactoryDescriptor> ConfigureSchemeHandlerFactories() {
             return new List<SchemeHandlerFactoryDescriptor> {
-                new SchemeHandlerFactoryDescriptor("mvc", "localhost", new MvcSchemeHandlerFactory())
+                new SchemeHandlerFactoryDescriptor(Schemes.Chocolate, "localhost", new ChocolateSchemeHandlerFactory())
             };
         }
 
         protected virtual IList<SchemeDescriptor> ConfigureSchemeHandlers() {
             return new List<SchemeDescriptor> {
-                new MvcSchemeDescriptor()
+                new ChocolateSchemeDescriptor()
             };
         }
 

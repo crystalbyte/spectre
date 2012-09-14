@@ -93,10 +93,9 @@ namespace Crystalbyte.Chocolate {
         }
 
         protected override void DisposeNative() {
-            // TODO: check thread for progress 
+            // TODO: Check thread for progress.
             // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
-            return;
-            //base.DisposeNative();
+            base.DisposeNative();
         }
     }
 }

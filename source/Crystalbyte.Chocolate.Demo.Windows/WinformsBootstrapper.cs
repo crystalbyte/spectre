@@ -21,7 +21,7 @@ namespace Crystalbyte.Chocolate {
     public sealed class WinformsBootstrapper : Bootstrapper {
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
-                StartupUri = new Uri("mvc://localhost/start")
+                StartupUri = new Uri("chocolate://localhost/desktop")
             };
         }
     }

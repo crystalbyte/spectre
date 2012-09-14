@@ -22,9 +22,11 @@ namespace Crystalbyte.Chocolate {
     public sealed class Dispatcher {
         private static readonly Dispatcher _dispatcher = new Dispatcher();
 
-        private Dispatcher() { }
+        private Dispatcher() {}
 
-        public static Dispatcher Current { get { return _dispatcher; } }
+        public static Dispatcher Current {
+            get { return _dispatcher; }
+        }
 
         public static void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
             var task = new Task(action);

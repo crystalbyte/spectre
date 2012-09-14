@@ -20,7 +20,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using Crystalbyte.Chocolate.IO;
-using Crystalbyte.Chocolate.Mvc;
+using Crystalbyte.Chocolate.Routing;
 
 #endregion
 

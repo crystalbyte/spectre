@@ -59,45 +59,36 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public bool IsUniversalAccessFromFileUrlsAllowed
-        {
-            get
-            {
+        public bool IsUniversalAccessFromFileUrlsAllowed {
+            get {
                 var r = MarshalFromNative<CefBrowserSettings>();
                 return r.UniversalAccessFromFileUrlsAllowed;
             }
-            set
-            {
+            set {
                 var r = MarshalFromNative<CefBrowserSettings>();
                 r.UniversalAccessFromFileUrlsAllowed = value;
                 MarshalToNative(r);
             }
         }
 
-        public bool IsWebSecurityDisabled
-        {
-            get
-            {
+        public bool IsWebSecurityDisabled {
+            get {
                 var r = MarshalFromNative<CefBrowserSettings>();
                 return r.WebSecurityDisabled;
             }
-            set
-            {
+            set {
                 var r = MarshalFromNative<CefBrowserSettings>();
                 r.WebSecurityDisabled = value;
                 MarshalToNative(r);
             }
         }
 
-        public bool IsUserStyleSheetEnabled
-        {
-            get
-            {
+        public bool IsUserStyleSheetEnabled {
+            get {
                 var r = MarshalFromNative<CefBrowserSettings>();
                 return r.UserStyleSheetEnabled;
             }
-            set
-            {
+            set {
                 var r = MarshalFromNative<CefBrowserSettings>();
                 r.UserStyleSheetEnabled = value;
                 MarshalToNative(r);

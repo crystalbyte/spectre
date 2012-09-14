@@ -12,7 +12,8 @@
 <html>
     <head>
         <title>Chocolate Windows Demo Application</title>
-        @Style.Link("Styles/metro.css")
+        @Style.Link("/Styles/metro.css")
+        @Script.Reference("/Scripts/jquery-1.8.1.js")
     </head>
     <body>
         <div class="header">
@@ -21,6 +22,8 @@
         <span>
             @model.WelcomeText
         </span>
-        <iframe width="640" height="360" src="http://www.youtube.com/embed/YJZxDYHBSqU?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+        
+        <iframe width="640" height="360" src="http://www.youtube.com/embed/7QomKuWMIc0?feature=player_detailpage"></iframe>
+        
     </body>
 </html>

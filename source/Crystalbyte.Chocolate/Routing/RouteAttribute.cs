@@ -13,31 +13,16 @@
 #region Namespace directives
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
-    public sealed class CompositionResult {
-        private readonly string _markup;
-        private readonly IEnumerable<Exception> _errors;
-
-        public CompositionResult(string markup, IEnumerable<Exception> errors = null) {
-            _markup = markup;
-            _errors = errors;
+namespace Crystalbyte.Chocolate.Routing {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
+    public sealed class RouteAttribute : Attribute {
+        public RouteAttribute(string path) {
+            Path = path;
         }
 
-        public IEnumerable<Exception> Errors {
-            get { return _errors; }
-        }
-
-        public string Markup {
-            get { return _markup; }
-        }
-
-        public bool IsErrornous {
-            get { return _errors != null && !_errors.Any(); }
-        }
+        public string Path { get; set; }
     }
 }

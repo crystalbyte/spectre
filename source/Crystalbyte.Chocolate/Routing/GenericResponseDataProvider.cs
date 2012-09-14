@@ -10,10 +10,39 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Mvc {
-    public enum ResourceState {
-        Valid = 0,
-        Missing,
-        Locked
+#region Namespace directives
+
+using System;
+using System.IO;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.Routing {
+    public sealed class GenericResponseDataProvider : IResponseDataProvider {
+        private readonly Uri _uri;
+        private BinaryReader _reader;
+
+        public GenericResponseDataProvider(Uri uri) {
+            _uri = uri;
+        }
+
+        public ResourceState GetResourceState() {
+            //TODO: Implement
+            return ResourceState.Valid;
+        }
+
+        public bool WriteDataBlock(BinaryWriter writer, int blockSize) {
+            var bytes = new byte[blockSize];
+            var bytesRead = _reader.Read(bytes, 0, blockSize);
+            writer.Write(bytes, 0, bytesRead);
+            return _reader.BaseStream.Position == _reader.BaseStream.Length - 1;
+        }
+
+
+        public void Initialize() {
+            var info = Framework.GetResourceStream(_uri);
+            _reader = new BinaryReader(info.Stream);
+            _reader.BaseStream.Seek(0, SeekOrigin.Begin);
+        }
     }
 }
