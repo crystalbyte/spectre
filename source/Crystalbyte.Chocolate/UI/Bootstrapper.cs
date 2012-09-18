@@ -21,12 +21,7 @@ using Crystalbyte.Chocolate.Scripting;
 
 namespace Crystalbyte.Chocolate.UI {
     public abstract class Bootstrapper {
-        private readonly Framework _framework;
         protected abstract IRenderTarget CreateRenderTarget();
-
-        protected Bootstrapper() {
-            _framework = new Framework();
-        }
 
         protected virtual AppDelegate CreateAppDelegate() {
             return new AppDelegate();
@@ -41,21 +36,22 @@ namespace Crystalbyte.Chocolate.UI {
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
 
-            ConfigureSettings(_framework.Settings);
-            _framework.Initialize(app);
+            ConfigureSettings(Framework.Current.Settings);
+            Framework.Current.Initialize(app);
 
-            if (!_framework.IsRootProcess) {
+            if (!Framework.Current.IsRootProcess)
+            {
                 return;
             }
 
             var factories = RegisterSchemeHandlerFactories();
-            factories.ForEach(_framework.SchemeFactories.Register);
+            factories.ForEach(Framework.Current.SchemeFactories.Register);
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);
 
-            _framework.Run(new Viewport(target, browserDelegate));
-            _framework.Shutdown();
+            Framework.Current.Run(new Viewport(target, browserDelegate));
+            Framework.Current.Shutdown();
         }
 
         private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {

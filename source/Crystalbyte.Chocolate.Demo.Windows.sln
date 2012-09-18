@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Razor.Hosting", "Crystalbyte.Chocolate.Razor.Hosting\Crystalbyte.Chocolate.Razor.Hosting.csproj", "{D8AE449B-3E8C-4D37-B0C8-21FDB8DD371F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{67D9C38D-EE71-4B9E-BB56-3B7FD6028FD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -91,9 +93,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB} = {65F12355-89EA-4F63-8257-1DCCAE079AD8}
 		{DC202E77-073A-4881-84C9-94B6BC7469B4} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
 		{D8AE449B-3E8C-4D37-B0C8-21FDB8DD371F} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB} = {65F12355-89EA-4F63-8257-1DCCAE079AD8}
 	EndGlobalSection
 EndGlobal

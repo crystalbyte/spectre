@@ -36,15 +36,16 @@ namespace Crystalbyte.Chocolate.IO {
         }
 
         public ResourceState GetResourceState() {
-            var success = RouteRegistrar.Current.TryGetController(_requestUri.AbsoluteUri, out _controllerType);
-            if (!success) {
-                return ResourceState.Missing;
-            }
-            return ResourceState.Valid;
+            throw new NotImplementedException();
+            //var success = RouteRegistrar.Current.TryGetController(_requestUri.AbsoluteUri, out _controllerType);
+            //if (!success) {
+            //    return ResourceState.Missing;
+            //}
+            //return ResourceState.Valid;
         }
 
         public void Initialize() {
-            var controller = (ViewController) Activator.CreateInstance(_controllerType);
+            var controller = (IViewController) Activator.CreateInstance(_controllerType);
             var view = controller.CreateView();
             var result = view.Compose();
             var bytes = Encoding.UTF8.GetBytes(result);

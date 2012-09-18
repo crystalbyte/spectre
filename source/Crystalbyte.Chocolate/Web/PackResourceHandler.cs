@@ -33,41 +33,42 @@ namespace Crystalbyte.Chocolate.IO {
         protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
             var extension = _requestUri.LocalPath.ToFileExtension();
             e.Response.MimeType = MimeMapper.ResolveFromExtension(extension);
+            throw new NotImplementedException();
 
-            if (RouteRegistrar.Current.IsKnownRoute(_requestUri.AbsoluteUri)) {
-                // View routes do not necessarily correspond to the actual view files.
-                // We need to manually adjust a views mime type to text/html.
-                e.Response.MimeType = "text/html";
+            //if (RouteRegistrar.Current.IsKnownRoute(_requestUri.AbsoluteUri)) {
+            //    // View routes do not necessarily correspond to the actual view files.
+            //    // We need to manually adjust a views mime type to text/html.
+            //    e.Response.MimeType = "text/html";
 
-                _provider = new ViewResourceProvider(_requestUri);
-            }
-            else {
-                _provider = new FileResourceProvider(_requestUri);
-            }
+            //    _provider = new ViewResourceProvider(_requestUri);
+            //}
+            //else {
+            //    _provider = new FileResourceProvider(_requestUri);
+            //}
 
-            try {
-                var state = _provider.GetResourceState();
-                switch (state) {
-                    case ResourceState.Valid:
-                        e.Response.StatusCode = 200;
-                        e.Response.StatusText = "OK";
-                        break;
-                    case ResourceState.Missing:
-                        e.Response.StatusCode = 404;
-                        e.Response.StatusText = string.Format("The requested resource has not been found.");
-                        break;
-                    case ResourceState.Locked:
-                        e.Response.StatusCode = 423;
-                        e.Response.StatusText = string.Format("The requested resource is locked and cannot be accessed.");
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-            catch (Exception ex) {
-                e.Response.StatusCode = 500;
-                e.Response.StatusText = string.Format("Internal server error. {0}", ex);
-            }
+            //try {
+            //    var state = _provider.GetResourceState();
+            //    switch (state) {
+            //        case ResourceState.Valid:
+            //            e.Response.StatusCode = 200;
+            //            e.Response.StatusText = "OK";
+            //            break;
+            //        case ResourceState.Missing:
+            //            e.Response.StatusCode = 404;
+            //            e.Response.StatusText = string.Format("The requested resource has not been found.");
+            //            break;
+            //        case ResourceState.Locked:
+            //            e.Response.StatusCode = 423;
+            //            e.Response.StatusText = string.Format("The requested resource is locked and cannot be accessed.");
+            //            break;
+            //        default:
+            //            throw new ArgumentOutOfRangeException();
+            //    }
+            //}
+            //catch (Exception ex) {
+            //    e.Response.StatusCode = 500;
+            //    e.Response.StatusText = string.Format("Internal server error. {0}", ex);
+            //}
         }
 
         protected override void OnResourceRequested(ResourceRequestedEventArgs e) {

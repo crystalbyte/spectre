@@ -56,7 +56,7 @@ namespace Crystalbyte.Chocolate.IO {
 
         private IEnumerable<Type> QueryControllers() {
             return AssemblyCatalog.SelectMany(x => x.GetTypes()
-                .Where(type => typeof (ViewController).IsAssignableFrom(type)));
+                .Where(type => typeof (IViewController).IsAssignableFrom(type)));
         }
     }
 }

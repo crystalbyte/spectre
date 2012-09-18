@@ -76,9 +76,6 @@
   <ItemGroup>
     <Compile Include="Controllers\DesktopController.cs" />
     <Compile Include="Models\DesktopModel.cs" />
-    <Compile Include="Razor\Shape.cs" />
-    <Compile Include="Razor\ImageTile.cs" />
-    <Compile Include="Razor\Tile.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,14 +110,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="Views\Desktop.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Crystalbyte.Chocolate.Razor.Hosting\Crystalbyte.Chocolate.Razor.Hosting.csproj">
-      <Project>{D8AE449B-3E8C-4D37-B0C8-21FDB8DD371F}</Project>
-      <Name>Crystalbyte.Chocolate.Razor.Hosting</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
       <Name>Crystalbyte.Chocolate</Name>
@@ -185,12 +178,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.8.1.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Styles\Metro.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

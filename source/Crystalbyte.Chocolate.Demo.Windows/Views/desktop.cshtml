@@ -1,31 +1,13 @@
-﻿@inherits Crystalbyte.Chocolate.Razor.RazorTemplateBase
-              
-@using System.Linq;
-@using Crystalbyte.Chocolate
-@using Crystalbyte.Chocolate.Models
-@using Crystalbyte.Chocolate.Razor.Markup
-
-              
-@{
-    var model = (DesktopModel) Context; 
-}
-
-<html>
+﻿<html>
     <head>
         <title>Chocolate Windows Demo Application</title>
-        @Style.Link("/Styles/metro.css")
-        @Script.Reference("/Scripts/jquery-1.8.1.js")
     </head>
     <body>
         <div class="header">
             Start
         </div>
         <div>
-            @foreach (var tile in model.Tiles) {
-                <div style="background-color: aquamarine; width: 150px; height: 150px;">
-                    
-                </div>
-            }
+            This is a demo view
         </div>
     </body>
 </html>

@@ -26,11 +26,14 @@ using Crystalbyte.Chocolate.UI;
 namespace Crystalbyte.Chocolate {
     public sealed class Framework {
         private App _app;
-        private readonly RouteRegistrar _routeRegistrar;
         private readonly Dictionary<IRenderTarget, Viewport> _views;
         private readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
 
-        public Framework() {
+        static Framework() {
+            Current = new Framework();
+        }
+
+        private Framework() {
 
             if (Current != null) {
                 throw new InvalidOperationException("Only a single framework instance may be created for each AppDomain.");
@@ -38,31 +41,24 @@ namespace Crystalbyte.Chocolate {
 
             RegisterUriScheme(Schemes.Pack);
             
-            _routeRegistrar = new RouteRegistrar();
             _views = new Dictionary<IRenderTarget, Viewport>();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
 
             Settings = new FrameworkSettings();
             QuitAfterLastViewClosed = true;
-
-            Framework.Current = this;
         }
 
         public static void RegisterUriScheme(string scheme) {
             if (!UriParser.IsKnownScheme(scheme)) {
-                UriParser.Register(new GenericUriParser
-                                       (GenericUriParserOptions.GenericAuthority), scheme, -1);
+                UriParser.Register(new GenericUriParser(GenericUriParserOptions.GenericAuthority), scheme, -1);
             }
         }
 
-
         public static Framework Current { get; private set; }
-        public FrameworkSettings Settings { get; set; }
 
+        public FrameworkSettings Settings { get; set; }
         public bool IsInitialized { get; private set; }
         public bool IsRootProcess { get; private set; }
-        
-
         public bool QuitAfterLastViewClosed { get; set; }
 
         public void IterateMessageLoop() {

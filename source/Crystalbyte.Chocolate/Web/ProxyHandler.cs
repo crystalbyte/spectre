@@ -1,4 +1,4 @@
-﻿#region Copyright notice
+#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -13,48 +13,32 @@
 #region Namespace directives
 
 using System;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
-    internal sealed class RouteRegistrar {
-        private readonly Dictionary<string, Type> _types;
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ProxyHandler : RefCountedNativeObject {
+        private readonly AppDelegate _delegate;
+        private readonly GetProxyForUrlCallback _getProxyForUrlCallback;
 
-        public RouteRegistrar() {
-            if (Current != null) {
-                throw new NotSupportedException("Only a single instance may be created for each AppDomain.");
-            }
-            _types = new Dictionary<string, Type>();
-
-            RouteRegistrar.Current = this;
+        public ProxyHandler(AppDelegate @delegate)
+            : base(typeof (CefProxyHandler)) {
+            _delegate = @delegate;
+            _getProxyForUrlCallback = GetProxyForUrl;
+            MarshalToNative(new CefProxyHandler {
+                Base = DedicatedBase,
+                GetProxyForUrl = Marshal.GetFunctionPointerForDelegate(_getProxyForUrlCallback)
+            });
         }
 
-        public static RouteRegistrar Current { get; private set; }
-
-        public void Register(string url, Type controller) {
-            _types.Add(url, controller);
-        }
-
-        public Type GetController(string route) {
-            return _types[route];
-        }
-
-        public bool TryGetController(string url, out Type controller)
-        {
-            if (_types.ContainsKey(url))
-            {
-                controller = _types[url];
-                return true;
-            }
-
-            controller = null;
-            return false;
-        }
-
-        public bool IsKnownRoute(string url)
-        {
-            return _types.ContainsKey(url);
+        private void GetProxyForUrl(IntPtr self, IntPtr url, IntPtr proxyinfo) {
+            var e = new ProxyUrlEventArgs {
+                Url = StringUtf16.ReadString(url)
+            };
+            _delegate.OnProxyForUrlRequested(e);
         }
     }
 }
