@@ -18,20 +18,20 @@ using System.IO;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class Resources {
+    public static class Resources {
         static Resources() {
-            Cache = new Dictionary<string, Stream>();
+            _cache = new Dictionary<string, Stream>();
         }
 
-        private static readonly IDictionary<string, Stream> Cache;
+        private static readonly IDictionary<string, Stream> _cache;
 
         public static Stream FindResource(string name) {
-            if (!Cache.ContainsKey(name)) {
+            if (!_cache.ContainsKey(name)) {
                 var resource = typeof (Resources).Assembly.GetManifestResourceStream(name);
-                Cache.Add(name, resource);
+                _cache.Add(name, resource);
             }
 
-            return Cache[name];
+            return _cache[name];
         }
     }
 }

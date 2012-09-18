@@ -21,11 +21,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Crystalbyte.Chocolate.Win32Application")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Chocolate Demo Application for Windows")]
+[assembly: AssemblyDescription("This Project illustrates usage scenarios for the Chocolate Framwork on the Windows platform.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Crystalbyte.Chocolate.Win32Application")]
+[assembly: AssemblyProduct("Crystalbyte Chocolate Framework")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

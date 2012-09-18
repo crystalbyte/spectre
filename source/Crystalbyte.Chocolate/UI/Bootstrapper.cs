@@ -14,14 +14,19 @@
 
 using System;
 using System.Collections.Generic;
-using Crystalbyte.Chocolate.Routing;
+using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Scripting;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
     public abstract class Bootstrapper {
+        private readonly Framework _framework;
         protected abstract IRenderTarget CreateRenderTarget();
+
+        protected Bootstrapper() {
+            _framework = new Framework();
+        }
 
         protected virtual AppDelegate CreateAppDelegate() {
             return new AppDelegate();
@@ -36,25 +41,25 @@ namespace Crystalbyte.Chocolate.UI {
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
 
-            ConfigureSettings(Framework.Settings);
-            Framework.Initialize(app);
+            ConfigureSettings(_framework.Settings);
+            _framework.Initialize(app);
 
-            if (!Framework.IsRootProcess) {
+            if (!_framework.IsRootProcess) {
                 return;
             }
 
-            var factories = ConfigureSchemeHandlerFactories();
-            factories.ForEach(Framework.SchemeFactories.Register);
+            var factories = RegisterSchemeHandlerFactories();
+            factories.ForEach(_framework.SchemeFactories.Register);
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);
-            Framework.Run(new HtmlRenderer(target, browserDelegate));
 
-            Framework.Shutdown();
+            _framework.Run(new Viewport(target, browserDelegate));
+            _framework.Shutdown();
         }
 
         private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {
-            var descriptors = ConfigureSchemeHandlers();
+            var descriptors = RegisterSchemeHandlers();
             e.SchemeDescriptors.AddRange(descriptors);
         }
 
@@ -66,20 +71,20 @@ namespace Crystalbyte.Chocolate.UI {
 #endif
         }
 
-        protected virtual IList<SchemeHandlerFactoryDescriptor> ConfigureSchemeHandlerFactories() {
+        protected virtual IList<SchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
             return new List<SchemeHandlerFactoryDescriptor> {
-                new SchemeHandlerFactoryDescriptor(Schemes.Chocolate, "localhost", new ChocolateSchemeHandlerFactory())
+                new SchemeHandlerFactoryDescriptor(Schemes.Pack, string.Empty, new PackSchemeHandlerFactory())
             };
         }
 
-        protected virtual IList<SchemeDescriptor> ConfigureSchemeHandlers() {
+        protected virtual IList<SchemeDescriptor> RegisterSchemeHandlers() {
             return new List<SchemeDescriptor> {
-                new ChocolateSchemeDescriptor()
+                new PackSchemeDescriptor()
             };
         }
 
-        protected virtual IList<ScriptingExtension> RegisterScriptingExtensions() {
-            return new List<ScriptingExtension>();
+        protected virtual IList<RuntimeExtension> RegisterScriptingExtensions() {
+            return new List<RuntimeExtension>();
         }
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
@@ -89,7 +94,7 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        private static void RegisterScriptingExtension(ScriptingExtension extension) {
+        private static void RegisterScriptingExtension(RuntimeExtension extension) {
             var name = Guid.NewGuid().ToString();
             ScriptingRuntime.RegisterExtension(name, extension);
         }

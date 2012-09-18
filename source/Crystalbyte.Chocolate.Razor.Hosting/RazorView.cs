@@ -17,10 +17,11 @@
 #region Namespace directives
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Crystalbyte.Chocolate.IO;
-using Crystalbyte.Chocolate.Routing;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
@@ -37,6 +38,7 @@ namespace Crystalbyte.Chocolate.Razor {
         private bool _isStarted;
 
         public RazorView(string templatePath, object context) {
+            ReferencedAssemblies = new List<Assembly>();
             _templateUri = new Uri(templatePath);
             _context = context;
             _host = new RazorStringHostContainer {
@@ -44,7 +46,9 @@ namespace Crystalbyte.Chocolate.Razor {
             };
         }
 
-        public CompositionResult Compose() {
+        public IList<Assembly> ReferencedAssemblies { get; private set; }
+
+        public string Compose() {
             if (!_isStarted) {
                 var location = _context.GetType().Assembly.Location;
                 var name = new FileInfo(location).Name;
@@ -60,14 +64,16 @@ namespace Crystalbyte.Chocolate.Razor {
                 }
 
                 var template = info.Stream.ToUtf8String();
-                var markup = _host.RenderTemplate(template, _context);
+                //var markup = _host.RenderTemplate(template, _context);
 
-                return string.IsNullOrEmpty(_host.ErrorMessage) ?
-                    new CompositionResult(markup) :
-                    new CompositionResult(string.Empty, new[] { new Exception(_host.ErrorMessage) });
+                //return string.IsNullOrEmpty(_host.ErrorMessage) ?
+                //    new CompositionResult(markup) :
+                //    new CompositionResult(string.Empty, new[] { new Exception(_host.ErrorMessage) });
+                return string.Empty;
             }
             catch (Exception ex) {
-                return new CompositionResult(string.Empty, new[] {ex});
+                //return new CompositionResult(string.Empty, new[] {ex});
+                return string.Empty;
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Crystalbyte.Chocolate.Razor;
 
 namespace Crystalbyte.Chocolate.Models
 {
@@ -6,9 +8,11 @@ namespace Crystalbyte.Chocolate.Models
     public sealed class DesktopModel
     {
         public DesktopModel() {
-            WelcomeText = "Welcome to Razor!";
+            Tiles = new List<Tile> {
+                new ImageTile("pack://siteoforigin:,,,/Media/Images/calendar.png", "Keep track of important events.")
+            };
         }
 
-        public string WelcomeText { get; set; }
+        public IEnumerable<Tile> Tiles { get; private set; }
     }
 }

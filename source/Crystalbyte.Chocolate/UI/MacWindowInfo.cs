@@ -30,8 +30,7 @@ namespace Crystalbyte.Chocolate.UI {
                 X = 0,
                 Y = 0,
                 Width = target.Size.Width,
-                // - Offsets.WindowRight,
-                Height = target.Size.Height // - Offsets.WindowBottom
+                Height = target.Size.Height
             });
             _isOwned = true;
         }

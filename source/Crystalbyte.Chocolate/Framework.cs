@@ -17,25 +17,35 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Routing;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public static class Framework {
-        private static App _app;
-        private static readonly Dictionary<IRenderTarget, HtmlRenderer> _views;
-        private static readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
+    public sealed class Framework {
+        private App _app;
+        private readonly RouteRegistrar _routeRegistrar;
+        private readonly Dictionary<IRenderTarget, Viewport> _views;
+        private readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
 
-        static Framework() {
-            RegisterUriScheme(Schemes.Chocolate);
+        public Framework() {
+
+            if (Current != null) {
+                throw new InvalidOperationException("Only a single framework instance may be created for each AppDomain.");
+            }
+
             RegisterUriScheme(Schemes.Pack);
-            Settings = new FrameworkSettings();
+            
+            _routeRegistrar = new RouteRegistrar();
+            _views = new Dictionary<IRenderTarget, Viewport>();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
-            _views = new Dictionary<IRenderTarget, HtmlRenderer>();
+
+            Settings = new FrameworkSettings();
             QuitAfterLastViewClosed = true;
+
+            Framework.Current = this;
         }
 
         public static void RegisterUriScheme(string scheme) {
@@ -45,39 +55,43 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        public static FrameworkSettings Settings { get; private set; }
 
-        public static bool IsInitialized { get; private set; }
-        public static bool IsRootProcess { get; private set; }
-        public static bool QuitAfterLastViewClosed { get; set; }
+        public static Framework Current { get; private set; }
+        public FrameworkSettings Settings { get; set; }
 
-        public static void IterateMessageLoop() {
+        public bool IsInitialized { get; private set; }
+        public bool IsRootProcess { get; private set; }
+        
+
+        public bool QuitAfterLastViewClosed { get; set; }
+
+        public void IterateMessageLoop() {
             CefAppCapi.CefDoMessageLoopWork();
         }
 
-        public static SchemeHandlerFactoryManager SchemeFactories {
+        public SchemeHandlerFactoryManager SchemeFactories {
             get { return _schemeHandlerfactoryManager; }
         }
 
-        public static event EventHandler ShutdownStarted;
+        public event EventHandler ShutdownStarted;
 
-        public static void OnShutdownStarted(EventArgs e) {
+        public void OnShutdownStarted(EventArgs e) {
             var handler = ShutdownStarted;
             if (handler != null) {
-                handler(null, e);
+                handler(this, e);
             }
         }
 
-        public static event EventHandler ShutdownFinished;
+        public event EventHandler ShutdownFinished;
 
-        public static void OnShutdownFinished(EventArgs e) {
+        public void OnShutdownFinished(EventArgs e) {
             var handler = ShutdownFinished;
             if (handler != null) {
-                handler(null, e);
+                handler(this, e);
             }
         }
 
-        private static bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
+        private bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
             _app = new App(del ?? new AppDelegate());
 
             Reference.Increment(_app.NativeHandle);
@@ -94,8 +108,8 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static StreamResourceInfo GetResourceStream(Uri uri) {
-            if (uri.Scheme != Schemes.Pack && uri.Scheme != Schemes.Chocolate) {
-                throw new NotSupportedException("Only pack and choc uri's are supported.");
+            if (uri.Scheme != Schemes.Pack) {
+                throw new NotSupportedException("Only pack uri's are supported.");
             }
             if (uri.Host.StartsWith("siteoforigin")) {
                 return GetContentStreamFromLocalPath(uri);
@@ -129,8 +143,9 @@ namespace Crystalbyte.Chocolate {
             };
         }
 
-        public static bool Initialize(AppDelegate del = null) {
+        public bool Initialize(AppDelegate del = null) {
             var handle = IntPtr.Zero;
+
             if (Platform.IsLinux) {
                 var commandLine = Environment.GetCommandLineArgs();
                 handle = AppArguments.CreateForLinux(commandLine);
@@ -144,11 +159,11 @@ namespace Crystalbyte.Chocolate {
             return Initialize(handle, del);
         }
 
-        public static void Shutdown() {
+        public void Shutdown() {
             OnShutdownStarted(EventArgs.Empty);
 
-            // Force collect to remove all remaining uncollected native objects.
-            // This is only called once, when closing the program, thus not affecting performance in the slightest.
+            // Poke the GC to free uncollected native objects.
+            // This is only called when closing the program, thus not affecting performance.
             // http://blogs.msdn.com/b/ricom/archive/2004/11/29/271829.aspx
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -159,18 +174,19 @@ namespace Crystalbyte.Chocolate {
             OnShutdownFinished(EventArgs.Empty);
         }
 
-        public static void Add(HtmlRenderer renderer) {
+        public void Add(Viewport renderer) {
             _views.Add(renderer.RenderTarget, renderer);
             renderer.RenderTarget.TargetClosing += OnRenderTargetClosing;
             renderer.RenderTarget.TargetClosed += OnRenderTargetClosed;
             renderer.CreateBrowser();
         }
 
-        private static void OnRenderTargetClosing(object sender, EventArgs e) {
+        private void OnRenderTargetClosing(object sender, EventArgs e) {
             var target = (IRenderTarget) sender;
             target.TargetClosing -= OnRenderTargetClosing;
             _views[target].Dispose();
             _views.Remove(target);
+
             if (QuitAfterLastViewClosed && _views.Count < 1) {
                 CefAppCapi.CefQuitMessageLoop();
             }
@@ -181,12 +197,12 @@ namespace Crystalbyte.Chocolate {
             target.TargetClosed -= OnRenderTargetClosed;
         }
 
-        public static void Run(HtmlRenderer renderer) {
+        public void Run(Viewport renderer) {
             Add(renderer);
             CefAppCapi.CefRunMessageLoop();
         }
 
-        public static void Run() {
+        public void Run() {
             CefAppCapi.CefRunMessageLoop();
         }
     }
