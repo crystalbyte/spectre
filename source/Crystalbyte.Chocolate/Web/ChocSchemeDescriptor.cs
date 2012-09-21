@@ -19,16 +19,18 @@ using System.Reflection;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
-    public sealed class PackSchemeDescriptor : SchemeDescriptor {
-        public PackSchemeDescriptor() {
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ChocSchemeDescriptor : SchemeDescriptor {
+        public ChocSchemeDescriptor() {
             _assemblyCatalog = new List<Assembly>();
 
-            SchemeProperties = SchemeProperties.Local | SchemeProperties.DisplayIsolated;
+            SchemeProperties = SchemeProperties.Local 
+                | SchemeProperties.DisplayIsolated 
+                | SchemeProperties.Standard;
         }
 
         public override string Scheme {
-            get { return Schemes.Pack; }
+            get { return Schemes.Choc; }
         }
 
         private readonly List<Assembly> _assemblyCatalog;

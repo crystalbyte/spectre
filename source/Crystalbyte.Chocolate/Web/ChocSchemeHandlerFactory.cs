@@ -12,10 +12,10 @@
 
 using Crystalbyte.Chocolate.UI;
 
-namespace Crystalbyte.Chocolate.IO {
-    public sealed class PackSchemeHandlerFactory : SchemeHandlerFactory {
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ChocSchemeHandlerFactory : SchemeHandlerFactory {
         protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
-            return new PackResourceHandler();
+            return new ChocResourceHandler();
         }
     }
 }

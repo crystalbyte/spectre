@@ -39,7 +39,7 @@ namespace Crystalbyte.Chocolate {
                 throw new InvalidOperationException("Only a single framework instance may be created for each AppDomain.");
             }
 
-            RegisterUriScheme(Schemes.Pack);
+            RegisterUriScheme(Schemes.Choc);
             
             _views = new Dictionary<IRenderTarget, Viewport>();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
@@ -104,7 +104,7 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static StreamResourceInfo GetResourceStream(Uri uri) {
-            if (uri.Scheme != Schemes.Pack) {
+            if (uri.Scheme != Schemes.Choc) {
                 throw new NotSupportedException("Only pack uri's are supported.");
             }
             if (uri.Host.StartsWith("siteoforigin")) {

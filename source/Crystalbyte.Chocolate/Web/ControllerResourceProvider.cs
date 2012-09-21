@@ -18,13 +18,13 @@ using System.Text;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
-    public sealed class ViewResourceProvider : IResourceProvider {
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ControllerResourceProvider : IResourceProvider {
         private Type _controllerType;
         private readonly Uri _requestUri;
         private BinaryReader _reader;
 
-        public ViewResourceProvider(Uri requestUri) {
+        public ControllerResourceProvider(Uri requestUri) {
             _requestUri = requestUri;
         }
 

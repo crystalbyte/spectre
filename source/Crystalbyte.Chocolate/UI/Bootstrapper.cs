@@ -14,8 +14,8 @@
 
 using System;
 using System.Collections.Generic;
-using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Chocolate.Web;
 
 #endregion
 
@@ -69,13 +69,13 @@ namespace Crystalbyte.Chocolate.UI {
 
         protected virtual IList<SchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
             return new List<SchemeHandlerFactoryDescriptor> {
-                new SchemeHandlerFactoryDescriptor(Schemes.Pack, string.Empty, new PackSchemeHandlerFactory())
+                new SchemeHandlerFactoryDescriptor(Schemes.Choc, string.Empty, new ChocSchemeHandlerFactory())
             };
         }
 
         protected virtual IList<SchemeDescriptor> RegisterSchemeHandlers() {
             return new List<SchemeDescriptor> {
-                new PackSchemeDescriptor()
+                new ChocSchemeDescriptor()
             };
         }
 

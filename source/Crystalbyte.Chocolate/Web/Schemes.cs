@@ -12,6 +12,6 @@
 
 namespace Crystalbyte.Chocolate.IO {
     public static class Schemes {
-        public const string Pack = "pack";
+        public const string Choc = "choc";
     }
 }

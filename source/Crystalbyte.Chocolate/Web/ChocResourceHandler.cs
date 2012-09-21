@@ -16,8 +16,8 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
-    public sealed class PackResourceHandler : ResourceHandler {
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ChocResourceHandler : ResourceHandler {
         private Uri _requestUri;
         private IResourceProvider _provider;
         private bool _isInitialized;
