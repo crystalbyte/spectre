@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public class SchemeDescriptor {
         public SchemeDescriptor(string scheme) {
             Scheme = scheme;

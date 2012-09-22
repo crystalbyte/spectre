@@ -14,42 +14,33 @@
 
 using System;
 using System.IO;
-using System.Text;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class ControllerResourceProvider : IResourceProvider {
-        private Type _controllerType;
-        private readonly Uri _requestUri;
+    public sealed class LocalFileResourceProvider : IResourceProvider {
+        private readonly Uri _uri;
         private BinaryReader _reader;
 
-        public ControllerResourceProvider(Uri requestUri) {
-            _requestUri = requestUri;
+        public LocalFileResourceProvider(Uri uri) {
+            _uri = uri;
+        }
+
+        public ResourceState GetResourceState() {
+            //TODO: Implement
+            return ResourceState.Valid;
         }
 
         public bool WriteDataBlock(BinaryWriter writer, int blockSize) {
             var bytes = new byte[blockSize];
-            var readBytes = _reader.Read(bytes, 0, blockSize);
-            writer.Write(bytes, 0, readBytes);
+            var bytesRead = _reader.Read(bytes, 0, blockSize);
+            writer.Write(bytes, 0, bytesRead);
             return _reader.BaseStream.Position == _reader.BaseStream.Length - 1;
         }
 
-        public ResourceState GetResourceState() {
-            throw new NotImplementedException();
-            //var success = RouteRegistrar.Current.TryGetController(_requestUri.AbsoluteUri, out _controllerType);
-            //if (!success) {
-            //    return ResourceState.Missing;
-            //}
-            //return ResourceState.Valid;
-        }
-
         public void Initialize() {
-            var controller = (IViewController) Activator.CreateInstance(_controllerType);
-            var view = controller.CreateView();
-            var result = view.Compose();
-            var bytes = Encoding.UTF8.GetBytes(result);
-            _reader = new BinaryReader(new MemoryStream(bytes), Encoding.UTF8);
+            var info = Framework.GetResourceStream(_uri);
+            _reader = new BinaryReader(info.Stream);
             _reader.BaseStream.Seek(0, SeekOrigin.Begin);
         }
     }

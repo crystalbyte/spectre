@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     [Flags]
     public enum SchemeProperties : byte {
         Standard = 1,

@@ -17,7 +17,7 @@ using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public sealed class ResponseDataReadingEventArgs : EventArgs {
         internal ResponseDataReadingEventArgs(BinaryWriter writer) {
             ResponseWriter = writer;

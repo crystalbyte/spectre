@@ -19,7 +19,7 @@ using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public abstract class SchemeHandlerFactory : RefCountedNativeObject {
         private readonly CreateCallback _createCallback;
 

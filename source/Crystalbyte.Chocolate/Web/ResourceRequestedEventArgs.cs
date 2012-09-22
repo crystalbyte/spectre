@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public sealed class ResourceRequestedEventArgs : EventArgs {
         public bool IsCanceled { get; set; }
         public Request Request { get; internal set; }

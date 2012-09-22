@@ -1,4 +1,4 @@
-﻿#region Copyright notice
+#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -13,17 +13,16 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
-    public static class ScriptingRuntime {
-        public static bool RegisterExtension(string name, RuntimeExtension extension) {
-            var n = new StringUtf16(name);
-            var j = new StringUtf16(extension.PrototypeCode);
-            var result = CefV8Capi.CefRegisterExtension(n.NativeHandle, j.NativeHandle, extension.NativeHandle);
-            return Convert.ToBoolean(result);
-        }
+namespace Crystalbyte.Chocolate.Web.Scripting {
+    public sealed class ContextEventArgs : EventArgs {
+        internal ContextEventArgs() {}
+
+        public Browser Browser { get; internal set; }
+        public Frame Frame { get; internal set; }
+        public ScriptingContext Context { get; internal set; }
     }
 }

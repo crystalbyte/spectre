@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public enum ResourceState {
         Valid = 0,
         Missing,

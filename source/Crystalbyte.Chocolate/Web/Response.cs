@@ -18,7 +18,7 @@ using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public sealed class Response : NativeObject {
         public Response()
             : base(typeof (CefResponse)) {

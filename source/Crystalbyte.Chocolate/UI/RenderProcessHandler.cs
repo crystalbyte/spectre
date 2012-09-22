@@ -17,7 +17,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Projections;
 using Crystalbyte.Chocolate.Projections.Internal;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Chocolate.Web.Scripting;
 
 #endregion
 

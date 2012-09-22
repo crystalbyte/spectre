@@ -16,7 +16,7 @@ using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate {
     public sealed class StreamResourceInfo {
         public string ContentType { get; internal set; }
         public Stream Stream { get; internal set; }

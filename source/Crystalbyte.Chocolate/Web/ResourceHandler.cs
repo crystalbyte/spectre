@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public abstract class ResourceHandler : RefCountedNativeObject {
         private readonly CanSetCookieCallback _canSetCookieCallback;
         private readonly CanGetCookieCallback _canGetCookieCallback;

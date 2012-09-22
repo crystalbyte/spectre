@@ -22,7 +22,7 @@ using Crystalbyte.Chocolate.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Chocolate.Web.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
     public sealed class ScriptableObject : NativeObject, IEnumerable<KeyValuePair<string, ScriptableObject>> {
         private ScriptableObject(IntPtr handle)

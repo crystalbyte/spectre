@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -10,19 +10,12 @@
 
 #endregion
 
-#region Namespace directives
-
-using System;
 using Crystalbyte.Chocolate.UI;
 
-#endregion
-
-namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class ContextEventArgs : EventArgs {
-        internal ContextEventArgs() {}
-
-        public Browser Browser { get; internal set; }
-        public Frame Frame { get; internal set; }
-        public ScriptingContext Context { get; internal set; }
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
+        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
+            return new ChocolateResourceHandler();
+        }
     }
 }

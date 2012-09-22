@@ -10,12 +10,29 @@
 
 #endregion
 
-using Crystalbyte.Chocolate.UI;
+#region Namespace directives
 
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocSchemeHandlerFactory : SchemeHandlerFactory {
-        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
-            return new ChocResourceHandler();
-        }
+using System;
+using System.Runtime.Serialization;
+
+#endregion
+
+namespace Crystalbyte.Chocolate.Web.Scripting {
+    [Serializable]
+    public class RuntimeException : Exception {
+        //
+        // For guidelines regarding the creation of new exception types, see
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
+        // and
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
+        //
+
+        public RuntimeException() {}
+        public RuntimeException(string message) : base(message) {}
+        public RuntimeException(string message, Exception inner) : base(message, inner) {}
+
+        protected RuntimeException(
+            SerializationInfo info,
+            StreamingContext context) : base(info, context) {}
     }
 }

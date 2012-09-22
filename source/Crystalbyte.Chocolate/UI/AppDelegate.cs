@@ -13,8 +13,8 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.IO;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Chocolate.Web;
+using Crystalbyte.Chocolate.Web.Scripting;
 
 #endregion
 

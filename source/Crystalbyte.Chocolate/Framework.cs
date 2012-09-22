@@ -17,9 +17,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.IO;
 using Crystalbyte.Chocolate.Projections;
 using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Chocolate.Web;
 
 #endregion
 

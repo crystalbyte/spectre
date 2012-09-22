@@ -16,7 +16,7 @@ using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     internal interface IResourceProvider {
         void Initialize();
         ResourceState GetResourceState();

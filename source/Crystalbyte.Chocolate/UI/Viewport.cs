@@ -94,15 +94,13 @@ namespace Crystalbyte.Chocolate.UI {
         }
 
         private void OnTargetSizeChanged(object sender, SizeChangedEventArgs e) {
-            // TODO: the passed down window size is too large, therefor we subtract offsets to 
             var bounds = new Rectangle(0, 0, e.Size.Width, e.Size.Height);
             _resizer.Resize(_browserHost.WindowHandle, bounds);
         }
 
         internal void CreateBrowser() {
             OnCreating(EventArgs.Empty);
-
-            // Starts the browser rendering loop.
+            
             var a = new BrowserCreationArgs {
                 ClientHandler = _handler,
                 Settings = _settings,
@@ -117,10 +115,12 @@ namespace Crystalbyte.Chocolate.UI {
                 a.WindowInfo = new LinuxWindowInfo(_target);
             }
 
+            // Starts the browser rendering loop.
             _browser = BrowserHost.CreateBrowser(a);
-
             _browserHost = _browser.Host;
+
             OnCreated(EventArgs.Empty);
+
             _target.Show();
         }
     }

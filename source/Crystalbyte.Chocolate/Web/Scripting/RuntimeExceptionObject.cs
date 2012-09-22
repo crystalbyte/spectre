@@ -13,26 +13,33 @@
 #region Namespace directives
 
 using System;
-using System.Runtime.Serialization;
+using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
-    [Serializable]
-    public class RuntimeException : Exception {
-        //
-        // For guidelines regarding the creation of new exception types, see
-        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
-        // and
-        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
-        //
+namespace Crystalbyte.Chocolate.Web.Scripting {
+    public sealed class RuntimeExceptionObject : NativeObject {
+        public RuntimeExceptionObject()
+            : base(typeof (CefV8exception)) {
+            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+        }
 
-        public RuntimeException() {}
-        public RuntimeException(string message) : base(message) {}
-        public RuntimeException(string message, Exception inner) : base(message, inner) {}
+        public string Message {
+            get {
+                var reflection = MarshalFromNative<CefV8exception>();
+                var function = (GetMessageCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetMessage, typeof (GetMessageCallback));
+                var handle = function(NativeHandle);
+                return StringUtf16.ReadString(handle);
+            }
+        }
 
-        protected RuntimeException(
-            SerializationInfo info,
-            StreamingContext context) : base(info, context) {}
+        protected override void DisposeNative() {
+            if (NativeHandle != IntPtr.Zero) {
+                Marshal.FreeHGlobal(NativeHandle);
+            }
+            base.DisposeNative();
+        }
     }
 }

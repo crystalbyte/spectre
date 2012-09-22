@@ -13,16 +13,26 @@
 #region Namespace directives
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class ExecutedEventArgs : EventArgs {
-        public string FunctionName { get; internal set; }
-        public IReadOnlyCollection<ScriptableObject> Arguments { get; internal set; }
-        public ScriptableObject Result { get; set; }
-        public ScriptableObject Object { get; internal set; }
-        public bool IsHandled { get; set; }
-        public Exception Exception { get; internal set; }
+namespace Crystalbyte.Chocolate.Web.Scripting {
+    internal sealed class ScriptableObjectCollection : List<ScriptableObject>, IReadOnlyCollection<ScriptableObject> {
+        private static readonly int _pointerSize = Marshal.SizeOf(typeof (IntPtr));
+
+        public ScriptableObjectCollection(IntPtr listHandle, int argumentCount) {
+            // FIXME: List is only populated on construction
+            if (argumentCount < 1) {
+                return;
+            }
+            var current = listHandle;
+            for (var i = 0; i < argumentCount; i++) {
+                var handle = Marshal.ReadIntPtr(current);
+                Add(ScriptableObject.FromHandle(handle));
+                current = new IntPtr(current.ToInt64() + _pointerSize);
+            }
+        }
     }
 }

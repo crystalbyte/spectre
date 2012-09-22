@@ -16,39 +16,47 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocResourceHandler : ResourceHandler {
+namespace Crystalbyte.Chocolate.Web
+{
+    public sealed class ChocolateResourceHandler : ResourceHandler
+    {
         private Uri _requestUri;
         private IResourceProvider _provider;
         private bool _isInitialized;
 
-        protected override void OnResponseDataReading(ResponseDataReadingEventArgs e) {
-            if (!_isInitialized) {
+        protected override void OnResponseDataReading(ResponseDataReadingEventArgs e)
+        {
+            if (!_isInitialized)
+            {
                 _provider.Initialize();
                 _isInitialized = true;
             }
             e.IsCompleted = _provider.WriteDataBlock(e.ResponseWriter, e.MaxBlockSize);
         }
 
-        protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {
+        protected override void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e)
+        {
             var extension = _requestUri.LocalPath.ToFileExtension();
             e.Response.MimeType = MimeMapper.ResolveFromExtension(extension);
-            throw new NotImplementedException();
 
-            //if (RouteRegistrar.Current.IsKnownRoute(_requestUri.AbsoluteUri)) {
+            //if (RoutingHelper.IsKnownRoute(_requestUri.AbsoluteUri))
+            //{
             //    // View routes do not necessarily correspond to the actual view files.
             //    // We need to manually adjust a views mime type to text/html.
             //    e.Response.MimeType = "text/html";
 
-            //    _provider = new ViewResourceProvider(_requestUri);
+            //    _provider = new MvcResourceProvider(_requestUri);
             //}
-            //else {
-            //    _provider = new FileResourceProvider(_requestUri);
+            //else
+            //{
+            //    _provider = new LocalFileResourceProvider(_requestUri);
             //}
 
-            //try {
+            //try
+            //{
             //    var state = _provider.GetResourceState();
-            //    switch (state) {
+            //    switch (state)
+            //    {
             //        case ResourceState.Valid:
             //            e.Response.StatusCode = 200;
             //            e.Response.StatusText = "OK";
@@ -65,13 +73,15 @@ namespace Crystalbyte.Chocolate.Web {
             //            throw new ArgumentOutOfRangeException();
             //    }
             //}
-            //catch (Exception ex) {
+            //catch (Exception ex)
+            //{
             //    e.Response.StatusCode = 500;
             //    e.Response.StatusText = string.Format("Internal server error. {0}", ex);
             //}
         }
 
-        protected override void OnResourceRequested(ResourceRequestedEventArgs e) {
+        protected override void OnResourceRequested(ResourceRequestedEventArgs e)
+        {
             _requestUri = new Uri(e.Request.Url);
         }
     }

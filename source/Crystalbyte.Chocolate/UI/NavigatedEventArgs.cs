@@ -13,11 +13,10 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Chocolate.UI {
     public sealed class NavigatedEventArgs : EventArgs {
         internal NavigatedEventArgs(string address, Browser browser, Frame frame) {
             Address = address;

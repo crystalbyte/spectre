@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.IO {
+namespace Crystalbyte.Chocolate.Web {
     public sealed class SchemeHandlerFactoryDescriptor {
         public SchemeHandlerFactoryDescriptor(string schemeName, SchemeHandlerFactory factory)
             : this(schemeName, string.Empty, factory) {}

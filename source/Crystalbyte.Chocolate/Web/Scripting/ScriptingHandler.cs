@@ -18,7 +18,7 @@ using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Chocolate.Web.Scripting {
     public class ScriptingHandler : RefCountedNativeObject {
         private readonly V8ExecuteCallback _executeCallback;
 

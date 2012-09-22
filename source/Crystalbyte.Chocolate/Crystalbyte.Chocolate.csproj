@@ -47,22 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\BrowserProcessHandler.cs" />
+    <Compile Include="Web\ChocResourceHandler.cs" />
+    <Compile Include="Web\ChocSchemeDescriptor.cs" />
+    <Compile Include="Web\ChocSchemeHandlerFactory.cs" />
     <Compile Include="Web\CustomSchemesRegisteringEventArgs.cs" />
     <Compile Include="MimeMapper.cs" />
-    <Compile Include="Web\PackResourceProvider.cs" />
+    <Compile Include="Web\LocalFileResourceProvider.cs" />
     <Compile Include="Web\IResourceProvider.cs" />
     <Compile Include="Web\ResourceState.cs" />
     <Compile Include="Web\Schemes.cs" />
-    <Compile Include="Web\IViewController.cs" />
-    <Compile Include="Web\PackResourceHandler.cs" />
-    <Compile Include="Web\PackSchemeDescriptor.cs" />
-    <Compile Include="Web\PackSchemeHandlerFactory.cs" />
-    <Compile Include="UI\IView.cs" />
-    <Compile Include="Web\ViewResourceProvider.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
     <Compile Include="Resources.cs" />
-    <Compile Include="Scripting\RuntimeException.cs" />
+    <Compile Include="Web\Scripting\RuntimeException.cs" />
     <Compile Include="StreamResourceInfo.cs" />
     <Compile Include="Web\Response.cs" />
     <Compile Include="Web\ResponseHeadersRequestedEventArgs.cs" />
@@ -98,29 +95,29 @@
     <Compile Include="ProcessType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reference.cs" />
-    <Compile Include="Scripting\ContextEventArgs.cs">
+    <Compile Include="Web\Scripting\ContextEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ExecutedEventArgs.cs">
+    <Compile Include="Web\Scripting\ExecutedEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptableObject.cs">
+    <Compile Include="Web\Scripting\ScriptableObject.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptableObjectCollection.cs">
+    <Compile Include="Web\Scripting\ScriptableObjectCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\RuntimeExceptionObject.cs" />
-    <Compile Include="Scripting\ScriptingContext.cs">
+    <Compile Include="Web\Scripting\RuntimeExceptionObject.cs" />
+    <Compile Include="Web\Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\RuntimeExtension.cs">
+    <Compile Include="Web\Scripting\RuntimeExtension.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingHandler.cs">
+    <Compile Include="Web\Scripting\ScriptingHandler.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingRuntime.cs">
+    <Compile Include="Web\Scripting\ScriptingRuntime.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StreamExtensions.cs" />
@@ -200,7 +197,5 @@
       <Name>Crystalbyte.Chocolate.Projections</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Web\Mvc\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

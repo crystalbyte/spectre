@@ -20,8 +20,8 @@ using System.Reflection;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocSchemeDescriptor : SchemeDescriptor {
-        public ChocSchemeDescriptor() {
+    public sealed class ChocolateSchemeDescriptor : SchemeDescriptor {
+        public ChocolateSchemeDescriptor() {
             _assemblyCatalog = new List<Assembly>();
 
             SchemeProperties = SchemeProperties.Local 
@@ -57,8 +57,9 @@ namespace Crystalbyte.Chocolate.Web {
         }
 
         private IEnumerable<Type> QueryControllers() {
-            return AssemblyCatalog.SelectMany(x => x.GetTypes()
-                .Where(type => typeof (IViewController).IsAssignableFrom(type)));
+            //return AssemblyCatalog.SelectMany(x => x.GetTypes()
+            //    .Where(type => typeof (IViewController).IsAssignableFrom(type)));
+            return null;
         }
     }
 }
