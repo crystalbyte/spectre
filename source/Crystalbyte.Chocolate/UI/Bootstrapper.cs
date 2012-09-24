@@ -67,14 +67,14 @@ namespace Crystalbyte.Chocolate.UI {
 #endif
         }
 
-        protected virtual IList<SchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
-            return new List<SchemeHandlerFactoryDescriptor> {
-                new SchemeHandlerFactoryDescriptor(Schemes.Choc, string.Empty, new ChocolateSchemeHandlerFactory())
+        protected virtual IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
+            return new List<ISchemeHandlerFactoryDescriptor> {
+                new ChocolateSchemeHandlerFactoryDescriptor()
             };
         }
 
-        protected virtual IList<SchemeDescriptor> RegisterSchemeHandlers() {
-            return new List<SchemeDescriptor> {
+        protected virtual IList<ISchemeDescriptor> RegisterSchemeHandlers() {
+            return new List<ISchemeDescriptor> {
                 new ChocolateSchemeDescriptor()
             };
         }

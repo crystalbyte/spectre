@@ -17,24 +17,8 @@ using System;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public class SchemeDescriptor {
-        public SchemeDescriptor(string scheme) {
-            Scheme = scheme;
-        }
-
-        protected SchemeDescriptor() {}
-
-        public SchemeProperties SchemeProperties { get; set; }
-
-        public virtual string Scheme { get; private set; }
-
-        public event EventHandler Registered;
-
-        public virtual void OnRegistered(EventArgs e) {
-            var handler = Registered;
-            if (handler != null) {
-                handler(this, e);
-            }
-        }
+    public sealed class ResponseHeadersReadingEventArgs : EventArgs {
+        public Response Response { get; internal set; }
+        public Uri RedirectUri { get; set; }
     }
 }

@@ -85,7 +85,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WinformsBootstrapper.cs" />
-    <Content Include="Views\us.html" />
+    <Content Include="Views\Index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -115,6 +117,26 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.AspNet.WebStack\src\System.Web.Mvc\System.Web.Mvc.csproj">
+      <Project>{3D3FFD8A-624D-4E9B-954B-E1C105507975}</Project>
+      <Name>System.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.AspNet.WebStack\src\System.Web.WebPages.Deployment\System.Web.WebPages.Deployment.csproj">
+      <Project>{22babb60-8f02-4027-affc-acf069954536}</Project>
+      <Name>System.Web.WebPages.Deployment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.AspNet.WebStack\src\System.Web.WebPages.Razor\System.Web.WebPages.Razor.csproj">
+      <Project>{0939b11a-fe4e-4ba1-8ad6-d97741ee314f}</Project>
+      <Name>System.Web.WebPages.Razor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.AspNet.WebStack\src\System.Web.WebPages\System.Web.WebPages.csproj">
+      <Project>{76efa9c5-8d7e-4fdf-b710-e20f8b6b00d2}</Project>
+      <Name>System.Web.WebPages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Crystalbyte.Chocolate.Web.Mvc\Crystalbyte.Chocolate.Web.Mvc.csproj">
+      <Project>{f81c21c6-2623-49fc-9ebc-4f99e9abc684}</Project>
+      <Name>Crystalbyte.Chocolate.Web.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
       <Name>Crystalbyte.Chocolate</Name>

@@ -51,15 +51,15 @@ namespace Crystalbyte.Chocolate.Web {
 
         private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback) {
             using (var writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8)) {
-                var e = new ResponseDataReadingEventArgs(writer) {
+                var e = new DataBlockReadingEventArgs(writer) {
                     MaxBlockSize = bytestoread,
-                    Controller = AsyncActivityController.FromHandle(callback)
+                    DelayController = ResponseDelayController.FromHandle(callback)
                 };
 
-                OnResponseDataReading(e);
+                OnDataBlockReading(e);
 
-                if (e.Controller.IsPaused) {
-                    // Data retrieval can be resumed by calling Continue() on the controller.
+                if (e.DelayController.IsPaused) {
+                    // Data retrieval can be resumed by calling Resume() on the controller.
                     bytesread = 0;
                     return 1;
                 }
@@ -83,11 +83,11 @@ namespace Crystalbyte.Chocolate.Web {
         }
 
         private int ProcessRequest(IntPtr self, IntPtr request, IntPtr callback) {
-            var e = new ResourceRequestedEventArgs {
+            var e = new RequestProcessingEventArgs {
                 Controller = AsyncActivityController.FromHandle(callback),
                 Request = Request.FromHandle(request)
             };
-            OnResourceRequested(e);
+            OnRequestProcessing(e);
             if (e.IsCanceled) {
                 e.Controller.Cancel();
             }
@@ -99,9 +99,9 @@ namespace Crystalbyte.Chocolate.Web {
             return e.IsCanceled ? 0 : 1;
         }
 
-        public event EventHandler<ResourceRequestedEventArgs> ResourceRequested;
+        public event EventHandler<RequestProcessingEventArgs> ResourceRequested;
 
-        protected virtual void OnResourceRequested(ResourceRequestedEventArgs e) {
+        protected virtual void OnRequestProcessing(RequestProcessingEventArgs e) {
             var handler = ResourceRequested;
             if (handler != null) {
                 handler(this, e);
@@ -109,11 +109,11 @@ namespace Crystalbyte.Chocolate.Web {
         }
 
         private void GetResponseHeaders(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl) {
-            var e = new ResponseHeadersRequestedEventArgs {
+            var e = new ResponseHeadersReadingEventArgs {
                 Response = Response.FromHandle(response)
             };
 
-            OnResponseHeadersRequested(e);
+            OnResponseHeadersReading(e);
 
             if (e.RedirectUri != null) {
                 StringUtf16.WriteString(e.RedirectUri.AbsoluteUri, redirecturl);
@@ -123,7 +123,7 @@ namespace Crystalbyte.Chocolate.Web {
             responselength = -1;
         }
 
-        protected virtual void OnResponseHeadersRequested(ResponseHeadersRequestedEventArgs e) {}
+        protected virtual void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {}
 
         private void Cancel(IntPtr self) {}
 
@@ -144,9 +144,9 @@ namespace Crystalbyte.Chocolate.Web {
             }
         }
 
-        public event EventHandler<ResponseDataReadingEventArgs> ResponseDataReading;
+        public event EventHandler<DataBlockReadingEventArgs> ResponseDataReading;
 
-        protected virtual void OnResponseDataReading(ResponseDataReadingEventArgs e) {
+        protected virtual void OnDataBlockReading(DataBlockReadingEventArgs e) {
             var handler = ResponseDataReading;
             if (handler != null) {
                 handler(this, e);

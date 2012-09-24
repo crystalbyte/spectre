@@ -1,4 +1,4 @@
-﻿#region Copyright notice
+#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -18,30 +18,14 @@ using System.IO;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class LocalFileResourceProvider : IResourceProvider {
-        private readonly Uri _uri;
-        private BinaryReader _reader;
-
-        public LocalFileResourceProvider(Uri uri) {
-            _uri = uri;
+    public sealed class DataBlockReadingEventArgs : EventArgs {
+        internal DataBlockReadingEventArgs(BinaryWriter writer) {
+            ResponseWriter = writer;
         }
 
-        public ResourceState GetResourceState() {
-            //TODO: Implement
-            return ResourceState.Valid;
-        }
-
-        public bool WriteDataBlock(BinaryWriter writer, int blockSize) {
-            var bytes = new byte[blockSize];
-            var bytesRead = _reader.Read(bytes, 0, blockSize);
-            writer.Write(bytes, 0, bytesRead);
-            return _reader.BaseStream.Position == _reader.BaseStream.Length - 1;
-        }
-
-        public void Initialize() {
-            var info = Framework.GetResourceStream(_uri);
-            _reader = new BinaryReader(info.Stream);
-            _reader.BaseStream.Seek(0, SeekOrigin.Begin);
-        }
+        public int MaxBlockSize { get; internal set; }
+        public BinaryWriter ResponseWriter { get; private set; }
+        public ResponseDelayController DelayController { get; internal set; }
+        public bool IsCompleted { get; set; }
     }
 }

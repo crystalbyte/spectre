@@ -21,7 +21,7 @@ namespace Crystalbyte.Chocolate.Web {
     public sealed class SchemeHandlerFactoryManager {
         internal SchemeHandlerFactoryManager() {}
 
-        public void Register(SchemeHandlerFactoryDescriptor descriptor) {
+        public void Register(ISchemeHandlerFactoryDescriptor descriptor) {
             if (descriptor == null) {
                 throw new ArgumentNullException("descriptor");
             }

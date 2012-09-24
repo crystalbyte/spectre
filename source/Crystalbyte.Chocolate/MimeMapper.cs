@@ -23,6 +23,8 @@ namespace Crystalbyte.Chocolate {
         static MimeMapper() {
             _types.Add("cshtml", "text/html");
             _types.Add("vbhtml", "text/html");
+            _types.Add("html", "text/html");
+            _types.Add("htm", "text/html");
             _types.Add("css", "text/css");
             _types.Add("js", "text/javascript");
             _types.Add("txt", "text/plain");

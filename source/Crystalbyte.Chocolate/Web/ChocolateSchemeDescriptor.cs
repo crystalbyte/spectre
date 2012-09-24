@@ -19,47 +19,23 @@ using System.Reflection;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocolateSchemeDescriptor : SchemeDescriptor {
-        public ChocolateSchemeDescriptor() {
-            _assemblyCatalog = new List<Assembly>();
-
-            SchemeProperties = SchemeProperties.Local 
-                | SchemeProperties.DisplayIsolated 
-                | SchemeProperties.Standard;
+namespace Crystalbyte.Chocolate.Web
+{
+    public sealed class ChocolateSchemeDescriptor : ISchemeDescriptor
+    {
+        public string Scheme
+        {
+            get { return Schemes.Chocolate; }
         }
 
-        public override string Scheme {
-            get { return Schemes.Choc; }
-        }
-
-        private readonly List<Assembly> _assemblyCatalog;
-
-        public IList<Assembly> AssemblyCatalog {
-            get { return _assemblyCatalog; }
-        }
-
-        public override void OnRegistered(EventArgs e) {
-            base.OnRegistered(e);
-
-            // Add entry assembly by default
-            var entryAssembly = Assembly.GetEntryAssembly();
-            if (entryAssembly != null && !AssemblyCatalog.Contains(entryAssembly)) {
-                AssemblyCatalog.Add(entryAssembly);
+        public SchemeProperties SchemeProperties
+        {
+            get
+            {
+                return SchemeProperties.Local
+                        | SchemeProperties.DisplayIsolated
+                        | SchemeProperties.Standard;
             }
-
-            //var controllers = QueryControllers();
-            //controllers.ForEach(x => {
-            //    var routes = x.GetCustomAttributes(typeof (RouteAttribute), true)
-            //        .Cast<RouteAttribute>();
-            //    routes.ForEach(r => RouteRegistrar.Register(r.Path, x));
-            //});
-        }
-
-        private IEnumerable<Type> QueryControllers() {
-            //return AssemblyCatalog.SelectMany(x => x.GetTypes()
-            //    .Where(type => typeof (IViewController).IsAssignableFrom(type)));
-            return null;
         }
     }
 }

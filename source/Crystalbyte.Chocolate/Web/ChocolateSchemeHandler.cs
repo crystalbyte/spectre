@@ -1,4 +1,4 @@
-#region Copyright notice
+﻿#region Copyright notice
 
 // Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -13,19 +13,34 @@
 #region Namespace directives
 
 using System;
-using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ResponseDataReadingEventArgs : EventArgs {
-        internal ResponseDataReadingEventArgs(BinaryWriter writer) {
-            ResponseWriter = writer;
+namespace Crystalbyte.Chocolate.Web
+{
+    public sealed class ChocolateSchemeHandler : ResourceHandler {
+
+        private readonly IEnumerable<IRequestHandler> _handlers;
+        private IRequestHandler _current;
+
+        public ChocolateSchemeHandler(IEnumerable<IRequestHandler> handlers) {
+            _handlers = handlers;
         }
 
-        public int MaxBlockSize { get; internal set; }
-        public BinaryWriter ResponseWriter { get; private set; }
-        public AsyncActivityController Controller { get; internal set; }
-        public bool IsCompleted { get; set; }
+        protected override void OnDataBlockReading(DataBlockReadingEventArgs e) {
+            _current.OnDataBlockReading(e);
+        }
+
+        protected override void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {
+            _current.OnResponseHeadersReading(e);
+        }
+
+        protected override void OnRequestProcessing(RequestProcessingEventArgs e) {
+            // find a suitable handler to process the request.
+            _current = _handlers.FirstOrDefault(x => x.CanHandle(e.Request));
+            e.IsCanceled = _current == null;
+        }
     }
 }

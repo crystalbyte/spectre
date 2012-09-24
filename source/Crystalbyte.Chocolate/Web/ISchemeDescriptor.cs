@@ -17,8 +17,8 @@ using System;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class ResponseHeadersRequestedEventArgs : EventArgs {
-        public Response Response { get; internal set; }
-        public Uri RedirectUri { get; set; }
+    public interface ISchemeDescriptor {
+        string Scheme { get; }
+        SchemeProperties SchemeProperties { get; }
     }
 }

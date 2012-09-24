@@ -37,23 +37,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\BrowserProcessHandler.cs" />
-    <Compile Include="Web\ChocResourceHandler.cs" />
-    <Compile Include="Web\ChocSchemeDescriptor.cs" />
-    <Compile Include="Web\ChocSchemeHandlerFactory.cs" />
+    <Compile Include="Web\ChocolateSchemeHandler.cs" />
+    <Compile Include="Web\ChocolateSchemeDescriptor.cs" />
+    <Compile Include="Web\ChocolateSchemeHandlerFactory.cs" />
+    <Compile Include="Web\ChocolateSchemeHandlerFactoryDescriptor.cs" />
     <Compile Include="Web\CustomSchemesRegisteringEventArgs.cs" />
     <Compile Include="MimeMapper.cs" />
-    <Compile Include="Web\LocalFileResourceProvider.cs" />
+    <Compile Include="Web\IRequestHandler.cs" />
+    <Compile Include="Web\ResourceRequestHandler.cs" />
     <Compile Include="Web\IResourceProvider.cs" />
+    <Compile Include="Web\ResponseDelayController.cs" />
     <Compile Include="Web\ResourceState.cs" />
     <Compile Include="Web\Schemes.cs" />
     <Compile Include="NativeObject.cs" />
@@ -62,7 +59,7 @@
     <Compile Include="Web\Scripting\RuntimeException.cs" />
     <Compile Include="StreamResourceInfo.cs" />
     <Compile Include="Web\Response.cs" />
-    <Compile Include="Web\ResponseHeadersRequestedEventArgs.cs" />
+    <Compile Include="Web\ResponseHeadersReadingEventArgs.cs" />
     <Compile Include="Web\ResourceRequestedEventArgs.cs" />
     <Compile Include="Web\SchemeProperties.cs" />
     <Compile Include="Web\SchemeRegistrar.cs" />
@@ -74,7 +71,7 @@
     <Compile Include="UrlRequestFlags.cs" />
     <Compile Include="UI\CreateHandlerEventArgs.cs" />
     <Compile Include="Web\ResourceHandler.cs" />
-    <Compile Include="Web\ResponseDataReadingEventArgs.cs" />
+    <Compile Include="Web\DataBlockReadingEventArgs.cs" />
     <Compile Include="AsyncActivityController.cs" />
     <Compile Include="Web\SchemeHandlerFactory.cs" />
     <Compile Include="StatusType.cs" />
@@ -177,7 +174,7 @@
     <Compile Include="UI\LinuxWindowResizer.cs" />
     <Compile Include="UI\LinuxWindowInfo.cs" />
     <Compile Include="EnumerationExtensions.cs" />
-    <Compile Include="Web\SchemeDescriptor.cs" />
+    <Compile Include="Web\ISchemeDescriptor.cs" />
     <Compile Include="Web\SchemeHandlerFactoryManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

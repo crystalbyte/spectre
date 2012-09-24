@@ -10,12 +10,24 @@
 
 #endregion
 
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using Crystalbyte.Chocolate.UI;
 
 namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
-        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
-            return new ChocolateResourceHandler();
+
+        public ChocolateSchemeHandlerFactory() {
+            RequestHandlerTypes = new List<Type> {
+                typeof(ResourceRequestHandler)
+            };
         }
+
+        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
+            return new ChocolateSchemeHandler(RequestHandlerTypes.Select(x => (IRequestHandler) Activator.CreateInstance(x)).ToList());
+        }
+
+        public IList<Type> RequestHandlerTypes { get; private set; }
     }
 }

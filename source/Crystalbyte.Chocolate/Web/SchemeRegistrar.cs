@@ -30,7 +30,7 @@ namespace Crystalbyte.Chocolate.Web {
             return new SchemeRegistrar(handle);
         }
 
-        public void Register(SchemeDescriptor descriptor) {
+        public void Register(ISchemeDescriptor descriptor) {
             var r = MarshalFromNative<CefSchemeRegistrar>();
             var function = (AddCustomSchemeCallback)
                            Marshal.GetDelegateForFunctionPointer(r.AddCustomScheme, typeof (AddCustomSchemeCallback));
@@ -44,10 +44,7 @@ namespace Crystalbyte.Chocolate.Web {
             var result = function(NativeHandle, name.NativeHandle, isStandard, isLocal, isDisplayIsolated);
             var success = Convert.ToBoolean(result);
             if (!success) {
-                Debug.WriteLine("Error registering custom scheme '{0}'", descriptor.Scheme);
-            }
-            else {
-                descriptor.OnRegistered(EventArgs.Empty);
+                Debug.WriteLine("Error registering custom scheme '{0}'. See debug.log for details.", descriptor.Scheme);
             }
         }
     }

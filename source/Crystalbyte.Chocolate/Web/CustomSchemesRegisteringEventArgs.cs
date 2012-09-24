@@ -20,9 +20,9 @@ using System.Collections.Generic;
 namespace Crystalbyte.Chocolate.Web {
     public sealed class CustomSchemesRegisteringEventArgs : EventArgs {
         public CustomSchemesRegisteringEventArgs() {
-            SchemeDescriptors = new List<SchemeDescriptor>();
+            SchemeDescriptors = new List<ISchemeDescriptor>();
         }
 
-        public IList<SchemeDescriptor> SchemeDescriptors { get; private set; }
+        public IList<ISchemeDescriptor> SchemeDescriptors { get; private set; }
     }
 }

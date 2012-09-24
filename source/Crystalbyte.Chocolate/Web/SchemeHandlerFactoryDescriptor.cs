@@ -11,18 +11,9 @@
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class SchemeHandlerFactoryDescriptor {
-        public SchemeHandlerFactoryDescriptor(string schemeName, SchemeHandlerFactory factory)
-            : this(schemeName, string.Empty, factory) {}
-
-        public SchemeHandlerFactoryDescriptor(string schemeName, string domainName, SchemeHandlerFactory factory) {
-            SchemeName = schemeName;
-            DomainName = domainName;
-            Factory = factory;
-        }
-
-        public string SchemeName { get; set; }
-        public string DomainName { get; set; }
-        public SchemeHandlerFactory Factory { get; set; }
+    public interface ISchemeHandlerFactoryDescriptor {
+        string SchemeName { get; }
+        string DomainName { get; }
+        SchemeHandlerFactory Factory { get;  }
     }
 }

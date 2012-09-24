@@ -12,6 +12,6 @@
 
 namespace Crystalbyte.Chocolate.Web {
     public static class Schemes {
-        public const string Choc = "chocolate";
+        public const string Chocolate = "chocolate";
     }
 }

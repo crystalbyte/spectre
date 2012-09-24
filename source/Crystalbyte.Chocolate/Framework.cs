@@ -39,7 +39,7 @@ namespace Crystalbyte.Chocolate {
                 throw new InvalidOperationException("Only a single framework instance may be created for each AppDomain.");
             }
 
-            RegisterUriScheme(Schemes.Choc);
+            RegisterUriScheme(Schemes.Chocolate);
             
             _views = new Dictionary<IRenderTarget, Viewport>();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
@@ -104,23 +104,23 @@ namespace Crystalbyte.Chocolate {
         }
 
         public static StreamResourceInfo GetResourceStream(Uri uri) {
-            if (uri.Scheme != Schemes.Choc) {
+            if (uri.Scheme != Schemes.Chocolate) {
                 throw new NotSupportedException("Only pack uri's are supported.");
             }
             if (uri.Host.StartsWith("siteoforigin")) {
-                return GetContentStreamFromLocalPath(uri);
+                return GetResourceStreamFromLocalPath(uri);
             }
             if (uri.Host.StartsWith("application")) {
-                return GetContentStreamFromAssembly(uri);
+                return GetResourceStreamFromAssembly(uri);
             }
             throw new NotSupportedException(string.Format("Authority '{0}' is not supported.", uri.Authority));
         }
 
-        private static StreamResourceInfo GetContentStreamFromAssembly(Uri uri) {
+        private static StreamResourceInfo GetResourceStreamFromAssembly(Uri uri) {
             throw new NotImplementedException();
         }
 
-        private static StreamResourceInfo GetContentStreamFromLocalPath(Uri uri) {
+        private static StreamResourceInfo GetResourceStreamFromLocalPath(Uri uri) {
             var entry = Assembly.GetEntryAssembly();
             var locationInfo = new FileInfo(entry.Location);
             var directoryName = locationInfo.DirectoryName;

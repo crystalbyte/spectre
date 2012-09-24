@@ -1,1 +1,4 @@
 
+[submodule "source/Crystalbyte.Chocolate.AspNet.WebStack"]
+	path = source/Crystalbyte.Chocolate.AspNet.WebStack
+	url = git@github.com:Crystalbyte/aspnetwebstack.git

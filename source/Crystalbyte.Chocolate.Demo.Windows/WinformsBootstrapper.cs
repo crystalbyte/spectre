@@ -13,16 +13,30 @@
 #region Namespace directives
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Chocolate.Web;
+using Crystalbyte.Chocolate.Web.Mvc;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
     public sealed class WinformsBootstrapper : Bootstrapper {
+
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
-                StartupUri = new Uri("chocolate:///desktop/index")
+                StartupUri = new Uri("chocolate://localhost/Views/Index.html")
             };
+        }
+
+        protected override IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
+            var handlers = base.RegisterSchemeHandlerFactories();
+
+            var descriptor = handlers.OfType<ChocolateSchemeHandlerFactoryDescriptor>().First();
+            descriptor.RequestHandlerTypes.Insert(0, typeof (MvcRequestHandler));
+
+            return handlers;
         }
     }
 }
