@@ -100,7 +100,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         internal void CreateBrowser() {
             OnCreating(EventArgs.Empty);
-            
+
             var a = new BrowserCreationArgs {
                 ClientHandler = _handler,
                 Settings = _settings,

@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Projections;
@@ -24,27 +23,27 @@ using Crystalbyte.Chocolate.Web;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class Framework {
+    public sealed class Application {
         private App _app;
         private readonly Dictionary<IRenderTarget, Viewport> _views;
         private readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
 
-        static Framework() {
-            Current = new Framework();
+        static Application() {
+            Current = new Application();
         }
 
-        private Framework() {
-
+        private Application() {
             if (Current != null) {
-                throw new InvalidOperationException("Only a single framework instance may be created for each AppDomain.");
+                throw new InvalidOperationException(
+                    "Only a single framework instance may be created for each AppDomain.");
             }
 
             RegisterUriScheme(Schemes.Chocolate);
-            
+
             _views = new Dictionary<IRenderTarget, Viewport>();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();
 
-            Settings = new FrameworkSettings();
+            Settings = new ApplicationSettings();
             QuitAfterLastViewClosed = true;
         }
 
@@ -54,9 +53,9 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        public static Framework Current { get; private set; }
+        public static Application Current { get; private set; }
 
-        public FrameworkSettings Settings { get; set; }
+        public ApplicationSettings Settings { get; set; }
         public bool IsInitialized { get; private set; }
         public bool IsRootProcess { get; private set; }
         public bool QuitAfterLastViewClosed { get; set; }
@@ -101,42 +100,6 @@ namespace Crystalbyte.Chocolate {
             var result = CefAppCapi.CefInitialize(mainArgs, Settings.NativeHandle, _app.NativeHandle);
             IsInitialized = Convert.ToBoolean(result);
             return IsInitialized;
-        }
-
-        public static StreamResourceInfo GetResourceStream(Uri uri) {
-            if (uri.Scheme != Schemes.Chocolate) {
-                throw new NotSupportedException("Only pack uri's are supported.");
-            }
-            if (uri.Host.StartsWith("siteoforigin")) {
-                return GetResourceStreamFromLocalPath(uri);
-            }
-            if (uri.Host.StartsWith("application")) {
-                return GetResourceStreamFromAssembly(uri);
-            }
-            throw new NotSupportedException(string.Format("Authority '{0}' is not supported.", uri.Authority));
-        }
-
-        private static StreamResourceInfo GetResourceStreamFromAssembly(Uri uri) {
-            throw new NotImplementedException();
-        }
-
-        private static StreamResourceInfo GetResourceStreamFromLocalPath(Uri uri) {
-            var entry = Assembly.GetEntryAssembly();
-            var locationInfo = new FileInfo(entry.Location);
-            var directoryName = locationInfo.DirectoryName;
-
-            if (string.IsNullOrWhiteSpace(directoryName)) {
-                throw new NullReferenceException("DirectoryName is null.");
-            }
-
-            var localPath = uri.LocalPath.TrimStart('/');
-
-            var resourcePath = Path.Combine(directoryName, localPath);
-            var extension = resourcePath.ToFileExtension();
-            return new StreamResourceInfo {
-                ContentType = MimeMapper.ResolveFromExtension(extension),
-                Stream = new MemoryStream(File.ReadAllBytes(resourcePath))
-            };
         }
 
         public bool Initialize(AppDelegate del = null) {
@@ -193,12 +156,22 @@ namespace Crystalbyte.Chocolate {
             target.TargetClosed -= OnRenderTargetClosed;
         }
 
+        public event EventHandler Starting;
+
+        public void OnStarting(EventArgs e) {
+            var handler = Starting;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
         public void Run(Viewport renderer) {
             Add(renderer);
-            CefAppCapi.CefRunMessageLoop();
+            Run();
         }
 
         public void Run() {
+            OnStarting(EventArgs.Empty);
             CefAppCapi.CefRunMessageLoop();
         }
     }

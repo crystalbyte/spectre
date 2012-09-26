@@ -12,29 +12,21 @@
 
 #region Namespace directives
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web
-{
-    public sealed class ChocolateSchemeDescriptor : ISchemeDescriptor
-    {
-        public string Scheme
-        {
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class ChocolateSchemeDescriptor : ISchemeDescriptor {
+        public string Scheme {
             get { return Schemes.Chocolate; }
         }
 
-        public SchemeProperties SchemeProperties
-        {
-            get
-            {
+        public SchemeProperties SchemeProperties {
+            get {
                 return SchemeProperties.Local
-                        | SchemeProperties.DisplayIsolated
-                        | SchemeProperties.Standard;
+                       | SchemeProperties.DisplayIsolated
+                       | SchemeProperties.Standard;
             }
         }
     }

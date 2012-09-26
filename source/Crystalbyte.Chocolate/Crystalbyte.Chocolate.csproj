@@ -47,11 +47,10 @@
     <Compile Include="Web\ChocolateSchemeHandlerFactoryDescriptor.cs" />
     <Compile Include="Web\CustomSchemesRegisteringEventArgs.cs" />
     <Compile Include="MimeMapper.cs" />
-    <Compile Include="Web\IRequestHandler.cs" />
-    <Compile Include="Web\ResourceRequestHandler.cs" />
-    <Compile Include="Web\IResourceProvider.cs" />
+    <Compile Include="Web\IRequestModule.cs" />
+    <Compile Include="Web\FileRequestModule.cs" />
+    <Compile Include="Web\RequestModules.cs" />
     <Compile Include="Web\ResponseDelayController.cs" />
-    <Compile Include="Web\ResourceState.cs" />
     <Compile Include="Web\Schemes.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
@@ -84,7 +83,6 @@
     <Compile Include="ObjectCollection.cs" />
     <Compile Include="RefCountedNativeObject.cs" />
     <Compile Include="DisposableObject.cs" />
-    <Compile Include="GraphicsImplementation.cs" />
     <Compile Include="IReadOnlyCollection.cs" />
     <Compile Include="IValueCollection.cs" />
     <Compile Include="LogSeverity.cs" />
@@ -137,7 +135,7 @@
     <Compile Include="UI\DisplayHandler.cs" />
     <Compile Include="UI\Frame.cs" />
     <Compile Include="UI\FrameCollection.cs" />
-    <Compile Include="Framework.cs" />
+    <Compile Include="Application.cs" />
     <Compile Include="UI\BrowserCreationArgs.cs" />
     <Compile Include="IpcMessageReceivedEventArgs.cs" />
     <Compile Include="GeolocationHandler.cs" />
@@ -153,7 +151,7 @@
     <Compile Include="UI\Rectangle.cs" />
     <Compile Include="UI\RenderProcessHandler.cs" />
     <Compile Include="UI\BrowserDelegate.cs" />
-    <Compile Include="FrameworkSettings.cs" />
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="UI\BrowserHost.cs" />
     <Compile Include="ClientHandler.cs" />
     <Compile Include="UI\IRenderTarget.cs" />

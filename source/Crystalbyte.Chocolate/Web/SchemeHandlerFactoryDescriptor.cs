@@ -14,6 +14,6 @@ namespace Crystalbyte.Chocolate.Web {
     public interface ISchemeHandlerFactoryDescriptor {
         string SchemeName { get; }
         string DomainName { get; }
-        SchemeHandlerFactory Factory { get;  }
+        SchemeHandlerFactory Factory { get; }
     }
 }

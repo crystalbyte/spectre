@@ -22,7 +22,8 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("Chocolate Demo Application for Windows")]
-[assembly: AssemblyDescription("This Project illustrates usage scenarios for the Chocolate Framwork on the Windows platform.")]
+[assembly:
+    AssemblyDescription("This Project illustrates usage scenarios for the Chocolate Framwork on the Windows platform.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Crystalbyte Chocolate Framework")]

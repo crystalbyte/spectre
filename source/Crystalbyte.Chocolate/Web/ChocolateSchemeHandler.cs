@@ -12,20 +12,18 @@
 
 #region Namespace directives
 
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web
-{
+namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandler : ResourceHandler {
+        private readonly IEnumerable<IRequestModule> _handlers;
+        private IRequestModule _current;
 
-        private readonly IEnumerable<IRequestHandler> _handlers;
-        private IRequestHandler _current;
-
-        public ChocolateSchemeHandler(IEnumerable<IRequestHandler> handlers) {
+        public ChocolateSchemeHandler(IEnumerable<IRequestModule> handlers)
+        {
             _handlers = handlers;
         }
 
@@ -38,8 +36,14 @@ namespace Crystalbyte.Chocolate.Web
         }
 
         protected override void OnRequestProcessing(RequestProcessingEventArgs e) {
+            
+
             // find a suitable handler to process the request.
-            _current = _handlers.FirstOrDefault(x => x.CanHandle(e.Request));
+            _current = _handlers.FirstOrDefault(x => { 
+                x.Init(e.Request);
+                return x.CanHandle;
+            });
+
             e.IsCanceled = _current == null;
         }
     }

@@ -19,8 +19,8 @@ using Crystalbyte.Chocolate.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class FrameworkSettings : NativeObject {
-        public FrameworkSettings()
+    public sealed class ApplicationSettings : NativeObject {
+        public ApplicationSettings()
             : base(typeof (CefSettings)) {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefSettings {

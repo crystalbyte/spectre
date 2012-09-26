@@ -10,16 +10,11 @@
 
 #endregion
 
-#region Namespace directives
-
-using System.IO;
-
-#endregion
-
 namespace Crystalbyte.Chocolate.Web {
-    internal interface IResourceProvider {
-        void Initialize();
-        ResourceState GetResourceState();
-        bool WriteDataBlock(BinaryWriter writer, int blockSize);
+    public interface IRequestModule {
+        void Init(Request request);
+        void OnDataBlockReading(DataBlockReadingEventArgs e);
+        void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e);
+        bool CanHandle { get; }
     }
 }

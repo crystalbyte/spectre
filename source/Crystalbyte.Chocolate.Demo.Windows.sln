@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Razor.Hosting", "Crystalbyte.Chocolate.Razor.Hosting\Crystalbyte.Chocolate.Razor.Hosting.csproj", "{D8AE449B-3E8C-4D37-B0C8-21FDB8DD371F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{67D9C38D-EE71-4B9E-BB56-3B7FD6028FD8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(tests)", "(tests)", "{67D9C38D-EE71-4B9E-BB56-3B7FD6028FD8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(mono.webstack)", "(mono.webstack)", "{6F73958C-6E8F-44E5-A632-2E56145DC611}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(aspnet.webstack)", "(aspnet.webstack)", "{6F73958C-6E8F-44E5-A632-2E56145DC611}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Web.Mvc", "Crystalbyte.Chocolate.AspNet.WebStack\src\System.Web.Mvc\System.Web.Mvc.csproj", "{3D3FFD8A-624D-4E9B-954B-E1C105507975}"
 EndProject

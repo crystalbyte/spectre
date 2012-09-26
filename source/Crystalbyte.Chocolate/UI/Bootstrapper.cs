@@ -36,22 +36,21 @@ namespace Crystalbyte.Chocolate.UI {
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
 
-            ConfigureSettings(Framework.Current.Settings);
-            Framework.Current.Initialize(app);
+            ConfigureSettings(Application.Current.Settings);
+            Application.Current.Initialize(app);
 
-            if (!Framework.Current.IsRootProcess)
-            {
+            if (!Application.Current.IsRootProcess) {
                 return;
             }
 
             var factories = RegisterSchemeHandlerFactories();
-            factories.ForEach(Framework.Current.SchemeFactories.Register);
+            factories.ForEach(Application.Current.SchemeFactories.Register);
 
             var target = CreateRenderTarget();
             var browserDelegate = CreateBrowserDelegate(target);
 
-            Framework.Current.Run(new Viewport(target, browserDelegate));
-            Framework.Current.Shutdown();
+            Application.Current.Run(new Viewport(target, browserDelegate));
+            Application.Current.Shutdown();
         }
 
         private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {
@@ -59,7 +58,7 @@ namespace Crystalbyte.Chocolate.UI {
             e.SchemeDescriptors.AddRange(descriptors);
         }
 
-        protected virtual void ConfigureSettings(FrameworkSettings settings) {
+        protected virtual void ConfigureSettings(ApplicationSettings settings) {
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;
 #else

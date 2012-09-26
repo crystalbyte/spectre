@@ -42,7 +42,10 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvcRequestHandler.cs" />
+    <Compile Include="AppDomainExtensions.cs" />
+    <Compile Include="AspRequestProcessor.cs" />
+    <Compile Include="AspRuntime.cs" />
+    <Compile Include="MvcRequestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

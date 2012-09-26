@@ -18,36 +18,23 @@ using System.Linq;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web
-{
-    public sealed class ResourceRequestHandler : IRequestHandler
-    {
-        private Uri _uri;
+namespace Crystalbyte.Chocolate.Web {
+    public sealed class FileRequestModule : IRequestModule {
         private bool _isCompleted;
         private Stream _fileStream;
         private BinaryReader _reader;
+        private Request _request;
 
-        public bool CanHandle(Request request)
-        {
-            _uri = new Uri(request.Url, UriKind.RelativeOrAbsolute);
-            // This handler is the last to be called if all others fail.
-            return true;
-        }
-
-        public void OnDataBlockReading(DataBlockReadingEventArgs e)
-        {
-            if (_isCompleted)
-            {
+        public void OnDataBlockReading(DataBlockReadingEventArgs e) {
+            if (_isCompleted) {
                 e.IsCompleted = true;
-                if (_reader != null)
-                {
+                if (_reader != null) {
                     _reader.Dispose();
                 }
                 return;
             }
-                
-            if (_reader == null)
-            {
+
+            if (_reader == null) {
                 _reader = new BinaryReader(_fileStream);
             }
 
@@ -57,19 +44,18 @@ namespace Crystalbyte.Chocolate.Web
             _isCompleted = _reader.BaseStream.Position == _reader.BaseStream.Length;
         }
 
-        public void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e)
-        {
-            var path = _uri.LocalPath.TrimStart('/');
-            if (!File.Exists(path))
-            {
+        public void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {
+            var uri = new Uri(_request.Url, UriKind.RelativeOrAbsolute);
+            var path = uri.LocalPath.TrimStart('/');
+
+            if (!File.Exists(path)) {
                 e.Response.MimeType = "text/plain";
                 e.Response.StatusCode = 404;
                 e.Response.StatusText = "Resource not found.";
                 return;
             }
 
-            try
-            {
+            try {
                 _fileStream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             }
             catch (IOException ex) {
@@ -77,16 +63,30 @@ namespace Crystalbyte.Chocolate.Web
                 e.Response.StatusCode = 500;
                 e.Response.StatusText = ex.ToString();
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 e.Response.MimeType = "text/plain";
                 e.Response.StatusCode = 505;
                 e.Response.StatusText = string.Format("Internal error. {0}", ex);
             }
 
-            var extension = _uri.Segments.Last().ToFileExtension();
+            var extension = uri.Segments.Last().ToFileExtension();
             e.Response.MimeType = MimeMapper.ResolveFromExtension(extension);
             e.Response.StatusCode = 200;
             e.Response.StatusText = "OK";
+        }
+
+        public void Init(Request request) {
+            _request = request;
+        }
+
+        public bool CanHandle
+        {
+            get
+            {
+                var uri = new Uri(_request.Url, UriKind.RelativeOrAbsolute);
+                var path = uri.LocalPath.TrimStart('/');
+                return File.Exists(path);
+            }
         }
     }
 }
