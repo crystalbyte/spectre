@@ -33,7 +33,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Chocolate.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -48,13 +48,12 @@
     <Compile Include="Web\CustomSchemesRegisteringEventArgs.cs" />
     <Compile Include="MimeMapper.cs" />
     <Compile Include="Web\IRequestModule.cs" />
-    <Compile Include="Web\FileRequestModule.cs" />
+    <Compile Include="Web\LocalResourceRequestModule.cs" />
     <Compile Include="Web\RequestModules.cs" />
     <Compile Include="Web\ResponseDelayController.cs" />
     <Compile Include="Web\Schemes.cs" />
     <Compile Include="NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
-    <Compile Include="Resources.cs" />
     <Compile Include="Web\Scripting\RuntimeException.cs" />
     <Compile Include="StreamResourceInfo.cs" />
     <Compile Include="Web\Response.cs" />
@@ -184,7 +183,7 @@
   </Target>
   -->
   <ItemGroup>
-    <None Include="key.snk" />
+    <None Include="Chocolate.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Crystalbyte.Chocolate.Projections\Crystalbyte.Chocolate.Projections.csproj">

@@ -12,8 +12,6 @@
 
 #region Namespace directives
 
-
-
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {

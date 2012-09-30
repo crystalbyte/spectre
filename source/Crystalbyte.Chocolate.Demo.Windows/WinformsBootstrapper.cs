@@ -13,51 +13,16 @@
 #region Namespace directives
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using System.Web.Routing;
 using Crystalbyte.Chocolate.UI;
-using Crystalbyte.Chocolate.Web;
-using Crystalbyte.Chocolate.Web.Mvc;
 
 #endregion
 
 namespace Crystalbyte.Chocolate {
     public sealed class WinformsBootstrapper : Bootstrapper {
-
-        public WinformsBootstrapper() {
-            Application.Current.Starting += OnApplicationStarting;
-        }
-
-        private static void OnApplicationStarting(object sender, EventArgs e) {
-              RegisterRoutes(RouteTable.Routes);
-        }
-
-        private static void RegisterRoutes(RouteCollection routes) {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapRoute("Default", "{controller}/{action}/{id}",
-                            new {
-                                controller = "Desktop",
-                                action = "Index",
-                                id = UrlParameter.Optional
-                            });
-        }
-
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
-                StartupUri = new Uri("chocolate://localhost/Views/Index.html")
-                //StartupUri = new Uri("chocolate://localhost/views/desktop")
+                StartupUri = new Uri("chocolate://localhost/views/index.html")
             };
-        }
-
-        protected override IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
-            var handlers = base.RegisterSchemeHandlerFactories();
-
-            var descriptor = handlers.OfType<ChocolateSchemeHandlerFactoryDescriptor>().First();
-            descriptor.Register(typeof (MvcRequestModule));
-
-            return handlers;
         }
     }
 }

@@ -12,9 +12,8 @@
 
 namespace Crystalbyte.Chocolate.Web {
     public interface IRequestModule {
-        void Init(Request request);
+        bool OnRequestProcessing(Request request);
         void OnDataBlockReading(DataBlockReadingEventArgs e);
         void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e);
-        bool CanHandle { get; }
     }
 }

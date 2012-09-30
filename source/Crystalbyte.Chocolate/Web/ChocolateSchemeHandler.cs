@@ -12,39 +12,39 @@
 
 #region Namespace directives
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandler : ResourceHandler {
-        private readonly IEnumerable<IRequestModule> _handlers;
-        private IRequestModule _current;
+        private readonly IEnumerable<Type> _moduleTypes;
+        private IRequestModule _module;
 
-        public ChocolateSchemeHandler(IEnumerable<IRequestModule> handlers)
-        {
-            _handlers = handlers;
+        public ChocolateSchemeHandler(IEnumerable<Type> moduleTypes) {
+            _moduleTypes = moduleTypes;
         }
 
         protected override void OnDataBlockReading(DataBlockReadingEventArgs e) {
-            _current.OnDataBlockReading(e);
+            Debug.Assert(_module != null, "_module != null");
+            _module.OnDataBlockReading(e);
         }
 
         protected override void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {
-            _current.OnResponseHeadersReading(e);
+            Debug.Assert(_module != null, "_module != null");
+            _module.OnResponseHeadersReading(e);
         }
 
         protected override void OnRequestProcessing(RequestProcessingEventArgs e) {
-            
-
+            _module = _moduleTypes
+                .Select(Activator.CreateInstance)
+                .Cast<IRequestModule>()
+                .FirstOrDefault(x => x.OnRequestProcessing(e.Request));
             // find a suitable handler to process the request.
-            _current = _handlers.FirstOrDefault(x => { 
-                x.Init(e.Request);
-                return x.CanHandle;
-            });
-
-            e.IsCanceled = _current == null;
+            e.IsCanceled = _module == null;
         }
     }
 }

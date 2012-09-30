@@ -12,9 +12,6 @@
 
 #region Namespace directives
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
@@ -23,12 +20,11 @@ namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
         public ChocolateSchemeHandlerFactory() {
             Modules = new RequestModules();
-            Modules.Register(typeof (FileRequestModule));
+            Modules.Register(typeof (LocalResourceRequestModule));
         }
 
         protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
-            return new ChocolateSchemeHandler(Modules.Types
-                    .Select(x => (IRequestModule) Activator.CreateInstance(x)).ToList());
+            return new ChocolateSchemeHandler(Modules.Types);
         }
 
         public RequestModules Modules { get; private set; }
