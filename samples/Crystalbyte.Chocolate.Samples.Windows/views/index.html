@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Chocolate HTML Demo Page</title>
+        <link href="../styles/metro.css" rel="stylesheet" />
+        <script src="../scripts/jquery-1.8.2.min.js"></script>
+        <script src="../scripts/metro.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var tiles = $.find(".tile");
+                metro.slideIn(tiles);
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <span>Chocolate</span>
+        </header>
+        <section style="width: 1000px;">
+            <button> Click me</button>
+            <ul>
+                <li class="tile">
+                    <div class="tint-image-overlay"></div>
+                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="tile">
+                    <div class="tint-image-overlay"></div>
+                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="wide tile">
+                    <div class="tint-image-overlay"></div>
+                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="wide tile">
+                    <div class="tint-image-overlay"></div>
+                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="tile">
+                    <div class="tint-image-overlay"></div>
+                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+            </ul>
+        </section>
+    </body>
+</html>
