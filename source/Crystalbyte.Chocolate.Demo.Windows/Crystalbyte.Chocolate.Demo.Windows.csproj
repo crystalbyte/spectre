@@ -39,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -166,7 +167,7 @@ xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\icudt.dll" "$(TargetDir)" /s /i /d
 xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\libEGL.dll" "$(TargetDir)" /s /i /d /y
 xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\libEGLESv2.dll" "$(TargetDir)" /s /i /d /y
 
-REM copy video &amp; audio codecs
+REM copy video &amp; audio codecs (optional)
 xcopy "$(CHROMIUM_SRC)\build\$(Configuration)\av*.dll" "$(TargetDir)" /s /i /d /y</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

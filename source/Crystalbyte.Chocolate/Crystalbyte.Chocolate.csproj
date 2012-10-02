@@ -72,7 +72,6 @@
     <Compile Include="Web\DataBlockReadingEventArgs.cs" />
     <Compile Include="AsyncActivityController.cs" />
     <Compile Include="Web\SchemeHandlerFactory.cs" />
-    <Compile Include="StatusType.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="UI\DispatcherQueue.cs" />
     <Compile Include="ErrorCode.cs" />

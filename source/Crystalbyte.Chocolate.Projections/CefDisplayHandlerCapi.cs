@@ -21,7 +21,7 @@ namespace Crystalbyte.Chocolate.Projections
 	public delegate void OnAddressChangeCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr url);
 	public delegate void OnTitleChangeCallback(IntPtr self, IntPtr browser, IntPtr title);
 	public delegate int OnTooltipCallback(IntPtr self, IntPtr browser, IntPtr text);
-	public delegate void OnStatusMessageCallback(IntPtr self, IntPtr browser, IntPtr value, CefHandlerStatustype type);
+	public delegate void OnStatusMessageCallback(IntPtr self, IntPtr browser, IntPtr value);
 	public delegate int OnConsoleMessageCallback(IntPtr self, IntPtr browser, IntPtr message, IntPtr source, int line);
 	
 }

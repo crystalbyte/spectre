@@ -59,21 +59,6 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        public string PackFilePath {
-            get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return Marshal.PtrToStringUni(reflection.PackFilePath.Str);
-            }
-            set {
-                var reflection = MarshalFromNative<CefSettings>();
-                reflection.PackFilePath = new CefStringUtf16 {
-                    Length = value.Length,
-                    Str = Marshal.StringToHGlobalUni(value)
-                };
-                MarshalToNative(reflection);
-            }
-        }
-
         public string Locale {
             get {
                 var reflection = MarshalFromNative<CefSettings>();

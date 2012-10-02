@@ -22,6 +22,7 @@ namespace Crystalbyte.Chocolate {
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
                 StartupUri = new Uri("chocolate://localhost/views/index.html")
+                //StartupUri = new Uri("http://trailers.apple.com/trailers/wb/thehobbit/")
             };
         }
     }

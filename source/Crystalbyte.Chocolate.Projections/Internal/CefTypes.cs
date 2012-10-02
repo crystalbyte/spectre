@@ -21,7 +21,7 @@ namespace Crystalbyte.Chocolate.Projections.Internal
 		public CefLogSeverity LogSeverity;
 		public CefStringUtf16 JavascriptFlags;
 		public bool AutoDetectProxySettingsEnabled;
-		public CefStringUtf16 PackFilePath;
+		public CefStringUtf16 ResourcesDirPath;
 		public CefStringUtf16 LocalesDirPath;
 		public bool PackLoadingDisabled;
 		public int RemoteDebuggingPort;
@@ -413,15 +413,10 @@ namespace Crystalbyte.Chocolate.Projections.Internal
 		XmlNodeWhitespace,
 		XmlNodeComment,
 	}
-	public enum CefHandlerStatustype {
-		StatustypeText = 0,
-		StatustypeMouseoverUrl,
-		StatustypeKeyboardFocusUrl,
-	}
 	public enum CefProxyType {
-		ProxyTypeDirect = 0,
-		ProxyTypeNamed,
-		ProxyTypePacString,
+		CefProxyTypeDirect = 0,
+		CefProxyTypeNamed,
+		CefProxyTypePacString,
 	}
 	public enum CefDomDocumentType {
 		DomDocumentTypeUnknown = 0,

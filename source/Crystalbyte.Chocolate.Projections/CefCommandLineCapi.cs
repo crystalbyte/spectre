@@ -24,6 +24,7 @@ namespace Crystalbyte.Chocolate.Projections
 		public IntPtr InitFromArgv;
 		public IntPtr InitFromString;
 		public IntPtr Reset;
+		public IntPtr GetArgv;
 		public IntPtr GetCommandLineString;
 		public IntPtr GetProgram;
 		public IntPtr SetProgram;
@@ -36,6 +37,7 @@ namespace Crystalbyte.Chocolate.Projections
 		public IntPtr HasArguments;
 		public IntPtr GetArguments;
 		public IntPtr AppendArgument;
+		public IntPtr PrependWrapper;
 	}
 	
 	public delegate int IsValidCallback(IntPtr self);
@@ -44,6 +46,7 @@ namespace Crystalbyte.Chocolate.Projections
 	public delegate void InitFromArgvCallback(IntPtr self, int argc, IntPtr argv);
 	public delegate void InitFromStringCallback(IntPtr self, IntPtr commandLine);
 	public delegate void ResetCallback(IntPtr self);
+	public delegate void GetArgvCallback(IntPtr self, IntPtr argv);
 	public delegate IntPtr GetCommandLineStringCallback(IntPtr self);
 	public delegate IntPtr GetProgramCallback(IntPtr self);
 	public delegate void SetProgramCallback(IntPtr self, IntPtr program);
@@ -56,5 +59,6 @@ namespace Crystalbyte.Chocolate.Projections
 	public delegate int HasArgumentsCallback(IntPtr self);
 	public delegate void GetArgumentsCallback(IntPtr self, IntPtr arguments);
 	public delegate void AppendArgumentCallback(IntPtr self, IntPtr argument);
+	public delegate void PrependWrapperCallback(IntPtr self, IntPtr wrapper);
 	
 }

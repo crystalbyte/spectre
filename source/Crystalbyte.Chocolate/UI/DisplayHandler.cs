@@ -49,11 +49,10 @@ namespace Crystalbyte.Chocolate.UI {
             });
         }
 
-        private void OnStatusMessage(IntPtr self, IntPtr browser, IntPtr value, CefHandlerStatustype type) {
+        private void OnStatusMessage(IntPtr self, IntPtr browser, IntPtr value) {
             var e = new StatusMessageReceivedEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Message = StringUtf16.ReadString(value),
-                StatusType = (StatusType) type
             };
             _delegate.OnStatusMessageReceived(e);
         }

@@ -23,6 +23,5 @@ namespace Crystalbyte.Chocolate {
 
         public Browser Browser { get; internal set; }
         public string Message { get; internal set; }
-        public StatusType StatusType { get; internal set; }
     }
 }

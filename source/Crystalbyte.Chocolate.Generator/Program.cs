@@ -31,16 +31,18 @@ namespace Crystalbyte.Chocolate
             const string projectName = "Crystalbyte.Chocolate.Projections";
 
             var created = false;
-        
-			var solutionDir = new FileInfo(typeof(Program).Assembly.Location).Directory.Parent.Parent.Parent.FullName;            
-			var outputDir = Path.Combine(solutionDir, projectName);
+
+            var directoryInfo = new FileInfo(typeof (Program).Assembly.Location).Directory;
+            if (directoryInfo == null) 
+                return;
+
+            var solutionDir = directoryInfo.Parent.Parent.Parent.FullName;            
+            var outputDir = Path.Combine(solutionDir, projectName);
 
             var chromiumPath = Environment.GetEnvironmentVariable(envVarName);
-            if (string.IsNullOrEmpty(chromiumPath)) {
-                chromiumPath = "/home/alexander/Development/Google/chromium/src/";
-            }
             if (string.IsNullOrWhiteSpace(chromiumPath))
             {
+                //chromiumPath = "/home/alexander/Development/Google/chromium/src/";
                 MessageBox.Show(
                     "Environmental variable 'CHROMIUM_SRC' not set, unable to determine Chromium source path.");
                 Application.Exit();
@@ -51,11 +53,11 @@ namespace Crystalbyte.Chocolate
             foreach (var dir in dirs)
             {
                 var settings = new GeneratorSettings
-                    {
-                        RootDirectory = new DirectoryInfo(dir),
-                        OutputDirectory = new DirectoryInfo(outputDir),
-                        Namespace = projectName
-                    };
+                                   {
+                                       RootDirectory = new DirectoryInfo(dir),
+                                       OutputDirectory = new DirectoryInfo(outputDir),
+                                       Namespace = projectName
+                                   };
                 if (dir.EndsWith("internal"))
                 {
                     settings.ClassNameSuffix = "Class";

@@ -24,7 +24,7 @@ namespace Crystalbyte.Chocolate.UI {
             : base(typeof (CefBrowserProcessHandler)) {
             _appDelegate = appDelegate;
             // TODO: Implement event handlers.
-            MarshalToNative(new CefRenderProcessHandler {
+            MarshalToNative(new CefBrowserProcessHandler {
                 Base = DedicatedBase
             });
         }
