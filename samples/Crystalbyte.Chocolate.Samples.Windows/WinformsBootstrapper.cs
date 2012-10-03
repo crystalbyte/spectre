@@ -46,6 +46,7 @@ namespace Crystalbyte.Chocolate {
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
                 StartupUri = new Uri("chocolate://localhost/views/index.html")
+                //StartupUri = new Uri("file:///C:/Users/Alexander/Documents/Visual%20Studio%202012/Projects/Chocolate/samples/Crystalbyte.Chocolate.Samples.Windows/views/index.html")
             };
         }
     }

@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Demo.Windows", "Crystalbyte.Chocolate.Demo.Windows\Crystalbyte.Chocolate.Demo.Windows.csproj", "{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate", "Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj", "{DC202E77-073A-4881-84C9-94B6BC7469B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(chocolate)", "(chocolate)", "{6A1A7CD3-7675-4A46-B598-A4FD457E3112}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(startup)", "(startup)", "{65F12355-89EA-4F63-8257-1DCCAE079AD8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Chocolate.Projections", "Crystalbyte.Chocolate.Projections\Crystalbyte.Chocolate.Projections.csproj", "{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(tests)", "(tests)", "{67D9C38D-EE71-4B9E-BB56-3B7FD6028FD8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(tests)", "(tests)", "{EFBAF148-9E65-4913-9769-795D16077A40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,21 +22,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.CodeCoverage|Any CPU.ActiveCfg = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.CodeCoverage|Mixed Platforms.ActiveCfg = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.CodeCoverage|Mixed Platforms.Build.0 = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.CodeCoverage|x86.ActiveCfg = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.CodeCoverage|x86.Build.0 = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|x86.ActiveCfg = Debug|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Debug|x86.Build.0 = Debug|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Release|Any CPU.ActiveCfg = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Release|Mixed Platforms.Build.0 = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Release|x86.ActiveCfg = Release|x86
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB}.Release|x86.Build.0 = Release|x86
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
 		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -76,7 +57,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{599A14FB-3067-4AC5-8A99-751CCC4FE8BB} = {65F12355-89EA-4F63-8257-1DCCAE079AD8}
 		{DC202E77-073A-4881-84C9-94B6BC7469B4} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
 	EndGlobalSection

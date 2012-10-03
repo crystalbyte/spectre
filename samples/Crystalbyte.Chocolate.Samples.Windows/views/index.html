@@ -4,44 +4,72 @@
     <head>
         <meta charset="utf-8" />
         <title>Chocolate HTML Demo Page</title>
-        <link href="../styles/metro.css" rel="stylesheet" />
+        <link href="../styles/chocolate.css" rel="stylesheet" />
         <script src="../scripts/jquery-1.8.2.min.js"></script>
-        <script src="../scripts/metro.js"></script>
-        <script type="text/javascript">
+        <script src="../scripts/jquery-ui-1.8.24.custom.min.js"></script>
+        <script src="../scripts/prototypes.js"></script>
+        <script src="../scripts/chocolate.js"></script>
+        <script>
             $(document).ready(function () {
-                var tiles = $.find(".tile");
-                metro.slideIn(tiles);
+                if (chocolate) {
+                    chocolate.displayStart();
+                }
             });
         </script>
     </head>
     <body>
-        <header>
-            <span>Chocolate</span>
-        </header>
-        <section style="width: 1000px;">
-            <button> Click me</button>
+        <div id="header">
+            <span>Start</span>
+        </div>
+        <div id="content" style="width: 1000px; opacity:0;">
             <ul>
-                <li class="tile">
-                    <div class="tint-image-overlay"></div>
-                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                <li class="square tile" onclick="chocolate.navigate('http://www.google.com');">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
                 </li>
-                <li class="tile">
-                    <div class="tint-image-overlay"></div>
-                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
                 </li>
                 <li class="wide tile">
-                    <div class="tint-image-overlay"></div>
-                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
                 </li>
                 <li class="wide tile">
-                    <div class="tint-image-overlay"></div>
-                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                    <img src="../media/pin.png" alt="Geolocation"  />    
                 </li>
-                <li class="tile">
-                    <div class="tint-image-overlay"></div>
-                    <img class="tint-image" src="../media/pin.png" alt="Geolocation"  />    
+                <li class="wide tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="square tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="wide tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
+                </li>
+                <li class="wide tile">
+                    <img src="../media/pin.png" alt="Geolocation"  />    
                 </li>
             </ul>
-        </section>
+        </div>
+        <iframe id="navFrame" src="http://www.apple.com">
+        </iframe>
+        <div id="navBar">
+            <a href="#" onclick="chocolate.goBack();">
+                click me
+            </a>
+        </div>
     </body>
 </html>
