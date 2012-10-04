@@ -46,9 +46,9 @@
     <Compile Include="Web\ChocolateSchemeHandlerFactory.cs" />
     <Compile Include="Web\ChocolateSchemeHandlerFactoryDescriptor.cs" />
     <Compile Include="Web\CustomSchemesRegisteringEventArgs.cs" />
-    <Compile Include="MimeMapper.cs" />
+    <Compile Include="Web\MimeMapper.cs" />
     <Compile Include="Web\IRequestModule.cs" />
-    <Compile Include="Web\LocalResourceRequestModule.cs" />
+    <Compile Include="Web\FileRequestModule.cs" />
     <Compile Include="Web\RequestModules.cs" />
     <Compile Include="Web\ResponseDelayController.cs" />
     <Compile Include="Web\Schemes.cs" />

@@ -20,7 +20,7 @@ namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
         public ChocolateSchemeHandlerFactory() {
             Modules = new RequestModules();
-            Modules.Register(typeof (LocalResourceRequestModule));
+            Modules.Register(typeof (FileRequestModule));
         }
 
         protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {

@@ -23,21 +23,7 @@ using System.Collections.Generic;
 namespace Crystalbyte.Chocolate {
     public sealed class WinformsBootstrapper : Bootstrapper {
 
-        protected override void ConfigureSettings(ApplicationSettings settings)
-        {
-            base.ConfigureSettings(settings);
-
-            // For debugging purposes it is more convenient to use the single process mode, 
-            // thus avoiding the need to attach the debugger to multiple processes.
-            // However, SP mode is very volatile, for it is not actively maintained
-            // and must therefor not be used in production environments.
-#if (DEBUG)
-            settings.IsSingleProcess = true;
-#endif
-        }
-
-        protected override IList<RuntimeExtension> RegisterScriptingExtensions()
-        {
+        protected override IList<RuntimeExtension> RegisterScriptingExtensions() {
             var extensions = base.RegisterScriptingExtensions();
             extensions.Add(new PerformSyncOperationExtension());
             return extensions;
@@ -46,7 +32,6 @@ namespace Crystalbyte.Chocolate {
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
                 StartupUri = new Uri("chocolate://localhost/views/index.html")
-                //StartupUri = new Uri("file:///C:/Users/Alexander/Documents/Visual%20Studio%202012/Projects/Chocolate/samples/Crystalbyte.Chocolate.Samples.Windows/views/index.html")
             };
         }
     }

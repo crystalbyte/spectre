@@ -59,5 +59,15 @@ namespace Crystalbyte.Chocolate.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon chocolate {
+            get {
+                object obj = ResourceManager.GetObject("chocolate", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

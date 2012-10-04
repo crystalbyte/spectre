@@ -21,7 +21,6 @@ namespace Crystalbyte.Chocolate.Extensions
         }
 
         protected override void OnExecuted(ExecutedEventArgs e) {
-
             MessageBox.Show("Sync");
         }
     }

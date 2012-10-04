@@ -19,7 +19,7 @@ using System.Linq;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class LocalResourceRequestModule : IRequestModule {
+    public sealed class FileRequestModule : IRequestModule {
         private bool _isCompleted;
         private Stream _fileStream;
         private BinaryReader _reader;

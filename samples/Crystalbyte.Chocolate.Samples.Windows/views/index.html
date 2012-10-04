@@ -12,25 +12,29 @@
         <script>
             $(document).ready(function () {
                 if (chocolate) {
-                    chocolate.displayStart();
+                    chocolate.displayStart(true);
                 }
             });
         </script>
     </head>
     <body>
         <div id="header">
-            <span>Start</span>
+            <span style="display: block; font-size: 2.5em;">Samples</span>
+            <span style="display: block; font-size: 0.8em;">With the Chocolate Framework you can create .NET/Mono applications using HTML5 & CSS3.</span>
+            <span style="display: block; font-size: 0.8em;">Click the tiles to view the samples.</span>
         </div>
         <div id="content" style="width: 1000px; opacity:0;">
             <ul>
-                <li class="square tile" onclick="chocolate.navigate('http://www.google.com');">
-                    <img src="../media/pin.png" alt="Geolocation"  />    
+                <li class="square tile" style="background-color: lightblue;" onclick="chocolate.navigate('http://html5test.com/','dimgrey');">
+                    <img src="../media/html5.png" style="width:100px; height:100px; margin: 25px;" alt="HTML5"  />    
                 </li>
-                <li class="square tile">
-                    <img src="../media/pin.png" alt="Geolocation"  />    
+                <li class="square tile" onclick="chocolate.navigate('youtube.html');">
+                    <img src="../media/youtube.png" alt="Youtube"  />    
                 </li>
-                <li class="wide tile">
-                    <img src="../media/pin.png" alt="Geolocation"  />    
+                <li class="wide tile" onclick="chocolate.navigate('http://carvisualizer.plus360degrees.com/threejs/');">
+                    <div style="width:304px; height:150px;">
+                        <img src="../media/webgl.png" alt="WebGL" style="display: inline;"  />    
+                    </div>
                 </li>
                 <li class="square tile">
                     <img src="../media/pin.png" alt="Geolocation"  />    
@@ -64,7 +68,7 @@
                 </li>
             </ul>
         </div>
-        <iframe id="navFrame" src="http://www.apple.com">
+        <iframe id="navFrame" sandbox="allow-top-navigation allow-scripts allow-forms allow-same-origin" >
         </iframe>
         <div id="navBar">
             <a href="#" onclick="chocolate.goBack();">

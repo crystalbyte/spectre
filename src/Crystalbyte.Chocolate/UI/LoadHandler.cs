@@ -47,8 +47,8 @@ namespace Crystalbyte.Chocolate.UI {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
                 ErrorCode = (ErrorCode) errorcode,
-                Message = StringUtf16.ReadStringAndFree(errortext),
-                FailedUrl = StringUtf16.ReadStringAndFree(failedurl)
+                Message = StringUtf16.ReadString(errortext),
+                FailedUrl = StringUtf16.ReadString(failedurl)
             };
             _delegate.OnPageLoadingFailed(e);
         }

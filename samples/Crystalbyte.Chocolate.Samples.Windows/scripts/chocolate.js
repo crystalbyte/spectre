@@ -1,18 +1,18 @@
-﻿//See: http://james.padolsey.com/javascript/fun-with-jquerys-animate/
-
-if (!chocolate) {
+﻿if (!chocolate) {
     var chocolate = {};
 }
 
-chocolate.displayStart = function (t) {
+chocolate.displayStart = function (delay) {
     var content = $('#content').stop();
     var header = $('#header').stop();
 
     header.css('margin-left', '20px');
     content.css('margin-left', '-40px');
 
-    header.delay(450).animate({ opacity: 1, marginLeft: '0px' }, { duration: 'slow', easing: 'easeOutCirc' });
-    content.delay(500).animate({ opacity: 1, marginLeft: '0px' }, { duration: 'slow', easing: 'easeOutCirc' });
+    var delayTime = delay ? 450 : 0;
+    
+    header.delay(delayTime).animate({ opacity: 1, marginLeft: '0px' }, { duration: 'slow', easing: 'easeOutCirc' });
+    content.delay(delayTime).animate({ opacity: 1, marginLeft: '0px' }, { duration: 'slow', easing: 'easeOutCirc' });
 };
 
 chocolate.hideStart = function () {
@@ -23,28 +23,49 @@ chocolate.hideStart = function () {
     return content.animate({ opacity: 0, marginLeft: '-40px' }, { duration: 'fast', easing: 'easeOutCirc' });
 };
 
-chocolate.displayNavFrame = function () {
-    var frame = $("#navFrame").stop();
-    frame.css("-webkit-transform-origin", '50% 50%');
+chocolate.displayNavbar = function () {
+    var bar = $('#navBar').stop();
+    bar.css("display", "block");
+    bar.delay(400).animate({ left: 0 }, { duration: 400, easing: 'easeOutCirc' });
+};
 
-    var from = { angle: 1 };
-    var to = { angle: 0 };
+chocolate.displayNavFrame = function (color, callback) {
+    var frame = $("#navFrame").stop();
+    frame.css("-webkit-transform-origin", '90% 50%');
+    if (color) {
+        frame.css("background-color", color);
+    } else {
+        frame.css("background-color", 'transparent');
+    }
+
+    if (window) {
+        window.open("about:blank", "navFrame");
+    }
+
+    // See: http://james.padolsey.com/javascript/fun-with-jquerys-animate/
+    var from = { angle: 0 };
+    var to = { angle: 1 };
 
     $(from).animate(to, {
-        duration: 2300,
-        easing: 'easeOutCirc',
+        duration: 400,
+        easing: 'easeOutExpo',
         step: function () {
             frame.css("display", "block");
             frame.css("opacity", 1);
-            frame.css('-webkit-transform', "rotate3d(1,1,0,{0}deg)".format(this.angle * 33));
+            frame.css('-webkit-transform', "scale({0})".format(this.angle));
+        },
+        complete:function () {
+            if (callback) {
+                callback();
+            }
         }
     });
 };
 
 chocolate.hideNavFrame = function() {
     var frame = $("#navFrame").stop();
-    frame.css("-webkit-transform-origin", '90% 90%');
-    
+    frame.css("-webkit-transform-origin", '90% 50%');
+
     var from = { angle: 0 };
     var to = { angle: 1 };
 
@@ -52,15 +73,16 @@ chocolate.hideNavFrame = function() {
         duration: 400,
         easing: 'easeOutCirc',
         step: function () {
-            frame.css('-webkit-transform', "rotate3d(1,1,0,{0}deg)".format(this.angle * 33));
+            frame.css('-webkit-transform', "scale({0})".format(1 - this.angle));
         }
     });
 
     $(frame).animate({ opacity: 0 }, {
         duration: 400, complete: function () {
-            frame.css('display', 'none');
-            frame.css('opacity', 0);
-            chocolate.displayStart();
+            chocolate.displayStart(false);
+            if (window) {
+                window.open("about:blank", "navFrame");
+            }
         }
     });
 };
@@ -72,19 +94,19 @@ chocolate.goBack = function () {
 
 chocolate.hideNavbar= function () {
     var bar = $('#navBar').stop();
-    bar.animate({ left: -101 }, { duration: 400, easing: 'easeOutExpo' }, function () {
+    bar.animate({ left: -101 }, { duration: 400, easing: 'easeOutCirc' }, function () {
         bar.css("display", "none");
     });
 };
 
-chocolate.displayNavbar = function () {
-    var bar = $('#navBar').stop();
-    bar.css("display", "block");
-    bar.delay(400).animate({ left: 0 }, { duration: 2000, easing: 'easeOutQuint' });
-};
 
-chocolate.navigate = function (url) {
+chocolate.navigate = function (url, color) {
     chocolate.hideStart();
-    chocolate.displayNavFrame();
+    chocolate.displayNavFrame(color, function () {
+        if (window) {
+            window.open(url, "navFrame");
+        }
+    });
+    
     chocolate.displayNavbar();
 };
