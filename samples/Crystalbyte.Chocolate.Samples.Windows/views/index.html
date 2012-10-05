@@ -25,19 +25,22 @@
         </div>
         <div id="content" style="width: 1000px; opacity:0;">
             <ul>
-                <li class="square tile" style="background-color: lightblue;" onclick="chocolate.navigate('http://html5test.com/','dimgrey');">
-                    <img src="../media/html5.png" style="width:100px; height:100px; margin: 25px;" alt="HTML5"  />    
-                </li>
-                <li class="square tile" onclick="chocolate.navigate('youtube.html');">
-                    <img src="../media/youtube.png" alt="Youtube"  />    
-                </li>
-                <li class="wide tile" onclick="chocolate.navigate('http://carvisualizer.plus360degrees.com/threejs/');">
-                    <div style="width:304px; height:150px;">
-                        <img src="../media/webgl.png" alt="WebGL" style="display: inline;"  />    
+                <li class="square tile" style="background-color: lightblue;" onclick="chocolate.navigate('http://html5test.com/');">
+                    <div class="square content" style="background: url('../media/html5.png') no-repeat center center">
                     </div>
                 </li>
-                <li class="square tile">
-                    <img src="../media/pin.png" alt="Geolocation"  />    
+                <li class="square tile" onclick="chocolate.navigate('youtube.html');">
+                    <div class="square content" style="background: url('../media/youtube.png') no-repeat center top">
+                    </div>
+                </li>
+                <li class="wide tile" style="background-color:purple;" onclick="chocolate.navigate('youtube.html');">
+                    <div class="wide content" style="background: url('../media/async.png') no-repeat center center" >
+                        <span style="color:white; font-size:1.5em; position:absolute;">async</span>
+                    </div>
+                </li>
+                <li class="square tile" style="background-color: white;" onclick="chocolate.navigate('http://carvisualizer.plus360degrees.com/threejs/');">
+                    <div class="content square" style="background:url('../media/webgl.png') no-repeat center center">
+                    </div>
                 </li>
                 <li class="square tile">
                     <img src="../media/pin.png" alt="Geolocation"  />    
@@ -68,7 +71,7 @@
                 </li>
             </ul>
         </div>
-        <iframe id="navFrame" sandbox="allow-top-navigation allow-scripts allow-forms allow-same-origin" >
+        <iframe id="navFrame" >
         </iframe>
         <div id="navBar">
             <a href="#" onclick="chocolate.goBack();">

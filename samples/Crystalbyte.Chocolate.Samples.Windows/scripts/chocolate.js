@@ -35,7 +35,7 @@ chocolate.displayNavFrame = function (color, callback) {
     if (color) {
         frame.css("background-color", color);
     } else {
-        frame.css("background-color", 'transparent');
+        frame.css("background-color", 'white');
     }
 
     if (window) {

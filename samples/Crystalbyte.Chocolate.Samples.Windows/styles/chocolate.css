@@ -55,10 +55,13 @@ body {
 
 .wide {
     width: 304px;
-    background-color: green;
 }
 
 .tile {
     height: 150px;
     display: inline-block;
+}
+
+.content {
+    height: 150px;
 }
