@@ -19,14 +19,14 @@ using Crystalbyte.Chocolate.UI;
 namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
         public ChocolateSchemeHandlerFactory() {
-            Modules = new RequestModules();
-            Modules.Register(typeof (FileRequestModule));
+            Providers = new DataProviders();
+            Providers.Register(typeof (FileDataProvider));
         }
 
         protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
-            return new ChocolateSchemeHandler(Modules.Types);
+            return new ChocolateSchemeHandler(Providers.Types);
         }
 
-        public RequestModules Modules { get; private set; }
+        public DataProviders Providers { get; private set; }
     }
 }

@@ -21,30 +21,30 @@ using System.Linq;
 
 namespace Crystalbyte.Chocolate.Web {
     public sealed class ChocolateSchemeHandler : ResourceHandler {
-        private readonly IEnumerable<Type> _moduleTypes;
-        private IRequestModule _module;
+        private readonly IEnumerable<Type> _providerTypes;
+        private IDataProvider _provider;
 
         public ChocolateSchemeHandler(IEnumerable<Type> moduleTypes) {
-            _moduleTypes = moduleTypes;
+            _providerTypes = moduleTypes;
         }
 
         protected override void OnDataBlockReading(DataBlockReadingEventArgs e) {
-            Debug.Assert(_module != null, "_module != null");
-            _module.OnDataBlockReading(e);
+            Debug.Assert(_provider != null, "_module != null");
+            _provider.OnDataBlockReading(e);
         }
 
         protected override void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {
-            Debug.Assert(_module != null, "_module != null");
-            _module.OnResponseHeadersReading(e);
+            Debug.Assert(_provider != null, "_module != null");
+            _provider.OnResponseHeadersReading(e);
         }
 
         protected override void OnRequestProcessing(RequestProcessingEventArgs e) {
-            _module = _moduleTypes
+            _provider = _providerTypes
                 .Select(Activator.CreateInstance)
-                .Cast<IRequestModule>()
+                .Cast<IDataProvider>()
                 .FirstOrDefault(x => x.OnRequestProcessing(e.Request));
             // find a suitable handler to process the request.
-            e.IsCanceled = _module == null;
+            e.IsCanceled = _provider == null;
         }
     }
 }

@@ -5,7 +5,7 @@ using Crystalbyte.Chocolate.Projections.Internal;
 using Crystalbyte.Chocolate.UI;
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class JavaScriptDialogHandler : RefCountedNativeObject {
+    public sealed class JavaScriptDialogHandler : RetainedNativeObject {
         private readonly OnJsdialogCallback _jsDialogCallback;
         private readonly OnResetDialogStateCallback _resetDialogStateCallback;
         private readonly OnBeforeUnloadDialogCallback _beforeUnloadDialogCallback;

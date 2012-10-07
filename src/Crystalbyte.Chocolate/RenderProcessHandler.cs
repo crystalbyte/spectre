@@ -22,7 +22,7 @@ using Crystalbyte.Chocolate.Scripting;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class RenderProcessHandler : RefCountedNativeObject {
+    public sealed class RenderProcessHandler : RetainedNativeObject {
         private readonly OnBrowserCreatedCallback _browserCreatedCallback;
         private readonly OnBrowserDestroyedCallback _browserDestroyedCallback;
         private readonly OnContextCreatedCallback _contextCreatedCallback;
@@ -96,7 +96,6 @@ namespace Crystalbyte.Chocolate.UI {
                 Context = JavaScriptContext.FromHandle(context)
             };
             _delegate.OnScriptingContextCreated(e);
-            Debug.WriteLine("Context created.");
         }
 
         private void OnBrowserDestroyed(IntPtr self, IntPtr browser) {

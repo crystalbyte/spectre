@@ -39,7 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -61,11 +61,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\GetSystemInformationExtension.cs" />
+    <Compile Include="SampleAppDelegate.cs" />
     <Compile Include="SampleBrowserDelegate.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
@@ -96,16 +96,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\jquery-1.8.2.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\chocolate.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\jquery-ui-1.8.24.custom.min.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\prototypes.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="styles\system.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -147,10 +147,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Crystalbyte.Chocolate.Projections\Crystalbyte.Chocolate.Projections.csproj">
-      <Project>{8ccc057c-fa77-4f49-bacd-5f6ebab13c14}</Project>
-      <Name>Crystalbyte.Chocolate.Projections</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Crystalbyte.Chocolate\Crystalbyte.Chocolate.csproj">
       <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
       <Name>Crystalbyte.Chocolate</Name>

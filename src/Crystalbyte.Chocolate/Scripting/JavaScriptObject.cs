@@ -280,7 +280,7 @@ namespace Crystalbyte.Chocolate.Scripting {
         public void Add(string key, JavaScriptObject value) {
             var reflection = MarshalFromNative<CefV8value>();
             var action = (SetValueBykeyCallback)
-                         Marshal.GetDelegateForFunctionPointer(reflection.GetValueByindex,
+                         Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey,
                                                                typeof (SetValueBykeyCallback));
             var s = new StringUtf16(key);
             action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
@@ -308,12 +308,7 @@ namespace Crystalbyte.Chocolate.Scripting {
         }
 
         public void Add(KeyValuePair<string, JavaScriptObject> item) {
-            var reflection = MarshalFromNative<CefV8value>();
-            var action = (SetValueBykeyCallback)
-                         Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey, typeof (SetValueBykeyCallback));
-            var s = new StringUtf16(item.Key);
-            action(NativeHandle, s.NativeHandle, item.Value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
-            s.Free();
+            Add(item.Key, item.Value);
         }
 
         public bool Contains(KeyValuePair<string, JavaScriptObject> item) {

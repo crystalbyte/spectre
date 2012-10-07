@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Projections;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class SchemeRegistrar : RefCountedNativeObject {
+    public sealed class SchemeRegistrar : RetainedNativeObject {
         private SchemeRegistrar(IntPtr handle)
             : base(typeof (CefSchemeRegistrar)) {
             NativeHandle = handle;

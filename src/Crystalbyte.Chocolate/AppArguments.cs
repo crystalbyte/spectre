@@ -18,7 +18,7 @@ using Crystalbyte.Chocolate.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Chocolate {
     internal static class AppArguments {
         public static IntPtr CreateForMac(string[] args) {
             throw new NotImplementedException();

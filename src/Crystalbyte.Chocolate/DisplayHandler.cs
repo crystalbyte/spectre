@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class DisplayHandler : RefCountedNativeObject {
+    public sealed class DisplayHandler : RetainedNativeObject {
         private readonly OnAddressChangeCallback _addressChangeCallback;
         private readonly OnConsoleMessageCallback _consoleMessageCallback;
         private readonly BrowserDelegate _delegate;

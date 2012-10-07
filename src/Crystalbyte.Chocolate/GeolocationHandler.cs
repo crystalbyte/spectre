@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.UI;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    internal sealed class GeolocationHandler : RefCountedNativeObject {
+    internal sealed class GeolocationHandler : RetainedNativeObject {
         private readonly OnCancelGeolocationPermissionCallback _cancelGeolocationPermission;
         private readonly BrowserDelegate _delegate;
         private readonly OnRequestGeolocationPermissionCallback _requestGeolocationPermission;

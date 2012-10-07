@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate {
     public abstract class NativeObject : DisposableObject {
         private IntPtr _nativeHandle;
 
-        protected NativeObject(Type nativeType, bool isRefCountedExternally = false) {
+        protected NativeObject(Type nativeType, bool isRefCounted = false) {
             if (nativeType == null) {
                 throw new ArgumentNullException("nativeType");
             }
@@ -34,7 +34,7 @@ namespace Crystalbyte.Chocolate {
             }
             NativeType = nativeType;
             NativeSize = Marshal.SizeOf(nativeType);
-            IsRefCountedExternally = isRefCountedExternally;
+            IsRefCounted = isRefCounted;
         }
 
         protected internal IntPtr NativeHandle {
@@ -48,10 +48,10 @@ namespace Crystalbyte.Chocolate {
 
         protected internal int NativeSize { get; private set; }
         protected Type NativeType { get; private set; }
-        protected bool IsRefCountedExternally { get; private set; }
+        protected bool IsRefCounted { get; private set; }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero && IsRefCountedExternally) {
+            if (NativeHandle != IntPtr.Zero && IsRefCounted) {
                 Reference.Decrement(NativeHandle);
             }
         }

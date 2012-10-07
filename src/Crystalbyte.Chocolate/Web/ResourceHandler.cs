@@ -21,7 +21,7 @@ using Crystalbyte.Chocolate.Projections;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public abstract class ResourceHandler : RefCountedNativeObject {
+    public abstract class ResourceHandler : RetainedNativeObject {
         private readonly CanSetCookieCallback _canSetCookieCallback;
         private readonly CanGetCookieCallback _canGetCookieCallback;
         private readonly CancelCallback _cancelCallback;

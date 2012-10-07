@@ -24,22 +24,22 @@ namespace Crystalbyte.Chocolate {
         static Platform() {
             // We will just assume the OS does not change at runtime, performing tests only once.
             IsWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
-            IsOSX = !IsWindows && CheckForOSX();
-            IsLinux = !IsWindows && Environment.OSVersion.Platform == PlatformID.Unix && !IsOSX;
+            IsOsX = !IsWindows && CheckForOsX();
+            IsLinux = !IsWindows && Environment.OSVersion.Platform == PlatformID.Unix && !IsOsX;
         }
 
         public static bool IsWindows { get; private set; }
 
         public static bool IsLinux { get; private set; }
 
-        public static bool IsOSX { get; private set; }
+        public static bool IsOsX { get; private set; }
 
         /// <summary>
         ///   Determines whether current OS is OS X.
         ///   http://aautar.digital-radiation.com/blog/?p=1198
         /// </summary>
         /// <returns> True if current OS is OS X, else false. </returns>
-        private static bool CheckForOSX() {
+        private static bool CheckForOsX() {
             var buffer = IntPtr.Zero;
             try {
                 buffer = Marshal.AllocHGlobal(8192);

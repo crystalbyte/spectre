@@ -15,12 +15,13 @@
 using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Chocolate.UI;
 using Crystalbyte.Chocolate.Web;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    internal sealed class App : RefCountedNativeObject {
+namespace Crystalbyte.Chocolate {
+    internal sealed class App : RetainedNativeObject {
         private readonly AppDelegate _delegate;
 
         private readonly RenderProcessHandler _renderProcessHandler;

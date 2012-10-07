@@ -37,7 +37,7 @@ namespace Crystalbyte.Chocolate.Web {
         }
 
         public void Register(Type type) {
-            _factory.Modules.Register(type);
+            _factory.Providers.Register(type);
         }
     }
 }

@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    public sealed class LoadHandler : RefCountedNativeObject {
+    public sealed class LoadHandler : RetainedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly OnLoadEndCallback _loadEndCallback;
         private readonly OnLoadErrorCallback _loadErrorCallback;

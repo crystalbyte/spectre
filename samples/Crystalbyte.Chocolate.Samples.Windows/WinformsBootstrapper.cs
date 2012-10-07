@@ -29,6 +29,10 @@ namespace Crystalbyte.Chocolate {
             base.ConfigureSettings(settings);
         }
 
+        protected override AppDelegate CreateAppDelegate() {
+            return new SampleAppDelegate();
+        }
+
         protected override BrowserDelegate CreateBrowserDelegate(IRenderTarget target) {
             return new SampleBrowserDelegate();
         }

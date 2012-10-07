@@ -14,11 +14,12 @@
 
 using System;
 using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Chocolate.UI;
 using Crystalbyte.Chocolate.Web;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Chocolate {
     public class AppDelegate {
         public event EventHandler<BrowserEventArgs> BrowserDestroyed;
 

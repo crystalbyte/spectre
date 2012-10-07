@@ -22,18 +22,22 @@ using Crystalbyte.Chocolate.UI;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    internal sealed class ClientHandler : RefCountedNativeObject {
+    internal sealed class ClientHandler : RetainedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;
         private readonly JavaScriptDialogHandler _javaScriptDialogHandler;
+        private readonly LifeSpanHandler _lifeSpanHandler;
+        private readonly LoadHandler _loadHandler;
+        private readonly ContextMenuHandler _contextMenuHandler;
+        
         private readonly GetJsdialogHandlerCallback _getJavaScriptdialogHandler;
         private readonly GeolocationHandler _geolocationHandler;
         private readonly GetDisplayHandlerCallback _getDisplayHandlerCallback;
         private readonly GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
         private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
         private readonly GetLoadHandlerCallback _getLoadHandlerCallback;
-        private readonly LifeSpanHandler _lifeSpanHandler;
-        private readonly LoadHandler _loadHandler;
+        private readonly GetContextMenuHandlerCallback _getContextMenuHandler;
+
         private readonly OnProcessMessageReceivedCallback _processMessageReceivedCallback;
 
         public ClientHandler(BrowserDelegate browserDelegate)
@@ -49,6 +53,9 @@ namespace Crystalbyte.Chocolate {
             _getGeolocationHandlerCallback = OnGetGeolocationHandler;
             _javaScriptDialogHandler = new JavaScriptDialogHandler(browserDelegate);
             _getJavaScriptdialogHandler = OnGetJavaScriptHandler;
+            _contextMenuHandler = new ContextMenuHandler(browserDelegate);
+            _getContextMenuHandler = OnGetContextMenuHandler;
+
             _processMessageReceivedCallback = OnProcessMessageReceived;
 
             MarshalToNative(new CefClient {
@@ -58,8 +65,17 @@ namespace Crystalbyte.Chocolate {
                 GetLoadHandler = Marshal.GetFunctionPointerForDelegate(_getLoadHandlerCallback),
                 GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
                 OnProcessMessageReceived = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback),
-                GetJsdialogHandler = Marshal.GetFunctionPointerForDelegate(_getJavaScriptdialogHandler)
+                GetJsdialogHandler = Marshal.GetFunctionPointerForDelegate(_getJavaScriptdialogHandler),
+                GetContextMenuHandler = Marshal.GetFunctionPointerForDelegate(_getContextMenuHandler)
             });
+        }
+
+        private IntPtr OnGetContextMenuHandler(IntPtr self) {
+            if (_contextMenuHandler == null) {
+                return IntPtr.Zero;
+            }
+            Reference.Increment(_contextMenuHandler.NativeHandle);
+            return _contextMenuHandler.NativeHandle;
         }
 
         private ClientHandler(IntPtr handle)

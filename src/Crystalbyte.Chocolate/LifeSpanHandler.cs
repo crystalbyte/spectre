@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.UI;
 #endregion
 
 namespace Crystalbyte.Chocolate {
-    public sealed class LifeSpanHandler : RefCountedNativeObject {
+    public sealed class LifeSpanHandler : RetainedNativeObject {
         private readonly OnBeforeCloseCallback _beforeCloseCallback;
         private readonly OnBeforePopupCallback _beforePopupCallback;
         private readonly BrowserDelegate _delegate;

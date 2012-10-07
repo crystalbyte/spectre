@@ -13,34 +13,31 @@
 #region Namespace directives
 
 using System;
+using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Projections;
 using Crystalbyte.Chocolate.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
-    public sealed class Dispatcher {
-        private static readonly Dispatcher _dispatcher = new Dispatcher();
+namespace Crystalbyte.Chocolate.Threading {
+    public sealed class Task : RetainedNativeObject {
+        private readonly Action _action;
+        private readonly ExecuteCallback _executeCallback;
 
-        private Dispatcher() {}
-
-        public static Dispatcher Current {
-            get { return _dispatcher; }
+        public Task(Action action)
+            : base(typeof (CefTask)) {
+            _action = action;
+            _executeCallback = OnExecute;
+            MarshalToNative(new CefTask {
+                Base = DedicatedBase,
+                Execute = Marshal.GetFunctionPointerForDelegate(_executeCallback)
+            });
         }
 
-        public static void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
-        }
-
-        public static void InvokeAsync(Action action, DispatcherQueue queue) {
-            var task = new Task(action);
-            CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
-        }
-
-        public static bool IsCurrentlyOn(DispatcherQueue queue) {
-            var result = CefTaskCapi.CefCurrentlyOn((CefThreadId) queue);
-            return Convert.ToBoolean(result);
+        private void OnExecute(IntPtr self, CefThreadId threadid) {
+            if (_action != null) {
+                _action();
+            }
         }
     }
 }

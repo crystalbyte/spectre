@@ -17,7 +17,7 @@ using Crystalbyte.Chocolate.Projections;
 #endregion
 
 namespace Crystalbyte.Chocolate.UI {
-    internal sealed class BrowserProcessHandler : RefCountedNativeObject {
+    internal sealed class BrowserProcessHandler : RetainedNativeObject {
         private readonly AppDelegate _appDelegate;
 
         public BrowserProcessHandler(AppDelegate appDelegate)

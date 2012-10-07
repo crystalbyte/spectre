@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using Crystalbyte.Chocolate.Scripting;
-using System.Management;
 using System;
 
 namespace Crystalbyte.Chocolate.Extensions {
@@ -26,6 +25,7 @@ namespace Crystalbyte.Chocolate.Extensions {
                                                 {"monitorCount", new JavaScriptObject(SystemInformation.MonitorCount)}
                                             };
             e.Result = info;
+            e.IsHandled = true;
         }
     }
 }

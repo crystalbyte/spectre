@@ -10,10 +10,30 @@
 
 #endregion
 
+#region Namespace directives
+
+using System;
+using System.Collections.Generic;
+
+#endregion
+
 namespace Crystalbyte.Chocolate.Web {
-    public interface IRequestModule {
-        bool OnRequestProcessing(Request request);
-        void OnDataBlockReading(DataBlockReadingEventArgs e);
-        void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e);
+    public sealed class DataProviders {
+        private readonly List<Type> _types;
+
+        public DataProviders() {
+            _types = new List<Type>();
+        }
+
+        public void Register(Type type) {
+            if (!typeof (IDataProvider).IsAssignableFrom(type)) {
+                throw new InvalidOperationException("Object must be assignable to IDataProvider.");
+            }
+            _types.Add(type);
+        }
+
+        public IEnumerable<Type> Types {
+            get { return _types; }
+        }
     }
 }

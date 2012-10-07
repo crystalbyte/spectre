@@ -20,7 +20,7 @@ using Crystalbyte.Chocolate.UI;
 #endregion
 
 namespace Crystalbyte.Chocolate.Web {
-    public sealed class ProxyHandler : RefCountedNativeObject {
+    public sealed class ProxyHandler : RetainedNativeObject {
         private readonly AppDelegate _delegate;
         private readonly GetProxyForUrlCallback _getProxyForUrlCallback;
 

@@ -19,6 +19,33 @@ using System;
 namespace Crystalbyte.Chocolate.UI {
     public class BrowserDelegate {
 
+        public event EventHandler<ContextMenuOpeningEventArgs> ContextMenuOpening;
+
+        protected internal void OnContextMenuOpening(ContextMenuOpeningEventArgs e) {
+            var handler = ContextMenuOpening;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<ContextMenuCommandEventArgs> ContextMenuCommand;
+
+        protected internal void OnContextMenuCommand(ContextMenuCommandEventArgs e) {
+            var handler = ContextMenuCommand;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<ContextMenuClosedEventArgs> ContextMenuClosed;
+
+        protected internal void OnContextMenuClosed(ContextMenuClosedEventArgs e) {
+            var handler = ContextMenuClosed;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
         public event EventHandler<JavaScriptDialogOpeningEventArgs> JavaScriptDialogOpening;
 
         protected internal virtual void OnJavaScriptDialogOpening(JavaScriptDialogOpeningEventArgs e) {
