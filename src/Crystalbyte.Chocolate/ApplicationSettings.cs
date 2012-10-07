@@ -25,7 +25,7 @@ namespace Crystalbyte.Chocolate {
             NativeHandle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefSettings {
                 Size = NativeSize,
-                LogSeverity = CefLogSeverity.LogseverityVerbose
+                LogSeverity = CefLogSeverity.LogseverityInfo
             });
         }
 

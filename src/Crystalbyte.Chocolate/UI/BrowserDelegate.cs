@@ -18,6 +18,25 @@ using System;
 
 namespace Crystalbyte.Chocolate.UI {
     public class BrowserDelegate {
+
+        public event EventHandler<JavaScriptDialogOpeningEventArgs> JavaScriptDialogOpening;
+
+        protected internal virtual void OnJavaScriptDialogOpening(JavaScriptDialogOpeningEventArgs e) {
+            var handler = JavaScriptDialogOpening;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<PageChangeNotificationDialogOpeningEventArgs> PageChangeNotificationDialogOpening;
+
+        protected internal virtual void OnPageChangeNotificationDialogOpening(PageChangeNotificationDialogOpeningEventArgs e) {
+            var handler = PageChangeNotificationDialogOpening;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
         public event EventHandler<NavigatedEventArgs> Navigated;
 
         protected internal virtual void OnNavigated(NavigatedEventArgs e) {

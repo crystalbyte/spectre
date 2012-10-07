@@ -23,6 +23,6 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         public Browser Browser { get; internal set; }
         public Frame Frame { get; internal set; }
-        public ScriptingContext Context { get; internal set; }
+        public JavaScriptContext Context { get; internal set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Crystalbyte.Chocolate.Projections
 		public IntPtr OnResetDialogState;
 	}
 	
-	public delegate int OnJsdialogCallback(IntPtr self, IntPtr browser, IntPtr originUrl, IntPtr acceptLang, CefJsdialogType dialogType, IntPtr messageText, IntPtr defaultPromptText, IntPtr callback, IntPtr suppressMessage);
+	public delegate int OnJsdialogCallback(IntPtr self, IntPtr browser, IntPtr originUrl, IntPtr acceptLang, CefJsdialogType dialogType, IntPtr messageText, IntPtr defaultPromptText, IntPtr callback, out int suppressMessage);
 	public delegate int OnBeforeUnloadDialogCallback(IntPtr self, IntPtr browser, IntPtr messageText, int isReload, IntPtr callback);
 	public delegate void OnResetDialogStateCallback(IntPtr self, IntPtr browser);
 	

@@ -11,7 +11,7 @@
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public abstract class RuntimeExtension : ScriptingHandler {
+    public abstract class RuntimeExtension : JavaScriptHandler {
         public abstract string PrototypeCode { get; }
     }
 }

@@ -13,26 +13,17 @@
 #region Namespace directives
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using Crystalbyte.Chocolate.Projections;
 
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    internal sealed class ScriptableObjectCollection : List<ScriptableObject>, IReadOnlyCollection<ScriptableObject> {
-        private static readonly int _pointerSize = Marshal.SizeOf(typeof (IntPtr));
-
-        public ScriptableObjectCollection(IntPtr listHandle, int argumentCount) {
-            // FIXME: List is only populated on construction
-            if (argumentCount < 1) {
-                return;
-            }
-            var current = listHandle;
-            for (var i = 0; i < argumentCount; i++) {
-                var handle = Marshal.ReadIntPtr(current);
-                Add(ScriptableObject.FromHandle(handle));
-                current = new IntPtr(current.ToInt64() + _pointerSize);
-            }
+    public static class JavaScriptRuntime {
+        public static bool RegisterExtension(string name, RuntimeExtension extension) {
+            var n = new StringUtf16(name);
+            var j = new StringUtf16(extension.PrototypeCode);
+            var result = CefV8Capi.CefRegisterExtension(n.NativeHandle, j.NativeHandle, extension.NativeHandle);
+            return Convert.ToBoolean(result);
         }
     }
 }

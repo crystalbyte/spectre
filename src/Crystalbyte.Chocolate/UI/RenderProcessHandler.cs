@@ -69,7 +69,7 @@ namespace Crystalbyte.Chocolate.UI {
             var e = new ContextEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
-                Context = ScriptingContext.FromHandle(context)
+                Context = JavaScriptContext.FromHandle(context)
             };
             _delegate.OnScriptingContextReleased(e);
         }
@@ -93,7 +93,7 @@ namespace Crystalbyte.Chocolate.UI {
             var e = new ContextEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
-                Context = ScriptingContext.FromHandle(context)
+                Context = JavaScriptContext.FromHandle(context)
             };
             _delegate.OnScriptingContextCreated(e);
             Debug.WriteLine("Context created.");

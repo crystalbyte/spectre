@@ -19,10 +19,10 @@ using Crystalbyte.Chocolate.Projections;
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public class ScriptingHandler : RefCountedNativeObject {
+    public class JavaScriptHandler : RefCountedNativeObject {
         private readonly V8ExecuteCallback _executeCallback;
 
-        public ScriptingHandler()
+        public JavaScriptHandler()
             : base(typeof (CefV8handler)) {
             _executeCallback = OnExecuted;
             MarshalToNative(new CefV8handler {
@@ -34,9 +34,9 @@ namespace Crystalbyte.Chocolate.Scripting {
         private int OnExecuted(IntPtr self, IntPtr name, IntPtr obj, int argcount, IntPtr arguments, out IntPtr retvalue,
                                IntPtr exception) {
             var e = new ExecutedEventArgs {
-                Arguments = new ScriptableObjectCollection(arguments, argcount),
+                Arguments = new JavaScriptObjectCollection(arguments, argcount),
                 FunctionName = StringUtf16.ReadString(name),
-                Object = ScriptableObject.FromHandle(obj)
+                Object = JavaScriptObject.FromHandle(obj)
             };
             var message = StringUtf16.ReadString(exception);
             if (string.IsNullOrWhiteSpace(message)) {

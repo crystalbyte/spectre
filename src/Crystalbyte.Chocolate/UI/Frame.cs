@@ -109,14 +109,14 @@ namespace Crystalbyte.Chocolate.UI {
             }
         }
 
-        public ScriptingContext Context {
+        public JavaScriptContext Context {
             get {
                 var reflection = MarshalFromNative<CefFrame>();
                 var function = (GetV8contextCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetV8context,
                                                                      typeof (GetV8contextCallback));
                 var handle = function(NativeHandle);
-                return ScriptingContext.FromHandle(handle);
+                return JavaScriptContext.FromHandle(handle);
             }
         }
 

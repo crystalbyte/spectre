@@ -19,9 +19,9 @@ using System;
 namespace Crystalbyte.Chocolate.Scripting {
     public sealed class ExecutedEventArgs : EventArgs {
         public string FunctionName { get; internal set; }
-        public IReadOnlyCollection<ScriptableObject> Arguments { get; internal set; }
-        public ScriptableObject Result { get; set; }
-        public ScriptableObject Object { get; internal set; }
+        public IReadOnlyCollection<JavaScriptObject> Arguments { get; internal set; }
+        public JavaScriptObject Result { get; set; }
+        public JavaScriptObject Object { get; internal set; }
         public bool IsHandled { get; set; }
         public Exception Exception { get; internal set; }
     }

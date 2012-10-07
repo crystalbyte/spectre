@@ -40,7 +40,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripting\DialogResult.cs" />
+    <Compile Include="Scripting\DialogType.cs" />
+    <Compile Include="Scripting\JavaScriptDialogCallback.cs" />
+    <Compile Include="Scripting\JavaScriptDialogHandler.cs" />
     <Compile Include="UI\BrowserProcessHandler.cs" />
+    <Compile Include="UI\JavaScriptDialogOpeningEventArgs.cs" />
+    <Compile Include="UI\PageChangeNotificationDialogOpening.cs" />
     <Compile Include="Web\ChocolateSchemeHandler.cs" />
     <Compile Include="Web\ChocolateSchemeDescriptor.cs" />
     <Compile Include="Web\ChocolateSchemeHandlerFactory.cs" />
@@ -93,23 +99,23 @@
     <Compile Include="Scripting\ExecutedEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptableObject.cs">
+    <Compile Include="Scripting\JavaScriptObject.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptableObjectCollection.cs">
+    <Compile Include="Scripting\JavaScriptObjectCollection.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\RuntimeExceptionObject.cs" />
-    <Compile Include="Scripting\ScriptingContext.cs">
+    <Compile Include="Scripting\JavaScriptContext.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\RuntimeExtension.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingHandler.cs">
+    <Compile Include="Scripting\JavaScriptHandler.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingRuntime.cs">
+    <Compile Include="Scripting\JavaScriptRuntime.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StreamExtensions.cs" />

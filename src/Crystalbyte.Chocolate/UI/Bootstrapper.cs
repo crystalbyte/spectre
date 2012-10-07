@@ -91,7 +91,7 @@ namespace Crystalbyte.Chocolate.UI {
 
         private static void RegisterScriptingExtension(RuntimeExtension extension) {
             var name = Guid.NewGuid().ToString();
-            ScriptingRuntime.RegisterExtension(name, extension);
+            JavaScriptRuntime.RegisterExtension(name, extension);
         }
     }
 }

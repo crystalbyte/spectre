@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Make async calls from .NET</title>
+    <link href="../styles/system.css" rel="stylesheet" />
+    <script src="../scripts/jquery-1.8.2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            if (chocolate) {
+                var systemInfo = chocolate.getSystemInfo();
+                $('#processorCount').text(systemInfo.processorCount);
+            }
+        });
+    </script>
+</head>
+    <body>
+        <div id="header">
+            <span style="display: block; font-size: 2.5em;">Managed Code</span>
+            <span style="display: block; font-size: 0.8em;">Extend the javascript runtime with arbitrary functions.</span>
+        </div>
+        <div id="content">
+            <span>Processors: </span>
+            <span id="processorCount"></span>
+        </div>
+    </body>
+</html>

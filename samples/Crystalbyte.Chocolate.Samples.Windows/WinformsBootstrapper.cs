@@ -23,9 +23,19 @@ using System.Collections.Generic;
 namespace Crystalbyte.Chocolate {
     public sealed class WinformsBootstrapper : Bootstrapper {
 
+        protected override void ConfigureSettings(ApplicationSettings settings)
+        {
+            settings.IsSingleProcess = true;
+            base.ConfigureSettings(settings);
+        }
+
+        protected override BrowserDelegate CreateBrowserDelegate(IRenderTarget target) {
+            return new SampleBrowserDelegate();
+        }
+
         protected override IList<RuntimeExtension> RegisterScriptingExtensions() {
             var extensions = base.RegisterScriptingExtensions();
-            extensions.Add(new PerformSyncOperationExtension());
+            extensions.Add(new GetSystemInformationExtension());
             return extensions;
         }
 

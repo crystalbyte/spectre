@@ -24,68 +24,68 @@ using Crystalbyte.Chocolate.Projections.Internal;
 
 namespace Crystalbyte.Chocolate.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
-    public sealed class ScriptableObject : NativeObject, IEnumerable<KeyValuePair<string, ScriptableObject>> {
-        private ScriptableObject(IntPtr handle)
+    public sealed class JavaScriptObject : NativeObject, IEnumerable<KeyValuePair<string, JavaScriptObject>> {
+        private JavaScriptObject(IntPtr handle)
             : base(typeof (CefV8value), true) {
             NativeHandle = handle;
         }
 
-        public ScriptableObject()
+        public JavaScriptObject()
             : base(typeof (CefV8value), true) {
             NativeHandle = CefV8Capi.CefV8valueCreateNull();
         }
 
-        public ScriptableObject(bool value)
+        public JavaScriptObject(bool value)
             : base(typeof (CefV8value), true) {
             var i = Convert.ToInt32(value);
             NativeHandle = CefV8Capi.CefV8valueCreateBool(i);
         }
 
-        public ScriptableObject(int value)
+        public JavaScriptObject(int value)
             : base(typeof (CefV8value), true) {
             NativeHandle = CefV8Capi.CefV8valueCreateInt(value);
         }
 
-        public ScriptableObject(double value)
+        public JavaScriptObject(double value)
             : base(typeof (CefV8value), true) {
             NativeHandle = CefV8Capi.CefV8valueCreateDouble(value);
         }
 
-        public ScriptableObject(string value)
+        public JavaScriptObject(string value)
             : base(typeof (CefV8value), true) {
             var s = new StringUtf16(value);
             NativeHandle = CefV8Capi.CefV8valueCreateString(s.NativeHandle);
             s.Free();
         }
 
-        public ScriptableObject(DateTime time)
+        public JavaScriptObject(DateTime time)
             : base(typeof (CefV8value), true) {
             var t = new Time(time);
             NativeHandle = CefV8Capi.CefV8valueCreateDate(t.NativeHandle);
         }
 
-        public ScriptableObject(string name, ScriptingHandler handler)
+        public JavaScriptObject(string name, JavaScriptHandler handler)
             : base(typeof (CefV8value), true) {
             var s = new StringUtf16(name);
             NativeHandle = CefV8Capi.CefV8valueCreateFunction(s.NativeHandle, handler.NativeHandle);
             s.Free();
         }
 
-        public static ScriptableObject Null {
+        public static JavaScriptObject Null {
             get {
                 var handle = CefV8Capi.CefV8valueCreateNull();
-                return new ScriptableObject(handle);
+                return new JavaScriptObject(handle);
             }
         }
 
-        public static ScriptableObject Undefined {
+        public static JavaScriptObject Undefined {
             get {
                 var handle = CefV8Capi.CefV8valueCreateUndefined();
-                return new ScriptableObject(handle);
+                return new JavaScriptObject(handle);
             }
         }
 
-        public ScriptableObject this[int index] {
+        public JavaScriptObject this[int index] {
             get {
                 var reflection = MarshalFromNative<CefV8value>();
                 var function = (GetValueByindexCallback)
@@ -224,7 +224,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             }
         }
 
-        public ScriptableObject this[string name] {
+        public JavaScriptObject this[string name] {
             get {
                 var reflection = MarshalFromNative<CefV8value>();
                 var function = (GetValueBykeyCallback)
@@ -256,7 +256,7 @@ namespace Crystalbyte.Chocolate.Scripting {
 
         #region IEnumerable<KeyValuePair<string,ScriptableObject>> Members
 
-        public IEnumerator<KeyValuePair<string, ScriptableObject>> GetEnumerator() {
+        public IEnumerator<KeyValuePair<string, JavaScriptObject>> GetEnumerator() {
             return new ScriptableObjectEnumerator(this);
         }
 
@@ -277,7 +277,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             return Convert.ToBoolean(contains);
         }
 
-        public void Add(string key, ScriptableObject value) {
+        public void Add(string key, JavaScriptObject value) {
             var reflection = MarshalFromNative<CefV8value>();
             var action = (SetValueBykeyCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.GetValueByindex,
@@ -298,7 +298,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             return Convert.ToBoolean(success);
         }
 
-        public bool TryGetValue(string key, out ScriptableObject value) {
+        public bool TryGetValue(string key, out JavaScriptObject value) {
             if (!ContainsKey(key)) {
                 value = null;
                 return false;
@@ -307,7 +307,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             return true;
         }
 
-        public void Add(KeyValuePair<string, ScriptableObject> item) {
+        public void Add(KeyValuePair<string, JavaScriptObject> item) {
             var reflection = MarshalFromNative<CefV8value>();
             var action = (SetValueBykeyCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.SetValueBykey, typeof (SetValueBykeyCallback));
@@ -316,16 +316,16 @@ namespace Crystalbyte.Chocolate.Scripting {
             s.Free();
         }
 
-        public bool Contains(KeyValuePair<string, ScriptableObject> item) {
+        public bool Contains(KeyValuePair<string, JavaScriptObject> item) {
             return ContainsKey(item.Key);
         }
 
-        public bool Remove(KeyValuePair<string, ScriptableObject> item) {
+        public bool Remove(KeyValuePair<string, JavaScriptObject> item) {
             return Remove(item.Key);
         }
 
-        internal static ScriptableObject FromHandle(IntPtr handle) {
-            return new ScriptableObject(handle);
+        internal static JavaScriptObject FromHandle(IntPtr handle) {
+            return new JavaScriptObject(handle);
         }
 
         public override string ToString() {
@@ -368,19 +368,19 @@ namespace Crystalbyte.Chocolate.Scripting {
             return function(NativeHandle);
         }
 
-        public static ScriptableObject CreateArray(int length = 4) {
+        public static JavaScriptObject CreateArray(int length = 4) {
             var handle = CefV8Capi.CefV8valueCreateArray(length);
             return FromHandle(handle);
         }
 
         #region Nested type: ScriptableObjectEnumerator
 
-        public sealed class ScriptableObjectEnumerator : IEnumerator<KeyValuePair<string, ScriptableObject>> {
+        public sealed class ScriptableObjectEnumerator : IEnumerator<KeyValuePair<string, JavaScriptObject>> {
             private readonly int _count;
-            private readonly ScriptableObject _so;
+            private readonly JavaScriptObject _so;
             private int _index;
 
-            public ScriptableObjectEnumerator(ScriptableObject so) {
+            public ScriptableObjectEnumerator(JavaScriptObject so) {
                 _count = so.Keys.Count;
                 _so = so;
                 _index = -1;
@@ -401,11 +401,11 @@ namespace Crystalbyte.Chocolate.Scripting {
                 _index = -1;
             }
 
-            public KeyValuePair<string, ScriptableObject> Current {
+            public KeyValuePair<string, JavaScriptObject> Current {
                 get {
                     var key = _so.Keys[_index];
                     var value = _so[key];
-                    return new KeyValuePair<string, ScriptableObject>(key, value);
+                    return new KeyValuePair<string, JavaScriptObject>(key, value);
                 }
             }
 

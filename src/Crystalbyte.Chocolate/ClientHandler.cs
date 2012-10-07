@@ -16,6 +16,7 @@ using System;
 using System.Runtime.InteropServices;
 using Crystalbyte.Chocolate.Projections;
 using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Chocolate.Scripting;
 using Crystalbyte.Chocolate.UI;
 
 #endregion
@@ -24,6 +25,8 @@ namespace Crystalbyte.Chocolate {
     internal sealed class ClientHandler : RefCountedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;
+        private readonly JavaScriptDialogHandler _javaScriptDialogHandler;
+        private readonly GetJsdialogHandlerCallback _getJavaScriptdialogHandler;
         private readonly GeolocationHandler _geolocationHandler;
         private readonly GetDisplayHandlerCallback _getDisplayHandlerCallback;
         private readonly GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
@@ -33,18 +36,19 @@ namespace Crystalbyte.Chocolate {
         private readonly LoadHandler _loadHandler;
         private readonly OnProcessMessageReceivedCallback _processMessageReceivedCallback;
 
-        public ClientHandler(BrowserDelegate @delegate)
+        public ClientHandler(BrowserDelegate browserDelegate)
             : base(typeof (CefClient)) {
-            _delegate = @delegate;
-            _displayHandler = new DisplayHandler(@delegate);
+            _delegate = browserDelegate;
+            _displayHandler = new DisplayHandler(browserDelegate);
             _getDisplayHandlerCallback = OnGetDisplayHandler;
-            _lifeSpanHandler = new LifeSpanHandler(@delegate);
+            _lifeSpanHandler = new LifeSpanHandler(browserDelegate);
             _getLifeSpanHandlerCallback = OnGetLifeSpanHandler;
-            _loadHandler = new LoadHandler(@delegate);
+            _loadHandler = new LoadHandler(browserDelegate);
             _getLoadHandlerCallback = OnGetLoadHandler;
-            _geolocationHandler = new GeolocationHandler(@delegate);
+            _geolocationHandler = new GeolocationHandler(browserDelegate);
             _getGeolocationHandlerCallback = OnGetGeolocationHandler;
-
+            _javaScriptDialogHandler = new JavaScriptDialogHandler(browserDelegate);
+            _getJavaScriptdialogHandler = OnGetJavaScriptHandler;
             _processMessageReceivedCallback = OnProcessMessageReceived;
 
             MarshalToNative(new CefClient {
@@ -54,6 +58,7 @@ namespace Crystalbyte.Chocolate {
                 GetLoadHandler = Marshal.GetFunctionPointerForDelegate(_getLoadHandlerCallback),
                 GetGeolocationHandler = Marshal.GetFunctionPointerForDelegate(_getGeolocationHandlerCallback),
                 OnProcessMessageReceived = Marshal.GetFunctionPointerForDelegate(_processMessageReceivedCallback),
+                GetJsdialogHandler = Marshal.GetFunctionPointerForDelegate(_getJavaScriptdialogHandler)
             });
         }
 
@@ -70,6 +75,14 @@ namespace Crystalbyte.Chocolate {
             };
             _delegate.OnIpcMessageReceived(e);
             return e.IsHandled ? 1 : 0;
+        }
+
+        private IntPtr OnGetJavaScriptHandler(IntPtr self) {
+            if (_javaScriptDialogHandler == null) {
+                return IntPtr.Zero;
+            }
+            Reference.Increment(_javaScriptDialogHandler.NativeHandle);
+            return _javaScriptDialogHandler.NativeHandle;
         }
 
         private IntPtr OnGetGeolocationHandler(IntPtr self) {

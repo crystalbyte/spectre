@@ -20,20 +20,20 @@ using Crystalbyte.Chocolate.UI;
 #endregion
 
 namespace Crystalbyte.Chocolate.Scripting {
-    public sealed class ScriptingContext : NativeObject {
-        private ScriptingContext(IntPtr handle)
+    public sealed class JavaScriptContext : NativeObject {
+        private JavaScriptContext(IntPtr handle)
             : base(typeof (CefV8context), true) {
             NativeHandle = handle;
         }
 
-        public static ScriptingContext Current {
+        public static JavaScriptContext Current {
             get {
                 var handle = CefV8Capi.CefV8contextGetCurrentContext();
                 return FromHandle(handle);
             }
         }
 
-        public static ScriptingContext Active {
+        public static JavaScriptContext Active {
             get {
                 var handle = CefV8Capi.CefV8contextGetEnteredContext();
                 return FromHandle(handle);
@@ -61,18 +61,18 @@ namespace Crystalbyte.Chocolate.Scripting {
             }
         }
 
-        public ScriptableObject Document {
+        public JavaScriptObject Document {
             get {
                 var reflection = MarshalFromNative<CefV8context>();
                 var function = (GetGlobalCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetGlobal, typeof (GetGlobalCallback));
                 var handle = function(NativeHandle);
-                return ScriptableObject.FromHandle(handle);
+                return JavaScriptObject.FromHandle(handle);
             }
         }
 
-        internal static ScriptingContext FromHandle(IntPtr handle) {
-            return new ScriptingContext(handle);
+        internal static JavaScriptContext FromHandle(IntPtr handle) {
+            return new JavaScriptContext(handle);
         }
 
         public bool TryEnter() {
@@ -105,7 +105,7 @@ namespace Crystalbyte.Chocolate.Scripting {
             return Convert.ToBoolean(value);
         }
 
-        public bool IsSame(ScriptingContext other) {
+        public bool IsSame(JavaScriptContext other) {
             var reflection = MarshalFromNative<CefV8context>();
             var function = (IsSameCallback)
                            Marshal.GetDelegateForFunctionPointer(reflection.IsSame, typeof (IsSameCallback));
@@ -113,8 +113,8 @@ namespace Crystalbyte.Chocolate.Scripting {
             return Convert.ToBoolean(value);
         }
 
-        public bool Evaluate(string code, out ScriptableObject result, out RuntimeExceptionObject exception) {
-            result = new ScriptableObject();
+        public bool Evaluate(string code, out JavaScriptObject result, out RuntimeExceptionObject exception) {
+            result = new JavaScriptObject();
             exception = new RuntimeExceptionObject();
             var str = new StringUtf16(code);
 
