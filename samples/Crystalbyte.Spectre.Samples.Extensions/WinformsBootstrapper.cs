@@ -12,6 +12,7 @@
 
 #region Namespace directives
 
+using Crystalbyte.Spectre.Samples.Commands;
 using Crystalbyte.Spectre.Samples.Extensions;
 using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;

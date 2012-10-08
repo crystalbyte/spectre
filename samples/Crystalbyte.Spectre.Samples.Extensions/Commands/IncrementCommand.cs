@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Crystalbyte.Spectre.Scripting;
 
-namespace Crystalbyte.Spectre.Samples.Extensions {
+namespace Crystalbyte.Spectre.Samples.Commands {
     public sealed class SingleResultExtension : RuntimeCommand {
         public override string PrototypeCode {
             get { return "(function(){" +

@@ -8,8 +8,10 @@
     <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script>
         (function (document) {
-            document.prototype.increment = function() {
-
+            document.increment = function() {
+                var value = document.spectre.value;
+                document.spectre.value = document.spectre.increment(value);
+                
             };
         })(document);
     </script>
