@@ -1,0 +1,19 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    background-color: #303030;
+    font-family: 'Segoe UI';
+    font-size: 1em;
+}
+
+#header {
+    border-bottom: 1px solid orange;
+}
+
+#footer {
+    border-top: 1px solid orange;
+}
