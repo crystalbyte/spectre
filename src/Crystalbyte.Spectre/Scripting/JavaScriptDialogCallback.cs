@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     public sealed class JavaScriptDialogCallback : NativeObject {
         private readonly ContinueCallback _continueCallback;
 

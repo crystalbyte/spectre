@@ -16,11 +16,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     [DebuggerDisplay("Count = {Count}")]
     internal sealed class StringUtf16Collection : DisposableObject, IValueCollection<string> {
         public StringUtf16Collection() {

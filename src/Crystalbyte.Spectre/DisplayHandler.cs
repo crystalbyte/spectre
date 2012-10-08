@@ -14,12 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre {
     public sealed class DisplayHandler : RetainedNativeObject {
         private readonly OnAddressChangeCallback _addressChangeCallback;
         private readonly OnConsoleMessageCallback _consoleMessageCallback;

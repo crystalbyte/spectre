@@ -14,12 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class Frame : NativeObject {
         private readonly StringUtf16 _aboutBlank;
 

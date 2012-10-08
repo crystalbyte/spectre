@@ -14,12 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class ProxyHandler : RetainedNativeObject {
         private readonly AppDelegate _delegate;
         private readonly GetProxyForUrlCallback _getProxyForUrlCallback;

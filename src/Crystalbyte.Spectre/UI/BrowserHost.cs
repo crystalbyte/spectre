@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     internal sealed class BrowserHost : NativeObject {
         private BrowserHost(IntPtr handle)
             : base(typeof (CefBrowserHost), true) {

@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Spectre.Scripting;
 
-namespace Crystalbyte.Chocolate.Samples.Extensions {
-    public sealed class AsyncResultExtension : RuntimeExtension {
+namespace Crystalbyte.Spectre.Samples.Extensions {
+    public sealed class AsyncResultExtension : RuntimeCommand {
         public override string PrototypeCode {
             get {
                 return "if (!chocolate) " +

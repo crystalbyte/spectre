@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     internal sealed class ObjectCollection : NativeObject {
         public ObjectCollection()
             : base(typeof (CefListValue), true) {

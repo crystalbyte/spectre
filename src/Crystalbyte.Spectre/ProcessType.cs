@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public enum ProcessType {
         Browser,
         Renderer

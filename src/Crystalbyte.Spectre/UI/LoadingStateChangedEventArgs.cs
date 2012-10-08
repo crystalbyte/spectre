@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class LoadingStateChangedEventArgs : EventArgs {
         public Browser Browser { get; internal set; }
         public bool IsLoading { get; internal set; }

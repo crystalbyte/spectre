@@ -10,8 +10,8 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public static class Schemes {
-        public const string Chocolate = "chocolate";
+        public const string Spectre = "spectre";
     }
 }

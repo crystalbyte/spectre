@@ -59,10 +59,10 @@
     <Compile Include="UI\MediaType.cs" />
     <Compile Include="UI\NodeTypes.cs" />
     <Compile Include="UI\PageChangeNotificationDialogOpening.cs" />
-    <Compile Include="Web\ChocolateSchemeHandler.cs" />
-    <Compile Include="Web\ChocolateSchemeDescriptor.cs" />
-    <Compile Include="Web\ChocolateSchemeHandlerFactory.cs" />
-    <Compile Include="Web\ChocolateSchemeHandlerFactoryDescriptor.cs" />
+    <Compile Include="Web\SpectreSchemeHandler.cs" />
+    <Compile Include="Web\SpectreSchemeDescriptor.cs" />
+    <Compile Include="Web\SpectreSchemeHandlerFactory.cs" />
+    <Compile Include="Web\SpectreSchemeHandlerFactoryDescriptor.cs" />
     <Compile Include="Web\CustomSchemesRegisteringEventArgs.cs" />
     <Compile Include="Web\MimeMapper.cs" />
     <Compile Include="Web\IDataProvider.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="Scripting\JavaScriptContext.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\RuntimeExtension.cs">
+    <Compile Include="Scripting\RuntimeCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\JavaScriptHandler.cs">

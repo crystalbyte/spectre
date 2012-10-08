@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class ProcessStartedEventArgs : EventArgs {
         internal ProcessStartedEventArgs() {}
 

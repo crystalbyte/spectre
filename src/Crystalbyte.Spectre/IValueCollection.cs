@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public interface IValueCollection<T> : IReadOnlyCollection<T> {
         void Add(T item);
         void Clear();

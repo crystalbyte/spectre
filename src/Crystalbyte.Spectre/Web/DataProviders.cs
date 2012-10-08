@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class DataProviders {
         private readonly List<Type> _types;
 

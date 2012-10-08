@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     [Serializable]
     public struct Point : IEquatable<Point> {
         public static Point Empty = new Point(0, 0);

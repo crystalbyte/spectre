@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public static class StreamExtensions {
         /// <summary>
         ///   This method will write the contents of the stream into unmanaged memory and return its handle.

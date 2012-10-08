@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class LinuxWindowInfo : NativeObject {
         private readonly bool _isOwned;
 

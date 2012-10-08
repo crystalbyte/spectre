@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class RequestProcessingEventArgs : EventArgs {
         public bool IsCanceled { get; set; }
         public Request Request { get; internal set; }

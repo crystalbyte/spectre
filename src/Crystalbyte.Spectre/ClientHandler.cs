@@ -14,14 +14,14 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
-using Crystalbyte.Chocolate.Scripting;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.Scripting;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     internal sealed class ClientHandler : RetainedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;

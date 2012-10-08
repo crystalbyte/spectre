@@ -1,4 +1,4 @@
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public enum MediaType {
         None,
         Image,

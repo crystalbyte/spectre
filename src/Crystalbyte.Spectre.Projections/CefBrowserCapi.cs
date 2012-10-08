@@ -1,10 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 using System.Security;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections.Internal;
 
-namespace Crystalbyte.Chocolate.Projections
+namespace Crystalbyte.Spectre.Projections
 {
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefBrowserCapi {

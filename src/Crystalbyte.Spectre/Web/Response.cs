@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class Response : NativeObject {
         public Response()
             : base(typeof (CefResponse)) {

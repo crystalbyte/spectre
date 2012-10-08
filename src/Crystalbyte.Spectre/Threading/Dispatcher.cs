@@ -13,13 +13,12 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Threading {
+namespace Crystalbyte.Spectre.Threading {
     public sealed class Dispatcher {
         private static readonly Dispatcher _dispatcher = new Dispatcher();
 

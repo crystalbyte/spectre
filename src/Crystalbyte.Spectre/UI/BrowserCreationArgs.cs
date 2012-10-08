@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     internal sealed class BrowserCreationArgs {
         public Uri StartUri { get; set; }
         public ClientHandler ClientHandler { get; set; }

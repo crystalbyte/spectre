@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class BrowserClosedEventArgs : EventArgs {
         internal BrowserClosedEventArgs(Browser browser) {
             Browser = browser;

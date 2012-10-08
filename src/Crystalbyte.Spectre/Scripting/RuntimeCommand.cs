@@ -10,23 +10,8 @@
 
 #endregion
 
-#region Namespace directives
-
-using Crystalbyte.Chocolate.UI;
-
-#endregion
-
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocolateSchemeHandlerFactory : SchemeHandlerFactory {
-        public ChocolateSchemeHandlerFactory() {
-            Providers = new DataProviders();
-            Providers.Register(typeof (FileDataProvider));
-        }
-
-        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
-            return new ChocolateSchemeHandler(Providers.Types);
-        }
-
-        public DataProviders Providers { get; private set; }
+namespace Crystalbyte.Spectre.Scripting {
+    public abstract class RuntimeCommand : JavaScriptHandler {
+        public abstract string PrototypeCode { get; }
     }
 }

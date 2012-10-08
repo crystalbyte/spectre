@@ -13,11 +13,11 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class CommandLine : NativeObject {
         public CommandLine()
             : base(typeof (CefCommandLine), true) {

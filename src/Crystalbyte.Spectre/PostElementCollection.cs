@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class PostElementCollection : NativeObject {
         public PostElementCollection()
             : base(typeof (CefPostData)) {

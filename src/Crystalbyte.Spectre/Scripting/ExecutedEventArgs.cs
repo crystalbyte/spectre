@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     public sealed class ExecutedEventArgs : EventArgs {
         public string FunctionName { get; internal set; }
         public IReadOnlyCollection<JavaScriptObject> Arguments { get; internal set; }

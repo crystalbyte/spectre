@@ -19,12 +19,12 @@ using System.Linq;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocolateSchemeHandler : ResourceHandler {
+namespace Crystalbyte.Spectre.Web {
+    public sealed class SpectreSchemeHandler : ResourceHandler {
         private readonly IEnumerable<Type> _providerTypes;
         private IDataProvider _provider;
 
-        public ChocolateSchemeHandler(IEnumerable<Type> moduleTypes) {
+        public SpectreSchemeHandler(IEnumerable<Type> moduleTypes) {
             _providerTypes = moduleTypes;
         }
 

@@ -13,14 +13,12 @@
 #region Namespace directives
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class FileDataProvider : IDataProvider {
         private bool _isCompleted;
         private Stream _fileStream;

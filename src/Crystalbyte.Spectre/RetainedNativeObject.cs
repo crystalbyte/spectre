@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     /// <summary>
     ///   This class serves as a managed access point to a native object.
     ///   This class does manage the objects lifecycle allocating unmanaged memory on construction.

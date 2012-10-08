@@ -14,12 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Threading {
+namespace Crystalbyte.Spectre.Threading {
     public sealed class Task : RetainedNativeObject {
         private readonly Action _action;
         private readonly ExecuteCallback _executeCallback;

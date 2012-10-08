@@ -15,11 +15,11 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class BinaryObject : NativeObject {
         public BinaryObject(Stream stream)
             : base(typeof (CefBinaryValue), true) {

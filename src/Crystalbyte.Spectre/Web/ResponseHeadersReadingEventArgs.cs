@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class ResponseHeadersReadingEventArgs : EventArgs {
         public Response Response { get; internal set; }
         public Uri RedirectUri { get; set; }

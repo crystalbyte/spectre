@@ -14,12 +14,13 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre {
     public sealed class LoadHandler : RetainedNativeObject {
         private readonly BrowserDelegate _delegate;
         private readonly OnLoadEndCallback _loadEndCallback;

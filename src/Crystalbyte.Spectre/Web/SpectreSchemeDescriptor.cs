@@ -10,8 +10,22 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
-    public abstract class RuntimeExtension : JavaScriptHandler {
-        public abstract string PrototypeCode { get; }
+#region Namespace directives
+
+#endregion
+
+namespace Crystalbyte.Spectre.Web {
+    public sealed class SpectreSchemeDescriptor : ISchemeDescriptor {
+        public string Scheme {
+            get { return Schemes.Spectre; }
+        }
+
+        public SchemeProperties SchemeProperties {
+            get {
+                return SchemeProperties.Local
+                       | SchemeProperties.DisplayIsolated
+                       | SchemeProperties.Standard;
+            }
+        }
     }
 }

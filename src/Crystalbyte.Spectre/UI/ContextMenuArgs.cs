@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class ContextMenuArgs : NativeObject {
         private ContextMenuArgs(IntPtr handle) 
             : base(typeof(CefContextMenuParams), true) {

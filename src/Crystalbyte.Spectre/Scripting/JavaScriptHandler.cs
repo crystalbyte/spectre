@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     public class JavaScriptHandler : RetainedNativeObject {
         private readonly V8ExecuteCallback _executeCallback;
 

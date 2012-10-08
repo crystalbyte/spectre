@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public abstract class DisposableObject : IDisposable {
         private bool _isDisposed;
 

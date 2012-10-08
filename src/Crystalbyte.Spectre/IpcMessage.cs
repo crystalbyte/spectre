@@ -15,11 +15,11 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class IpcMessage : NativeObject {
         public IpcMessage(string name)
             : base(typeof (CefProcessMessage), true) {

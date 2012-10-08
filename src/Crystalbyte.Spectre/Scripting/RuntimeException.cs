@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     [Serializable]
     public class RuntimeException : Exception {
         //

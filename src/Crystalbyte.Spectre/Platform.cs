@@ -19,7 +19,7 @@ using System.Security;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public static class Platform {
         static Platform() {
             // We will just assume the OS does not change at runtime, performing tests only once.

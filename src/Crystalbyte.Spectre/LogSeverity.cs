@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public enum LogSeverity {
         LogseverityVerbose = -1,
         LogseverityInfo,

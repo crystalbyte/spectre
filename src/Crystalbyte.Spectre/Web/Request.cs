@@ -15,11 +15,11 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class Request : NativeObject {
         public Request()
             : base(typeof (CefRequest)) {

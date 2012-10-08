@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class SizeChangedEventArgs : EventArgs {
         public SizeChangedEventArgs(Size size) {
             Size = size;

@@ -18,7 +18,7 @@ using System.Security;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     internal sealed class WindowsWindowResizer : IWindowResizer {
         public void Resize(IntPtr handle, Rectangle bounds) {
             var hdwp = NativeMethods.BeginDeferWindowPos(1);

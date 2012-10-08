@@ -13,13 +13,13 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Scripting;
-using Crystalbyte.Chocolate.UI;
-using Crystalbyte.Chocolate.Web;
+using Crystalbyte.Spectre.Scripting;
+using Crystalbyte.Spectre.UI;
+using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public class AppDelegate {
         public event EventHandler<BrowserEventArgs> BrowserDestroyed;
 

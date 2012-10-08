@@ -12,11 +12,11 @@
 
 #region Namespace directives
 
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     internal sealed class BrowserProcessHandler : RetainedNativeObject {
         private readonly AppDelegate _appDelegate;
 

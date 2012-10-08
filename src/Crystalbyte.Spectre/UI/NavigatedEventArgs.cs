@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class NavigatedEventArgs : EventArgs {
         internal NavigatedEventArgs(string address, Browser browser, Frame frame) {
             Address = address;

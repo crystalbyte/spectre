@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Crystalbyte.Chocolate.Samples {
+namespace Crystalbyte.Spectre.Samples {
     static class Program {
         /// <summary>
         /// The main entry point for the application.

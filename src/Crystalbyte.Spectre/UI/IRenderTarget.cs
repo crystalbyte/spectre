@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public interface IRenderTarget {
         Size Size { get; }
         IntPtr Handle { get; }

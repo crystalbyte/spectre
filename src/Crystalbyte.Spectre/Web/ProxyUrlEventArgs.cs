@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class ProxyUrlEventArgs : EventArgs {
         internal ProxyUrlEventArgs() {}
 

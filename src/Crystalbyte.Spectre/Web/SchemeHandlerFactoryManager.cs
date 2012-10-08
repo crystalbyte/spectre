@@ -13,11 +13,11 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class SchemeHandlerFactoryManager {
         internal SchemeHandlerFactoryManager() {}
 

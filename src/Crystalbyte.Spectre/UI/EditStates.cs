@@ -1,6 +1,6 @@
 using System;
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     [Flags]
     public enum EditStates {
         None = 0,

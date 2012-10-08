@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.UI;
 
-namespace Crystalbyte.Chocolate.Samples {
+namespace Crystalbyte.Spectre.Samples {
     public partial class Window : Form, IRenderTarget {
         public Window() {
             InitializeComponent();
@@ -41,7 +41,13 @@ namespace Crystalbyte.Chocolate.Samples {
         }
 
         public new Size Size {
-            get { return new Size(base.Size.Width, base.Size.Height); }
+            get
+            {
+                var titleHeight = SystemInformation.CaptionHeight
+                                  + SystemInformation.FrameBorderSize.Height * 2;
+                var verticalBorderWidth = SystemInformation.FrameBorderSize.Width * 2;
+                return new Size(Width - verticalBorderWidth, Height - titleHeight);
+            }
         }
 
         #endregion

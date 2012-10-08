@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     /// <summary>
     ///   This class is a managed access point for native cef objects.
     ///   This class does not manage the object's lifecycle, thus not allocating any memory.

@@ -1,6 +1,6 @@
 using System;
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class ContextMenuOpeningEventArgs : EventArgs {
         public Browser Browser { get; internal set; }
         public Frame Frame { get; internal set; }

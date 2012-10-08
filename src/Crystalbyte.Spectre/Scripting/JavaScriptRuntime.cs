@@ -13,13 +13,13 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     public static class JavaScriptRuntime {
-        public static bool RegisterExtension(string name, RuntimeExtension extension) {
+        public static bool RegisterExtension(string name, RuntimeCommand extension) {
             var n = new StringUtf16(name);
             var j = new StringUtf16(extension.PrototypeCode);
             var result = CefV8Capi.CefRegisterExtension(n.NativeHandle, j.NativeHandle, extension.NativeHandle);

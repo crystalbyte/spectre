@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public enum ErrorCode {
         ErrFailed = -2,
         ErrAborted = -3,

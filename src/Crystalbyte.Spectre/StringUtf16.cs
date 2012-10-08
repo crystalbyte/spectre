@@ -15,11 +15,11 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     [DebuggerDisplay("Text = {Text}")]
     internal sealed class StringUtf16 : NativeObject {
         public StringUtf16(string value)

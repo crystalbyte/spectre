@@ -17,12 +17,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
     public sealed class JavaScriptObject : NativeObject, IEnumerable<KeyValuePair<string, JavaScriptObject>> {
         private JavaScriptObject(IntPtr handle)

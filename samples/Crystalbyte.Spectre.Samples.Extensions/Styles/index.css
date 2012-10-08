@@ -2,18 +2,53 @@
     padding: 0;
     margin: 0;
     border: 0;
+    color: whitesmoke;
 }
 
 body {
-    background-color: #303030;
+    background-color: #202020;
     font-family: 'Segoe UI';
     font-size: 1em;
 }
 
+button {
+    padding: 3px;
+    background-color: #353535;
+    border: 1px solid orange;
+}
+
+button:hover {
+    background-color: #454545;
+}
+
+button:active {
+    background-color: orange;
+    border: 1px solid #454545;
+}
+
 #header {
+    background-color: #353535;
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    top: 0;
     border-bottom: 1px solid orange;
 }
 
 #footer {
+    background-color: #202020;
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     border-top: 1px solid orange;
 }
+
+#content {
+    padding-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
+    max-height: 100%;
+}
+

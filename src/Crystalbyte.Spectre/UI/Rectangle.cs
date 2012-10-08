@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Rectangle : IEquatable<Rectangle> {

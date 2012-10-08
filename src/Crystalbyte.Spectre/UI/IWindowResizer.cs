@@ -16,7 +16,7 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     internal interface IWindowResizer {
         void Resize(IntPtr handle, Rectangle bounds);
     }

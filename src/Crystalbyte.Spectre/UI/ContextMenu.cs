@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Crystalbyte.Chocolate.Projections;
+﻿using Crystalbyte.Spectre.Projections;
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class ContextMenu : NativeObject {
         public ContextMenu() 
             : base(typeof(CefMenuModel), true) {

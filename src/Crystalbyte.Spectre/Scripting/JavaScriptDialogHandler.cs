@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.UI;
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     public sealed class JavaScriptDialogHandler : RetainedNativeObject {
         private readonly OnJsdialogCallback _jsDialogCallback;
         private readonly OnResetDialogStateCallback _resetDialogStateCallback;

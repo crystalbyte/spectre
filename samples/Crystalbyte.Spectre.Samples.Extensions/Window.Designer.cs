@@ -1,4 +1,4 @@
-﻿namespace Crystalbyte.Chocolate.Samples {
+﻿namespace Crystalbyte.Spectre.Samples {
     partial class Window {
         /// <summary>
         /// Required designer variable.
@@ -25,12 +25,12 @@
         private void InitializeComponent() {
             this.SuspendLayout();
             // 
-            // Form1
+            // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(1264, 986);
+            this.Name = "Window";
             this.Text = "Chocolate - Extensions Sample";
             this.ResumeLayout(false);
 

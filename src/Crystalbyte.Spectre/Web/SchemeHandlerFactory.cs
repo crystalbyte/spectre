@@ -14,12 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public abstract class SchemeHandlerFactory : RetainedNativeObject {
         private readonly CreateCallback _createCallback;
 

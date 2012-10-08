@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.UI;
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre {
     public sealed class ContextMenuHandler : RetainedNativeObject {
         private readonly OnContextMenuCommandCallback _contextMenuCommandCallback;
         private readonly OnBeforeContextMenuCallback _beforeContextMenuCallback;

@@ -15,12 +15,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class Browser : NativeObject {
         private Browser(IntPtr handle)
             : base(typeof (CefBrowser), true) {

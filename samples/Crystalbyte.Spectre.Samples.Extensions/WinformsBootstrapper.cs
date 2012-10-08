@@ -12,15 +12,15 @@
 
 #region Namespace directives
 
+using Crystalbyte.Spectre.Samples.Extensions;
+using Crystalbyte.Spectre.Scripting;
+using Crystalbyte.Spectre.UI;
 using System;
-using Crystalbyte.Chocolate.Samples.Extensions;
-using Crystalbyte.Chocolate.Scripting;
-using Crystalbyte.Chocolate.UI;
 using System.Collections.Generic;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Samples {
+namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
 
         protected override void ConfigureSettings(ApplicationSettings settings)
@@ -29,7 +29,7 @@ namespace Crystalbyte.Chocolate.Samples {
             base.ConfigureSettings(settings);
         }
        
-        protected override IList<RuntimeExtension> RegisterScriptingExtensions() {
+        protected override IList<RuntimeCommand> RegisterScriptingExtensions() {
             var extensions = base.RegisterScriptingExtensions();
             extensions.Add(new SingleResultExtension());
             extensions.Add(new AsyncResultExtension());
@@ -38,7 +38,7 @@ namespace Crystalbyte.Chocolate.Samples {
 
         protected override IRenderTarget CreateRenderTarget() {
             return new Window {
-                StartupUri = new Uri("chocolate://localhost/Views/index.html")
+                StartupUri = new Uri("spectre://localhost/Views/index.html")
             };
         }
     }

@@ -16,7 +16,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public static class MimeMapper {
         private static readonly Dictionary<string, string> _types = new Dictionary<string, string>();
 

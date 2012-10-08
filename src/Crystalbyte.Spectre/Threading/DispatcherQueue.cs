@@ -10,7 +10,7 @@
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Threading {
+namespace Crystalbyte.Spectre.Threading {
     public enum DispatcherQueue {
         UI,
         DB,

@@ -13,11 +13,11 @@
 #region Namespace directives
 
 using System;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class ConsoleMessageReceivedEventArgs : EventArgs {
         internal ConsoleMessageReceivedEventArgs() {}
 

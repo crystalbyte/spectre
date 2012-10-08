@@ -1,7 +1,7 @@
 using System;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Spectre.Scripting;
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre.UI {
     public sealed class PageChangeNotificationDialogOpeningEventArgs : EventArgs {
         internal PageChangeNotificationDialogOpeningEventArgs() {
             

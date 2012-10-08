@@ -12,32 +12,21 @@
 
 #region Namespace directives
 
-using System;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
-    public sealed class ChocolateSchemeHandlerFactoryDescriptor : ISchemeHandlerFactoryDescriptor {
-        private readonly ChocolateSchemeHandlerFactory _factory;
-
-        public ChocolateSchemeHandlerFactoryDescriptor() {
-            _factory = new ChocolateSchemeHandlerFactory();
+namespace Crystalbyte.Spectre.Web {
+    public sealed class SpectreSchemeHandlerFactory : SchemeHandlerFactory {
+        public SpectreSchemeHandlerFactory() {
+            Providers = new DataProviders();
+            Providers.Register(typeof (FileDataProvider));
         }
 
-        public string SchemeName {
-            get { return Schemes.Chocolate; }
+        protected override ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e) {
+            return new SpectreSchemeHandler(Providers.Types);
         }
 
-        public string DomainName {
-            get { return "localhost"; }
-        }
-
-        public SchemeHandlerFactory Factory {
-            get { return _factory; }
-        }
-
-        public void Register(Type type) {
-            _factory.Providers.Register(type);
-        }
+        public DataProviders Providers { get; private set; }
     }
 }

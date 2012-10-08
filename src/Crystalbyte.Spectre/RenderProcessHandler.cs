@@ -13,15 +13,15 @@
 #region Namespace directives
 
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.Projections.Internal;
-using Crystalbyte.Chocolate.Scripting;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.Scripting;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.UI {
+namespace Crystalbyte.Spectre {
     public sealed class RenderProcessHandler : RetainedNativeObject {
         private readonly OnBrowserCreatedCallback _browserCreatedCallback;
         private readonly OnBrowserDestroyedCallback _browserDestroyedCallback;

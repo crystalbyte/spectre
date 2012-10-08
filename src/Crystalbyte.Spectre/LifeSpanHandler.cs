@@ -14,12 +14,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.UI;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class LifeSpanHandler : RetainedNativeObject {
         private readonly OnBeforeCloseCallback _beforeCloseCallback;
         private readonly OnBeforePopupCallback _beforePopupCallback;

@@ -16,13 +16,13 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.UI;
-using Crystalbyte.Chocolate.Web;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.UI;
+using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public sealed class Application {
         private App _app;
         private readonly Dictionary<IRenderTarget, Viewport> _views;
@@ -38,7 +38,7 @@ namespace Crystalbyte.Chocolate {
                     "Only a single framework instance may be created for each AppDomain.");
             }
 
-            RegisterUriScheme(Schemes.Chocolate);
+            RegisterUriScheme(Schemes.Spectre);
 
             _views = new Dictionary<IRenderTarget, Viewport>();
             _schemeHandlerfactoryManager = new SchemeHandlerFactoryManager();

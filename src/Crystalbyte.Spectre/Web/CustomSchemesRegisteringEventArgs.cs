@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public sealed class CustomSchemesRegisteringEventArgs : EventArgs {
         public CustomSchemesRegisteringEventArgs() {
             SchemeDescriptors = new List<ISchemeDescriptor>();

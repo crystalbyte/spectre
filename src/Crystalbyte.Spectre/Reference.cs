@@ -14,11 +14,11 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     internal static class Reference {
         public static void Decrement(IntPtr handle) {
             var obj = (CefBase) Marshal.PtrToStructure(handle, typeof (CefBase));

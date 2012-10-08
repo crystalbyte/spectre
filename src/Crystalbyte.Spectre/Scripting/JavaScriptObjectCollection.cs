@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Scripting {
+namespace Crystalbyte.Spectre.Scripting {
     internal sealed class JavaScriptObjectCollection : List<JavaScriptObject>, IReadOnlyCollection<JavaScriptObject> {
         private static readonly int _pointerSize = Marshal.SizeOf(typeof (IntPtr));
 

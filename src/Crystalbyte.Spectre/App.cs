@@ -14,13 +14,13 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Crystalbyte.Chocolate.Projections;
-using Crystalbyte.Chocolate.UI;
-using Crystalbyte.Chocolate.Web;
+using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.UI;
+using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     internal sealed class App : RetainedNativeObject {
         private readonly AppDelegate _delegate;
 

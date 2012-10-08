@@ -14,13 +14,13 @@
 
 using System;
 using System.Collections.Generic;
-using Crystalbyte.Chocolate.Scripting;
-using Crystalbyte.Chocolate.UI;
-using Crystalbyte.Chocolate.Web;
+using Crystalbyte.Spectre.Scripting;
+using Crystalbyte.Spectre.UI;
+using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Chocolate {
+namespace Crystalbyte.Spectre {
     public abstract class Bootstrapper {
         protected abstract IRenderTarget CreateRenderTarget();
 
@@ -69,18 +69,18 @@ namespace Crystalbyte.Chocolate {
 
         protected virtual IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
             return new List<ISchemeHandlerFactoryDescriptor> {
-                new ChocolateSchemeHandlerFactoryDescriptor()
+                new SpectreSchemeHandlerFactoryDescriptor()
             };
         }
 
         protected virtual IList<ISchemeDescriptor> RegisterSchemeHandlers() {
             return new List<ISchemeDescriptor> {
-                new ChocolateSchemeDescriptor()
+                new SpectreSchemeDescriptor()
             };
         }
 
-        protected virtual IList<RuntimeExtension> RegisterScriptingExtensions() {
-            return new List<RuntimeExtension>();
+        protected virtual IList<RuntimeCommand> RegisterScriptingExtensions() {
+            return new List<RuntimeCommand>();
         }
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
@@ -90,7 +90,7 @@ namespace Crystalbyte.Chocolate {
             }
         }
 
-        private static void RegisterScriptingExtension(RuntimeExtension extension) {
+        private static void RegisterScriptingExtension(RuntimeCommand extension) {
             var name = Guid.NewGuid().ToString();
             JavaScriptRuntime.RegisterExtension(name, extension);
         }

@@ -16,11 +16,11 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using Crystalbyte.Chocolate.Projections;
+using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Chocolate.Web {
+namespace Crystalbyte.Spectre.Web {
     public abstract class ResourceHandler : RetainedNativeObject {
         private readonly CanSetCookieCallback _canSetCookieCallback;
         private readonly CanGetCookieCallback _canGetCookieCallback;
