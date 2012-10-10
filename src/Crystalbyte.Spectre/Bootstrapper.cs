@@ -92,7 +92,7 @@ namespace Crystalbyte.Spectre {
 
         private static void RegisterRuntimeCommand(ScriptingCommand extension) {
             var name = Guid.NewGuid().ToString();
-            JavaScriptRuntime.RegisterCommand(name, extension);
+            ScriptingRuntime.RegisterCommand(name, extension);
         }
     }
 }

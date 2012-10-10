@@ -7,49 +7,55 @@
     <link href="../Styles/index.css" rel="stylesheet" />
     <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script>
-        if (!spectre) {
+        // sanity check
+        if (!commands) {
             throw 'Commands not registered.';
         }
+        
+        // define sample object
         function Sample(window) {
             this.window = window;
             this.value = 0;
             this.increment = function () {
-                this.value = window.spectre.increment(this.value);
-                $('#syncCounter').text(this.value);
+                this.value = window.commands.increment(this.value);
+                $('#counter').text(this.value);
             };
             this.incrementAsync = function () {
-                var callback = function(value) {
-                    $('#asyncCounter').text(value);
-                    return value;
+                var callback = function (value) {
+                    window.sample.value = value;
+                    $('#counter').text(value);
                 };
-                window.spectre.incrementAsync(callback);
+                window.commands.incrementAsync(callback, this.value);
             };
         }
+        
+        // extend the window object
         var sample = new Sample(this);
     </script>
 </head>
 <body>
     <div id="header">
     </div>
-    <div id="content">
-        <span>
-            Extend the JavaScript Runtime using managed code.<br/>
-            Click the button multiple times.
-        </span>
-        <span id="syncCounter">
-            
-        </span>
-        <button onclick="sample.increment();">Increment</button>
-    </div>
-    <div>
-        <span>
-            Make async callbacks from your managed code.
-            Click the button once.
-        </span>
-        <span id="asyncCounter">
-            
-        </span>
-        <button onclick="sample.incrementAsync();">Increment</button>
+    <div id="content" style="width: 100%;">
+        <div style="display: inline-block; width: 50%;">
+            <div style="height: 40%;">
+                <span>
+                    Extend the JavaScript Runtime using managed code.<br />
+                    Click the button multiple times.
+                </span>
+                <button onclick="sample.increment();">+1</button>
+            </div>
+            <div style="height: 40%;">
+                <span>
+                    Make async callbacks from your managed code.
+                    Click the button once.
+                </span>
+                <button onclick="sample.incrementAsync();">+100</button>
+            </div>
+        </div>
+        <div style="display: inline-block; width: 50%;">
+            <span id="counter" style="font-size: 10em;"></span>
+        </div>
     </div>
     <div id="footer">
     </div>

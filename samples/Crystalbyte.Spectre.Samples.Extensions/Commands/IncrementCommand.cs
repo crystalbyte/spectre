@@ -3,12 +3,12 @@ using Crystalbyte.Spectre.Scripting;
 
 namespace Crystalbyte.Spectre.Samples.Commands {
     public sealed class IncrementCommand : ScriptingCommand {
-        public override string PrototypeCode {
+        public override string RegistrationCode {
             get {
-                return "if(!spectre) {" +
-                       "    var spectre = { };" +
+                return "if(!commands) {" +
+                       "    var commands = { };" +
                        "}" +
-                       "spectre.increment = function(value) {" +
+                       "commands.increment = function(value) {" +
                        "    native function __increment();" +
                        "    return __increment(value);" +
                        "}";

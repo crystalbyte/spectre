@@ -20,20 +20,20 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class JavaScriptContext : NativeObject {
-        private JavaScriptContext(IntPtr handle)
-            : base(typeof (CefV8context), true) {
+    public sealed class ScriptingContext : NativeObject {
+        private ScriptingContext(IntPtr handle)
+            : base(typeof(CefV8context), true) {
             NativeHandle = handle;
         }
 
-        public static JavaScriptContext Current {
+        public static ScriptingContext Current {
             get {
                 var handle = CefV8Capi.CefV8contextGetCurrentContext();
                 return FromHandle(handle);
             }
         }
 
-        public static JavaScriptContext Active {
+        public static ScriptingContext Active {
             get {
                 var handle = CefV8Capi.CefV8contextGetEnteredContext();
                 return FromHandle(handle);
@@ -44,7 +44,7 @@ namespace Crystalbyte.Spectre.Scripting {
             get {
                 var reflection = MarshalFromNative<CefV8context>();
                 var function = (GetBrowserCallback)
-                               Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser, typeof (GetBrowserCallback));
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser, typeof(GetBrowserCallback));
                 var handle = function(NativeHandle);
                 return Browser.FromHandle(handle);
             }
@@ -55,7 +55,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var reflection = MarshalFromNative<CefV8context>();
                 var function = (GetContextFrameCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetFrame,
-                                                                     typeof (GetContextFrameCallback));
+                                                                     typeof(GetContextFrameCallback));
                 var handle = function(NativeHandle);
                 return Frame.FromHandle(handle);
             }
@@ -65,20 +65,23 @@ namespace Crystalbyte.Spectre.Scripting {
             get {
                 var reflection = MarshalFromNative<CefV8context>();
                 var function = (GetGlobalCallback)
-                               Marshal.GetDelegateForFunctionPointer(reflection.GetGlobal, typeof (GetGlobalCallback));
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetGlobal, typeof(GetGlobalCallback));
                 var handle = function(NativeHandle);
                 return JavaScriptObject.FromHandle(handle);
             }
         }
 
-        internal static JavaScriptContext FromHandle(IntPtr handle) {
-            return new JavaScriptContext(handle);
+        internal static ScriptingContext FromHandle(IntPtr handle) {
+            return new ScriptingContext(handle);
         }
 
         public bool TryEnter() {
+            if (NativeHandle == IntPtr.Zero) {
+                return false;
+            }
             var reflection = MarshalFromNative<CefV8context>();
             var function = (EnterCallback)
-                           Marshal.GetDelegateForFunctionPointer(reflection.Enter, typeof (EnterCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.Enter, typeof(EnterCallback));
             var value = function(NativeHandle);
             return Convert.ToBoolean(value);
         }
@@ -98,17 +101,20 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         public bool TryExit() {
+            if (NativeHandle == IntPtr.Zero) {
+                return false;
+            }
             var reflection = MarshalFromNative<CefV8context>();
             var function = (ExitCallback)
-                           Marshal.GetDelegateForFunctionPointer(reflection.Exit, typeof (ExitCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.Exit, typeof(ExitCallback));
             var value = function(NativeHandle);
             return Convert.ToBoolean(value);
         }
 
-        public bool IsSame(JavaScriptContext other) {
+        public bool IsSame(ScriptingContext other) {
             var reflection = MarshalFromNative<CefV8context>();
             var function = (IsSameCallback)
-                           Marshal.GetDelegateForFunctionPointer(reflection.IsSame, typeof (IsSameCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.IsSame, typeof(IsSameCallback));
             var value = function(NativeHandle, other.NativeHandle);
             return Convert.ToBoolean(value);
         }
@@ -120,7 +126,7 @@ namespace Crystalbyte.Spectre.Scripting {
 
             var reflection = MarshalFromNative<CefV8context>();
             var function = (EvalCallback)
-                           Marshal.GetDelegateForFunctionPointer(reflection.Eval, typeof (EvalCallback));
+                           Marshal.GetDelegateForFunctionPointer(reflection.Eval, typeof(EvalCallback));
             var success = function(NativeHandle, str.NativeHandle, result.NativeHandle, exception.NativeHandle);
             return Convert.ToBoolean(success);
         }

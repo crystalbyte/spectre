@@ -120,7 +120,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\RuntimeExceptionObject.cs" />
-    <Compile Include="Scripting\JavaScriptContext.cs">
+    <Compile Include="Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\ScriptingCommand.cs">
@@ -129,7 +129,7 @@
     <Compile Include="Scripting\JavaScriptHandler.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\JavaScriptRuntime.cs">
+    <Compile Include="Scripting\ScriptingRuntime.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StreamExtensions.cs" />

@@ -1,43 +1,55 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
 using Crystalbyte.Spectre.Scripting;
+using Crystalbyte.Spectre.Threading;
+using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Crystalbyte.Spectre.Threading;
 
 namespace Crystalbyte.Spectre.Samples.Commands {
-    public sealed class AsyncIncrementCommand : ScriptingCommand {
-        public override string PrototypeCode {
+    public sealed class AsyncIncrementCommand : ScriptingCommand
+    {
+        private IFunction _callback;
+        private ScriptingContext _context;
+
+        public override string RegistrationCode {
             get {
-                return "if(!spectre) {" +
-                       "    var spectre = { };" +
+                return "if(!commands) {" +
+                       "    var commands = { };" +
                        "}" +
-                       "spectre.incrementAsync = function(value) {" +
+                       "commands.incrementAsync = function(callback, value) {" +
                        "    native function __incrementAsync();" +
-                       "    return __incrementAsync(value);" +
+                       "    return __incrementAsync(callback, value);" +
                        "}";
 
             }
         }
 
-        protected override void OnExecuted(ExecutedEventArgs e) {
-            var argument = e.Arguments.FirstOrDefault();
-            if (argument == null) {
-                throw new IndexOutOfRangeException("Function must be passed as first argument.");
-            }
-            if (!argument.IsFunction) {
-                throw new InvalidOperationException("First argument must be a function.");
-            }
+        protected override void OnExecuted(ExecutedEventArgs e)
+        {
+            var callbackValue = e.Arguments.ElementAtOrDefault(0);
+            var startValue = e.Arguments.ElementAtOrDefault(1);
 
-            var callback = argument.ToFunction();
+            // Keep strong references
+            _callback = callbackValue.ToFunction();
+            var value = startValue.ToInteger();
+            _context = ScriptingContext.Current;
 
+            // Start new thread
             Task.Factory.StartNew(() =>
-                Enumerable.Range(0, 20).ForEach(x => {
-                    callback.Execute(JavaScriptObject.Null, new JavaScriptObject(x));
-                    Thread.Sleep(1000);
+                Enumerable.Range(value, 200)
+                .ForEach(x => {
+                    Dispatcher.Current.InvokeAsync(
+                        () => ExecuteCallback(x));
+                    Thread.Sleep(15);
                 }));
+        }
+
+        private void ExecuteCallback(int value)
+        {
+            _context.Enter();
+            _callback.Execute(JavaScriptObject.Null, new JavaScriptObject(value));
+            _context.Exit();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Crystalbyte.Spectre.Threading {
             CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
         }
 
-        public void InvokeAsync(Action action, DispatcherQueue queue = DispatcherQueue.UI) {
+        public void InvokeAsync(Action action, DispatcherQueue queue = DispatcherQueue.Renderer) {
             var task = new Task(action);
             CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
         }

@@ -69,7 +69,7 @@ namespace Crystalbyte.Spectre {
             var e = new ContextEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
-                Context = JavaScriptContext.FromHandle(context)
+                Context = ScriptingContext.FromHandle(context)
             };
             _delegate.OnScriptingContextReleased(e);
         }
@@ -93,7 +93,7 @@ namespace Crystalbyte.Spectre {
             var e = new ContextEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
-                Context = JavaScriptContext.FromHandle(context)
+                Context = ScriptingContext.FromHandle(context)
             };
             _delegate.OnScriptingContextCreated(e);
         }

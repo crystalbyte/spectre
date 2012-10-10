@@ -45,7 +45,7 @@ namespace Crystalbyte.Spectre.Scripting {
             var e = new ExecutedEventArgs {
                 Arguments = new JavaScriptObjectCollection(arguments, argcount),
                 FunctionName = StringUtf16.ReadString(name),
-                Object = JavaScriptObject.FromHandle(obj)
+                Target = JavaScriptObject.FromHandle(obj)
             };
             var message = StringUtf16.ReadString(exception);
             if (string.IsNullOrWhiteSpace(message)) {

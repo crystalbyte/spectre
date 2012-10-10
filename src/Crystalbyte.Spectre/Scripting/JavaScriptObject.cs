@@ -438,6 +438,11 @@ namespace Crystalbyte.Spectre.Scripting {
             }
         }
 
+        JavaScriptObject IFunction.Execute(params JavaScriptObject[] arguments)
+        {
+            return (this as IFunction).Execute(Null, arguments);
+        }
+
         JavaScriptObject IFunction.Execute(JavaScriptObject target, params JavaScriptObject[] arguments)
         {
             if (target == null) throw new ArgumentNullException("target");
@@ -452,10 +457,18 @@ namespace Crystalbyte.Spectre.Scripting {
             return result;
         }
 
-        JavaScriptObject IFunction.Execute(JavaScriptContext context, params JavaScriptObject[] arguments)
+        JavaScriptObject IFunction.Execute(ScriptingContext context, JavaScriptObject target, params JavaScriptObject[] arguments)
         {
             if (context == null) throw new ArgumentNullException("context");
-            throw new NotImplementedException();
+
+            var r = MarshalFromNative<CefV8value>();
+            var function = (ExecuteFunctionWithContextCallback)
+                           Marshal.GetDelegateForFunctionPointer(r.ExecuteFunctionWithContext, typeof(ExecuteFunctionWithContextCallback));
+            var handle = arguments.ToUnmanagedArray();
+            var resultHandle = function(NativeHandle, context.NativeHandle, target.NativeHandle, arguments.Length, handle);
+
+            var result = FromHandle(resultHandle);
+            return result;
         }
     }
 }

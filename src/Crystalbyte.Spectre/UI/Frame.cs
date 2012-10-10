@@ -109,14 +109,14 @@ namespace Crystalbyte.Spectre.UI {
             }
         }
 
-        public JavaScriptContext Context {
+        public ScriptingContext Context {
             get {
                 var reflection = MarshalFromNative<CefFrame>();
                 var function = (GetV8contextCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetV8context,
                                                                      typeof (GetV8contextCallback));
                 var handle = function(NativeHandle);
-                return JavaScriptContext.FromHandle(handle);
+                return ScriptingContext.FromHandle(handle);
             }
         }
 
