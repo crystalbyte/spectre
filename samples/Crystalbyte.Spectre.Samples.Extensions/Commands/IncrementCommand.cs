@@ -2,17 +2,18 @@
 using Crystalbyte.Spectre.Scripting;
 
 namespace Crystalbyte.Spectre.Samples.Commands {
-    public sealed class SingleResultExtension : RuntimeCommand {
+    public sealed class IncrementCommand : ScriptingCommand {
         public override string PrototypeCode {
-            get { return "(function(){" +
-                         "  if(!document.spectre) {" +
-                         "      document.spectre = { };" +
-                         "  }" +
-                         "  document.spectre.increment = function(value) {" +
-                         "      native function __increment();" +
-                         "      return __increment(value);" +
-                         "  }" +
-                         "})(document)"; }
+            get {
+                return "if(!spectre) {" +
+                       "    var spectre = { };" +
+                       "}" +
+                       "spectre.increment = function(value) {" +
+                       "    native function __increment();" +
+                       "    return __increment(value);" +
+                       "}";
+
+            }
         }
 
         protected override void OnExecuted(ExecutedEventArgs e) {

@@ -79,20 +79,20 @@ namespace Crystalbyte.Spectre {
             };
         }
 
-        protected virtual IList<RuntimeCommand> RegisterScriptingExtensions() {
-            return new List<RuntimeCommand>();
+        protected virtual IList<ScriptingCommand> RegisterRuntimeCommands() {
+            return new List<ScriptingCommand>();
         }
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
-            var extensions = RegisterScriptingExtensions();
+            var extensions = RegisterRuntimeCommands();
             if (extensions != null) {
-                extensions.ForEach(RegisterScriptingExtension);
+                extensions.ForEach(RegisterRuntimeCommand);
             }
         }
 
-        private static void RegisterScriptingExtension(RuntimeCommand extension) {
+        private static void RegisterRuntimeCommand(ScriptingCommand extension) {
             var name = Guid.NewGuid().ToString();
-            JavaScriptRuntime.RegisterExtension(name, extension);
+            JavaScriptRuntime.RegisterCommand(name, extension);
         }
     }
 }

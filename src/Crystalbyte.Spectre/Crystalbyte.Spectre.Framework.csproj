@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="Scripting\DialogResult.cs" />
     <Compile Include="Scripting\DialogType.cs" />
+    <Compile Include="Scripting\IFunction.cs" />
     <Compile Include="Scripting\JavaScriptDialogCallback.cs" />
     <Compile Include="Scripting\JavaScriptDialogHandler.cs" />
+    <Compile Include="Scripting\JavaScriptEnumerationExtensions.cs" />
     <Compile Include="UI\BrowserProcessHandler.cs" />
     <Compile Include="UI\ContextMenu.cs" />
     <Compile Include="UI\ContextMenuClosedEventArgs.cs" />
@@ -121,7 +123,7 @@
     <Compile Include="Scripting\JavaScriptContext.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\RuntimeCommand.cs">
+    <Compile Include="Scripting\ScriptingCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\JavaScriptHandler.cs">

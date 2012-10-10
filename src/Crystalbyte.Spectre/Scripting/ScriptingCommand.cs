@@ -11,7 +11,7 @@
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public abstract class RuntimeCommand : JavaScriptHandler {
+    public abstract class ScriptingCommand : JavaScriptHandler {
         public abstract string PrototypeCode { get; }
     }
 }

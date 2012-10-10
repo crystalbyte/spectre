@@ -22,6 +22,15 @@ namespace Crystalbyte.Spectre.Scripting {
     public class JavaScriptHandler : RetainedNativeObject {
         private readonly V8ExecuteCallback _executeCallback;
 
+        private JavaScriptHandler(IntPtr handle)
+            : base(typeof(CefV8handler)) {
+            NativeHandle = handle;
+        }
+
+        public static JavaScriptHandler FromHandle (IntPtr handle) {
+            return new JavaScriptHandler(handle);
+        }
+
         public JavaScriptHandler()
             : base(typeof (CefV8handler)) {
             _executeCallback = OnExecuted;

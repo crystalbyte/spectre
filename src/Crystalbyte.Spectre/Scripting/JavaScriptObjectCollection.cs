@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 
 namespace Crystalbyte.Spectre.Scripting {
     internal sealed class JavaScriptObjectCollection : List<JavaScriptObject>, IReadOnlyCollection<JavaScriptObject> {
-        private static readonly int _pointerSize = Marshal.SizeOf(typeof (IntPtr));
+        private static readonly int PointerSize = Marshal.SizeOf(typeof (IntPtr));
 
         public JavaScriptObjectCollection(IntPtr listHandle, int argumentCount) {
             // TODO: List is only populated on construction
@@ -31,7 +31,7 @@ namespace Crystalbyte.Spectre.Scripting {
             for (var i = 0; i < argumentCount; i++) {
                 var handle = Marshal.ReadIntPtr(current);
                 Add(JavaScriptObject.FromHandle(handle));
-                current = new IntPtr(current.ToInt64() + _pointerSize);
+                current = new IntPtr(current.ToInt64() + PointerSize);
             }
         }
     }

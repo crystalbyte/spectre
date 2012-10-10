@@ -13,7 +13,6 @@
 #region Namespace directives
 
 using Crystalbyte.Spectre.Samples.Commands;
-using Crystalbyte.Spectre.Samples.Extensions;
 using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;
 using System;
@@ -30,10 +29,10 @@ namespace Crystalbyte.Spectre.Samples {
             base.ConfigureSettings(settings);
         }
        
-        protected override IList<RuntimeCommand> RegisterScriptingExtensions() {
-            var extensions = base.RegisterScriptingExtensions();
-            extensions.Add(new SingleResultExtension());
-            extensions.Add(new AsyncResultExtension());
+        protected override IList<ScriptingCommand> RegisterRuntimeCommands() {
+            var extensions = base.RegisterRuntimeCommands();
+            extensions.Add(new IncrementCommand());
+            extensions.Add(new AsyncIncrementCommand());
             return extensions;
         }
 

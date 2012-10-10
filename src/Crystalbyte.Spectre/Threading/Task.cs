@@ -20,7 +20,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.Threading {
-    public sealed class Task : RetainedNativeObject {
+    internal sealed class Task : RetainedNativeObject {
         private readonly Action _action;
         private readonly ExecuteCallback _executeCallback;
 

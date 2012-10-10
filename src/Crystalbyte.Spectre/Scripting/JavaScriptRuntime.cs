@@ -19,10 +19,10 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre.Scripting {
     public static class JavaScriptRuntime {
-        public static bool RegisterExtension(string name, RuntimeCommand extension) {
+        public static bool RegisterCommand(string name, ScriptingCommand command) {
             var n = new StringUtf16(name);
-            var j = new StringUtf16(extension.PrototypeCode);
-            var result = CefV8Capi.CefRegisterExtension(n.NativeHandle, j.NativeHandle, extension.NativeHandle);
+            var j = new StringUtf16(command.PrototypeCode);
+            var result = CefV8Capi.CefRegisterExtension(n.NativeHandle, j.NativeHandle, command.NativeHandle);
             return Convert.ToBoolean(result);
         }
     }

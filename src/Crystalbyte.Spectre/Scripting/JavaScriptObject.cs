@@ -24,7 +24,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 
 namespace Crystalbyte.Spectre.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
-    public sealed class JavaScriptObject : NativeObject, IEnumerable<KeyValuePair<string, JavaScriptObject>> {
+    public sealed class JavaScriptObject : NativeObject, IEnumerable<KeyValuePair<string, JavaScriptObject>>, IFunction {
         private JavaScriptObject(IntPtr handle)
             : base(typeof (CefV8value), true) {
             NativeHandle = handle;
@@ -355,6 +355,10 @@ namespace Crystalbyte.Spectre.Scripting {
             return function(NativeHandle);
         }
 
+        public IFunction ToFunction() {
+            return this;
+        }
+
         public double ToDouble() {
             var reflection = MarshalFromNative<CefV8value>();
             var function = (GetDoubleValueCallback)
@@ -412,5 +416,46 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         #endregion
+
+        string IFunction.Name {
+            get { 
+                var r = MarshalFromNative<CefV8value>();
+                var function = (GetFunctionNameCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.GetFunctionName, typeof(GetFunctionNameCallback));
+                var handle = function(NativeHandle);
+                return StringUtf16.ReadStringAndFree(handle);
+            }
+        }
+
+        JavaScriptHandler IFunction.Handler {
+            get
+            {
+                var r = MarshalFromNative<CefV8value>();
+                var function = (GetFunctionHandlerCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.GetFunctionHandler, typeof(GetFunctionHandlerCallback));
+                var handle = function(NativeHandle);
+                return JavaScriptHandler.FromHandle(handle);
+            }
+        }
+
+        JavaScriptObject IFunction.Execute(JavaScriptObject target, params JavaScriptObject[] arguments)
+        {
+            if (target == null) throw new ArgumentNullException("target");
+
+            var r = MarshalFromNative<CefV8value>();
+            var function = (ExecuteFunctionCallback)
+                           Marshal.GetDelegateForFunctionPointer(r.ExecuteFunction, typeof (ExecuteFunctionCallback));
+            var handle = arguments.ToUnmanagedArray();
+            var resultHandle = function(NativeHandle, target.NativeHandle, arguments.Length, handle);
+
+            var result = FromHandle(resultHandle);
+            return result;
+        }
+
+        JavaScriptObject IFunction.Execute(JavaScriptContext context, params JavaScriptObject[] arguments)
+        {
+            if (context == null) throw new ArgumentNullException("context");
+            throw new NotImplementedException();
+        }
     }
 }
