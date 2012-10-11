@@ -1,32 +1,21 @@
-﻿#region Copyright notice
-
-// Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#endregion
-
-#region Namespace directives
+﻿#region Using directives
 
 using System;
 using System.Runtime.InteropServices;
+using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Spectre.UI {
-    internal sealed class BrowserHost : NativeObject {
+namespace Crystalbyte.Spectre.UI{
+    internal sealed class BrowserHost : RefCountedNativeObject{
         private BrowserHost(IntPtr handle)
-            : base(typeof (CefBrowserHost), true) {
+            : base(typeof (CefBrowserHost)){
             NativeHandle = handle;
         }
 
-        public IntPtr OpenerWindowHandle {
-            get {
+        public IntPtr OpenerWindowHandle{
+            get{
                 var reflection = MarshalFromNative<CefBrowserHost>();
                 var function = (GetOpenerWindowHandleCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetOpenerWindowHandle,
@@ -35,8 +24,8 @@ namespace Crystalbyte.Spectre.UI {
             }
         }
 
-        public IntPtr WindowHandle {
-            get {
+        public IntPtr WindowHandle{
+            get{
                 var reflection = MarshalFromNative<CefBrowserHost>();
                 var function = (GetWindowHandleCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetWindowHandle,
@@ -45,8 +34,8 @@ namespace Crystalbyte.Spectre.UI {
             }
         }
 
-        public Browser Browser {
-            get {
+        public Browser Browser{
+            get{
                 var reflection = MarshalFromNative<CefBrowserHost>();
                 var function = (GetBrowserCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser, typeof (GetBrowserCallback));
@@ -55,7 +44,7 @@ namespace Crystalbyte.Spectre.UI {
             }
         }
 
-        public static Browser CreateBrowser(BrowserCreationArgs a) {
+        public static Browser CreateBrowser(BrowserCreationArgs a){
             var uri = new StringUtf16(a.StartUri.AbsoluteUri);
             Reference.Increment(a.ClientHandler.NativeHandle);
             var handle = CefBrowserCapi.CefBrowserHostCreateBrowserSync(
@@ -67,11 +56,11 @@ namespace Crystalbyte.Spectre.UI {
             return Browser.FromHandle(handle);
         }
 
-        public static BrowserHost FromHandle(IntPtr handle) {
+        public static BrowserHost FromHandle(IntPtr handle){
             return new BrowserHost(handle);
         }
 
-        public void ParentWindowWillClose() {
+        public void ParentWindowWillClose(){
             var reflection = MarshalFromNative<CefBrowserHost>();
             var action = (ParentWindowWillCloseCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.ParentWindowWillClose,
@@ -79,7 +68,7 @@ namespace Crystalbyte.Spectre.UI {
             action(NativeHandle);
         }
 
-        public void Focus() {
+        public void Focus(){
             var reflection = MarshalFromNative<CefBrowserHost>();
             var action = (SetFocusCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.SetFocus,
@@ -87,7 +76,7 @@ namespace Crystalbyte.Spectre.UI {
             action(NativeHandle, 1);
         }
 
-        public void CloseBrowser() {
+        public void CloseBrowser(){
             var reflection = MarshalFromNative<CefBrowserHost>();
             var action = (CloseBrowserCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.GetOpenerWindowHandle,

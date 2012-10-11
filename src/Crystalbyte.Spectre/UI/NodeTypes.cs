@@ -1,8 +1,12 @@
+#region Using directives
+
 using System;
 
-namespace Crystalbyte.Spectre.UI {
+#endregion
+
+namespace Crystalbyte.Spectre.UI{
     [Flags]
-    public enum NodeTypes {
+    public enum NodeTypes{
         None = 0,
         Page = 1 << 0,
         Frame = 1 << 1,

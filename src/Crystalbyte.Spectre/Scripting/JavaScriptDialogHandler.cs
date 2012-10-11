@@ -1,68 +1,80 @@
-﻿using System;
+﻿#region Using directives
+
+using System;
 using System.Runtime.InteropServices;
+using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
 using Crystalbyte.Spectre.UI;
 
-namespace Crystalbyte.Spectre.Scripting {
-    public sealed class JavaScriptDialogHandler : RetainedNativeObject {
-        private readonly OnJsdialogCallback _jsDialogCallback;
-        private readonly OnResetDialogStateCallback _resetDialogStateCallback;
+#endregion
+
+namespace Crystalbyte.Spectre.Scripting{
+    public sealed class JavaScriptDialogHandler : OwnedRefCountedNativeObject{
         private readonly OnBeforeUnloadDialogCallback _beforeUnloadDialogCallback;
         private readonly BrowserDelegate _browserDelegate;
+        private readonly OnJsdialogCallback _jsDialogCallback;
+        private readonly OnResetDialogStateCallback _resetDialogStateCallback;
 
         public JavaScriptDialogHandler(BrowserDelegate browserDelegate)
-            : base(typeof(CefJsdialogHandler)) {
-
+            : base(typeof (CefJsdialogHandler)){
             _browserDelegate = browserDelegate;
             _jsDialogCallback = OnJsDialog;
             _resetDialogStateCallback = OnResetDialogState;
             _beforeUnloadDialogCallback = OnBeforeUnloadDialog;
 
-            MarshalToNative(new CefJsdialogHandler {
-                Base = DedicatedBase,
-                OnJsdialog = Marshal.GetFunctionPointerForDelegate(_jsDialogCallback),
-                OnResetDialogState = Marshal.GetFunctionPointerForDelegate(_resetDialogStateCallback),
-                OnBeforeUnloadDialog = Marshal.GetFunctionPointerForDelegate(_beforeUnloadDialogCallback)
-            });
+            MarshalToNative(new CefJsdialogHandler{
+                                                      Base = DedicatedBase,
+                                                      OnJsdialog =
+                                                          Marshal.GetFunctionPointerForDelegate(_jsDialogCallback),
+                                                      OnResetDialogState =
+                                                          Marshal.GetFunctionPointerForDelegate(
+                                                              _resetDialogStateCallback),
+                                                      OnBeforeUnloadDialog =
+                                                          Marshal.GetFunctionPointerForDelegate(
+                                                              _beforeUnloadDialogCallback)
+                                                  });
         }
 
-        private int OnBeforeUnloadDialog(IntPtr self, IntPtr browser, IntPtr messagetext, int isreload, IntPtr callback) {
-            var e = new PageChangeNotificationDialogOpeningEventArgs {
-                Browser = Browser.FromHandle(browser),
-                IsReload = Convert.ToBoolean(isreload),
-                Message = StringUtf16.ReadString(messagetext),
-                Callback = JavaScriptDialogCallback.FromHandle(callback)
-            };
+        private int OnBeforeUnloadDialog(IntPtr self, IntPtr browser, IntPtr messagetext, int isreload, IntPtr callback){
+            var e = new PageChangeNotificationDialogOpeningEventArgs{
+                                                                        Browser = Browser.FromHandle(browser),
+                                                                        IsReload = Convert.ToBoolean(isreload),
+                                                                        Message = StringUtf16.ReadString(messagetext),
+                                                                        Callback =
+                                                                            JavaScriptDialogCallback.FromHandle(callback)
+                                                                    };
 
             _browserDelegate.OnPageChangeNotificationDialogOpening(e);
 
             return e.IsHandled ? 0 : 1;
         }
 
-        private static void OnResetDialogState(IntPtr self, IntPtr browser) {
+        private static void OnResetDialogState(IntPtr self, IntPtr browser){
             // TODO: Do we really need that ?
         }
 
-        private int OnJsDialog(IntPtr self, IntPtr browser, IntPtr originurl, IntPtr acceptlang, CefJsdialogType dialogtype, IntPtr messagetext, IntPtr defaultprompttext, IntPtr callback, out int suppressmessage) {
-            var e = new JavaScriptDialogOpeningEventArgs {
-                AcceptedLanguage = StringUtf16.ReadString(acceptlang),
-                Browser = Browser.FromHandle(browser),
-                Origin = StringUtf16.ReadString(originurl),
-                DialogType = (DialogType) dialogtype,
-                Message = StringUtf16.ReadString(messagetext),
-                DefaultPrompt = StringUtf16.ReadString(defaultprompttext),
-                Result= new DialogResult()
-            };
+        private int OnJsDialog(IntPtr self, IntPtr browser, IntPtr originurl, IntPtr acceptlang,
+                               CefJsdialogType dialogtype, IntPtr messagetext, IntPtr defaultprompttext, IntPtr callback,
+                               out int suppressmessage){
+            var e = new JavaScriptDialogOpeningEventArgs{
+                                                            AcceptedLanguage = StringUtf16.ReadString(acceptlang),
+                                                            Browser = Browser.FromHandle(browser),
+                                                            Origin = StringUtf16.ReadString(originurl),
+                                                            DialogType = (DialogType) dialogtype,
+                                                            Message = StringUtf16.ReadString(messagetext),
+                                                            DefaultPrompt = StringUtf16.ReadString(defaultprompttext),
+                                                            Result = new DialogResult()
+                                                        };
 
             _browserDelegate.OnJavaScriptDialogOpening(e);
 
-            if (e.IsCanceled) {
+            if (e.IsCanceled){
                 suppressmessage = Convert.ToInt32(true);
                 return Convert.ToInt32(false);
             }
 
-            if (e.IsHandled) {
+            if (e.IsHandled){
                 var func = JavaScriptDialogCallback.FromHandle(callback);
                 func.Resume(e.Result.IsSuccessful, e.Result.Message);
                 suppressmessage = Convert.ToInt32(false);

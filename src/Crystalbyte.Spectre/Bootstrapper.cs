@@ -1,16 +1,4 @@
-﻿#region Copyright notice
-
-// Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#endregion
-
-#region Namespace directives
+﻿#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -20,19 +8,20 @@ using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Spectre {
-    public abstract class Bootstrapper {
+namespace Crystalbyte.Spectre{
+    public abstract class Bootstrapper{
+
         protected abstract IRenderTarget CreateRenderTarget();
 
-        protected virtual AppDelegate CreateAppDelegate() {
+        protected virtual AppDelegate CreateAppDelegate(){
             return new AppDelegate();
         }
 
-        protected virtual BrowserDelegate CreateBrowserDelegate(IRenderTarget target) {
+        protected virtual BrowserDelegate CreateBrowserDelegate(IRenderTarget target){
             return new BrowserDelegate();
         }
 
-        public virtual void Run() {
+        public virtual void Run(){
             var app = CreateAppDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
@@ -40,7 +29,7 @@ namespace Crystalbyte.Spectre {
             ConfigureSettings(Application.Current.Settings);
             Application.Current.Initialize(app);
 
-            if (!Application.Current.IsRootProcess) {
+            if (!Application.Current.IsRootProcess){
                 return;
             }
 
@@ -54,12 +43,12 @@ namespace Crystalbyte.Spectre {
             Application.Current.Shutdown();
         }
 
-        private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {
+        private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e){
             var descriptors = RegisterSchemeHandlers();
             e.SchemeDescriptors.AddRange(descriptors);
         }
 
-        protected virtual void ConfigureSettings(ApplicationSettings settings) {
+        protected virtual void ConfigureSettings(ApplicationSettings settings){
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;
 #else
@@ -67,30 +56,30 @@ namespace Crystalbyte.Spectre {
 #endif
         }
 
-        protected virtual IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
-            return new List<ISchemeHandlerFactoryDescriptor> {
-                new SpectreSchemeHandlerFactoryDescriptor()
-            };
+        protected virtual IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories(){
+            return new List<ISchemeHandlerFactoryDescriptor>{
+                                                                new SpectreSchemeHandlerFactoryDescriptor()
+                                                            };
         }
 
-        protected virtual IList<ISchemeDescriptor> RegisterSchemeHandlers() {
-            return new List<ISchemeDescriptor> {
-                new SpectreSchemeDescriptor()
-            };
+        protected virtual IList<ISchemeDescriptor> RegisterSchemeHandlers(){
+            return new List<ISchemeDescriptor>{
+                                                  new SpectreSchemeDescriptor()
+                                              };
         }
 
-        protected virtual IList<ScriptingCommand> RegisterRuntimeCommands() {
+        protected virtual IList<ScriptingCommand> RegisterRuntimeCommands(){
             return new List<ScriptingCommand>();
         }
 
-        private void OnFrameworkInitialized(object sender, EventArgs e) {
+        private void OnFrameworkInitialized(object sender, EventArgs e){
             var extensions = RegisterRuntimeCommands();
-            if (extensions != null) {
+            if (extensions != null){
                 extensions.ForEach(RegisterRuntimeCommand);
             }
         }
 
-        private static void RegisterRuntimeCommand(ScriptingCommand extension) {
+        private static void RegisterRuntimeCommand(ScriptingCommand extension){
             var name = Guid.NewGuid().ToString();
             ScriptingRuntime.RegisterCommand(name, extension);
         }

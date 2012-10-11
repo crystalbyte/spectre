@@ -1,8 +1,12 @@
+#region Using directives
+
 using System;
 
-namespace Crystalbyte.Spectre.UI {
+#endregion
+
+namespace Crystalbyte.Spectre.UI{
     [Flags]
-    public enum MediaStates {
+    public enum MediaStates{
         None = 0,
         Error = 1 << 0,
         Paused = 1 << 1,

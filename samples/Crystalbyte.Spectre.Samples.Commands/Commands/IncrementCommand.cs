@@ -12,7 +12,6 @@ namespace Crystalbyte.Spectre.Samples.Commands {
                        "    native function __increment();" +
                        "    return __increment(value);" +
                        "}";
-
             }
         }
 

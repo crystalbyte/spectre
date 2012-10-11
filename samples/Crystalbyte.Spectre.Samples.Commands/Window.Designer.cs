@@ -29,7 +29,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 986);
+            this.ClientSize = new System.Drawing.Size(884, 562);
             this.Name = "Window";
             this.Text = "Chocolate - Extensions Sample";
             this.ResumeLayout(false);

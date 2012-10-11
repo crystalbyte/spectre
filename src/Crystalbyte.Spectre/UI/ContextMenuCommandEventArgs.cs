@@ -1,7 +1,11 @@
+#region Using directives
+
 using System;
 
-namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenuCommandEventArgs : EventArgs {
+#endregion
+
+namespace Crystalbyte.Spectre.UI{
+    public sealed class ContextMenuCommandEventArgs : EventArgs{
         public Frame Frame { get; internal set; }
         public Browser Browser { get; internal set; }
     }

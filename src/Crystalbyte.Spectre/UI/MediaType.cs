@@ -1,5 +1,5 @@
-namespace Crystalbyte.Spectre.UI {
-    public enum MediaType {
+namespace Crystalbyte.Spectre.UI{
+    public enum MediaType{
         None,
         Image,
         Video,

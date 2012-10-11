@@ -1,39 +1,28 @@
-﻿#region Copyright notice
-
-// Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#endregion
-
-#region Namespace directives
+﻿#region Using directives
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.UI;
 using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Spectre {
-    public sealed class Application {
-        private App _app;
-        private readonly Dictionary<IRenderTarget, Viewport> _views;
+namespace Crystalbyte.Spectre{
+    public sealed class Application{
         private readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
+        private readonly Dictionary<IRenderTarget, Viewport> _views;
+        private App _app;
 
-        static Application() {
+        static Application(){
             Current = new Application();
         }
 
-        private Application() {
-            if (Current != null) {
+        private Application(){
+            if (Current != null){
                 throw new InvalidOperationException(
                     "Only a single framework instance may be created for each AppDomain.");
             }
@@ -47,12 +36,6 @@ namespace Crystalbyte.Spectre {
             QuitAfterLastViewClosed = true;
         }
 
-        public static void RegisterUriScheme(string scheme) {
-            if (!UriParser.IsKnownScheme(scheme)) {
-                UriParser.Register(new GenericUriParser(GenericUriParserOptions.GenericAuthority), scheme, -1);
-            }
-        }
-
         public static Application Current { get; private set; }
 
         public ApplicationSettings Settings { get; set; }
@@ -60,39 +43,45 @@ namespace Crystalbyte.Spectre {
         public bool IsRootProcess { get; private set; }
         public bool QuitAfterLastViewClosed { get; set; }
 
-        public void IterateMessageLoop() {
-            CefAppCapi.CefDoMessageLoopWork();
+        public SchemeHandlerFactoryManager SchemeFactories{
+            get { return _schemeHandlerfactoryManager; }
         }
 
-        public SchemeHandlerFactoryManager SchemeFactories {
-            get { return _schemeHandlerfactoryManager; }
+        public static void RegisterUriScheme(string scheme){
+            if (!UriParser.IsKnownScheme(scheme)){
+                UriParser.Register(new GenericUriParser(GenericUriParserOptions.GenericAuthority), scheme, -1);
+            }
+        }
+
+        public void IterateMessageLoop(){
+            CefAppCapi.CefDoMessageLoopWork();
         }
 
         public event EventHandler ShutdownStarted;
 
-        public void OnShutdownStarted(EventArgs e) {
+        public void OnShutdownStarted(EventArgs e){
             var handler = ShutdownStarted;
-            if (handler != null) {
+            if (handler != null){
                 handler(this, e);
             }
         }
 
         public event EventHandler ShutdownFinished;
 
-        public void OnShutdownFinished(EventArgs e) {
+        public void OnShutdownFinished(EventArgs e){
             var handler = ShutdownFinished;
-            if (handler != null) {
+            if (handler != null){
                 handler(this, e);
             }
         }
 
-        private bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
+        private bool Initialize(IntPtr mainArgs, AppDelegate del = null){
             _app = new App(del ?? new AppDelegate());
 
             Reference.Increment(_app.NativeHandle);
             var exitCode = CefAppCapi.CefExecuteProcess(mainArgs, _app.NativeHandle);
             IsRootProcess = exitCode < 0;
-            if (!IsRootProcess) {
+            if (!IsRootProcess){
                 return true;
             }
 
@@ -102,15 +91,15 @@ namespace Crystalbyte.Spectre {
             return IsInitialized;
         }
 
-        public bool Initialize(AppDelegate del = null) {
+        public bool Initialize(AppDelegate del = null){
             var handle = IntPtr.Zero;
 
-            if (Platform.IsLinux) {
+            if (Platform.IsLinux){
                 var commandLine = Environment.GetCommandLineArgs();
                 handle = AppArguments.CreateForLinux(commandLine);
             }
 
-            if (Platform.IsWindows) {
+            if (Platform.IsWindows){
                 var module = Assembly.GetEntryAssembly().ManifestModule;
                 var hInstance = Marshal.GetHINSTANCE(module);
                 handle = AppArguments.CreateForWindows(hInstance);
@@ -118,7 +107,7 @@ namespace Crystalbyte.Spectre {
             return Initialize(handle, del);
         }
 
-        public void Shutdown() {
+        public void Shutdown(){
             OnShutdownStarted(EventArgs.Empty);
 
             // Poke the GC to free uncollected native objects.
@@ -133,44 +122,44 @@ namespace Crystalbyte.Spectre {
             OnShutdownFinished(EventArgs.Empty);
         }
 
-        public void Add(Viewport renderer) {
+        public void Add(Viewport renderer){
             _views.Add(renderer.RenderTarget, renderer);
             renderer.RenderTarget.TargetClosing += OnRenderTargetClosing;
             renderer.RenderTarget.TargetClosed += OnRenderTargetClosed;
             renderer.CreateBrowser();
         }
 
-        private void OnRenderTargetClosing(object sender, EventArgs e) {
+        private void OnRenderTargetClosing(object sender, EventArgs e){
             var target = (IRenderTarget) sender;
             target.TargetClosing -= OnRenderTargetClosing;
             _views[target].Dispose();
             _views.Remove(target);
 
-            if (QuitAfterLastViewClosed && _views.Count < 1) {
+            if (QuitAfterLastViewClosed && _views.Count < 1){
                 CefAppCapi.CefQuitMessageLoop();
             }
         }
 
-        private static void OnRenderTargetClosed(object sender, EventArgs e) {
+        private static void OnRenderTargetClosed(object sender, EventArgs e){
             var target = (IRenderTarget) sender;
             target.TargetClosed -= OnRenderTargetClosed;
         }
 
         public event EventHandler Starting;
 
-        public void OnStarting(EventArgs e) {
+        public void OnStarting(EventArgs e){
             var handler = Starting;
-            if (handler != null) {
+            if (handler != null){
                 handler(this, e);
             }
         }
 
-        public void Run(Viewport renderer) {
+        public void Run(Viewport renderer){
             Add(renderer);
             Run();
         }
 
-        public void Run() {
+        public void Run(){
             OnStarting(EventArgs.Empty);
             CefAppCapi.CefRunMessageLoop();
         }

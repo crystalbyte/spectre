@@ -1,12 +1,16 @@
+#region Using directives
+
 using System;
 
-namespace Crystalbyte.Spectre.UI {
+#endregion
+
+namespace Crystalbyte.Spectre.UI{
     [Flags]
-    public enum EditStates {
+    public enum EditStates{
         None = 0,
         CanUndo = 1 << 0,
         CanRedo = 1 << 1,
-        CanCut  = 1 << 2,
+        CanCut = 1 << 2,
         CanCopy = 1 << 3,
         CanPaste = 1 << 4,
         CanDelete = 1 << 5,

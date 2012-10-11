@@ -1,145 +1,148 @@
-﻿using System;
+﻿#region Using directives
+
+using System;
 using System.Runtime.InteropServices;
+using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 
-namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenuArgs : NativeObject {
-        private ContextMenuArgs(IntPtr handle) 
-            : base(typeof(CefContextMenuParams), true) {
+#endregion
+
+namespace Crystalbyte.Spectre.UI{
+    public sealed class ContextMenuArgs : RefCountedNativeObject{
+        private ContextMenuArgs(IntPtr handle)
+            : base(typeof (CefContextMenuParams)){
             NativeHandle = handle;
         }
 
-        public static ContextMenuArgs FromHandle(IntPtr handle) {
-            return new ContextMenuArgs(handle);
-        }
-
-        public int X {
-            get { 
+        public int X{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetXcoordCallback) 
-                    Marshal.GetDelegateForFunctionPointer(r.GetXcoord, typeof(GetXcoordCallback));
+                var function = (GetXcoordCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetXcoord, typeof (GetXcoordCallback));
                 return function(NativeHandle);
             }
         }
 
-        public int Y {
-            get {
+        public int Y{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetYcoordCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetXcoord, typeof(GetYcoordCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetXcoord, typeof (GetYcoordCallback));
                 return function(NativeHandle);
             }
         }
 
-        public NodeTypes SenderType {
-            get {
+        public NodeTypes SenderType{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetTypeFlagsCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetTypeFlags, typeof(GetTypeFlagsCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetTypeFlags, typeof (GetTypeFlagsCallback));
                 return (NodeTypes) function(NativeHandle);
             }
         }
 
-        public string LinkUrl {
-            get {
+        public string LinkUrl{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetLinkUrlCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetLinkUrl, typeof(GetLinkUrlCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetLinkUrl, typeof (GetLinkUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public string UnfilteredLinkUrl {
-            get {
+        public string UnfilteredLinkUrl{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetUnfilteredLinkUrlCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetUnfilteredLinkUrl, typeof(GetUnfilteredLinkUrlCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetUnfilteredLinkUrl,
+                                                                     typeof (GetUnfilteredLinkUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public string SourceUrl {
-            get {
+        public string SourceUrl{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetSourceUrlCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetSourceUrl, typeof(GetSourceUrlCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetSourceUrl, typeof (GetSourceUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public bool IsBlockedImage {
-            get {
+        public bool IsBlockedImage{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (IsImageBlockedCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.IsImageBlocked, typeof(IsImageBlockedCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.IsImageBlocked, typeof (IsImageBlockedCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
         }
 
-        public string PageUrl {
-            get {
+        public string PageUrl{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetPageUrlCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetPageUrl, typeof(GetPageUrlCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetPageUrl, typeof (GetPageUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public string FrameUrl {
-            get {
+        public string FrameUrl{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetFrameUrlCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetFrameUrl, typeof(GetFrameUrlCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetFrameUrl, typeof (GetFrameUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public string FrameCharset {
-            get {
+        public string FrameCharset{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetFrameCharsetCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetFrameCharset, typeof(GetFrameCharsetCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetFrameCharset, typeof (GetFrameCharsetCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public MediaType MediaType {
-            get {
+        public MediaType MediaType{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetMediaTypeCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetMediaType, typeof(GetMediaTypeCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetMediaType, typeof (GetMediaTypeCallback));
                 return (MediaType) function(NativeHandle);
             }
         }
 
-        public MediaStates SupportedMediaStates {
-            get {
+        public MediaStates SupportedMediaStates{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetMediaStateFlagsCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetMediaType, typeof(GetMediaStateFlagsCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetMediaType, typeof (GetMediaStateFlagsCallback));
                 return (MediaStates) function(NativeHandle);
             }
         }
 
-        public string SelectedText {
-            get {
+        public string SelectedText{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetSelectionTextCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetSelectionText, typeof(GetSelectionTextCallback));
+                               Marshal.GetDelegateForFunctionPointer(r.GetSelectionText,
+                                                                     typeof (GetSelectionTextCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
 
-        public bool IsEditable {
-            get {
+        public bool IsEditable{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (IsEditableCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsEditable, typeof (IsEditableCallback));
@@ -148,8 +151,8 @@ namespace Crystalbyte.Spectre.UI {
             }
         }
 
-        public bool IsSpeechInputEnabled {
-            get {
+        public bool IsSpeechInputEnabled{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (IsSpeechInputEnabledCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsSpeechInputEnabled,
@@ -159,14 +162,18 @@ namespace Crystalbyte.Spectre.UI {
             }
         }
 
-        public EditStates SupportedEditStates {
-            get {
+        public EditStates SupportedEditStates{
+            get{
                 var r = MarshalFromNative<CefContextMenuParams>();
                 var function = (GetEditStateFlagsCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetEditStateFlags,
-                                                                     typeof(GetEditStateFlagsCallback));
+                                                                     typeof (GetEditStateFlagsCallback));
                 return (EditStates) function(NativeHandle);
             }
+        }
+
+        public static ContextMenuArgs FromHandle(IntPtr handle){
+            return new ContextMenuArgs(handle);
         }
     }
 }

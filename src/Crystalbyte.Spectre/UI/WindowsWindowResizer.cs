@@ -1,16 +1,4 @@
-﻿#region Copyright notice
-
-// Copyright (C) 2012 Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-#endregion
-
-#region Namespace directives
+﻿#region Using directives
 
 using System;
 using System.Runtime.InteropServices;
@@ -18,24 +6,28 @@ using System.Security;
 
 #endregion
 
-namespace Crystalbyte.Spectre.UI {
-    internal sealed class WindowsWindowResizer : IWindowResizer {
-        public void Resize(IntPtr handle, Rectangle bounds) {
+namespace Crystalbyte.Spectre.UI{
+    internal sealed class WindowsWindowResizer : IWindowResizer{
+        #region IWindowResizer Members
+
+        public void Resize(IntPtr handle, Rectangle bounds){
             var hdwp = NativeMethods.BeginDeferWindowPos(1);
             hdwp = NativeMethods.DeferWindowPos(hdwp, handle, IntPtr.Zero, bounds.X, bounds.Y, bounds.Width,
                                                 bounds.Height,
                                                 WindowResizeFlags.NoZorder);
             var success = NativeMethods.EndDeferWindowPos(hdwp);
-            if (success) {
+            if (success){
                 return;
             }
             throw new InvalidOperationException("error resizing window.");
         }
 
+        #endregion
+
         #region Nested type: NativeMethods
 
         [SuppressUnmanagedCodeSecurity]
-        private static class NativeMethods {
+        private static class NativeMethods{
             [DllImport("user32.dll")]
             public static extern IntPtr BeginDeferWindowPos(int windowCount);
 
@@ -53,7 +45,7 @@ namespace Crystalbyte.Spectre.UI {
         #region Nested type: WindowResizeFlags
 
         [Flags]
-        private enum WindowResizeFlags : uint {
+        private enum WindowResizeFlags : uint{
             DrawFrame = 0x0020,
             FrameChanged = 0x0020,
             HideWindow = 0x0080,

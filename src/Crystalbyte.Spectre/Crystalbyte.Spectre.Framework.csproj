@@ -40,6 +40,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interop\RefCountedNativeObject.cs" />
     <Compile Include="Scripting\DialogResult.cs" />
     <Compile Include="Scripting\DialogType.cs" />
     <Compile Include="Scripting\IFunction.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="Web\DataProviders.cs" />
     <Compile Include="Web\ResponseDelayController.cs" />
     <Compile Include="Web\Schemes.cs" />
-    <Compile Include="NativeObject.cs" />
+    <Compile Include="Interop\NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
     <Compile Include="Scripting\RuntimeException.cs" />
     <Compile Include="Web\Response.cs" />
@@ -98,15 +99,15 @@
     <Compile Include="GeolocationRequestCanceledEventArgs.cs" />
     <Compile Include="IpcMessage.cs" />
     <Compile Include="ObjectCollection.cs" />
-    <Compile Include="RetainedNativeObject.cs" />
-    <Compile Include="DisposableObject.cs" />
+    <Compile Include="Interop\OwnedRefCountedNativeObject.cs" />
+    <Compile Include="Interop\DisposableObject.cs" />
     <Compile Include="IReadOnlyCollection.cs" />
     <Compile Include="IValueCollection.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="ProcessType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reference.cs" />
+    <Compile Include="Interop\Reference.cs" />
     <Compile Include="Scripting\ContextEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>

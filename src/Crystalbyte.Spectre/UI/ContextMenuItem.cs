@@ -1,5 +1,3 @@
-﻿namespace Crystalbyte.Spectre.UI {
-    public abstract class ContextMenuItem {
-
-    }
+﻿namespace Crystalbyte.Spectre.UI{
+    public abstract class ContextMenuItem{}
 }

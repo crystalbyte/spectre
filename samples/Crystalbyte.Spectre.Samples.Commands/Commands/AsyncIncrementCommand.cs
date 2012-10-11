@@ -30,6 +30,18 @@ namespace Crystalbyte.Spectre.Samples.Commands {
             var callbackValue = e.Arguments.ElementAtOrDefault(0);
             var startValue = e.Arguments.ElementAtOrDefault(1);
 
+            if (callbackValue == null){
+                e.Exception = new ArgumentNullException("callback");
+                e.IsHandled = true;
+                return;
+            }
+
+            if (startValue == null) {
+                e.Exception = new ArgumentNullException("startValue");
+                e.IsHandled = true;
+                return;
+            }
+
             // Keep strong references
             _callback = callbackValue.ToFunction();
             var value = startValue.ToInteger();
@@ -37,12 +49,14 @@ namespace Crystalbyte.Spectre.Samples.Commands {
 
             // Start new thread
             Task.Factory.StartNew(() =>
-                Enumerable.Range(value, 200)
+                Enumerable.Range(value + 1, 1000)
                 .ForEach(x => {
                     Dispatcher.Current.InvokeAsync(
                         () => ExecuteCallback(x));
                     Thread.Sleep(15);
                 }));
+
+            e.IsHandled = true;
         }
 
         private void ExecuteCallback(int value)

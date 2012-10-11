@@ -27,6 +27,10 @@
                 };
                 window.commands.incrementAsync(callback, this.value);
             };
+            this.reset = function() {
+                this.value = 0;
+                $('#counter').text(value);
+            };
         }
         
         // extend the window object
@@ -35,26 +39,31 @@
 </head>
 <body>
     <div id="header">
+        <span>Samples - Commands</span>
     </div>
-    <div id="content" style="width: 100%;">
-        <div style="display: inline-block; width: 50%;">
-            <div style="height: 40%;">
+    <div id="content" >
+        <div style="float:left;">
+            <div>
                 <span>
-                    Extend the JavaScript Runtime using managed code.<br />
-                    Click the button multiple times.
+                    Make a synchronous call to increment the counter
                 </span>
                 <button onclick="sample.increment();">+1</button>
             </div>
-            <div style="height: 40%;">
+            <div>
                 <span>
-                    Make async callbacks from your managed code.
-                    Click the button once.
+                    Increment the counter by 100 using a managed background thread.
                 </span>
                 <button onclick="sample.incrementAsync();">+100</button>
             </div>
+            <div>
+                <span>
+                    Reset the counter locally.
+                </span>
+                <button onclick="sample.reset();">Reset</button>
+            </div>
         </div>
-        <div style="display: inline-block; width: 50%;">
-            <span id="counter" style="font-size: 10em;"></span>
+        <div style="float:right;">
+            <span id="counter" style="font-size: 10em;">0</span>
         </div>
     </div>
     <div id="footer">

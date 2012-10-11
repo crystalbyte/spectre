@@ -1,11 +1,13 @@
+#region Using directives
+
 using System;
 using Crystalbyte.Spectre.Scripting;
 
-namespace Crystalbyte.Spectre.UI {
-    public sealed class JavaScriptDialogOpeningEventArgs : EventArgs {
-        internal JavaScriptDialogOpeningEventArgs() {
-            
-        }
+#endregion
+
+namespace Crystalbyte.Spectre.UI{
+    public sealed class JavaScriptDialogOpeningEventArgs : EventArgs{
+        internal JavaScriptDialogOpeningEventArgs(){}
 
         public string AcceptedLanguage { get; internal set; }
         public Browser Browser { get; internal set; }
