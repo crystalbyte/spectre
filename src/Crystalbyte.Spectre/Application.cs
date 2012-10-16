@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -11,18 +29,18 @@ using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Spectre{
-    public sealed class Application{
+namespace Crystalbyte.Spectre {
+    public sealed class Application {
         private readonly SchemeHandlerFactoryManager _schemeHandlerfactoryManager;
         private readonly Dictionary<IRenderTarget, Viewport> _views;
         private App _app;
 
-        static Application(){
+        static Application() {
             Current = new Application();
         }
 
-        private Application(){
-            if (Current != null){
+        private Application() {
+            if (Current != null) {
                 throw new InvalidOperationException(
                     "Only a single framework instance may be created for each AppDomain.");
             }
@@ -43,45 +61,45 @@ namespace Crystalbyte.Spectre{
         public bool IsRootProcess { get; private set; }
         public bool QuitAfterLastViewClosed { get; set; }
 
-        public SchemeHandlerFactoryManager SchemeFactories{
+        public SchemeHandlerFactoryManager SchemeFactories {
             get { return _schemeHandlerfactoryManager; }
         }
 
-        public static void RegisterUriScheme(string scheme){
-            if (!UriParser.IsKnownScheme(scheme)){
+        public static void RegisterUriScheme(string scheme) {
+            if (!UriParser.IsKnownScheme(scheme)) {
                 UriParser.Register(new GenericUriParser(GenericUriParserOptions.GenericAuthority), scheme, -1);
             }
         }
 
-        public void IterateMessageLoop(){
+        public void IterateMessageLoop() {
             CefAppCapi.CefDoMessageLoopWork();
         }
 
         public event EventHandler ShutdownStarted;
 
-        public void OnShutdownStarted(EventArgs e){
+        public void OnShutdownStarted(EventArgs e) {
             var handler = ShutdownStarted;
-            if (handler != null){
+            if (handler != null) {
                 handler(this, e);
             }
         }
 
         public event EventHandler ShutdownFinished;
 
-        public void OnShutdownFinished(EventArgs e){
+        public void OnShutdownFinished(EventArgs e) {
             var handler = ShutdownFinished;
-            if (handler != null){
+            if (handler != null) {
                 handler(this, e);
             }
         }
 
-        private bool Initialize(IntPtr mainArgs, AppDelegate del = null){
+        private bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
             _app = new App(del ?? new AppDelegate());
 
             Reference.Increment(_app.NativeHandle);
             var exitCode = CefAppCapi.CefExecuteProcess(mainArgs, _app.NativeHandle);
             IsRootProcess = exitCode < 0;
-            if (!IsRootProcess){
+            if (!IsRootProcess) {
                 return true;
             }
 
@@ -91,15 +109,15 @@ namespace Crystalbyte.Spectre{
             return IsInitialized;
         }
 
-        public bool Initialize(AppDelegate del = null){
+        public bool Initialize(AppDelegate del = null) {
             var handle = IntPtr.Zero;
 
-            if (Platform.IsLinux){
+            if (Platform.IsLinux) {
                 var commandLine = Environment.GetCommandLineArgs();
                 handle = AppArguments.CreateForLinux(commandLine);
             }
 
-            if (Platform.IsWindows){
+            if (Platform.IsWindows) {
                 var module = Assembly.GetEntryAssembly().ManifestModule;
                 var hInstance = Marshal.GetHINSTANCE(module);
                 handle = AppArguments.CreateForWindows(hInstance);
@@ -107,7 +125,7 @@ namespace Crystalbyte.Spectre{
             return Initialize(handle, del);
         }
 
-        public void Shutdown(){
+        public void Shutdown() {
             OnShutdownStarted(EventArgs.Empty);
 
             // Poke the GC to free uncollected native objects.
@@ -122,44 +140,44 @@ namespace Crystalbyte.Spectre{
             OnShutdownFinished(EventArgs.Empty);
         }
 
-        public void Add(Viewport renderer){
+        public void Add(Viewport renderer) {
             _views.Add(renderer.RenderTarget, renderer);
             renderer.RenderTarget.TargetClosing += OnRenderTargetClosing;
             renderer.RenderTarget.TargetClosed += OnRenderTargetClosed;
             renderer.CreateBrowser();
         }
 
-        private void OnRenderTargetClosing(object sender, EventArgs e){
+        private void OnRenderTargetClosing(object sender, EventArgs e) {
             var target = (IRenderTarget) sender;
             target.TargetClosing -= OnRenderTargetClosing;
             _views[target].Dispose();
             _views.Remove(target);
 
-            if (QuitAfterLastViewClosed && _views.Count < 1){
+            if (QuitAfterLastViewClosed && _views.Count < 1) {
                 CefAppCapi.CefQuitMessageLoop();
             }
         }
 
-        private static void OnRenderTargetClosed(object sender, EventArgs e){
+        private static void OnRenderTargetClosed(object sender, EventArgs e) {
             var target = (IRenderTarget) sender;
             target.TargetClosed -= OnRenderTargetClosed;
         }
 
         public event EventHandler Starting;
 
-        public void OnStarting(EventArgs e){
+        public void OnStarting(EventArgs e) {
             var handler = Starting;
-            if (handler != null){
+            if (handler != null) {
                 handler(this, e);
             }
         }
 
-        public void Run(Viewport renderer){
+        public void Run(Viewport renderer) {
             Add(renderer);
             Run();
         }
 
-        public void Run(){
+        public void Run() {
             OnStarting(EventArgs.Empty);
             CefAppCapi.CefRunMessageLoop();
         }

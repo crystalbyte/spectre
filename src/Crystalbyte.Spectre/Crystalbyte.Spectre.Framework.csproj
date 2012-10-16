@@ -40,14 +40,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Errors.cs" />
     <Compile Include="Interop\RefCountedNativeObject.cs" />
+    <Compile Include="Scripting\ContextRegistrar.cs" />
     <Compile Include="Scripting\DialogResult.cs" />
     <Compile Include="Scripting\DialogType.cs" />
     <Compile Include="Scripting\IFunction.cs" />
     <Compile Include="Scripting\JavaScriptDialogCallback.cs" />
     <Compile Include="Scripting\JavaScriptDialogHandler.cs" />
     <Compile Include="Scripting\JavaScriptEnumerationExtensions.cs" />
-    <Compile Include="UI\BrowserProcessHandler.cs" />
+    <Compile Include="BrowserProcessHandler.cs" />
+    <Compile Include="Scripting\RegistrationCode.cs" />
     <Compile Include="UI\ContextMenu.cs" />
     <Compile Include="UI\ContextMenuClosedEventArgs.cs" />
     <Compile Include="UI\ContextMenuCommandEventArgs.cs" />

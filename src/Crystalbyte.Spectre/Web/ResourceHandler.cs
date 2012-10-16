@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System;
 using System.IO;
@@ -9,8 +27,8 @@ using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Spectre.Web{
-    public abstract class ResourceHandler : OwnedRefCountedNativeObject{
+namespace Crystalbyte.Spectre.Web {
+    public abstract class ResourceHandler : OwnedRefCountedNativeObject {
         private readonly CanGetCookieCallback _canGetCookieCallback;
         private readonly CanSetCookieCallback _canSetCookieCallback;
         private readonly CancelCallback _cancelCallback;
@@ -19,7 +37,7 @@ namespace Crystalbyte.Spectre.Web{
         private readonly ReadResponseCallback _readResponseCallback;
 
         protected ResourceHandler()
-            : base(typeof (CefResourceHandler)){
+            : base(typeof (CefResourceHandler)) {
             _canSetCookieCallback = CanSetCookie;
             _canGetCookieCallback = CanGetCookie;
             _cancelCallback = Cancel;
@@ -27,34 +45,34 @@ namespace Crystalbyte.Spectre.Web{
             _processRequestCallback = ProcessRequest;
             _readResponseCallback = ReadResponse;
 
-            MarshalToNative(new CefResourceHandler{
-                                                      Base = DedicatedBase,
-                                                      CanGetCookie =
-                                                          Marshal.GetFunctionPointerForDelegate(_canGetCookieCallback),
-                                                      CanSetCookie =
-                                                          Marshal.GetFunctionPointerForDelegate(_canSetCookieCallback),
-                                                      Cancel = Marshal.GetFunctionPointerForDelegate(_cancelCallback),
-                                                      GetResponseHeaders =
-                                                          Marshal.GetFunctionPointerForDelegate(
-                                                              _getResponseHeadersCallback),
-                                                      ProcessRequest =
-                                                          Marshal.GetFunctionPointerForDelegate(_processRequestCallback),
-                                                      ReadResponse =
-                                                          Marshal.GetFunctionPointerForDelegate(_readResponseCallback)
-                                                  });
+            MarshalToNative(new CefResourceHandler {
+                Base = DedicatedBase,
+                CanGetCookie =
+                    Marshal.GetFunctionPointerForDelegate(_canGetCookieCallback),
+                CanSetCookie =
+                    Marshal.GetFunctionPointerForDelegate(_canSetCookieCallback),
+                Cancel = Marshal.GetFunctionPointerForDelegate(_cancelCallback),
+                GetResponseHeaders =
+                    Marshal.GetFunctionPointerForDelegate(
+                        _getResponseHeadersCallback),
+                ProcessRequest =
+                    Marshal.GetFunctionPointerForDelegate(_processRequestCallback),
+                ReadResponse =
+                    Marshal.GetFunctionPointerForDelegate(_readResponseCallback)
+            });
         }
 
-        private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback){
-            using (var writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8)){
-                var e = new DataBlockReadingEventArgs(writer){
-                                                                 MaxBlockSize = bytestoread,
-                                                                 DelayController =
-                                                                     ResponseDelayController.FromHandle(callback)
-                                                             };
+        private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback) {
+            using (var writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8)) {
+                var e = new DataBlockReadingEventArgs(writer) {
+                    MaxBlockSize = bytestoread,
+                    DelayController =
+                        ResponseDelayController.FromHandle(callback)
+                };
 
                 OnDataBlockReading(e);
 
-                if (e.DelayController.IsPaused){
+                if (e.DelayController.IsPaused) {
                     // Data retrieval can be resumed by calling Resume() on the controller.
                     bytesread = 0;
                     return 1;
@@ -63,12 +81,12 @@ namespace Crystalbyte.Spectre.Web{
                 e.ResponseWriter.Flush();
                 e.ResponseWriter.Seek(0, SeekOrigin.Begin);
 
-                if (e.ResponseWriter.BaseStream.Length == 0){
+                if (e.ResponseWriter.BaseStream.Length == 0) {
                     bytesread = 0;
                     return 0;
                 }
 
-                using (var reader = new BinaryReader(e.ResponseWriter.BaseStream)){
+                using (var reader = new BinaryReader(e.ResponseWriter.BaseStream)) {
                     var bytes = reader.ReadBytes(e.MaxBlockSize);
                     bytesread = bytes.Length;
                     Marshal.Copy(bytes, 0, dataout, bytesread);
@@ -78,16 +96,16 @@ namespace Crystalbyte.Spectre.Web{
             }
         }
 
-        private int ProcessRequest(IntPtr self, IntPtr request, IntPtr callback){
-            var e = new RequestProcessingEventArgs{
-                                                      Controller = AsyncActivityController.FromHandle(callback),
-                                                      Request = Request.FromHandle(request)
-                                                  };
+        private int ProcessRequest(IntPtr self, IntPtr request, IntPtr callback) {
+            var e = new RequestProcessingEventArgs {
+                Controller = AsyncActivityController.FromHandle(callback),
+                Request = Request.FromHandle(request)
+            };
             OnRequestProcessing(e);
-            if (e.IsCanceled){
+            if (e.IsCanceled) {
                 e.Controller.Cancel();
             }
-            else{
+            else {
                 e.Controller.Continue();
             }
 
@@ -97,21 +115,21 @@ namespace Crystalbyte.Spectre.Web{
 
         public event EventHandler<RequestProcessingEventArgs> ResourceRequested;
 
-        protected virtual void OnRequestProcessing(RequestProcessingEventArgs e){
+        protected virtual void OnRequestProcessing(RequestProcessingEventArgs e) {
             var handler = ResourceRequested;
-            if (handler != null){
+            if (handler != null) {
                 handler(this, e);
             }
         }
 
-        private void GetResponseHeaders(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl){
-            var e = new ResponseHeadersReadingEventArgs{
-                                                           Response = Response.FromHandle(response)
-                                                       };
+        private void GetResponseHeaders(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl) {
+            var e = new ResponseHeadersReadingEventArgs {
+                Response = Response.FromHandle(response)
+            };
 
             OnResponseHeadersReading(e);
 
-            if (e.RedirectUri != null){
+            if (e.RedirectUri != null) {
                 StringUtf16.WriteString(e.RedirectUri.AbsoluteUri, redirecturl);
             }
 
@@ -119,32 +137,32 @@ namespace Crystalbyte.Spectre.Web{
             responselength = -1;
         }
 
-        protected virtual void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e){}
+        protected virtual void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {}
 
-        private void Cancel(IntPtr self){}
+        private void Cancel(IntPtr self) {}
 
-        private int CanGetCookie(IntPtr self, IntPtr cookie){
+        private int CanGetCookie(IntPtr self, IntPtr cookie) {
             return 0;
         }
 
-        private int CanSetCookie(IntPtr self, IntPtr cookie){
+        private int CanSetCookie(IntPtr self, IntPtr cookie) {
             return 0;
         }
 
         public event EventHandler Canceled;
 
-        protected virtual void OnCanceled(EventArgs e){
+        protected virtual void OnCanceled(EventArgs e) {
             var handler = Canceled;
-            if (handler != null){
+            if (handler != null) {
                 handler(this, EventArgs.Empty);
             }
         }
 
         public event EventHandler<DataBlockReadingEventArgs> ResponseDataReading;
 
-        protected virtual void OnDataBlockReading(DataBlockReadingEventArgs e){
+        protected virtual void OnDataBlockReading(DataBlockReadingEventArgs e) {
             var handler = ResponseDataReading;
-            if (handler != null){
+            if (handler != null) {
                 handler(this, e);
             }
         }

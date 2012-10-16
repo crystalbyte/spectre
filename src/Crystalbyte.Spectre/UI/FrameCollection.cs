@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,16 +25,16 @@ using Crystalbyte.Spectre.Projections;
 
 #endregion
 
-namespace Crystalbyte.Spectre.UI{
-    public sealed class FrameCollection : IEnumerable<Frame>{
+namespace Crystalbyte.Spectre.UI {
+    public sealed class FrameCollection : IEnumerable<Frame> {
         private readonly Browser _browser;
 
-        public FrameCollection(Browser browser){
+        public FrameCollection(Browser browser) {
             _browser = browser;
         }
 
-        public Frame this[string name]{
-            get{
+        public Frame this[string name] {
+            get {
                 var r = _browser.MarshalFromNative<CefBrowser>();
                 var str = new StringUtf16(name);
                 var function = (GetFrameCallback)
@@ -27,8 +45,8 @@ namespace Crystalbyte.Spectre.UI{
             }
         }
 
-        public Frame this[int ident]{
-            get{
+        public Frame this[int ident] {
+            get {
                 var r = _browser.MarshalFromNative<CefBrowser>();
                 var function = (GetFrameByidentCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFrameByident,
@@ -38,8 +56,8 @@ namespace Crystalbyte.Spectre.UI{
             }
         }
 
-        public int Count{
-            get{
+        public int Count {
+            get {
                 var r = _browser.MarshalFromNative<CefBrowser>();
                 var function = (GetFrameCountCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFrameCount,
@@ -50,11 +68,11 @@ namespace Crystalbyte.Spectre.UI{
 
         #region IEnumerable<Frame> Members
 
-        public IEnumerator<Frame> GetEnumerator(){
+        public IEnumerator<Frame> GetEnumerator() {
             return new FrameCollectionEnumerator(this, _browser);
         }
 
-        IEnumerator IEnumerable.GetEnumerator(){
+        IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
 
@@ -62,13 +80,13 @@ namespace Crystalbyte.Spectre.UI{
 
         #region Nested type: FrameCollectionEnumerator
 
-        private sealed class FrameCollectionEnumerator : IEnumerator<Frame>{
+        private sealed class FrameCollectionEnumerator : IEnumerator<Frame> {
             private readonly FrameCollection _collection;
             private readonly int _count;
             private readonly IValueCollection<string> _frameNames;
             private int _index;
 
-            public FrameCollectionEnumerator(FrameCollection collection, Browser browser){
+            public FrameCollectionEnumerator(FrameCollection collection, Browser browser) {
                 _frameNames = (IValueCollection<string>) browser.FrameNames;
                 _count = collection.Count;
                 _collection = collection;
@@ -77,27 +95,27 @@ namespace Crystalbyte.Spectre.UI{
 
             #region IEnumerator<Frame> Members
 
-            public Frame Current{
-                get{
+            public Frame Current {
+                get {
                     var name = _frameNames[_index];
                     return _collection[name];
                 }
             }
 
-            public void Dispose(){
+            public void Dispose() {
                 // nada
             }
 
-            object IEnumerator.Current{
+            object IEnumerator.Current {
                 get { return Current; }
             }
 
-            public bool MoveNext(){
+            public bool MoveNext() {
                 _index++;
                 return _index < _count;
             }
 
-            public void Reset(){
+            public void Reset() {
                 _index = -1;
             }
 

@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System;
 using System.Runtime.InteropServices;
@@ -6,17 +24,17 @@ using System.Security;
 
 #endregion
 
-namespace Crystalbyte.Spectre.UI{
-    internal sealed class WindowsWindowResizer : IWindowResizer{
+namespace Crystalbyte.Spectre.UI {
+    internal sealed class WindowsWindowResizer : IWindowResizer {
         #region IWindowResizer Members
 
-        public void Resize(IntPtr handle, Rectangle bounds){
+        public void Resize(IntPtr handle, Rectangle bounds) {
             var hdwp = NativeMethods.BeginDeferWindowPos(1);
             hdwp = NativeMethods.DeferWindowPos(hdwp, handle, IntPtr.Zero, bounds.X, bounds.Y, bounds.Width,
                                                 bounds.Height,
                                                 WindowResizeFlags.NoZorder);
             var success = NativeMethods.EndDeferWindowPos(hdwp);
-            if (success){
+            if (success) {
                 return;
             }
             throw new InvalidOperationException("error resizing window.");
@@ -27,7 +45,7 @@ namespace Crystalbyte.Spectre.UI{
         #region Nested type: NativeMethods
 
         [SuppressUnmanagedCodeSecurity]
-        private static class NativeMethods{
+        private static class NativeMethods {
             [DllImport("user32.dll")]
             public static extern IntPtr BeginDeferWindowPos(int windowCount);
 
@@ -45,7 +63,7 @@ namespace Crystalbyte.Spectre.UI{
         #region Nested type: WindowResizeFlags
 
         [Flags]
-        private enum WindowResizeFlags : uint{
+        private enum WindowResizeFlags : uint {
             DrawFrame = 0x0020,
             FrameChanged = 0x0020,
             HideWindow = 0x0080,

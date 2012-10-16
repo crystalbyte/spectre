@@ -6,31 +6,40 @@
 }
 
 body {
-    background-color: #202020;
+    background: url('../Media/Images/background.png') repeat;
     font-family: 'Segoe UI';
     font-size: 1em;
 }
 
 button {
     padding: 3px;
+    margin-top: 5px;
+    width: 100%;
     background-color: #353535;
     border: 1px solid orange;
 }
 
-button:hover {
-    background-color: #454545;
-}
+    button:hover {
+        background-color: #454545;
+    }
 
-button:active {
-    background-color: orange;
-    border: 1px solid #454545;
-}
+    button:active {
+        background-color: orange;
+        border: 1px solid #454545;
+    }
+
+    button[disabled] {
+        border: 1px solid #858585;
+        background-color: #454545;
+        color: #858585;
+    }
 
 #header {
-    background-color: #353535;
+    background-color: #202020;
     height: 60px;
     width: 100%;
     position: absolute;
+    font-size: 1.8em;
     top: 0;
     border-bottom: 1px solid orange;
 }
@@ -51,4 +60,3 @@ button:active {
     padding-bottom: 80px;
     max-height: 100%;
 }
-

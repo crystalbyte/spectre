@@ -1,0 +1,39 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: whitesmoke;
+}
+
+body {
+    background: url('../Media/Images/background.png') repeat;
+    font-family: 'Segoe UI';
+    font-size: 1em;
+}
+
+#header {
+    background-color: #202020;
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    font-size: 1.8em;
+    top: 0;
+    border-bottom: 1px solid orange;
+}
+
+#footer {
+    background-color: #202020;
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid orange;
+}
+
+#content {
+    padding-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
+    max-height: 100%;
+}

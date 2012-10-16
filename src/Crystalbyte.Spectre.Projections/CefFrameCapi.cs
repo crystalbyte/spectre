@@ -1,53 +1,89 @@
+#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
+
 using System;
 using System.Runtime.InteropServices;
 
-namespace Crystalbyte.Spectre.Projections
-{
-	[StructLayout(LayoutKind.Sequential)]
-	public struct CefFrame {
-		public CefBase Base;
-		public IntPtr IsValid;
-		public IntPtr Undo;
-		public IntPtr Redo;
-		public IntPtr Cut;
-		public IntPtr Copy;
-		public IntPtr Paste;
-		public IntPtr Del;
-		public IntPtr SelectAll;
-		public IntPtr ViewSource;
-		public IntPtr GetSource;
-		public IntPtr GetText;
-		public IntPtr LoadRequest;
-		public IntPtr LoadUrl;
-		public IntPtr LoadString;
-		public IntPtr ExecuteJavaScript;
-		public IntPtr IsMain;
-		public IntPtr IsFocused;
-		public IntPtr GetName;
-		public IntPtr GetIdentifier;
-		public IntPtr GetParent;
-		public IntPtr GetUrl;
-		public IntPtr GetBrowser;
-		public IntPtr GetV8context;
-		public IntPtr VisitDom;
-	}
-	
-	public delegate void UndoCallback(IntPtr self);
-	public delegate void RedoCallback(IntPtr self);
-	public delegate void CutCallback(IntPtr self);
-	public delegate void PasteCallback(IntPtr self);
-	public delegate void DelCallback(IntPtr self);
-	public delegate void SelectAllCallback(IntPtr self);
-	public delegate void ViewSourceCallback(IntPtr self);
-	public delegate void GetSourceCallback(IntPtr self, IntPtr visitor);
-	public delegate void GetTextCallback(IntPtr self, IntPtr visitor);
-	public delegate void LoadRequestCallback(IntPtr self, IntPtr request);
-	public delegate void LoadUrlCallback(IntPtr self, IntPtr url);
-	public delegate void LoadStringCallback(IntPtr self, IntPtr stringVal, IntPtr url);
-	public delegate void ExecuteJavaScriptCallback(IntPtr self, IntPtr code, IntPtr scriptUrl, int startLine);
-	public delegate int IsMainCallback(IntPtr self);
-	public delegate int IsFocusedCallback(IntPtr self);
-	public delegate IntPtr GetV8contextCallback(IntPtr self);
-	public delegate void VisitDomCallback(IntPtr self, IntPtr visitor);
-	
+#endregion
+
+namespace Crystalbyte.Spectre.Projections {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CefFrame {
+        public CefBase Base;
+        public IntPtr IsValid;
+        public IntPtr Undo;
+        public IntPtr Redo;
+        public IntPtr Cut;
+        public IntPtr Copy;
+        public IntPtr Paste;
+        public IntPtr Del;
+        public IntPtr SelectAll;
+        public IntPtr ViewSource;
+        public IntPtr GetSource;
+        public IntPtr GetText;
+        public IntPtr LoadRequest;
+        public IntPtr LoadUrl;
+        public IntPtr LoadString;
+        public IntPtr ExecuteJavaScript;
+        public IntPtr IsMain;
+        public IntPtr IsFocused;
+        public IntPtr GetName;
+        public IntPtr GetIdentifier;
+        public IntPtr GetParent;
+        public IntPtr GetUrl;
+        public IntPtr GetBrowser;
+        public IntPtr GetV8context;
+        public IntPtr VisitDom;
+    }
+
+    public delegate void UndoCallback(IntPtr self);
+
+    public delegate void RedoCallback(IntPtr self);
+
+    public delegate void CutCallback(IntPtr self);
+
+    public delegate void PasteCallback(IntPtr self);
+
+    public delegate void DelCallback(IntPtr self);
+
+    public delegate void SelectAllCallback(IntPtr self);
+
+    public delegate void ViewSourceCallback(IntPtr self);
+
+    public delegate void GetSourceCallback(IntPtr self, IntPtr visitor);
+
+    public delegate void GetTextCallback(IntPtr self, IntPtr visitor);
+
+    public delegate void LoadRequestCallback(IntPtr self, IntPtr request);
+
+    public delegate void LoadUrlCallback(IntPtr self, IntPtr url);
+
+    public delegate void LoadStringCallback(IntPtr self, IntPtr stringVal, IntPtr url);
+
+    public delegate void ExecuteJavaScriptCallback(IntPtr self, IntPtr code, IntPtr scriptUrl, int startLine);
+
+    public delegate int IsMainCallback(IntPtr self);
+
+    public delegate int IsFocusedCallback(IntPtr self);
+
+    public delegate IntPtr GetV8contextCallback(IntPtr self);
+
+    public delegate void VisitDomCallback(IntPtr self, IntPtr visitor);
 }

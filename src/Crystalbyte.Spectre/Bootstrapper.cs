@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -8,20 +26,19 @@ using Crystalbyte.Spectre.Web;
 
 #endregion
 
-namespace Crystalbyte.Spectre{
-    public abstract class Bootstrapper{
-
+namespace Crystalbyte.Spectre {
+    public abstract class Bootstrapper {
         protected abstract IRenderTarget CreateRenderTarget();
 
-        protected virtual AppDelegate CreateAppDelegate(){
+        protected virtual AppDelegate CreateAppDelegate() {
             return new AppDelegate();
         }
 
-        protected virtual BrowserDelegate CreateBrowserDelegate(IRenderTarget target){
+        protected virtual BrowserDelegate CreateBrowserDelegate(IRenderTarget target) {
             return new BrowserDelegate();
         }
 
-        public virtual void Run(){
+        public virtual void Run() {
             var app = CreateAppDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
@@ -29,7 +46,7 @@ namespace Crystalbyte.Spectre{
             ConfigureSettings(Application.Current.Settings);
             Application.Current.Initialize(app);
 
-            if (!Application.Current.IsRootProcess){
+            if (!Application.Current.IsRootProcess) {
                 return;
             }
 
@@ -43,12 +60,12 @@ namespace Crystalbyte.Spectre{
             Application.Current.Shutdown();
         }
 
-        private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e){
+        private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {
             var descriptors = RegisterSchemeHandlers();
             e.SchemeDescriptors.AddRange(descriptors);
         }
 
-        protected virtual void ConfigureSettings(ApplicationSettings settings){
+        protected virtual void ConfigureSettings(ApplicationSettings settings) {
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;
 #else
@@ -56,30 +73,30 @@ namespace Crystalbyte.Spectre{
 #endif
         }
 
-        protected virtual IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories(){
-            return new List<ISchemeHandlerFactoryDescriptor>{
-                                                                new SpectreSchemeHandlerFactoryDescriptor()
-                                                            };
+        protected virtual IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
+            return new List<ISchemeHandlerFactoryDescriptor> {
+                new SpectreSchemeHandlerFactoryDescriptor()
+            };
         }
 
-        protected virtual IList<ISchemeDescriptor> RegisterSchemeHandlers(){
-            return new List<ISchemeDescriptor>{
-                                                  new SpectreSchemeDescriptor()
-                                              };
+        protected virtual IList<ISchemeDescriptor> RegisterSchemeHandlers() {
+            return new List<ISchemeDescriptor> {
+                new SpectreSchemeDescriptor()
+            };
         }
 
-        protected virtual IList<ScriptingCommand> RegisterRuntimeCommands(){
+        protected virtual IList<ScriptingCommand> RegisterRuntimeCommands() {
             return new List<ScriptingCommand>();
         }
 
-        private void OnFrameworkInitialized(object sender, EventArgs e){
+        private void OnFrameworkInitialized(object sender, EventArgs e) {
             var extensions = RegisterRuntimeCommands();
-            if (extensions != null){
+            if (extensions != null) {
                 extensions.ForEach(RegisterRuntimeCommand);
             }
         }
 
-        private static void RegisterRuntimeCommand(ScriptingCommand extension){
+        private static void RegisterRuntimeCommand(ScriptingCommand extension) {
             var name = Guid.NewGuid().ToString();
             ScriptingRuntime.RegisterCommand(name, extension);
         }

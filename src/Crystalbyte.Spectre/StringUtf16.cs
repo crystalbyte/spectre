@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System;
 using System.Diagnostics;
@@ -8,52 +26,52 @@ using Crystalbyte.Spectre.Projections.Internal;
 
 #endregion
 
-namespace Crystalbyte.Spectre{
+namespace Crystalbyte.Spectre {
     [DebuggerDisplay("Text = {Text}")]
-    internal sealed class StringUtf16 : NativeObject{
+    internal sealed class StringUtf16 : NativeObject {
         public StringUtf16(string value)
-            : this(){
+            : this() {
             Text = value;
         }
 
         public StringUtf16(IntPtr handle)
-            : base(typeof (CefStringUtf16)){
+            : base(typeof (CefStringUtf16)) {
             NativeHandle = handle;
         }
 
         public StringUtf16()
-            : this(CefStringTypesClass.CefStringUserfreeUtf16Alloc()){}
+            : this(CefStringTypesClass.CefStringUserfreeUtf16Alloc()) {}
 
-        public string Text{
-            get{
+        public string Text {
+            get {
                 var reflection = MarshalFromNative<CefStringUtf16>();
                 return Marshal.PtrToStringUni(reflection.Str);
             }
-            set{
+            set {
                 Clear();
-                MarshalToNative(new CefStringUtf16{
-                                                      Length = value.Length,
-                                                      Str = Marshal.StringToHGlobalUni(value)
-                                                  });
+                MarshalToNative(new CefStringUtf16 {
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                });
             }
         }
 
-        public static void WriteString(string text, IntPtr handle){
-            new StringUtf16(handle){
-                                       Text = text
-                                   };
+        public static void WriteString(string text, IntPtr handle) {
+            new StringUtf16(handle) {
+                Text = text
+            };
         }
 
-        public static string ReadString(IntPtr handle){
-            if (handle == IntPtr.Zero){
+        public static string ReadString(IntPtr handle) {
+            if (handle == IntPtr.Zero) {
                 Debug.WriteLine("ReadString: handle is null");
                 return string.Empty;
             }
             return new StringUtf16(handle).Text;
         }
 
-        public static string ReadStringAndFree(IntPtr handle){
-            if (handle == IntPtr.Zero){
+        public static string ReadStringAndFree(IntPtr handle) {
+            if (handle == IntPtr.Zero) {
                 Debug.WriteLine("ReadStringAndFree: handle is null");
                 return string.Empty;
             }
@@ -63,11 +81,11 @@ namespace Crystalbyte.Spectre{
             return text;
         }
 
-        public void Free(){
+        public void Free() {
             CefStringTypesClass.CefStringUserfreeUtf16Free(NativeHandle);
         }
 
-        public void Clear(){
+        public void Clear() {
             CefStringTypesClass.CefStringUtf16Clear(NativeHandle);
         }
     }

@@ -1,4 +1,22 @@
-﻿#region Using directives
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
 
 using System;
 using System.Runtime.InteropServices;
@@ -8,37 +26,37 @@ using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Spectre{
-    public sealed class LifeSpanHandler : OwnedRefCountedNativeObject{
+namespace Crystalbyte.Spectre {
+    public sealed class LifeSpanHandler : OwnedRefCountedNativeObject {
         private readonly OnBeforeCloseCallback _beforeCloseCallback;
         private readonly OnBeforePopupCallback _beforePopupCallback;
         private readonly BrowserDelegate _delegate;
         private readonly DoCloseCallback _doCloseCallback;
 
         public LifeSpanHandler(BrowserDelegate @delegate)
-            : base(typeof (CefLifeSpanHandler)){
+            : base(typeof (CefLifeSpanHandler)) {
             _delegate = @delegate;
             _doCloseCallback = OnDoClose;
             _beforePopupCallback = OnBeforePopup;
             _beforeCloseCallback = OnBeforeClose;
-            MarshalToNative(new CefLifeSpanHandler{
-                                                      Base = DedicatedBase,
-                                                      OnBeforePopup =
-                                                          Marshal.GetFunctionPointerForDelegate(_beforePopupCallback),
-                                                      OnBeforeClose =
-                                                          Marshal.GetFunctionPointerForDelegate(_beforeCloseCallback),
-                                                      DoClose = Marshal.GetFunctionPointerForDelegate(_doCloseCallback),
-                                                  });
+            MarshalToNative(new CefLifeSpanHandler {
+                Base = DedicatedBase,
+                OnBeforePopup =
+                    Marshal.GetFunctionPointerForDelegate(_beforePopupCallback),
+                OnBeforeClose =
+                    Marshal.GetFunctionPointerForDelegate(_beforeCloseCallback),
+                DoClose = Marshal.GetFunctionPointerForDelegate(_doCloseCallback),
+            });
         }
 
-        private int OnDoClose(IntPtr self, IntPtr browser){
+        private int OnDoClose(IntPtr self, IntPtr browser) {
             var b = Browser.FromHandle(browser);
             var e = new BrowserClosingEventArgs(b);
             _delegate.OnClosing(e);
             return e.IsCanceled ? 1 : 0;
         }
 
-        private void OnBeforeClose(IntPtr self, IntPtr browser){
+        private void OnBeforeClose(IntPtr self, IntPtr browser) {
             var b = Browser.FromHandle(browser);
             var e = new BrowserClosedEventArgs(b);
             _delegate.OnClosed(e);
@@ -55,13 +73,13 @@ namespace Crystalbyte.Spectre{
         }
 
         private int OnBeforePopup(IntPtr self, IntPtr parentbrowser, IntPtr popupfeatures, IntPtr windowinfo, IntPtr url,
-                                  IntPtr client, IntPtr settings){
-            var e = new PopupCreatingEventArgs{
-                                                  Parent = Browser.FromHandle(parentbrowser),
-                                                  Info = WindowsWindowInfo.FromHandle(windowinfo),
-                                                  Settings = BrowserSettings.FromHandle(settings),
-                                                  Address = StringUtf16.ReadString(url)
-                                              };
+                                  IntPtr client, IntPtr settings) {
+            var e = new PopupCreatingEventArgs {
+                Parent = Browser.FromHandle(parentbrowser),
+                Info = WindowsWindowInfo.FromHandle(windowinfo),
+                Settings = BrowserSettings.FromHandle(settings),
+                Address = StringUtf16.ReadString(url)
+            };
             _delegate.OnPopupCreating(e);
             return e.IsCanceled ? 1 : 0;
         }
