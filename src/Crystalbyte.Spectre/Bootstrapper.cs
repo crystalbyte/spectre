@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;
 using Crystalbyte.Spectre.Web;
@@ -28,15 +29,11 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre {
     public abstract class Bootstrapper {
-        protected abstract IRenderTarget CreateRenderTarget();
-
         protected virtual AppDelegate CreateAppDelegate() {
             return new AppDelegate();
         }
 
-        protected virtual BrowserDelegate CreateBrowserDelegate(IRenderTarget target) {
-            return new BrowserDelegate();
-        }
+        protected abstract IEnumerable<Viewport> CreateViewports();
 
         public virtual void Run() {
             var app = CreateAppDelegate();
@@ -47,16 +44,18 @@ namespace Crystalbyte.Spectre {
             Application.Current.Initialize(app);
 
             if (!Application.Current.IsRootProcess) {
+                // Any sub process will terminate at this point
                 return;
             }
 
+            // Only the browser process will run the code below
             var factories = RegisterSchemeHandlerFactories();
             factories.ForEach(Application.Current.SchemeFactories.Register);
 
-            var target = CreateRenderTarget();
-            var browserDelegate = CreateBrowserDelegate(target);
+            var viewports = CreateViewports();
+            viewports.ForEach(Application.Current.Add);
 
-            Application.Current.Run(new Viewport(target, browserDelegate));
+            Application.Current.Run();
             Application.Current.Shutdown();
         }
 

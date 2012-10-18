@@ -19,16 +19,17 @@
 #region Using directives
 
 using System;
+using System.Collections.Generic;
 using Crystalbyte.Spectre.UI;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
-        protected override IRenderTarget CreateRenderTarget() {
-            return new Window {
-                StartupUri = new Uri("spectre://localhost/Views/index.html")
-            };
+        protected override IEnumerable<Viewport> CreateViewports() {
+            yield return new Viewport(
+                new Window { StartupUri = new Uri("spectre://localhost/Views/index.html")}, 
+                new BrowserDelegate());
         }
     }
 }

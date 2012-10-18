@@ -36,13 +36,9 @@ namespace Crystalbyte.Spectre.Scripting {
         private JavaScriptObject(IntPtr handle)
             : base(typeof (CefV8value)) {
             NativeHandle = handle;
-            DebugNotice = string.Format("{0} - {1}", ToString(), Reference.GetReferenceCounter(NativeHandle));
         }
 
-        public string DebugNotice { get; set; }
-
         protected override void DisposeNative() {
-            Debug.WriteLine(DebugNotice);
             base.DisposeNative();
         }
 

@@ -31,8 +31,10 @@ namespace Crystalbyte.Spectre.Scripting {
 
         private ContextRegistrar() {
             _contextList = new List<ScriptingContext>();
-            if (Application.Current != null)
+            if (Application.Current != null) {
+                // This is necessary to allow the GC to collect all destroyed context objects
                 Application.Current.ShutdownStarted += (sender, e) => _contextList.Clear();
+            }
         }
 
         public static ContextRegistrar Current {

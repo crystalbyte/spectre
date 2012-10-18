@@ -32,13 +32,13 @@ namespace Crystalbyte.Spectre.UI {
         private Browser _browser;
         private BrowserHost _browserHost;
 
-        public Viewport(IRenderTarget target, BrowserDelegate @delegate) {
+        public Viewport(IRenderTarget target, BrowserDelegate browserDelegate) {
             _target = target;
             _target.TargetClosing += OnTargetClosing;
             _target.TargetClosed += OnTargetClosed;
             _target.TargetSizeChanged += OnTargetSizeChanged;
 
-            _handler = new ClientHandler(@delegate);
+            _handler = new ClientHandler(browserDelegate);
 
             _settings = new BrowserSettings {
                 IsFileAccessfromUrlsAllowed = false,

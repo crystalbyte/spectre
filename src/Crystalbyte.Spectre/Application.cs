@@ -172,8 +172,8 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-        public void Run(Viewport renderer) {
-            Add(renderer);
+        public void Run(Viewport viewport) {
+            Add(viewport);
             Run();
         }
 

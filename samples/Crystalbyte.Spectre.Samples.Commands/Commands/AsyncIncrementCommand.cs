@@ -18,6 +18,7 @@
 
 #region Using directives
 
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace Crystalbyte.Spectre.Samples.Commands {
 
             var value = e.Arguments.ElementAt(3).ToInteger();
 
-            // Keep strong references on all objects that need to be kept alive after leaving local scope.
+            // Keep strong references for all objects that need to be kept alive after leaving local scope.
             _context = ScriptingContext.Current;
             _callback = e.Arguments.ElementAt(1).ToFunction();
             _end = e.Arguments.ElementAt(2).ToFunction();
@@ -54,32 +55,39 @@ namespace Crystalbyte.Spectre.Samples.Commands {
             // Start new thread
             Task.Factory.StartNew(() => {
                 // Count to value + 100 and call ExecuteCallback on each iteration.
-                Enumerable.Range(value + 1, 100)
+                Enumerable.Range(value + 1, 100) 
                     .ForEach(x => {
-                        // As most UI systems, such as WPF, Swing, Qt or Winforms, the WebKit layout engine is thread affine,
+                        // As most UI engines, such as WPF, Swing, Qt or Winforms, the WebKit layout engine is thread affine,
                         // being modifyable only from the rendering (NOT UI) thread. We need to invoke.
                         Dispatcher.Current.InvokeAsync(
                             () => ExecuteCallback(x));
                         Thread.Sleep(15);
                     });
+
                 // Call the end function, which will enable the "+100" button.
                 Dispatcher.Current.InvokeAsync(
                     () => {
-                        if (_context.IsAlive) {
+                        try {
                             // All code executed after entering a context is compiled and run within this context.
                             // This action is mandatory in order to run the code inside the correct window/frame.
-                            _context.Enter();
+                            var success = _context.TryEnter();
+                            if (!success) {
+                                // May occur if the corresponding frame has changed or the window has been closed.
+                                return;
+                            }
 
                             // Execute our callback method.
                             _end.Execute();
 
                             // Restore the previously used context.
-                            _context.Exit();
+                            _context.TryExit();    
                         }
-
-                        // Since we kept strong references, 
-                        // we need to dispose of them manually after we finished using it.
-                        Cleanup();
+                        finally {
+                            // Since we kept strong references, 
+                            // we need to dispose of them manually after we finished using them.
+                            // This won't be necessary if the object holding the references becomes disposed or goes out of scope.    
+                            Cleanup();
+                        }
                     });
             });
 
@@ -99,19 +107,20 @@ namespace Crystalbyte.Spectre.Samples.Commands {
         }
 
         private void ExecuteCallback(int value) {
-            if (!_context.IsAlive) {
-                return;
-            }
-
             // All code executed after entering a context is compiled and run within this context.
             // This action is mandatory in order to run the code inside the correct window/frame.
-            _context.Enter();
+            var success = _context.TryEnter();
+            if (!success) {
+                // May occur if the corresponding frame has changed or the window has been closed.
+                return;
+            }
 
             // Execute our callback method.
             _callback.Execute(arguments: new JavaScriptObject(value));
 
             // Restore the previously used context.
-            _context.Exit();
+            // May occur if the corresponding frame has changed or the window has been closed.
+            _context.TryExit();
         }
     }
 }

@@ -26,4 +26,5 @@ GNU General Public License for more details.&#xD;
 &#xD;
 You should have received a copy of the GNU General Public License&#xD;
 along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.&#xD;
-</s:String></wpf:ResourceDictionary>
+</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateStaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="_" Suffix="" Style="aaBb" /&gt;</s:String></wpf:ResourceDictionary>

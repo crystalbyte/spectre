@@ -22,6 +22,7 @@ using System;
 using System.Diagnostics;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.UI;
 
 #endregion
 
@@ -36,25 +37,22 @@ namespace Crystalbyte.Spectre.Threading {
         }
 
         public void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
+            if (!BrowserRegistrar.Current.AnyRegistered()) {
+                Debug.WriteLine("Browser has already been destroyed, unable to post task.");
+                return;
+            }
             var task = new Task(action);
-            try {
-                CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
-            }
-            catch (AccessViolationException ex) {
-                // This may occur, if someone kills the render process while posting a new task on its queue.
-                Debug.WriteLine(ex);
-            }
+            CefTaskCapi.CefPostDelayedTask((CefThreadId)queue, task.NativeHandle, (long)delay.TotalMilliseconds);
         }
 
         public void InvokeAsync(Action action, DispatcherQueue queue = DispatcherQueue.Renderer) {
+            if (!BrowserRegistrar.Current.AnyRegistered()) {
+                Debug.WriteLine("Browser has already been destroyed, unable to post task.");
+                return;
+            }
+
             var task = new Task(action);
-            try {
-                CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
-            }
-            catch (AccessViolationException ex) {
-                // This may occur, if someone kills the render process while posting a new task on its queue.
-                Debug.WriteLine(ex);
-            }
+            CefTaskCapi.CefPostTask((CefThreadId)queue, task.NativeHandle);
         }
 
         public bool IsCurrentlyOn(DispatcherQueue queue) {

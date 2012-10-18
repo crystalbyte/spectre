@@ -133,7 +133,7 @@ namespace Crystalbyte.Spectre.Scripting {
             return Convert.ToBoolean(value);
         }
 
-        public bool Evaluate(string code, out JavaScriptObject result, out RuntimeExceptionObject exception) {
+        internal bool Evaluate(string code, out JavaScriptObject result, out RuntimeExceptionObject exception) {
             result = JavaScriptObject.Null;
             exception = new RuntimeExceptionObject();
             var str = new StringUtf16(code);

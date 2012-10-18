@@ -102,6 +102,9 @@ namespace Crystalbyte.Spectre {
             var e = new BrowserEventArgs {
                 Browser = Browser.FromHandle(browser)
             };
+
+            BrowserRegistrar.Current.Register(e.Browser);
+
             _delegate.OnBrowserCreated(e);
         }
 
@@ -128,7 +131,10 @@ namespace Crystalbyte.Spectre {
         private void OnBrowserDestroyed(IntPtr self, IntPtr browser) {
             var b = Browser.FromHandle(browser);
             var e = new BrowserEventArgs(b);
+
             _delegate.OnBrowserDestroyed(e);
+
+            BrowserRegistrar.Current.Remove(e.Browser);
         }
     }
 }
