@@ -325,6 +325,10 @@ namespace Crystalbyte.Spectre.Scripting {
             if (context == null)
                 throw new ArgumentNullException("context");
 
+            if (context.IsDisposed) {
+                return null;
+            }
+
             var r = MarshalFromNative<CefV8value>();
             var function = (ExecuteFunctionWithContextCallback)
                            Marshal.GetDelegateForFunctionPointer(r.ExecuteFunctionWithContext,

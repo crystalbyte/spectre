@@ -27,7 +27,11 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class ScriptingContext : RefCountedNativeObject {
+    public sealed class ScriptingContext : RefCountedNativeObject, IEquatable<ScriptingContext> {
+        public override int GetHashCode() {
+            return NativeHandle.ToInt32() ^ 4;
+        }
+
         private ScriptingContext(IntPtr handle)
             : base(typeof (CefV8context)) {
             NativeHandle = handle;
@@ -45,10 +49,6 @@ namespace Crystalbyte.Spectre.Scripting {
                 var handle = CefV8Capi.CefV8contextGetEnteredContext();
                 return FromHandle(handle);
             }
-        }
-
-        public bool IsAlive {
-            get { return ContextRegistrar.Current.IsContextAlive(this); }
         }
 
         public Browser Browser {
@@ -87,7 +87,7 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         public bool TryEnter() {
-            if (NativeHandle == IntPtr.Zero) {
+            if (NativeHandle == IntPtr.Zero || IsDisposed) {
                 return false;
             }
             var r = MarshalFromNative<CefV8context>();
@@ -112,7 +112,7 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         public bool TryExit() {
-            if (NativeHandle == IntPtr.Zero) {
+            if (NativeHandle == IntPtr.Zero || IsDisposed) {
                 return false;
             }
             var r = MarshalFromNative<CefV8context>();
@@ -123,6 +123,9 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         public bool IsSame(ScriptingContext other) {
+            if (IsDisposed || other.IsDisposed) {
+                return false;
+            }
             var r = MarshalFromNative<CefV8context>();
             var function = (IsSameCallback)
                            Marshal.GetDelegateForFunctionPointer(r.IsSame, typeof (IsSameCallback));
@@ -154,5 +157,17 @@ namespace Crystalbyte.Spectre.Scripting {
         private delegate IntPtr GetContextFrameCallback(IntPtr self);
 
         #endregion
+
+        public override bool Equals(object obj) {
+            if (obj is ScriptingContext) {
+                return Equals(obj as ScriptingContext);
+            }
+
+            return false;
+        }
+
+        public bool Equals(ScriptingContext other) {
+            return other.IsSame(this);
+        }
     }
 }

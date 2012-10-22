@@ -78,9 +78,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Media\Images\background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Styles\index.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

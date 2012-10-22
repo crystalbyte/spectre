@@ -93,17 +93,14 @@ namespace Crystalbyte.Spectre {
                 Context = ScriptingContext.FromHandle(context)
             };
 
+            ScriptingRuntime.RegisteredCommands.ForEach(x => x.OnScriptingContextReleased(e));
             _delegate.OnScriptingContextReleased(e);
-
-            ContextRegistrar.Current.Remove(e.Context);
         }
 
         private void OnBrowserCreated(IntPtr self, IntPtr browser) {
             var e = new BrowserEventArgs {
                 Browser = Browser.FromHandle(browser)
             };
-
-            BrowserRegistrar.Current.Register(e.Browser);
 
             _delegate.OnBrowserCreated(e);
         }
@@ -123,8 +120,6 @@ namespace Crystalbyte.Spectre {
                 Context = ScriptingContext.FromHandle(context)
             };
 
-            ContextRegistrar.Current.Register(e.Context);
-
             _delegate.OnScriptingContextCreated(e);
         }
 
@@ -133,8 +128,6 @@ namespace Crystalbyte.Spectre {
             var e = new BrowserEventArgs(b);
 
             _delegate.OnBrowserDestroyed(e);
-
-            BrowserRegistrar.Current.Remove(e.Browser);
         }
     }
 }

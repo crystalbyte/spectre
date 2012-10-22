@@ -23,7 +23,7 @@ using System;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public interface IRenderTarget {
+    public interface IRenderTarget : IDisposable {
         Size Size { get; }
         IntPtr Handle { get; }
         Uri StartupUri { get; }

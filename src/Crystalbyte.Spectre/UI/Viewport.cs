@@ -86,10 +86,14 @@ namespace Crystalbyte.Spectre.UI {
             _target.TargetClosing -= OnTargetClosing;
             _target.TargetClosed -= OnTargetClosed;
             _target.TargetSizeChanged -= OnTargetSizeChanged;
+            base.DisposeManaged();
+        }
+
+        protected override void DisposeNative() {
             _handler.Dispose();
             _browser.Dispose();
             _browserHost.Dispose();
-            base.DisposeManaged();
+            base.DisposeNative();
         }
 
         private void OnTargetClosing(object sender, EventArgs e) {

@@ -24,5 +24,6 @@ namespace Crystalbyte.Spectre.Scripting {
         JavaScriptObject Execute(JavaScriptObject target, params JavaScriptObject[] arguments);
         JavaScriptObject Execute(ScriptingContext context, JavaScriptObject target, params JavaScriptObject[] arguments);
         void Dispose();
+        bool IsDisposed { get; }
     }
 }

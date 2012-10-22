@@ -6,17 +6,17 @@
 }
 
 body {
-    background: url('../Media/Images/background.png') repeat;
     font-family: 'Segoe UI';
     font-size: 1em;
+    background-color: #252525;
 }
 
 button {
     padding: 3px;
     margin-top: 5px;
-    width: 100%;
+    width: 70px;
     background-color: #353535;
-    border: 1px solid orange;
+    border: 1px solid #007ACC;
 }
 
     button:hover {
@@ -24,7 +24,7 @@ button {
     }
 
     button:active {
-        background-color: orange;
+        background-color: #007ACC;
         border: 1px solid #454545;
     }
 
@@ -33,30 +33,3 @@ button {
         background-color: #454545;
         color: #858585;
     }
-
-#header {
-    background-color: #202020;
-    height: 60px;
-    width: 100%;
-    position: absolute;
-    font-size: 1.8em;
-    top: 0;
-    border-bottom: 1px solid orange;
-}
-
-#footer {
-    background-color: #202020;
-    height: 60px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    border-top: 1px solid orange;
-}
-
-#content {
-    padding-top: 80px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 80px;
-    max-height: 100%;
-}

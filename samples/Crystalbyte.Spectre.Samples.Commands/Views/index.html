@@ -13,7 +13,6 @@
             }
 
             // define sample object
-
             function Sample(window) {
                 this.window = window;
                 this.value = 0;
@@ -26,13 +25,7 @@
                         window.sample.value = value;
                         $('#counter').text(value);
                     };
-                    var begin = function() {
-                        $('#asyncButton').attr("disabled", "true");
-                    };
-                    var end = function() {
-                        $('#asyncButton').removeAttr("disabled");
-                    };
-                    window.commands.incrementAsync(begin, callback, end, this.value);
+                    window.commands.incrementAsync(callback, this.value);
                 };
             }
 
@@ -41,32 +34,8 @@
         </script>
     </head>
     <body>
-        <div id="header">
-            <div style="padding: 7px 0px 0px 20px;">
-                <span>Commands</span>
-            </div>
-        </div>
-        <div id="content" >
-            <div style="float: left; max-width: 50%;">
-                <div style="margin-top: 40px; position: relative;">
-                    <span>
-                        Increment the counter by one using a synchronous command.
-                    </span>
-                    <button onclick="sample.increment();">+1</button>
-                </div>
-                <div style="margin-top: 40px; position: relative;">
-                    <span>
-                        Increment the counter by 100. <br/> 
-                        This call will spawn a new managed thread and make callbacks into the javascript runtime every 15ms.
-                    </span>
-                    <button id="asyncButton" onclick="sample.incrementAsync();">+100</button>
-                </div>
-            </div>
-            <div style="float: right; max-width: 50%;">
-                <span id="counter" style="font-size: 11em;">0</span>
-            </div>
-        </div>
-        <div id="footer">
-        </div>
+        <button style="width: 70px; position: absolute; bottom: 50px; right: 20px;" onclick="sample.increment();">+1</button>
+        <button style="width: 70px; position: absolute; bottom: 20px; right: 20px;" onclick="sample.incrementAsync();">+100</button>
+        <div style="margin-left: auto; margin-right: auto; text-align: center; font-size: 11em;" id="counter" >0</div>
     </body>
 </html>

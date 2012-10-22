@@ -26,7 +26,6 @@ using System.Runtime.InteropServices;
 namespace Crystalbyte.Spectre.Interop {
     /// <summary>
     ///   This class is a managed access point for native cef objects.
-    ///   This class does not manage the object's lifecycle, thus not allocating any memory.
     /// </summary>
     public abstract class NativeObject : DisposableObject {
         private IntPtr _nativeHandle;

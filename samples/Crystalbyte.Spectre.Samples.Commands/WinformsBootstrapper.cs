@@ -33,24 +33,21 @@ namespace Crystalbyte.Spectre.Samples {
             // Without SP mode, all rendering will be outsourced into a seperate process.
             // SP mode is not for production use, for it is not actively maintained by the chromium project.
             // PS. Kitten will die if you use it !
-            //settings.IsSingleProcess = true;
+            settings.IsSingleProcess = true;
             base.ConfigureSettings(settings);
         }
 
-        protected override IList<ScriptingCommand> RegisterRuntimeCommands() {
-            var extensions = base.RegisterRuntimeCommands();
+        protected override IList<ScriptingCommand> RegisterScriptingCommands() {
+            var extensions = base.RegisterScriptingCommands();
             extensions.Add(new IncrementCommand());
-            extensions.Add(new AsyncIncrementCommand());
+            extensions.Add(new ConcurrentIncrementCommand());
             return extensions;
         }
 
         protected override IEnumerable<Viewport> CreateViewports() {
             yield return new Viewport(
                 new Window { StartupUri = new Uri("spectre://localhost/Views/index.html") },
-                new BrowserDelegate());
-            yield return new Viewport(
-                new Window { StartupUri = new Uri("spectre://localhost/Views/index.html") },
-                new BrowserDelegate());
+                new BrowserDelegate());    
         }
     }
 }

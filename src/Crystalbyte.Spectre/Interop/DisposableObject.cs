@@ -19,6 +19,7 @@
 #region Using directives
 
 using System;
+using System.Diagnostics;
 
 #endregion
 
@@ -36,7 +37,7 @@ namespace Crystalbyte.Spectre.Interop {
         #endregion
 
         ~DisposableObject() {
-            //Debug.WriteLine(string.Format("Finalizer called on Type: {0}. ", GetType()));
+            Debug.WriteLine(string.Format("Finalizer called on Type: {0}. ", GetType()));
             Dispose(false);
         }
 
@@ -67,5 +68,7 @@ namespace Crystalbyte.Spectre.Interop {
         protected virtual void DisposeNative() {
             // override
         }
+
+        public bool IsDisposed { get { return _isDisposed; } }
     }
 }

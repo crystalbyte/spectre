@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
+using Crystalbyte.Spectre.Threading;
 using Crystalbyte.Spectre.UI;
 using Crystalbyte.Spectre.Web;
 
@@ -60,6 +61,8 @@ namespace Crystalbyte.Spectre {
         public bool IsInitialized { get; private set; }
         public bool IsRootProcess { get; private set; }
         public bool QuitAfterLastViewClosed { get; set; }
+
+        public Dispatcher Dispatcher { get { return Dispatcher.Current; } }
 
         public SchemeHandlerFactoryManager SchemeFactories {
             get { return _schemeHandlerfactoryManager; }
@@ -150,6 +153,7 @@ namespace Crystalbyte.Spectre {
         private void OnRenderTargetClosing(object sender, EventArgs e) {
             var target = (IRenderTarget) sender;
             target.TargetClosing -= OnRenderTargetClosing;
+            target.Dispose();
             _views[target].Dispose();
             _views.Remove(target);
 
