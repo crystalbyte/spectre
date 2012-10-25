@@ -31,6 +31,14 @@ namespace Crystalbyte.Spectre.Threading {
         private readonly Action _action;
         private readonly ExecuteCallback _executeCallback;
 
+        public event EventHandler Executed;
+
+        private void OnExecuted(EventArgs e) {
+            var handler = Executed;
+            if (handler != null) 
+                handler(this, e);
+        }
+
         public Task(Action action)
             : base(typeof (CefTask)) {
             _action = action;
@@ -45,6 +53,7 @@ namespace Crystalbyte.Spectre.Threading {
             if (_action != null) {
                 _action();
             }
+            OnExecuted(EventArgs.Empty);
         }
     }
 }

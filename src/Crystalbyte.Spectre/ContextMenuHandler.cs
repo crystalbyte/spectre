@@ -66,7 +66,7 @@ namespace Crystalbyte.Spectre {
 
         private int OnContextMenuCommand(IntPtr self, IntPtr browser, IntPtr frame, IntPtr @params, int commandid,
                                          CefEventFlags eventflags) {
-            var p = ContextMenuArgs.FromHandle(@params);
+            //var p = ContextMenuArgs.FromHandle(@params);
             var e = new ContextMenuCommandEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame)

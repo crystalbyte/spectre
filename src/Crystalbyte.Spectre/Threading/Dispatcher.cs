@@ -19,6 +19,7 @@
 #region Using directives
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
@@ -29,8 +30,13 @@ using Crystalbyte.Spectre.UI;
 namespace Crystalbyte.Spectre.Threading {
     public sealed class Dispatcher {
         private static readonly Dispatcher _dispatcher = new Dispatcher();
+        private readonly HashSet<Task> _tasks;
+        private readonly object _mutex;
 
-        private Dispatcher() {}
+        private Dispatcher() {
+            _mutex = new object();
+            _tasks = new HashSet<Task>();
+        }
 
         public static Dispatcher Current {
             get { return _dispatcher; }
@@ -43,7 +49,17 @@ namespace Crystalbyte.Spectre.Threading {
 
         public void InvokeAsync(Action action, DispatcherQueue queue = DispatcherQueue.Renderer) {
             var task = new Task(action);
+            task.Executed += OnExecuted;
             CefTaskCapi.CefPostTask((CefThreadId)queue, task.NativeHandle);
+            lock (_mutex) {
+                _tasks.Add(task);
+            }
+        }
+
+        private void OnExecuted(object sender, EventArgs e) {
+            lock (_mutex) {
+                _tasks.Remove((Task)sender);
+            }
         }
 
         public bool IsCurrentlyOn(DispatcherQueue queue) {

@@ -26,7 +26,7 @@ namespace Crystalbyte.Spectre.UI {
     public class BrowserDelegate {
         public event EventHandler<ContextMenuOpeningEventArgs> ContextMenuOpening;
 
-        protected internal void OnContextMenuOpening(ContextMenuOpeningEventArgs e) {
+        protected internal virtual void OnContextMenuOpening(ContextMenuOpeningEventArgs e) {
             var handler = ContextMenuOpening;
             if (handler != null) {
                 handler(this, e);
@@ -35,7 +35,7 @@ namespace Crystalbyte.Spectre.UI {
 
         public event EventHandler<ContextMenuCommandEventArgs> ContextMenuCommand;
 
-        protected internal void OnContextMenuCommand(ContextMenuCommandEventArgs e) {
+        protected internal virtual void OnContextMenuCommand(ContextMenuCommandEventArgs e) {
             var handler = ContextMenuCommand;
             if (handler != null) {
                 handler(this, e);
