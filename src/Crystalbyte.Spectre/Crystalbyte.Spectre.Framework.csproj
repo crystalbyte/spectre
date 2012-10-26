@@ -50,6 +50,7 @@
     <Compile Include="Scripting\JavaScriptEnumerationExtensions.cs" />
     <Compile Include="BrowserProcessHandler.cs" />
     <Compile Include="Scripting\RegistrationCodes.cs" />
+    <Compile Include="Threading\ISynchronizable.cs" />
     <Compile Include="UI\ContextMenu.cs" />
     <Compile Include="UI\ContextMenuClosedEventArgs.cs" />
     <Compile Include="UI\ContextMenuCommandEventArgs.cs" />
