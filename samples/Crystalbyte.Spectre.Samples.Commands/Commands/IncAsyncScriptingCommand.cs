@@ -31,12 +31,12 @@ using System.Collections.Concurrent;
 #endregion
 
 namespace Crystalbyte.Spectre.Samples.Commands {
-    public sealed class ConcurrentIncrementCommand : ScriptingCommand {
+    public sealed class IncAsyncScriptingCommand : ScriptingCommand {
         private static int _threadCount;
         private readonly List<ContextBoundTaskManager> _taskManagers;
         private readonly object _mutex;
 
-        public ConcurrentIncrementCommand() {
+        public IncAsyncScriptingCommand() {
             _mutex = new object();
             _taskManagers = new List<ContextBoundTaskManager>();
         }

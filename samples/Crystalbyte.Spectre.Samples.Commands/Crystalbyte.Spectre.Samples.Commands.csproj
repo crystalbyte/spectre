@@ -40,8 +40,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ConcurrentIncrementCommand.cs" />
-    <Compile Include="Commands\IncrementCommand.cs" />
+    <Compile Include="Commands\IncAsyncScriptingCommand.cs" />
+    <Compile Include="Commands\IncScriptingCommand.cs" />
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>

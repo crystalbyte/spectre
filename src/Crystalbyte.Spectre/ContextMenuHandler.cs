@@ -19,11 +19,13 @@
 #region Using directives
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
 using Crystalbyte.Spectre.UI;
+using System.Collections;
 
 #endregion
 
@@ -66,13 +68,16 @@ namespace Crystalbyte.Spectre {
 
         private int OnContextMenuCommand(IntPtr self, IntPtr browser, IntPtr frame, IntPtr @params, int commandid,
                                          CefEventFlags eventflags) {
-            //var p = ContextMenuArgs.FromHandle(@params);
             var e = new ContextMenuCommandEventArgs {
                 Browser = Browser.FromHandle(browser),
-                Frame = Frame.FromHandle(frame)
+                Frame = Frame.FromHandle(frame),
+                Arguments = ContextMenuArgs.FromHandle(@params),
+                Command = commandid,
+                Modifiers = (KeyModifiers) eventflags
             };
 
             _browserDelegate.OnContextMenuCommand(e);
+            e.Arguments.Dispose();
             return Convert.ToInt32(false);
         }
 
@@ -80,10 +85,13 @@ namespace Crystalbyte.Spectre {
             var e = new ContextMenuOpeningEventArgs {
                 Browser = Browser.FromHandle(browser),
                 Frame = Frame.FromHandle(frame),
-                Arguments = ContextMenuArgs.FromHandle(@params)
+                Arguments = ContextMenuArgs.FromHandle(@params),
+                Menu = ContextMenu.FromHandle(model)
             };
-
+            
             _browserDelegate.OnContextMenuOpening(e);
+            e.Arguments.Dispose();
+            e.Menu.Dispose();
         }
     }
 }

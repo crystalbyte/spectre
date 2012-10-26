@@ -24,7 +24,7 @@ using Crystalbyte.Spectre.Scripting;
 #endregion
 
 namespace Crystalbyte.Spectre.Samples.Commands {
-    public sealed class IncrementCommand : ScriptingCommand {
+    public sealed class IncScriptingCommand : ScriptingCommand {
 
         public override string RegistrationCode {
             get {

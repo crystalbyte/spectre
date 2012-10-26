@@ -26,5 +26,8 @@ namespace Crystalbyte.Spectre.UI {
     public sealed class ContextMenuCommandEventArgs : EventArgs {
         public Frame Frame { get; internal set; }
         public Browser Browser { get; internal set; }
+        public ContextMenuArgs Arguments { get; internal set; }
+        public int Command { get; internal set; }
+        public KeyModifiers Modifiers { get; internal set; }
     }
 }

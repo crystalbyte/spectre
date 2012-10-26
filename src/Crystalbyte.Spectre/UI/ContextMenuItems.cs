@@ -25,45 +25,37 @@ using System.Collections.Generic;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenuItemCollection : ICollection<ContextMenuItem> {
-        public ContextMenuItemCollection(ContextMenu menu) {}
+    public sealed class ContextMenuItems {
+        private readonly ContextMenu _menu;
+        private readonly Dictionary<int, ContextMenuItem> _items;
+
+        public ContextMenuItems(ContextMenu menu) {
+            if (menu == null) 
+                throw new ArgumentNullException("menu");
+            _items = new Dictionary<int, ContextMenuItem>();
+            _menu = menu;
+        }
 
         #region ICollection<ContextMenuItem> Members
 
         public void Add(ContextMenuItem item) {
-            throw new NotImplementedException();
+            _menu.AddItem(item.Command, item.Text);
         }
 
         public void Clear() {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(ContextMenuItem item) {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(ContextMenuItem[] array, int arrayIndex) {
-            throw new NotImplementedException();
+            _menu.Clear();
         }
 
         public int Count {
-            get { throw new NotImplementedException(); }
+            get { return _menu.GetCount(); }
         }
 
         public bool IsReadOnly {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public bool Remove(ContextMenuItem item) {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<ContextMenuItem> GetEnumerator() {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            throw new NotImplementedException();
+            return _menu.Remove(item.Command);
         }
 
         #endregion
