@@ -8,12 +8,15 @@ namespace Crystalbyte.Spectre.Samples {
     class SampleBrowserDelegate : BrowserDelegate {
         protected override void OnContextMenuOpening(ContextMenuOpeningEventArgs e) {
             e.Menu.Items.Clear();
-            e.Menu.Items.Add(new LabelMenuItem("Close") {Command = 26500});
+            e.Menu.Items.Add(new LabelMenuItem("http://www.google.de") { Command = 26500 });
             base.OnContextMenuOpening(e);   
         }
 
         protected override void OnContextMenuCommand(ContextMenuCommandEventArgs e) {
             base.OnContextMenuCommand(e);
+            if (e.Command == 26500) {
+                e.Browser.MainFrame.Navigate("http://www.google.de");
+            }
         }
     }
 }
