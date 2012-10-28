@@ -61,6 +61,7 @@ namespace Crystalbyte.Spectre {
         public bool IsInitialized { get; private set; }
         public bool IsRootProcess { get; private set; }
         public bool QuitAfterLastViewClosed { get; set; }
+        public IEnumerable<Viewport> Viewports { get { return _views.Values; } }
 
         public Dispatcher Dispatcher { get { return Dispatcher.Current; } }
 

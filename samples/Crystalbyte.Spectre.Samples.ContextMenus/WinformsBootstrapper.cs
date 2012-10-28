@@ -26,12 +26,11 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
+
         protected override void ConfigureSettings(ApplicationSettings settings) {
-            // In order to be able to debug commands, we will start the application in SP mode.
-            // Without SP mode, all rendering will be outsourced into a seperate process.
-            // SP mode is not for production use, for it is not actively maintained by the chromium project.
-            // PS. Kitten will die if you use it !
-            //settings.IsSingleProcess = true;
+#if DEBUG
+            settings.IsSingleProcess = true;
+#endif
             base.ConfigureSettings(settings);
         }
 

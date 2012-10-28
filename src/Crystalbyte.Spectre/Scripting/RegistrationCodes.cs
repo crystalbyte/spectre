@@ -6,7 +6,7 @@ using System.Text;
 namespace Crystalbyte.Spectre.Scripting {
     public static class RegistrationCodes {
         public static string Synthesize(string container, string name, params string[] arguments) {
-            var commaSepArgs = arguments.Aggregate((a, c) => a + "," + c);
+            var commaSepArgs = arguments.Any() ? arguments.Aggregate((a, c) => a + "," + c) : string.Empty;
             var code = string.Format(
                 "if(!{0}) {{" +
                 "    var {0} = {{ }};" +

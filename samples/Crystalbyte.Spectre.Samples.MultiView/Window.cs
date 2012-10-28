@@ -19,18 +19,33 @@
 #region Using directives
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ComponentModel;
+using System.Windows.Forms;
+using Crystalbyte.Spectre.UI;
+using Crystalbyte.Spectre;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples {
-    internal static class Program {
-        /// <summary>
-        ///   The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main() {
-            var bootstrapper = new WinformsBootstrapper();
-            bootstrapper.Run();
+    public partial class Window : Form {
+        public Window() {
+            InitializeComponent();
+        }
+
+        public IEnumerable<IRenderTarget> GetRenderTargets() {
+            return _layout.Controls.OfType<IRenderTarget>();
+        }
+
+        protected override void OnClosing(CancelEventArgs e) {
+            GetRenderTargets().OfType<Frame>().ForEach(x => x.OnClosing(e));
+            base.OnClosing(e);
+        }
+
+        protected override void OnClosed(EventArgs e) {
+            GetRenderTargets().OfType<Frame>().ForEach(x => x.OnClosed(e));
+            base.OnClosed(e);
         }
     }
 }

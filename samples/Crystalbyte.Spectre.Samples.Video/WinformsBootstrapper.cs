@@ -26,6 +26,7 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
+
         protected override void ConfigureSettings(ApplicationSettings settings) {
 #if DEBUG
             settings.IsSingleProcess = true;

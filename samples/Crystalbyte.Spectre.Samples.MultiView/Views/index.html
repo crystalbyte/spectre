@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Video</title>
+        <link href="../Styles/index.css" rel="stylesheet" />
+        <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script>
+            $('document').ready(function(window) {
+                $('#pidArea').text("PID: " + window.commands.getPID());
+            }(window));
+        </script>
+    </head>
+    <body>
+        <div id="content" >
+            <button onclick="commands.dock(false);">Undock</button>
+        </div>
+        <div id="pidArea" style="font-size: 0.2em;"></div>
+    </body>
+</html>

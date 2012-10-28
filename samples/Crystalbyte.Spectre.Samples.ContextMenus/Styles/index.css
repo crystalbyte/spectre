@@ -11,16 +11,10 @@ body {
     background-color: #252525;
 }
 
-.contextarea {
-    border: 3px dashed gray;
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-span {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+.center{
+	width:80px;
+	position:absolute;
+	left:50%;
+	top:50%;
+    margin: 0px 0px 0px -40px;
 }

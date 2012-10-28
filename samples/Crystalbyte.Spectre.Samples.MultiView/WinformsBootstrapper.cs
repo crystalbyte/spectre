@@ -21,32 +21,36 @@
 using System;
 using System.Collections.Generic;
 using Crystalbyte.Spectre.Samples.Commands;
-using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
+        private Window _window;
+
+        protected override void OnStarting(object sender, EventArgs e) {
+            _window = new Window();
+            _window.GetRenderTargets()
+                .ForEach(x => Application.Current.Add(new Viewport(x, new BrowserDelegate(x))));
+            _window.Show();
+        }
 
         protected override void ConfigureSettings(ApplicationSettings settings) {
-#if DEBUG
-            settings.IsSingleProcess = true;
-#endif
+            //settings.IsSingleProcess = true;
             base.ConfigureSettings(settings);
         }
 
-        protected override IList<ScriptingCommand> RegisterScriptingCommands() {
-            var extensions = base.RegisterScriptingCommands();
-            extensions.Add(new IncScriptingCommand());
-            extensions.Add(new IncAsyncScriptingCommand());
-            return extensions;
+        protected override IList<Scripting.ScriptingCommand> RegisterScriptingCommands() {
+            var commands = base.RegisterScriptingCommands();
+            commands.Add(new DockingCommand());
+            commands.Add(new InfoCommand());
+            return commands;
         }
 
         protected override IEnumerable<Viewport> CreateViewports() {
-            yield return new Viewport(
-                new Window { StartupUri = new Uri("spectre://localhost/Views/index.html") },
-                new BrowserDelegate());    
+            // views will be created dynamically
+            yield break;
         }
     }
 }

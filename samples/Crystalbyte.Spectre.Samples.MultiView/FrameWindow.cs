@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Crystalbyte.Spectre.Samples.MultiView {
-    public partial class Form1 : Form {
-        public Form1() {
+namespace Crystalbyte.Spectre.Samples {
+    public partial class FrameWindow : Form {
+        public FrameWindow() {
             InitializeComponent();
         }
     }

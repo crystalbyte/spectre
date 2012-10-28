@@ -39,6 +39,7 @@ namespace Crystalbyte.Spectre {
             var app = CreateAppDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
+            
 
             ConfigureSettings(Application.Current.Settings);
             Application.Current.Initialize(app);
@@ -55,8 +56,13 @@ namespace Crystalbyte.Spectre {
             var viewports = CreateViewports();
             viewports.ForEach(Application.Current.Add);
 
+            Application.Current.Starting += OnStarting;
             Application.Current.Run();
             Application.Current.Shutdown();
+        }
+
+        protected virtual void OnStarting(object sender, EventArgs e) {
+            // override
         }
 
         private void OnCustomSchemesRegistering(object sender, CustomSchemesRegisteringEventArgs e) {
