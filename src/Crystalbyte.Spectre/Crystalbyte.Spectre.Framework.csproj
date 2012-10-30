@@ -55,7 +55,7 @@
     <Compile Include="UI\ContextMenuCommandEventArgs.cs" />
     <Compile Include="ContextMenuHandler.cs" />
     <Compile Include="UI\ContextMenuItem.cs" />
-    <Compile Include="UI\ContextMenuItems.cs" />
+    <Compile Include="UI\ContextMenuItemCollection.cs" />
     <Compile Include="UI\ContextMenu.cs" />
     <Compile Include="UI\ContextMenuOpeningEventArgs.cs" />
     <Compile Include="UI\ContextMenuArgs.cs" />
