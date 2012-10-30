@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace Crystalbyte.Spectre.Samples {
-    class SampleBrowserDelegate : BrowserDelegate {
+    class ContextMenuBrowserDelegate : BrowserDelegate {
 
         protected override void OnContextMenuOpening(ContextMenuOpeningEventArgs e) {
             e.Menu.Items.Clear();

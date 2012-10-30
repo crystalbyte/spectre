@@ -20,24 +20,32 @@
 
 using System;
 using System.Collections.Generic;
+using Crystalbyte.Spectre.Samples.Commands;
 using Crystalbyte.Spectre.UI;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
+        private Window _window;
 
-        protected override void ConfigureSettings(ApplicationSettings settings) {
-#if DEBUG
-            settings.IsSingleProcess = true;
-#endif
-            base.ConfigureSettings(settings);
+        protected override void OnStarting(object sender, EventArgs e) {
+            _window = new Window();
+            _window.GetRenderTargets()
+                .ForEach(x => Application.Current.Add(new Viewport(x, new BrowserDelegate())));
+            _window.Show();
+        }
+
+        protected override IList<Scripting.ScriptingCommand> RegisterScriptingCommands() {
+            var commands = base.RegisterScriptingCommands();
+            commands.Add(new InfoCommand());
+            commands.Add(new IpcMessageCommand());
+            return commands;
         }
 
         protected override IEnumerable<Viewport> CreateViewports() {
-            yield return new Viewport(
-                new Window { StartupUri = new Uri("spectre://localhost/Views/index.html") },
-                new ContextMenuBrowserDelegate());    
+            // views will be created dynamically
+            yield break;
         }
     }
 }

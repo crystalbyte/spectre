@@ -25,11 +25,11 @@ using System.Collections.Generic;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenuItems {
+    public sealed class ContextMenuItemCollection {
         private readonly ContextMenu _menu;
         private readonly Dictionary<int, ContextMenuItem> _items;
 
-        public ContextMenuItems(ContextMenu menu) {
+        public ContextMenuItemCollection(ContextMenu menu) {
             if (menu == null) 
                 throw new ArgumentNullException("menu");
             _items = new Dictionary<int, ContextMenuItem>();

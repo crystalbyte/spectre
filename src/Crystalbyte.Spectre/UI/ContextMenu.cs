@@ -11,15 +11,15 @@ namespace Crystalbyte.Spectre.UI {
         private ContextMenu(IntPtr handle)
             : base(typeof(CefMenuModel)) {
             NativeHandle = handle;
-            _items = new ContextMenuItems(this);
+            _items = new ContextMenuItemCollection(this);
         }
 
         public static ContextMenu FromHandle(IntPtr handle) {
             return new ContextMenu(handle);
         }
 
-        private readonly ContextMenuItems _items;
-        public ContextMenuItems Items { get { return _items; } }
+        private readonly ContextMenuItemCollection _items;
+        public ContextMenuItemCollection Items { get { return _items; } }
 
         internal void Clear() {
             var r = MarshalFromNative<CefMenuModel>();

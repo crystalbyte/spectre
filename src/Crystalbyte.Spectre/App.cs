@@ -59,6 +59,8 @@ namespace Crystalbyte.Spectre {
             });
         }
 
+        public AppDelegate Delegate { get { return _delegate; } }
+
         private void OnRegisterCustomScheme(IntPtr self, IntPtr registrar) {
             var e = new CustomSchemesRegisteringEventArgs();
             _delegate.OnCustomSchemesRegistering(e);

@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
+using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
@@ -166,6 +167,12 @@ namespace Crystalbyte.Spectre.UI {
                          Marshal.GetDelegateForFunctionPointer(r.Reload, typeof (ReloadCallback));
             }
             action(NativeHandle);
+        }
+
+        public static Browser Current {
+            get {
+                return ScriptingContext.Current.Browser;
+            }
         }
 
         public void SendIpcMessage(ProcessType target, IpcMessage message) {
