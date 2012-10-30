@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Crystalbyte.Spectre.UI;
 using Size = Crystalbyte.Spectre.UI.Size;
@@ -24,10 +19,9 @@ namespace Crystalbyte.Spectre.Samples {
 
         public void NotifySizeChanged() {
             var handler = TargetSizeChanged;
-            if (handler != null) {
-                var size = ((IRenderTarget) this).Size;
-                handler(this, new SizeChangedEventArgs(size));
-            }
+            if (handler == null) return;
+            var size = ((IRenderTarget) this).Size;
+            handler(this, new SizeChangedEventArgs(size));
         }
 
         public event EventHandler TargetClosed;

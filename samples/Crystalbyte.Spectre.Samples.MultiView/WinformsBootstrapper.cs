@@ -32,18 +32,12 @@ namespace Crystalbyte.Spectre.Samples {
         protected override void OnStarting(object sender, EventArgs e) {
             _window = new Window();
             _window.GetRenderTargets()
-                .ForEach(x => Application.Current.Add(new Viewport(x, new BrowserDelegate(x))));
+                .ForEach(x => Application.Current.Add(new Viewport(x, new BrowserDelegate())));
             _window.Show();
-        }
-
-        protected override void ConfigureSettings(ApplicationSettings settings) {
-            //settings.IsSingleProcess = true;
-            base.ConfigureSettings(settings);
         }
 
         protected override IList<Scripting.ScriptingCommand> RegisterScriptingCommands() {
             var commands = base.RegisterScriptingCommands();
-            commands.Add(new DockingCommand());
             commands.Add(new InfoCommand());
             return commands;
         }

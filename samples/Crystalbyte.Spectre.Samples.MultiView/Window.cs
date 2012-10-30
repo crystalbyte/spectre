@@ -39,12 +39,17 @@ namespace Crystalbyte.Spectre.Samples {
         }
 
         protected override void OnClosing(CancelEventArgs e) {
-            GetRenderTargets().OfType<Frame>().ForEach(x => x.OnClosing(e));
+            var frames = _layout.Controls.OfType<Frame>().ToList();
+            //frames.ForEach(x => x.OnClosing(new CancelEventArgs()));
+            foreach (var frame in frames) {
+                frame.OnClosing(new CancelEventArgs());
+            }
             base.OnClosing(e);
         }
 
         protected override void OnClosed(EventArgs e) {
-            GetRenderTargets().OfType<Frame>().ForEach(x => x.OnClosed(e));
+            var frames = _layout.Controls.OfType<Frame>().ToList();
+            frames.ForEach(x => x.OnClosed(EventArgs.Empty));
             base.OnClosed(e);
         }
     }
