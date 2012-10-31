@@ -7,7 +7,7 @@
     <ProjectGuid>{33125B62-B19A-45F8-B546-66C1BC03C8E5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Crystalbyte.Spectre.Samples.Razor</RootNamespace>
+    <RootNamespace>Crystalbyte.Spectre.Samples</RootNamespace>
     <AssemblyName>Crystalbyte.Spectre.Samples.Razor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -23,13 +23,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,14 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window.Designer.cs">
+      <DependentUpon>Window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinformsBootstrapper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -60,7 +64,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -71,7 +79,34 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Crystalbyte.Spectre.Razor\Crystalbyte.Spectre.Razor.csproj">
+      <Project>{50708109-e81f-4451-a7df-dbeb4a1b0750}</Project>
+      <Name>Crystalbyte.Spectre.Razor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Crystalbyte.Spectre\Crystalbyte.Spectre.Framework.csproj">
+      <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
+      <Name>Crystalbyte.Spectre.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\index.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\home.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(CHROMIUM_SRC)build\$(Configuration)\*.pak" "$(TargetDir)" /i /y 
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\av*.dll" "$(TargetDir)" /i /y
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\lib*.dll" "$(TargetDir)" /i /y 
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\locales\*" "$(TargetDir)\locales\" /i /y 
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\av*.dll" "$(TargetDir)" /i /y 
+REM xcopy "$(CHROMIUM_SRC)build\$(Configuration)\lib*.pdb" "$(TargetDir)" /i /y 
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\icudt.dll" "$(TargetDir)" /i /y</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

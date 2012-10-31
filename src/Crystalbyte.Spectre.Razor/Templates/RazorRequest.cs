@@ -16,21 +16,12 @@
 
 #endregion
 
-#region Using directives
-
-using System;
-
-#endregion
-
-namespace Crystalbyte.Spectre.Samples {
-    internal static class Program {
-        /// <summary>
-        ///   The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main() {
-            var bootstrapper = new WinformsBootstrapper();
-            bootstrapper.Run();
-        }
+namespace Crystalbyte.Spectre.Razor.Templates {
+    /// <summary>
+    ///   Not used at the moment - more of a placeholder for now
+    /// </summary>
+    public class RazorRequest {
+        public string TemplatePath { get; set; }
+        public string TemplateRelativePath { get; set; }
     }
 }

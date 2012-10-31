@@ -1,5 +1,5 @@
-﻿namespace Crystalbyte.Spectre.Samples.Razor {
-    partial class Form1 {
+﻿namespace Crystalbyte.Spectre.Samples {
+    partial class Window {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,9 +23,22 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Window
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(884, 552);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(900, 590);
+            this.Name = "Window";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Spectre -WebM Video Sample";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

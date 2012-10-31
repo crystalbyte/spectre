@@ -1,0 +1,44 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: whitesmoke;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: #252525;
+    font-family: 'Segoe UI';
+    font-size: 1em;
+}
+
+button {
+    padding: 3px;
+    margin-top: 5px;
+    width: 70px;
+    display: inline-block;
+    background-color: #353535;
+    border: 1px solid red;
+}
+
+    button:hover {
+        background-color: #454545;
+    }
+
+    button:active {
+        background-color: red;
+        border: 1px solid #454545;
+    }
+
+    button[disabled] {
+        border: 1px solid #858585;
+        background-color: #454545;
+        color: #858585;
+    }
+
+video {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 1px solid red;
+}
