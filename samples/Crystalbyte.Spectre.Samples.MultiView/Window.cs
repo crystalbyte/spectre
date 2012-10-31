@@ -40,10 +40,7 @@ namespace Crystalbyte.Spectre.Samples {
 
         protected override void OnClosing(CancelEventArgs e) {
             var frames = _layout.Controls.OfType<Frame>().ToList();
-            //frames.ForEach(x => x.OnClosing(new CancelEventArgs()));
-            foreach (var frame in frames) {
-                frame.OnClosing(new CancelEventArgs());
-            }
+            frames.ForEach(x => x.OnClosing(new CancelEventArgs()));
             base.OnClosing(e);
         }
 
