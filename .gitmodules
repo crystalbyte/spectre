@@ -1,0 +1,3 @@
+[submodule "submodules/mono.aspnetwebstack"]
+	path = submodules/mono.aspnetwebstack
+	url = git://github.com/mono/aspnetwebstack.git
