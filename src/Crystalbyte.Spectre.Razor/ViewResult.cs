@@ -10,5 +10,9 @@ namespace Crystalbyte.Spectre.Razor {
         public ViewResult(IView view) {
             _view = view;
         }
+
+        public override void ExecuteResult(ControllerContext context) {
+            _view.Render(new ViewContext(context), context.ResponseWriter.TextWriter);
+        }
     }
 }

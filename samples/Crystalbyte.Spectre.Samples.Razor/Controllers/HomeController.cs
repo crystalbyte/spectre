@@ -7,7 +7,7 @@ using Crystalbyte.Spectre.Samples.Models;
 
 namespace Crystalbyte.Spectre.Samples.Controllers {
     public sealed class HomeController : Controller {
-        public override ActionResult ComposeView() {
+        public override ActionResult Execute() {
             return View(new HomeModel());
         }
     }

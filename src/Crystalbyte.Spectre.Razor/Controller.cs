@@ -1,17 +1,18 @@
-﻿using Crystalbyte.Spectre.Razor.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre.Razor {
     public abstract class Controller {
-        public RequestContext RequestContext { get; private set; }
-        public void Initialize(RequestContext context) {
-            RequestContext = context;
+        public void Initialize(Request request) {
+            if (request == null) 
+                throw new ArgumentNullException("request");
+
+            Request = request;
         }
 
-        public abstract ActionResult ComposeView();
+        protected Request Request { get; private set; }
+
+        public abstract ActionResult Execute();
 
         protected ViewResult View(object model) {
             return new ViewResult(new RazorView(model));

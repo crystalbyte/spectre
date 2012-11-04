@@ -67,6 +67,7 @@
     <Compile Include="UI\MediaType.cs" />
     <Compile Include="UI\NodeTypes.cs" />
     <Compile Include="UI\PageChangeNotificationDialogOpening.cs" />
+    <Compile Include="Web\IResponseContext.cs" />
     <Compile Include="Web\SpectreSchemeHandler.cs" />
     <Compile Include="Web\SpectreSchemeDescriptor.cs" />
     <Compile Include="Web\SpectreSchemeHandlerFactory.cs" />

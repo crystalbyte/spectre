@@ -39,7 +39,7 @@ namespace Crystalbyte.Spectre.Samples {
         }
 
         protected override void OnStarting(object sender, EventArgs e) {
-            RazorViewRegistrar.Register("spectre://localhost/Controllers/Home", typeof(HomeController));
+            ControllerRegistrar.Register("home", typeof(HomeController));
             base.OnStarting(sender, e);
         }
 

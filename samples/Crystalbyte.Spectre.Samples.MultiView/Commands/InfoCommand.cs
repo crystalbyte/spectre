@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using Crystalbyte.Spectre.Scripting;
-using System.Windows.Forms;
-using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre.Samples.Commands {
     class InfoCommand : ScriptingCommand {

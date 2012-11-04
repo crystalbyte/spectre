@@ -1,30 +1,34 @@
-﻿using Crystalbyte.Spectre.Razor.Routing;
-using Crystalbyte.Spectre.Web;
-using System;
-using System.Collections.Generic;
+﻿using Crystalbyte.Spectre.Web;
+using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Crystalbyte.Spectre.Razor {
-    public sealed class RazorDataProvider : IDataProvider {
+    public sealed class RazorDataProvider : IDataProvider, IResponseWriter {
         private Request _request;
-        private Response _response;
+        private ActionResult _result;
+        private TextWriter _textWriter;
 
         public bool OnRequestProcessing(Request request) {
             _request = request;
-            return RazorViewRegistrar.CanServe(request.Url);
+            var name = request.Url.Split('/').Last();
+            return ControllerRegistrar.CanServe(name);
         }
 
         public void OnDataBlockReading(DataBlockReadingEventArgs e) {
-            throw new NotImplementedException();
+            var name = _request.Url.Split('/').Last();
+            var context = HostingRuntime.GetContext(name);
         }
 
         public void OnResponseHeadersReading(ResponseHeadersReadingEventArgs e) {
-            _response = e.Response;
-
-            var controller = RazorViewRegistrar.CreateInstance(_request.Url);
-            controller.Initialize(new RequestContext(_request, _response));
-            var view = controller.ComposeView();
+            var name = _request.Url.Split('/').Last();
+            var controller = ControllerRegistrar.CreateInstance(name);
+            controller.Initialize(_request);
+            _result = controller.Execute();
+            _result.ExecuteResult(new ControllerContext(e, controller, this));
+        }
+     
+        public TextWriter TextWriter {
+            get { return _textWriter ?? (_textWriter = new StringWriter()); }
         }
     }
 }

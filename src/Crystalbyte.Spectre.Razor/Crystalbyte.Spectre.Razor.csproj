@@ -52,6 +52,8 @@
     <Compile Include="ActionResult.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="ControllerContext.cs" />
+    <Compile Include="HostingContext.cs" />
+    <Compile Include="HostingRuntime.cs" />
     <Compile Include="Hosting\Containers\RazorBaseHostContainer.cs" />
     <Compile Include="Hosting\Containers\RazorFolderHostContainer.cs" />
     <Compile Include="Hosting\Containers\RazorStringHostContainer.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Hosting\RazorEngineConfiguration.cs" />
     <Compile Include="Hosting\RazorEngineFactory.cs" />
     <Compile Include="Hosting\Utilities.cs" />
+    <Compile Include="IResponseWriter.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -68,13 +71,13 @@
     </Compile>
     <Compile Include="RazorDataProvider.cs" />
     <Compile Include="RazorView.cs" />
-    <Compile Include="RazorViewRegistrar.cs" />
+    <Compile Include="ControllerRegistrar.cs" />
     <Compile Include="RedirectResult.cs" />
-    <Compile Include="Routing\RequestContext.cs" />
     <Compile Include="Templates\RazorRequest.cs" />
     <Compile Include="Templates\RazorResponse.cs" />
     <Compile Include="Templates\RazorTemplateBase.cs" />
     <Compile Include="Templates\RazorTemplateFolderHost.cs" />
+    <Compile Include="ViewContext.cs" />
     <Compile Include="ViewResult.cs" />
   </ItemGroup>
   <ItemGroup>
