@@ -1,19 +1,32 @@
-﻿<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+﻿@using Crystalbyte.Spectre.Samples.Support
+@inherits  Crystalbyte.Spectre.Razor.Templates.RazorFolderHostTemplate
+               
+@{
+    var model = (Crystalbyte.Spectre.Samples.Models.HomeModel)Context;
+}
+
+<html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Video</title>
-        <link href="../Styles/index.css" rel="stylesheet" />
+        <title>Razor</title>
+        @foreach (var style in model.Styles) {
+            @Style.Link(style);
+        }
+        @foreach (var script in model.Scripts) {
+            @Script.Reference(script);
+        }
     </head>
     <body>
-        <div id="content" >
-            <video id="bunny" width="853" height="480"
-                   src="http://ie.microsoft.com/testdrive/graphics/videoformatsupport/big_buck_bunny_trailer_480p.webm" 
-                   preload="metadata"></video>
-            <div style="position: absolute; bottom: 20px; right:20px;">
-                <button onclick="player.play();">Play</button>
-                <button onclick="player.pause();">Pause</button>
-                <button onclick="player.stop();">Stop</button>                
+        <div class="content" >
+            <div>
+                @Html.Header(model.Header)
             </div>
+            <div>
+                @Html.Span(model.Description)
+            </div>
+            <footer>
+                <span>created on: @model.CreationDate.ToShortDateString()</span>
+            </footer>
         </div>
     </body>
 </html>

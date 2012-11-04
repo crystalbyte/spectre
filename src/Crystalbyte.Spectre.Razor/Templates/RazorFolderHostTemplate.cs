@@ -27,7 +27,7 @@ namespace Crystalbyte.Spectre.Razor.Templates {
     ///   Custom template implementation for the FolderHostContainer that supports 
     ///   relative path based partial rendering.
     /// </summary>
-    public class RazorTemplateFolderHost : RazorTemplateBase {
+    public class RazorFolderHostTemplate : RazorTemplateBase {
         public override void InitializeTemplate(object context, object configurationData) {
             // Pick up configuration data and stuff into Request object
             var config = configurationData as RazorFolderHostTemplateConfiguration;

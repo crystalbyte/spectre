@@ -15,11 +15,9 @@ namespace Crystalbyte.Spectre.Razor {
             }
         }
 
-        public IList<string> ReferencedAssemblies { get; set; }
-
         public string ViewName {
             get { 
-                return string.Format("Views/{0}View.cshtml", _context
+                return string.Format("{0}View.cshtml", _context
                     .Controller.GetType().Name.Replace("Controller", string.Empty)); 
             }
         }

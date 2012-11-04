@@ -38,7 +38,7 @@ namespace Crystalbyte.Spectre.Razor.Hosting.Containers {
     ///   For any other template implementation use the generic parameter
     ///   to specify the template type.
     /// </summary>
-    public class RazorFolderHostContainer : RazorFolderHostContainer<RazorTemplateFolderHost> {}
+    public class RazorFolderHostContainer : RazorFolderHostContainer<RazorFolderHostTemplate> {}
 
     /// <summary>
     ///   This class is a caching directory based host wrapper around
@@ -49,7 +49,7 @@ namespace Crystalbyte.Spectre.Razor.Hosting.Containers {
     ///   Runs Razor Templates in a seperate AppDomain
     /// </summary>
     /// <typeparam name="TBaseTemplate"> The type of the base template to use </typeparam>
-    public class RazorFolderHostContainer<TBaseTemplate> : RazorBaseHostContainer<RazorTemplateFolderHost> {
+    public class RazorFolderHostContainer<TBaseTemplate> : RazorBaseHostContainer<RazorFolderHostTemplate> {
         /// <summary>
         ///   The Path where templates live
         /// </summary>

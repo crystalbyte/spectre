@@ -7,5 +7,6 @@ using System.Text;
 namespace Crystalbyte.Spectre.Razor {
     public interface IResponseWriter {
         TextWriter TextWriter { get; }
+        void Finish();
     }
 }

@@ -76,7 +76,7 @@
     <Compile Include="Templates\RazorRequest.cs" />
     <Compile Include="Templates\RazorResponse.cs" />
     <Compile Include="Templates\RazorTemplateBase.cs" />
-    <Compile Include="Templates\RazorTemplateFolderHost.cs" />
+    <Compile Include="Templates\RazorFolderHostTemplate.cs" />
     <Compile Include="ViewContext.cs" />
     <Compile Include="ViewResult.cs" />
   </ItemGroup>

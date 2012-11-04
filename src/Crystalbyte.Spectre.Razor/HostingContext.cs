@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Crystalbyte.Spectre.Razor.Hosting.Containers;
@@ -10,7 +11,7 @@ namespace Crystalbyte.Spectre.Razor {
 
         public HostingContext(string relativePath) {
             _host = new RazorFolderHostContainer {
-                TemplatePath = relativePath
+                TemplatePath = Path.Combine(Environment.CurrentDirectory, relativePath)
             };
         }
 

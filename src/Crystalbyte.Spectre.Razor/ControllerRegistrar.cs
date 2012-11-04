@@ -8,11 +8,7 @@ namespace Crystalbyte.Spectre.Razor {
         private static readonly Dictionary<string, Type>
             _controllers = new Dictionary<string, Type>();
 
-        public static void Register(string url, Type type) {
-            if (url == null) {
-                throw new ArgumentNullException("url");
-            }
-
+        public static void Register(Type type) {
             if (type == null) {
                 throw new ArgumentNullException("type");
             }

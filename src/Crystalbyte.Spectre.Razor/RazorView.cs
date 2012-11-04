@@ -16,18 +16,20 @@ namespace Crystalbyte.Spectre.Razor {
         }
 
         public void Render(ViewContext viewContext, TextWriter writer) {
-            var name = viewContext.ViewName;
-
-            var context = HostingRuntime.GetContext("Controllers");
+            var context = HostingRuntime.GetContext("Views");
             if (!context.IsStarted) {
                 context.Start();
             }
 
-            
-            
+            var references = viewContext.ControllerContext.Controller.ConfigureReferencedAssemblies();
+            context.Host.ReferencedAssemblies.AddRange(references);
 
+            var success = context.Host.RenderTemplate(viewContext.ViewName, _model, writer);
+            if (!success) {
+                throw new InvalidOperationException(context.Host.ErrorMessage);
+            }
 
-
+            viewContext.ControllerContext.ResponseWriter.Finish();
         }
     }
 }
