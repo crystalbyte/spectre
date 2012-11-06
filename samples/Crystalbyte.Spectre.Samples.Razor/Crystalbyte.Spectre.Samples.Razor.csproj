@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Crystalbyte.Spectre.Samples</RootNamespace>
     <AssemblyName>Crystalbyte.Spectre.Samples.Razor</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -39,7 +40,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -84,11 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Crystalbyte.Spectre.Razor\Crystalbyte.Spectre.Razor.csproj">
-      <Project>{50708109-e81f-4451-a7df-dbeb4a1b0750}</Project>
+      <Project>{50708109-E81F-4451-A7DF-DBEB4A1B0750}</Project>
       <Name>Crystalbyte.Spectre.Razor</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Crystalbyte.Spectre\Crystalbyte.Spectre.Framework.csproj">
-      <Project>{dc202e77-073a-4881-84c9-94b6bc7469b4}</Project>
+      <Project>{DC202E77-073A-4881-84C9-94B6BC7469B4}</Project>
       <Name>Crystalbyte.Spectre.Framework</Name>
     </ProjectReference>
   </ItemGroup>

@@ -103,8 +103,7 @@ namespace Crystalbyte.Spectre.Samples.Commands {
                 if (!success) {
                     return;
                 }
-
-                callback.Execute(arguments: new JavaScriptObject(value));    
+                callback.Execute(new JavaScriptObject(value));    
                 context.Exit();
             });
         }
