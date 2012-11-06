@@ -25,11 +25,11 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre {
     internal sealed class BrowserProcessHandler : OwnedRefCountedNativeObject {
-        private readonly AppDelegate _appDelegate;
+        //private readonly AppDelegate _appDelegate;
 
         public BrowserProcessHandler(AppDelegate appDelegate)
             : base(typeof (CefBrowserProcessHandler)) {
-            _appDelegate = appDelegate;
+            //_appDelegate = appDelegate;
             // TODO: Implement event handlers.
             MarshalToNative(new CefBrowserProcessHandler {
                 Base = DedicatedBase

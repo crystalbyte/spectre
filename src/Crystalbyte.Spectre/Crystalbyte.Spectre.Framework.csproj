@@ -209,7 +209,7 @@
   -->
   <ItemGroup>
     <ProjectReference Include="..\Crystalbyte.Spectre.Projections\Crystalbyte.Spectre.Projections.csproj">
-      <Project>{8ccc057c-fa77-4f49-bacd-5f6ebab13c14}</Project>
+      <Project>{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}</Project>
       <Name>Crystalbyte.Spectre.Projections</Name>
     </ProjectReference>
   </ItemGroup>
