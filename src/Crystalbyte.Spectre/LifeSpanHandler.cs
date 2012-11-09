@@ -61,7 +61,7 @@ namespace Crystalbyte.Spectre {
             var e = new BrowserClosedEventArgs(b);
             _delegate.OnClosed(e);
 
-            // Need to call Dispose manually, since the GC will not be able to free the browser instance b above for it will be referenced by local scope.
+            // Need to call Dispose manually, since the GC will not be able to free the browser instance b above, for it will be still referenced by local scope.
             b.Dispose();
 
             //// CEF requires all objects to be freed before the window is actually closed.
