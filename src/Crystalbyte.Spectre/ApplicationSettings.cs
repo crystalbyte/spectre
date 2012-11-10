@@ -38,53 +38,53 @@ namespace Crystalbyte.Spectre {
 
         public string BrowserSubprocessPath {
             get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return Marshal.PtrToStringUni(reflection.BrowserSubprocessPath.Str);
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.BrowserSubprocessPath.Str);
             }
             set {
-                var reflection = MarshalFromNative<CefSettings>();
-                reflection.BrowserSubprocessPath = new CefStringUtf16 {
+                var r = MarshalFromNative<CefSettings>();
+                r.BrowserSubprocessPath = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-                MarshalToNative(reflection);
+                MarshalToNative(r);
             }
         }
 
         public string LocalesDirPath {
             get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return Marshal.PtrToStringUni(reflection.LocalesDirPath.Str);
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.LocalesDirPath.Str);
             }
             set {
-                var reflection = MarshalFromNative<CefSettings>();
-                reflection.LocalesDirPath = new CefStringUtf16 {
+                var r = MarshalFromNative<CefSettings>();
+                r.LocalesDirPath = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-                MarshalToNative(reflection);
+                MarshalToNative(r);
             }
         }
 
         public string Locale {
             get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return Marshal.PtrToStringUni(reflection.Locale.Str);
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.Locale.Str);
             }
             set {
-                var reflection = MarshalFromNative<CefSettings>();
-                reflection.Locale = new CefStringUtf16 {
+                var r = MarshalFromNative<CefSettings>();
+                r.Locale = new CefStringUtf16 {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
-                MarshalToNative(reflection);
+                MarshalToNative(r);
             }
         }
 
         public LogSeverity LogSeverity {
             get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return (LogSeverity) reflection.LogSeverity;
+                var r = MarshalFromNative<CefSettings>();
+                return (LogSeverity) r.LogSeverity;
             }
             set {
                 var reflection = MarshalFromNative<CefSettings>();
@@ -95,13 +95,13 @@ namespace Crystalbyte.Spectre {
 
         public bool IsMessageLoopMultiThreaded {
             get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return reflection.MultiThreadedMessageLoop;
+                var r = MarshalFromNative<CefSettings>();
+                return r.MultiThreadedMessageLoop;
             }
             set {
-                var reflection = MarshalFromNative<CefSettings>();
-                reflection.MultiThreadedMessageLoop = value;
-                MarshalToNative(reflection);
+                var r = MarshalFromNative<CefSettings>();
+                r.MultiThreadedMessageLoop = value;
+                MarshalToNative(r);
             }
         }
 

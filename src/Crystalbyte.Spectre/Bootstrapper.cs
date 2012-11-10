@@ -77,11 +77,15 @@ namespace Crystalbyte.Spectre {
         protected virtual void ConfigureSettings(ApplicationSettings settings) {
 			if (Platform.IsLinux || Platform.IsOsX) {
 				var fullname = Assembly.GetEntryAssembly().Location;
-				settings.BrowserSubprocessPath = string.Format("/usr/bin/mono {0}", fullname);
+				settings.BrowserSubprocessPath = string.Format("/usr/bin/mono \"{0}\"", fullname);
 			}
 
-			settings.Locale = CultureInfo.CurrentCulture.Name;
-			settings.LocalesDirPath = "./locales";
+			var culture = CultureInfo.CurrentCulture.Name;
+			settings.Locale = culture != string.Empty ? culture	: "en-US";
+
+			var modulePath = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
+			settings.LocalesDirPath = Path.Combine(modulePath, "locales");
+
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;
 #else
