@@ -29,10 +29,10 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre.Scripting {
     public sealed class JavaScriptDialogHandler : OwnedRefCountedNativeObject {
-        private readonly OnBeforeUnloadDialogCallback _beforeUnloadDialogCallback;
+        private readonly CefJsdialogHandlerCapiDelegates.OnBeforeUnloadDialogCallback _beforeUnloadDialogCallback;
+        private readonly CefJsdialogHandlerCapiDelegates.OnJsdialogCallback _jsDialogCallback;
+        private readonly CefJsdialogHandlerCapiDelegates.OnResetDialogStateCallback _resetDialogStateCallback;
         private readonly BrowserDelegate _browserDelegate;
-        private readonly OnJsdialogCallback _jsDialogCallback;
-        private readonly OnResetDialogStateCallback _resetDialogStateCallback;
 
         public JavaScriptDialogHandler(BrowserDelegate browserDelegate)
             : base(typeof (CefJsdialogHandler)) {

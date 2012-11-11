@@ -17,7 +17,7 @@ using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
+namespace Crystalbyte.Spectre
 {
     public sealed class DiscoveryService
     {

@@ -17,7 +17,7 @@ using System.IO;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
+namespace Crystalbyte.Spectre
 {
     public sealed class CSharpCodeWriter : IDisposable
     {
@@ -45,7 +45,7 @@ namespace Crystalbyte.Chocolate
             WriteUsingDirective("System.Runtime.InteropServices");
             WriteUsingDirective("System.Collections.Generic");
             WriteUsingDirective("System.Security");
-            WriteUsingDirective("Crystalbyte.Chocolate.Projections.Internal");
+            WriteUsingDirective("Crystalbyte.Spectre.Projections.Internal");
             _writer.Write(Environment.NewLine);
         }
 

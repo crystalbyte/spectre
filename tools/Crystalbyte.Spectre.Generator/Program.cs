@@ -21,14 +21,14 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
+namespace Crystalbyte.Spectre
 {
     internal class Program
     {
         private static void Main(string[] args)
         {
             const string envVarName = "CHROMIUM_SRC";
-            const string projectName = "Crystalbyte.Chocolate.Projections";
+            const string projectName = "Crystalbyte.Spectre.Projections";
 
             var created = false;
 
@@ -36,17 +36,17 @@ namespace Crystalbyte.Chocolate
             if (directoryInfo == null) 
                 return;
 
-            var solutionDir = directoryInfo.Parent.Parent.Parent.FullName;            
+            var solutionDir = Path.Combine(directoryInfo.Parent.Parent.Parent.Parent.FullName,"src");            
             var outputDir = Path.Combine(solutionDir, projectName);
 
             var chromiumPath = Environment.GetEnvironmentVariable(envVarName);
-            if (string.IsNullOrWhiteSpace(chromiumPath))
-            {
+            if (string.IsNullOrWhiteSpace(chromiumPath)) {
                 //chromiumPath = "/home/alexander/Development/Google/chromium/src/";
                 MessageBox.Show(
                     "Environmental variable 'CHROMIUM_SRC' not set, unable to determine Chromium source path.");
                 Application.Exit();
             }
+
             var sourceDir = Path.Combine(chromiumPath, "cef", "include");
             var dirs = new List<string> {Path.Combine(sourceDir, "capi"), Path.Combine(sourceDir, "internal")};
 

@@ -17,7 +17,7 @@ using System.Linq;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
+namespace Crystalbyte.Spectre
 {
     internal static class StringExtensions
     {

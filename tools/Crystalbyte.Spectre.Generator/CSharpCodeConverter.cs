@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
+namespace Crystalbyte.Spectre
 {
     public static class CSharpCodeConverter
     {

@@ -34,8 +34,8 @@ namespace Crystalbyte.Spectre.Scripting {
 
         public void Resume(bool success, string message = "") {
             var r = MarshalFromNative<CefJsdialogCallback>();
-            var action = (ContinueCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (ContinueCallback));
+            var action = (CefJsdialogHandlerCapiDelegates.ContCallback6)
+                         Marshal.GetDelegateForFunctionPointer(r.Cont, typeof(CefJsdialogHandlerCapiDelegates.ContCallback6));
             var input = new StringUtf16(message);
             action(NativeHandle, Convert.ToInt32(success), input.NativeHandle);
             input.Free();
@@ -45,10 +45,10 @@ namespace Crystalbyte.Spectre.Scripting {
             return new JavaScriptDialogCallback(handle);
         }
 
-        #region Nested type: ContinueCallback
+        //#region Nested type: ContinueCallback
 
-        private delegate void ContinueCallback(IntPtr self, int success, IntPtr userInput);
+        //private delegate void ContinueCallback(IntPtr self, int success, IntPtr userInput);
 
-        #endregion
+        //#endregion
     }
 }

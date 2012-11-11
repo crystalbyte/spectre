@@ -21,17 +21,17 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace Crystalbyte.Chocolate
+namespace Crystalbyte.Spectre
 {
     public sealed class ProjectionsGenerator
     {
-        private readonly Dictionary<string, string> _delegeteArchive;
+        private readonly Dictionary<string, string> _delegateArchive;
         private readonly GeneratorSettings _settings;
 
         public ProjectionsGenerator(GeneratorSettings settings)
         {
             _settings = settings;
-            _delegeteArchive = new Dictionary<string, string>();
+            _delegateArchive = new Dictionary<string, string>();
         }
 
         public void Generate()
@@ -103,7 +103,7 @@ namespace Crystalbyte.Chocolate
                     if (structs.Count > 0)
                     {
                         var prefix = DeterminePrefix(name);
-                        GenerateStruct(cw, structs, prefix);
+                        GenerateStruct(cw, structs, prefix, name.Split('.').First());
                         cw.WriteLine(string.Empty);
                     }
 
@@ -170,7 +170,7 @@ namespace Crystalbyte.Chocolate
             return (from Match match in matches select match.Value).ToList();
         }
 
-        private void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs, string prefix = "")
+        private void GenerateStruct(CSharpCodeWriter cw, IEnumerable<string> structs, string prefix = "", string className = "")
         {
             var delegates = new List<string>();
             foreach (var @struct in structs)
@@ -194,18 +194,39 @@ namespace Crystalbyte.Chocolate
                 cw.WriteLine(string.Empty);
             }
 
+            var container = className + "Delegates";
+            cw.BeginClass(container);
+
             foreach (var @delegate in delegates)
             {
                 string name;
-                var @d = CSharpCodeConverter.CreateDelegate(@delegate, out name);
-                if (_delegeteArchive.ContainsKey(name))
+                var @d = CSharpCodeConverter.CreateDelegate(@delegate, out name).Trim();
+
+                var original = name;
+
+                var number = 1;
+                while (_delegateArchive.ContainsKey(name))
                 {
-                    Debug.WriteLine("skipped delegate", name);
-                    continue;
+                    var value = _delegateArchive[name];
+                    if (value == @d)
+                    {
+                        Debug.WriteLine("Skipping duplicate delegate '{0}:{1}", name, @d);
+                        break;
+                    }
+                    var c = number.ToString().First();
+                    name = name.TrimEnd(c) + (number+=1);
                 }
+
+                if (_delegateArchive.ContainsKey(name)) 
+                    continue;
+
+                @d = @d.Replace(original, name);
+
                 cw.WriteLine(@d);
-                _delegeteArchive.Add(name, @delegate);
+                _delegateArchive.Add(name, @d);
             }
+
+            cw.EndClass();
         }
 
         private static void GenerateClass(CSharpCodeWriter cw, IEnumerable<string> methods, string name, string suffix)

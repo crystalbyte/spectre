@@ -8,8 +8,8 @@
     <ProjectGuid>{02034A86-60A8-4AD6-A291-EA1B2D3FC743}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Crystalbyte.Chocolate</RootNamespace>
-    <AssemblyName>Crystalbyte.Chocolate.BindingsGenerator</AssemblyName>
+    <RootNamespace>Crystalbyte.Spectre</RootNamespace>
+    <AssemblyName>Crystalbyte.Spectre.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
