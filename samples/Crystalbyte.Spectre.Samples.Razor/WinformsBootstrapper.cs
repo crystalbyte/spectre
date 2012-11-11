@@ -32,10 +32,11 @@ namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
 
         protected override void ConfigureSettings(ApplicationSettings settings) {
+            base.ConfigureSettings(settings);
+
 #if DEBUG
             settings.IsSingleProcess = true;
 #endif
-            base.ConfigureSettings(settings);
         }
 
         protected override void OnStarting(object sender, EventArgs e) {

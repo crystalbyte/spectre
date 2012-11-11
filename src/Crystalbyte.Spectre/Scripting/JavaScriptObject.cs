@@ -299,10 +299,10 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         JavaScriptObject IFunction.Execute(params JavaScriptObject[] arguments) {
-            return (this as IFunction).Execute(Null, arguments);
+            return (this as IFunction).ExecuteWithTarget(Null, arguments);
         }
 
-        JavaScriptObject IFunction.Execute(JavaScriptObject target, params JavaScriptObject[] arguments) {
+        JavaScriptObject IFunction.ExecuteWithTarget(JavaScriptObject target, params JavaScriptObject[] arguments) {
             if (target == null)
                 throw new ArgumentNullException("target");
 
@@ -320,7 +320,7 @@ namespace Crystalbyte.Spectre.Scripting {
             return result;
         }
 
-        JavaScriptObject IFunction.Execute(ScriptingContext context, JavaScriptObject target,
+        JavaScriptObject IFunction.ExecuteWithContextAndTarget(ScriptingContext context, JavaScriptObject target,
                                            params JavaScriptObject[] arguments) {
             if (context == null)
                 throw new ArgumentNullException("context");
