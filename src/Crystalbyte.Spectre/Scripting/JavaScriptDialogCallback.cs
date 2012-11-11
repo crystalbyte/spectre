@@ -44,11 +44,5 @@ namespace Crystalbyte.Spectre.Scripting {
         public static JavaScriptDialogCallback FromHandle(IntPtr handle) {
             return new JavaScriptDialogCallback(handle);
         }
-
-        //#region Nested type: ContinueCallback
-
-        //private delegate void ContinueCallback(IntPtr self, int success, IntPtr userInput);
-
-        //#endregion
     }
 }
