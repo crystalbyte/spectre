@@ -43,8 +43,11 @@ namespace Crystalbyte.Spectre {
         public bool IsReadOnly {
             get {
                 var r = MarshalFromNative<CefProcessMessage>();
-                var function = (IsReadOnlyCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsReadOnly, typeof (IsReadOnlyCallback));
+                var function = (CefProcessMessageCapiDelegates.IsReadOnlyCallback2)
+                               Marshal.GetDelegateForFunctionPointer(r.IsReadOnly,
+                                                                     typeof (
+                                                                         CefProcessMessageCapiDelegates.
+                                                                         IsReadOnlyCallback2));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -53,8 +56,11 @@ namespace Crystalbyte.Spectre {
         public bool IsValid {
             get {
                 var r = MarshalFromNative<CefProcessMessage>();
-                var function = (IsValidCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsValid, typeof (IsValidCallback));
+                var function = (CefProcessMessageCapiDelegates.IsValidCallback4)
+                               Marshal.GetDelegateForFunctionPointer(r.IsValid,
+                                                                     typeof (
+                                                                         CefProcessMessageCapiDelegates.IsValidCallback4
+                                                                         ));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -63,8 +69,11 @@ namespace Crystalbyte.Spectre {
         public string Name {
             get {
                 var r = MarshalFromNative<CefProcessMessage>();
-                var function = (GetNameCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetName, typeof (GetNameCallback));
+                var function = (CefProcessMessageCapiDelegates.GetNameCallback3)
+                               Marshal.GetDelegateForFunctionPointer(r.GetName,
+                                                                     typeof (
+                                                                         CefProcessMessageCapiDelegates.GetNameCallback3
+                                                                         ));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
@@ -74,8 +83,10 @@ namespace Crystalbyte.Spectre {
             get {
                 var r = MarshalFromNative<CefProcessMessage>();
                 var function =
-                    (GetArgumentListCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.GetArgumentList, typeof (GetArgumentListCallback));
+                    (CefProcessMessageCapiDelegates.GetArgumentListCallback)
+                    Marshal.GetDelegateForFunctionPointer(r.GetArgumentList,
+                                                          typeof (CefProcessMessageCapiDelegates.GetArgumentListCallback
+                                                              ));
                 var handle = function(NativeHandle);
                 return ObjectCollection.FromHandle(handle);
             }

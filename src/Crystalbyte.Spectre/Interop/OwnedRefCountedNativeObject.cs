@@ -31,10 +31,10 @@ namespace Crystalbyte.Spectre.Interop {
     ///   Memory is released once the reference counter reaches zero.
     /// </summary>
     public abstract class OwnedRefCountedNativeObject : RefCountedNativeObject {
-        private readonly ReleaseCallback _decrementDelegate;
+        private readonly CefBaseCapiDelegates.ReleaseCallback _decrementDelegate;
+        private readonly CefBaseCapiDelegates.GetRefctCallback _getRefCountDelegate;
+        private readonly CefBaseCapiDelegates.AddRefCallback _incrementDelegate;
         private readonly CefBase _dedicatedBase;
-        private readonly GetRefctCallback _getRefCountDelegate;
-        private readonly AddRefCallback _incrementDelegate;
         private readonly object _mutex;
         private int _referenceCounter;
 

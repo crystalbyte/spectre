@@ -28,12 +28,12 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre {
     internal sealed class App : OwnedRefCountedNativeObject {
-        private readonly OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
+        private readonly CefAppCapiDelegates.OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
         private readonly BrowserProcessHandler _browserProcessHandler;
         private readonly AppDelegate _delegate;
-        private readonly GetBrowserProcessHandlerCallback _getBrowserProcessHandlerCallback;
-        private readonly GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
-        private readonly OnRegisterCustomSchemesCallback _registerCustomSchemeCallback;
+        private readonly CefAppCapiDelegates.GetBrowserProcessHandlerCallback _getBrowserProcessHandlerCallback;
+        private readonly CefAppCapiDelegates.GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
+        private readonly CefAppCapiDelegates.OnRegisterCustomSchemesCallback _registerCustomSchemeCallback;
         private readonly RenderProcessHandler _renderProcessHandler;
 
         public App(AppDelegate appDelegate)
@@ -59,7 +59,9 @@ namespace Crystalbyte.Spectre {
             });
         }
 
-        public AppDelegate Delegate { get { return _delegate; } }
+        public AppDelegate Delegate {
+            get { return _delegate; }
+        }
 
         private void OnRegisterCustomScheme(IntPtr self, IntPtr registrar) {
             var e = new CustomSchemesRegisteringEventArgs();

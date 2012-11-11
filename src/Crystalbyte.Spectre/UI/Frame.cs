@@ -39,8 +39,9 @@ namespace Crystalbyte.Spectre.UI {
         public bool IsFocused {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (IsFocusedCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsFocused, typeof (IsFocusedCallback));
+                var function = (CefFrameCapiDelegates.IsFocusedCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsFocused,
+                                                                     typeof (CefFrameCapiDelegates.IsFocusedCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -49,8 +50,9 @@ namespace Crystalbyte.Spectre.UI {
         public bool IsMain {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (IsMainCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsMain, typeof (IsMainCallback));
+                var function = (CefFrameCapiDelegates.IsMainCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsMain,
+                                                                     typeof (CefFrameCapiDelegates.IsMainCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -59,8 +61,10 @@ namespace Crystalbyte.Spectre.UI {
         public bool IsValid {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (IsValidCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsValid, typeof (IsValidCallback));
+                var function = (CefCommandLineCapiDelegates.IsValidCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsValid,
+                                                                     typeof (CefCommandLineCapiDelegates.IsValidCallback
+                                                                         ));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -69,9 +73,10 @@ namespace Crystalbyte.Spectre.UI {
         public long Id {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (GetIdentifierCallback)
+                var function = (CefBrowserCapiDelegates.GetIdentifierCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetIdentifier,
-                                                                     typeof (GetIdentifierCallback));
+                                                                     typeof (
+                                                                         CefBrowserCapiDelegates.GetIdentifierCallback));
                 return function(NativeHandle);
             }
         }
@@ -79,8 +84,9 @@ namespace Crystalbyte.Spectre.UI {
         public string Name {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (GetNameCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetName, typeof (GetNameCallback));
+                var function = (CefDomCapiDelegates.GetNameCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetName,
+                                                                     typeof (CefDomCapiDelegates.GetNameCallback));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
@@ -89,8 +95,9 @@ namespace Crystalbyte.Spectre.UI {
         public Frame Parent {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (GetParentCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetParent, typeof (GetParentCallback));
+                var function = (CefDomCapiDelegates.GetParentCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetParent,
+                                                                     typeof (CefDomCapiDelegates.GetParentCallback));
                 var handle = function(NativeHandle);
                 return handle == IntPtr.Zero ? null : FromHandle(handle);
             }
@@ -99,8 +106,10 @@ namespace Crystalbyte.Spectre.UI {
         public string Url {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (GetUrlCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetUrl, typeof (GetUrlCallback));
+                var function = (CefDownloadItemCapiDelegates.GetUrlCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetUrl,
+                                                                     typeof (CefDownloadItemCapiDelegates.GetUrlCallback
+                                                                         ));
                 var handle = function(NativeHandle);
                 return handle == IntPtr.Zero ? string.Empty : StringUtf16.ReadStringAndFree(handle);
             }
@@ -109,8 +118,9 @@ namespace Crystalbyte.Spectre.UI {
         public Browser Browser {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (GetBrowserCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetBrowser, typeof (GetBrowserCallback));
+                var function = (CefBrowserCapiDelegates.GetBrowserCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetBrowser,
+                                                                     typeof (CefBrowserCapiDelegates.GetBrowserCallback));
                 var handle = function(NativeHandle);
                 return Browser.FromHandle(handle);
             }
@@ -119,9 +129,9 @@ namespace Crystalbyte.Spectre.UI {
         public ScriptingContext Context {
             get {
                 var r = MarshalFromNative<CefFrame>();
-                var function = (GetV8contextCallback)
+                var function = (CefFrameCapiDelegates.GetV8contextCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetV8context,
-                                                                     typeof (GetV8contextCallback));
+                                                                     typeof (CefFrameCapiDelegates.GetV8contextCallback));
                 var handle = function(NativeHandle);
                 return ScriptingContext.FromHandle(handle);
             }
@@ -141,8 +151,8 @@ namespace Crystalbyte.Spectre.UI {
         public void Navigate(string address) {
             var u = new StringUtf16(address);
             var r = MarshalFromNative<CefFrame>();
-            var action = (LoadUrlCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.LoadUrl, typeof (LoadUrlCallback));
+            var action = (CefFrameCapiDelegates.LoadUrlCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.LoadUrl, typeof (CefFrameCapiDelegates.LoadUrlCallback));
             action(NativeHandle, u.NativeHandle);
             u.Free();
         }
@@ -150,8 +160,9 @@ namespace Crystalbyte.Spectre.UI {
         public void Display(string source) {
             var u = new StringUtf16(source);
             var reflection = MarshalFromNative<CefFrame>();
-            var action = (LoadStringCallback)
-                         Marshal.GetDelegateForFunctionPointer(reflection.LoadString, typeof (LoadStringCallback));
+            var action = (CefFrameCapiDelegates.LoadStringCallback)
+                         Marshal.GetDelegateForFunctionPointer(reflection.LoadString,
+                                                               typeof (CefFrameCapiDelegates.LoadStringCallback));
             action(NativeHandle, u.NativeHandle, _aboutBlank.NativeHandle);
             u.Free();
         }
@@ -162,50 +173,51 @@ namespace Crystalbyte.Spectre.UI {
 
         public void SelectAll() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (SelectAllCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.SelectAll, typeof (SelectAllCallback));
+            var action = (CefFrameCapiDelegates.SelectAllCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.SelectAll,
+                                                               typeof (CefFrameCapiDelegates.SelectAllCallback));
             action(NativeHandle);
         }
 
         public void Copy() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (CopyCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Copy, typeof (CopyCallback));
+            var action = (CefFrameCapiDelegates.CopyCallback2)
+                         Marshal.GetDelegateForFunctionPointer(r.Copy, typeof (CefFrameCapiDelegates.CopyCallback2));
             action(NativeHandle);
         }
 
         public void Cut() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (CutCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Cut, typeof (CutCallback));
+            var action = (CefFrameCapiDelegates.CutCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.Cut, typeof (CefFrameCapiDelegates.CutCallback));
             action(NativeHandle);
         }
 
         public void Undo() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (UndoCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Undo, typeof (UndoCallback));
+            var action = (CefFrameCapiDelegates.UndoCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.Undo, typeof (CefFrameCapiDelegates.UndoCallback));
             action(NativeHandle);
         }
 
         public void Delete() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (DelCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Del, typeof (DelCallback));
+            var action = (CefFrameCapiDelegates.DelCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.Del, typeof (CefFrameCapiDelegates.DelCallback));
             action(NativeHandle);
         }
 
         public void Redo() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (RedoCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Redo, typeof (RedoCallback));
+            var action = (CefFrameCapiDelegates.RedoCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.Redo, typeof (CefFrameCapiDelegates.RedoCallback));
             action(NativeHandle);
         }
 
         public void Paste() {
             var r = MarshalFromNative<CefFrame>();
-            var action = (PasteCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.Paste, typeof (PasteCallback));
+            var action = (CefFrameCapiDelegates.PasteCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.Paste, typeof (CefFrameCapiDelegates.PasteCallback));
             action(NativeHandle);
         }
 
@@ -221,9 +233,9 @@ namespace Crystalbyte.Spectre.UI {
             var s = new StringUtf16(scriptUrl);
             var c = new StringUtf16(code);
             var reflection = MarshalFromNative<CefFrame>();
-            var action = (ExecuteJavaScriptCallback)
+            var action = (CefFrameCapiDelegates.ExecuteJavaScriptCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.ExecuteJavaScript,
-                                                               typeof (ExecuteJavaScriptCallback));
+                                                               typeof (CefFrameCapiDelegates.ExecuteJavaScriptCallback));
             action(NativeHandle, c.NativeHandle, s.NativeHandle, line);
             c.Free();
             s.Free();

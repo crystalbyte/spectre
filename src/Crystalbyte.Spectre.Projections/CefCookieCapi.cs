@@ -40,7 +40,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int SetCookieCallback(IntPtr self, IntPtr url, IntPtr cookie);
 		public delegate int DeleteCookiesCallback(IntPtr self, IntPtr url, IntPtr cookieName);
 		public delegate int SetStoragePathCallback(IntPtr self, IntPtr path);
-		public delegate int VisitCallback(IntPtr self, IntPtr cookie, int count, int total, IntPtr deletecookie);
+		public delegate int VisitCallback(IntPtr self, IntPtr cookie, int count, int total, ref int deletecookie);
 	}
 	
 }

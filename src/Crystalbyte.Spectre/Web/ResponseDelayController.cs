@@ -40,7 +40,8 @@ namespace Crystalbyte.Spectre.Web {
 
         public void Resume() {
             var r = MarshalFromNative<CefCallback>();
-            var action = (ContCallback) Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (ContCallback));
+            var action = (CefCallbackCapiDelegates.ContCallback2)
+                         Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (CefCallbackCapiDelegates.ContCallback2));
             action(NativeHandle);
         }
 

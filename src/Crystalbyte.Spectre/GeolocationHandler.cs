@@ -28,9 +28,13 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre {
     internal sealed class GeolocationHandler : OwnedRefCountedNativeObject {
-        private readonly OnCancelGeolocationPermissionCallback _cancelGeolocationPermission;
+        private readonly CefGeolocationHandlerCapiDelegates.OnCancelGeolocationPermissionCallback
+            _cancelGeolocationPermission;
+
         private readonly BrowserDelegate _delegate;
-        private readonly OnRequestGeolocationPermissionCallback _requestGeolocationPermission;
+
+        private readonly CefGeolocationHandlerCapiDelegates.OnRequestGeolocationPermissionCallback
+            _requestGeolocationPermission;
 
         public GeolocationHandler(BrowserDelegate @delegate)
             : base(typeof (CefGeolocationHandler)) {

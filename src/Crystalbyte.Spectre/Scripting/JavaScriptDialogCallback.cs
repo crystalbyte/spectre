@@ -35,7 +35,8 @@ namespace Crystalbyte.Spectre.Scripting {
         public void Resume(bool success, string message = "") {
             var r = MarshalFromNative<CefJsdialogCallback>();
             var action = (CefJsdialogHandlerCapiDelegates.ContCallback6)
-                         Marshal.GetDelegateForFunctionPointer(r.Cont, typeof(CefJsdialogHandlerCapiDelegates.ContCallback6));
+                         Marshal.GetDelegateForFunctionPointer(r.Cont,
+                                                               typeof (CefJsdialogHandlerCapiDelegates.ContCallback6));
             var input = new StringUtf16(message);
             action(NativeHandle, Convert.ToInt32(success), input.NativeHandle);
             input.Free();

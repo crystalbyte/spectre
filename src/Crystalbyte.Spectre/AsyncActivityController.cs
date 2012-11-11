@@ -41,13 +41,17 @@ namespace Crystalbyte.Spectre {
 
         public void Continue() {
             var r = MarshalFromNative<CefCallback>();
-            var action = (ContCallback) Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (ContCallback));
+            var action =
+                (CefCallbackCapiDelegates.ContCallback2)
+                Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (CefCallbackCapiDelegates.ContCallback2));
             action(NativeHandle);
         }
 
         public void Cancel() {
             var r = MarshalFromNative<CefCallback>();
-            var action = (CancelCallback) Marshal.GetDelegateForFunctionPointer(r.Cancel, typeof (CancelCallback));
+            var action =
+                (CefCallbackCapiDelegates.CancelCallback)
+                Marshal.GetDelegateForFunctionPointer(r.Cancel, typeof (CefCallbackCapiDelegates.CancelCallback));
             action(NativeHandle);
             IsCanceled = true;
         }

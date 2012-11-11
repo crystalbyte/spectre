@@ -13,6 +13,7 @@
             }
 
             // define sample object
+
             function Sample(window) {
                 this.window = window;
                 this.value = 0;
@@ -34,8 +35,8 @@
         </script>
     </head>
     <body>
-        <button style="width: 70px; position: absolute; bottom: 50px; right: 20px;" onclick="sample.increment();">+1</button>
-        <button style="width: 70px; position: absolute; bottom: 20px; right: 20px;" onclick="sample.incrementAsync();">+100</button>
+        <button style="width: 70px; position: absolute; bottom: 50px; right: 20px;" onclick=" sample.increment(); ">+1</button>
+        <button style="width: 70px; position: absolute; bottom: 20px; right: 20px;" onclick=" sample.incrementAsync();">+100</button>
         <div style="margin-left: auto; margin-right: auto; text-align: center; font-size: 11em;" id="counter" >0</div>
     </body>
 </html>

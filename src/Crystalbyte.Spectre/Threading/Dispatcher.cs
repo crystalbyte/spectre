@@ -20,10 +20,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
-using Crystalbyte.Spectre.UI;
 
 #endregion
 
@@ -44,13 +42,13 @@ namespace Crystalbyte.Spectre.Threading {
 
         public void InvokeAsync(Action action, DispatcherQueue queue, TimeSpan delay) {
             var task = new Task(action);
-            CefTaskCapi.CefPostDelayedTask((CefThreadId)queue, task.NativeHandle, (long)delay.TotalMilliseconds);
+            CefTaskCapi.CefPostDelayedTask((CefThreadId) queue, task.NativeHandle, (long) delay.TotalMilliseconds);
         }
 
         public void InvokeAsync(Action action, DispatcherQueue queue = DispatcherQueue.Renderer) {
             var task = new Task(action);
             task.Executed += OnExecuted;
-            CefTaskCapi.CefPostTask((CefThreadId)queue, task.NativeHandle);
+            CefTaskCapi.CefPostTask((CefThreadId) queue, task.NativeHandle);
             lock (_mutex) {
                 _tasks.Add(task);
             }
@@ -58,7 +56,7 @@ namespace Crystalbyte.Spectre.Threading {
 
         private void OnExecuted(object sender, EventArgs e) {
             lock (_mutex) {
-                _tasks.Remove((Task)sender);
+                _tasks.Remove((Task) sender);
             }
         }
 

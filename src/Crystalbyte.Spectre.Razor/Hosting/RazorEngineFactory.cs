@@ -112,7 +112,7 @@ namespace Crystalbyte.Spectre.Razor.Hosting {
 
                 var fullName = typeof (RazorEngine<TBaseTemplateType>).FullName;
                 if (fullName != null)
-                    host = (RazorEngine<TBaseTemplateType>) 
+                    host = (RazorEngine<TBaseTemplateType>)
                            _localAppDomain.CreateInstanceFrom(assemblyPath, fullName).Unwrap();
             }
             catch (Exception ex) {

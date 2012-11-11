@@ -30,7 +30,6 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
-
         protected override void ConfigureSettings(ApplicationSettings settings) {
             base.ConfigureSettings(settings);
 
@@ -40,21 +39,21 @@ namespace Crystalbyte.Spectre.Samples {
         }
 
         protected override void OnStarting(object sender, EventArgs e) {
-            ControllerRegistrar.Register(typeof(HomeController));
+            ControllerRegistrar.Register(typeof (HomeController));
             base.OnStarting(sender, e);
         }
 
         protected override IEnumerable<Viewport> CreateViewports() {
             yield return new Viewport(
-                new Window { StartupUri = new Uri("spectre://localhost/Controllers/Home")}, 
+                new Window {StartupUri = new Uri("spectre://localhost/Controllers/Home")},
                 new BrowserDelegate());
         }
 
         protected override IList<ISchemeHandlerFactoryDescriptor> RegisterSchemeHandlerFactories() {
             var descriptors = base.RegisterSchemeHandlerFactories();
             var spectre = (SpectreSchemeHandlerFactoryDescriptor)
-                descriptors.First(x => x is SpectreSchemeHandlerFactoryDescriptor);
-            spectre.Register(typeof(RazorDataProvider));
+                          descriptors.First(x => x is SpectreSchemeHandlerFactoryDescriptor);
+            spectre.Register(typeof (RazorDataProvider));
             return descriptors;
         }
     }

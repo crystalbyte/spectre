@@ -174,7 +174,7 @@ namespace Crystalbyte.Spectre.Razor.Hosting {
             compilerParameters.ReferencedAssemblies.Add("System.dll");
             compilerParameters.ReferencedAssemblies.Add("System.Core.dll");
             compilerParameters.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
-                // dynamic support!                     
+            // dynamic support!                     
 
             // Also add the current assembly so RazorTemplateBase is available
             compilerParameters.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().CodeBase.Substring(8));

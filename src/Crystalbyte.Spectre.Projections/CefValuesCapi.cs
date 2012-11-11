@@ -89,11 +89,19 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefValuesCapiDelegates {
+		public delegate int IsValidCallback9(IntPtr self);
 		public delegate int IsOwnedCallback(IntPtr self);
+		public delegate IntPtr CopyCallback4(IntPtr self);
 		public delegate int GetSizeCallback(IntPtr self);
 		public delegate int GetDataCallback(IntPtr self, IntPtr buffer, int bufferSize, int dataOffset);
-		public delegate IntPtr CopyCallback3(IntPtr self, int excludeEmptyChildren);
+		public delegate int IsValidCallback10(IntPtr self);
+		public delegate int IsOwnedCallback2(IntPtr self);
+		public delegate int IsReadOnlyCallback7(IntPtr self);
+		public delegate IntPtr CopyCallback5(IntPtr self, int excludeEmptyChildren);
+		public delegate int GetSizeCallback2(IntPtr self);
+		public delegate int ClearCallback2(IntPtr self);
 		public delegate int HasKeyCallback(IntPtr self, IntPtr key);
+		public delegate int GetKeysCallback2(IntPtr self, IntPtr keys);
 		public delegate int RemoveCallback2(IntPtr self, IntPtr key);
 		public delegate CefValueType GetTypeCallback6(IntPtr self, IntPtr key);
 		public delegate int GetBoolCallback(IntPtr self, IntPtr key);
@@ -111,7 +119,13 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int SetBinaryCallback(IntPtr self, IntPtr key, IntPtr value);
 		public delegate int SetDictionaryCallback(IntPtr self, IntPtr key, IntPtr value);
 		public delegate int SetListCallback(IntPtr self, IntPtr key, IntPtr value);
+		public delegate int IsValidCallback1011(IntPtr self);
+		public delegate int IsOwnedCallback3(IntPtr self);
+		public delegate int IsReadOnlyCallback8(IntPtr self);
+		public delegate IntPtr CopyCallback6(IntPtr self);
 		public delegate int SetSizeCallback(IntPtr self, int size);
+		public delegate int GetSizeCallback3(IntPtr self);
+		public delegate int ClearCallback3(IntPtr self);
 		public delegate int RemoveCallback3(IntPtr self, int index);
 		public delegate CefValueType GetTypeCallback7(IntPtr self, int index);
 		public delegate int GetBoolCallback2(IntPtr self, int index);

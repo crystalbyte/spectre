@@ -35,9 +35,11 @@ namespace Crystalbyte.Spectre.UI {
         public IntPtr OpenerWindowHandle {
             get {
                 var reflection = MarshalFromNative<CefBrowserHost>();
-                var function = (GetOpenerWindowHandleCallback)
+                var function = (CefBrowserCapiDelegates.GetOpenerWindowHandleCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetOpenerWindowHandle,
-                                                                     typeof (GetOpenerWindowHandleCallback));
+                                                                     typeof (
+                                                                         CefBrowserCapiDelegates.
+                                                                         GetOpenerWindowHandleCallback));
                 return function(NativeHandle);
             }
         }
@@ -45,9 +47,11 @@ namespace Crystalbyte.Spectre.UI {
         public IntPtr WindowHandle {
             get {
                 var reflection = MarshalFromNative<CefBrowserHost>();
-                var function = (GetWindowHandleCallback)
+                var function = (CefBrowserCapiDelegates.GetWindowHandleCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetWindowHandle,
-                                                                     typeof (GetWindowHandleCallback));
+                                                                     typeof (
+                                                                         CefBrowserCapiDelegates.GetWindowHandleCallback
+                                                                         ));
                 return function(NativeHandle);
             }
         }
@@ -55,8 +59,9 @@ namespace Crystalbyte.Spectre.UI {
         public Browser Browser {
             get {
                 var reflection = MarshalFromNative<CefBrowserHost>();
-                var function = (GetBrowserCallback)
-                               Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser, typeof (GetBrowserCallback));
+                var function = (CefBrowserCapiDelegates.GetBrowserCallback)
+                               Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser,
+                                                                     typeof (CefBrowserCapiDelegates.GetBrowserCallback));
                 var handle = function(NativeHandle);
                 return Browser.FromHandle(handle);
             }
@@ -80,25 +85,27 @@ namespace Crystalbyte.Spectre.UI {
 
         public void ParentWindowWillClose() {
             var reflection = MarshalFromNative<CefBrowserHost>();
-            var action = (ParentWindowWillCloseCallback)
+            var action = (CefBrowserCapiDelegates.ParentWindowWillCloseCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.ParentWindowWillClose,
-                                                               typeof (ParentWindowWillCloseCallback));
+                                                               typeof (
+                                                                   CefBrowserCapiDelegates.ParentWindowWillCloseCallback
+                                                                   ));
             action(NativeHandle);
         }
 
         public void Focus() {
             var reflection = MarshalFromNative<CefBrowserHost>();
-            var action = (SetFocusCallback)
+            var action = (CefBrowserCapiDelegates.SetFocusCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.SetFocus,
-                                                               typeof (SetFocusCallback));
+                                                               typeof (CefBrowserCapiDelegates.SetFocusCallback));
             action(NativeHandle, 1);
         }
 
         public void CloseBrowser() {
             var reflection = MarshalFromNative<CefBrowserHost>();
-            var action = (CloseBrowserCallback)
+            var action = (CefBrowserCapiDelegates.CloseBrowserCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.GetOpenerWindowHandle,
-                                                               typeof (CloseBrowserCallback));
+                                                               typeof (CefBrowserCapiDelegates.CloseBrowserCallback));
             action(NativeHandle);
         }
     }

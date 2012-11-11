@@ -19,7 +19,6 @@
 #region Using directives
 
 using System;
-using System.Runtime.InteropServices;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 
@@ -28,23 +27,24 @@ using Crystalbyte.Spectre.Projections;
 namespace Crystalbyte.Spectre {
     internal sealed class BrowserProcessHandler : OwnedRefCountedNativeObject {
         private readonly AppDelegate _appDelegate;
-		private readonly OnBeforeChildProcessLaunchCallback _beforeChildProcessLaunchCallback;
+
+        private readonly CefBrowserProcessHandlerCapiDelegates.OnBeforeChildProcessLaunchCallback
+            _beforeChildProcessLaunchCallback;
 
         public BrowserProcessHandler(AppDelegate appDelegate)
             : base(typeof (CefBrowserProcessHandler)) {
             _appDelegate = appDelegate;
 
-			_beforeChildProcessLaunchCallback = OnBeforeChildProcessLaunch;
-            
+            _beforeChildProcessLaunchCallback = OnBeforeChildProcessLaunch;
+
             MarshalToNative(new CefBrowserProcessHandler {
                 Base = DedicatedBase,
-				//OnBeforeChildProcessLaunch = Marshal.GetFunctionPointerForDelegate(_beforeChildProcessLaunchCallback)
+                //OnBeforeChildProcessLaunch = Marshal.GetFunctionPointerForDelegate(_beforeChildProcessLaunchCallback)
             });
         }
 
-		private void OnBeforeChildProcessLaunch(IntPtr self, IntPtr commandLine) {
-			var command = CommandLine.FromHandle(commandLine);
-
-		}
+        private void OnBeforeChildProcessLaunch(IntPtr self, IntPtr commandLine) {
+            var command = CommandLine.FromHandle(commandLine);
+        }
     }
 }

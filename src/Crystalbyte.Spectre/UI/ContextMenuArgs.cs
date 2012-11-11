@@ -35,8 +35,11 @@ namespace Crystalbyte.Spectre.UI {
         public int X {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetXcoordCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetXcoord, typeof (GetXcoordCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetXcoordCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetXcoord,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetXcoordCallback));
                 return function(NativeHandle);
             }
         }
@@ -44,8 +47,11 @@ namespace Crystalbyte.Spectre.UI {
         public int Y {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetYcoordCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetXcoord, typeof (GetYcoordCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetYcoordCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetXcoord,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetYcoordCallback));
                 return function(NativeHandle);
             }
         }
@@ -53,8 +59,11 @@ namespace Crystalbyte.Spectre.UI {
         public NodeTypes SenderType {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetTypeFlagsCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetTypeFlags, typeof (GetTypeFlagsCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetTypeFlagsCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetTypeFlags,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetTypeFlagsCallback));
                 return (NodeTypes) function(NativeHandle);
             }
         }
@@ -62,8 +71,11 @@ namespace Crystalbyte.Spectre.UI {
         public string LinkUrl {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetLinkUrlCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetLinkUrl, typeof (GetLinkUrlCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetLinkUrlCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetLinkUrl,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetLinkUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -72,9 +84,11 @@ namespace Crystalbyte.Spectre.UI {
         public string UnfilteredLinkUrl {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetUnfilteredLinkUrlCallback)
+                var function = (CefContextMenuHandlerCapiDelegates.GetUnfilteredLinkUrlCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetUnfilteredLinkUrl,
-                                                                     typeof (GetUnfilteredLinkUrlCallback));
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetUnfilteredLinkUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -83,8 +97,11 @@ namespace Crystalbyte.Spectre.UI {
         public string SourceUrl {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetSourceUrlCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetSourceUrl, typeof (GetSourceUrlCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetSourceUrlCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetSourceUrl,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetSourceUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -93,8 +110,11 @@ namespace Crystalbyte.Spectre.UI {
         public bool IsBlockedImage {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (IsImageBlockedCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsImageBlocked, typeof (IsImageBlockedCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.IsImageBlockedCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsImageBlocked,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         IsImageBlockedCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -103,8 +123,11 @@ namespace Crystalbyte.Spectre.UI {
         public string PageUrl {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetPageUrlCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetPageUrl, typeof (GetPageUrlCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetPageUrlCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetPageUrl,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetPageUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -113,8 +136,11 @@ namespace Crystalbyte.Spectre.UI {
         public string FrameUrl {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetFrameUrlCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetFrameUrl, typeof (GetFrameUrlCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetFrameUrlCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetFrameUrl,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetFrameUrlCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -123,8 +149,11 @@ namespace Crystalbyte.Spectre.UI {
         public string FrameCharset {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetFrameCharsetCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetFrameCharset, typeof (GetFrameCharsetCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetFrameCharsetCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetFrameCharset,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetFrameCharsetCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -133,8 +162,11 @@ namespace Crystalbyte.Spectre.UI {
         public MediaType MediaType {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetMediaTypeCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetMediaType, typeof (GetMediaTypeCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetMediaTypeCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetMediaType,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetMediaTypeCallback));
                 return (MediaType) function(NativeHandle);
             }
         }
@@ -142,8 +174,11 @@ namespace Crystalbyte.Spectre.UI {
         public MediaStates SupportedMediaStates {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetMediaStateFlagsCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetMediaType, typeof (GetMediaStateFlagsCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.GetMediaStateFlagsCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetMediaType,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetMediaStateFlagsCallback));
                 return (MediaStates) function(NativeHandle);
             }
         }
@@ -151,9 +186,11 @@ namespace Crystalbyte.Spectre.UI {
         public string SelectedText {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetSelectionTextCallback)
+                var function = (CefContextMenuHandlerCapiDelegates.GetSelectionTextCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetSelectionText,
-                                                                     typeof (GetSelectionTextCallback));
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetSelectionTextCallback));
                 var s = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(s);
             }
@@ -162,8 +199,11 @@ namespace Crystalbyte.Spectre.UI {
         public bool IsEditable {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (IsEditableCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsEditable, typeof (IsEditableCallback));
+                var function = (CefContextMenuHandlerCapiDelegates.IsEditableCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsEditable,
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         IsEditableCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -172,9 +212,11 @@ namespace Crystalbyte.Spectre.UI {
         public bool IsSpeechInputEnabled {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (IsSpeechInputEnabledCallback)
+                var function = (CefContextMenuHandlerCapiDelegates.IsSpeechInputEnabledCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsSpeechInputEnabled,
-                                                                     typeof (IsSpeechInputEnabledCallback));
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         IsSpeechInputEnabledCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -183,9 +225,11 @@ namespace Crystalbyte.Spectre.UI {
         public EditStates SupportedEditStates {
             get {
                 var r = MarshalFromNative<CefContextMenuParams>();
-                var function = (GetEditStateFlagsCallback)
+                var function = (CefContextMenuHandlerCapiDelegates.GetEditStateFlagsCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetEditStateFlags,
-                                                                     typeof (GetEditStateFlagsCallback));
+                                                                     typeof (
+                                                                         CefContextMenuHandlerCapiDelegates.
+                                                                         GetEditStateFlagsCallback));
                 return (EditStates) function(NativeHandle);
             }
         }

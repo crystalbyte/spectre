@@ -18,53 +18,46 @@
 
 #region Using directives
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Crystalbyte.Spectre.Scripting;
-using Crystalbyte.Spectre.Threading;
-using System.Collections.Concurrent;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples.Commands {
     public sealed class IncAsyncScriptingCommand : ScriptingCommand {
-        private static int _threadCount;
-        private readonly List<ContextBoundTaskManager> _taskManagers;
+        private readonly List<ContextBoundTask> _tasks;
         private readonly object _mutex;
 
         public IncAsyncScriptingCommand() {
             _mutex = new object();
-            _taskManagers = new List<ContextBoundTaskManager>();
+            _tasks = new List<ContextBoundTask>();
         }
 
         public override string RegistrationCode {
             get { return RegistrationCodes.Synthesize("commands", "incrementAsync", "callback", "value"); }
         }
 
-        private ContextBoundTaskManager GetTaskManager(ScriptingContext context) {
-            var any = _taskManagers.Any(x => x.Matches(context));
+        private ContextBoundTask GetTask(ScriptingContext context) {
+            var any = _tasks.Any(x => x.Matches(context));
             if (!any) {
-                _taskManagers.Add(new ContextBoundTaskManager(context));
+                _tasks.Add(new ContextBoundTask(context));
             }
-            return _taskManagers.First(x => x.Matches(context));
+            return _tasks.First(x => x.Matches(context));
         }
 
         protected override void OnExecuted(ExecutedEventArgs e) {
-
             // Pull arguments, this must occur on the main thread.
             var context = ScriptingContext.Current;
             var callback = e.Arguments.ElementAt(0).ToFunction();
             var value = e.Arguments.ElementAt(1).ToInteger();
 
             // This instance will keep track of all used resources, v8 will want them back later.
-            var manager = GetTaskManager(context);
+            var manager = GetTask(context);
 
             var task = Task.Factory.StartNew(() => {
-                Thread.CurrentThread.Name = "Worker Thread " + _threadCount++;
                 // Keep strong references to all arguments we're about to use.
                 // In this example a scoped reference will do nicely.
                 var f = callback;
@@ -85,13 +78,13 @@ namespace Crystalbyte.Spectre.Samples.Commands {
             }, manager.Source.Token).ContinueWith(x => {
                 var m = manager;
                 lock (_mutex) {
-                    m.Tasks.Remove(x);    
+                    m.Tasks.Remove(x);
                 }
             });
 
             // Store the task object, we will need it later;
             lock (_mutex) {
-                manager.Tasks.Add(task);    
+                manager.Tasks.Add(task);
             }
 
             e.IsHandled = true;
@@ -103,38 +96,37 @@ namespace Crystalbyte.Spectre.Samples.Commands {
                 if (!success) {
                     return;
                 }
-                callback.Execute(new JavaScriptObject(value));    
+                callback.Execute(new JavaScriptObject(value));
                 context.Exit();
             });
         }
 
         protected override void OnScriptingContextReleased(ContextEventArgs e) {
-
             // Grab our state object.
-            var manager = GetTaskManager(e.Context);
+            var task = GetTask(e.Context);
 
             // Cancel all running tasks associated with the current context.
-            manager.Source.Cancel(false);
+            task.Source.Cancel(false);
 
             // Block the thread until all tasks have ended and released their resources.
-            manager.Wait();
+            task.Wait();
 
             // Release all remaining references stored inside our state object, if any.
-            manager.Dispose();
+            task.Dispose();
 
             // Make the managed husk eligible for garbage collection.
-            _taskManagers.Remove(manager);
+            _tasks.Remove(task);
         }
 
-        private sealed class ContextBoundTaskManager {
+        private sealed class ContextBoundTask {
             private readonly ScriptingContext _context;
             private readonly List<Task> _tasks;
             private readonly CancellationTokenSource _source;
 
-            public ContextBoundTaskManager(ScriptingContext context) {
+            public ContextBoundTask(ScriptingContext context) {
                 _context = context;
                 _tasks = new List<Task>();
-                _source= new CancellationTokenSource();
+                _source = new CancellationTokenSource();
             }
 
             public CancellationTokenSource Source {

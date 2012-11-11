@@ -2,7 +2,7 @@
 @inherits  Crystalbyte.Spectre.Razor.Templates.RazorFolderHostTemplate
                
 @{
-    var model = (Crystalbyte.Spectre.Samples.Models.HomeModel)Context;
+    var model = (Crystalbyte.Spectre.Samples.Models.HomeModel) Context;
 }
 
 <html lang="en">
@@ -10,10 +10,12 @@
         <meta charset="utf-8" />
         <title>Razor</title>
         @foreach (var style in model.Styles) {
-            @Style.Link(style);
+            @Style.Link(style)
+            ;
         }
         @foreach (var script in model.Scripts) {
-            @Script.Reference(script);
+            @Script.Reference(script)
+            ;
         }
     </head>
     <body>

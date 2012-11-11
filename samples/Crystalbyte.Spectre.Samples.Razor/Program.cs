@@ -29,8 +29,8 @@ namespace Crystalbyte.Spectre.Samples {
         /// </summary>
         [STAThread]
         private static void Main() {
-			var bootstrapper = new WinformsBootstrapper();
-            bootstrapper.Run();	
+            var bootstrapper = new WinformsBootstrapper();
+            bootstrapper.Run();
         }
     }
 }

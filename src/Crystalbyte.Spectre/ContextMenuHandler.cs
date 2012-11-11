@@ -19,22 +19,20 @@
 #region Using directives
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Projections.Internal;
 using Crystalbyte.Spectre.UI;
-using System.Collections;
 
 #endregion
 
 namespace Crystalbyte.Spectre {
     public sealed class ContextMenuHandler : OwnedRefCountedNativeObject {
-        private readonly OnBeforeContextMenuCallback _beforeContextMenuCallback;
+        private readonly CefContextMenuHandlerCapiDelegates.OnBeforeContextMenuCallback _beforeContextMenuCallback;
         private readonly BrowserDelegate _browserDelegate;
-        private readonly OnContextMenuCommandCallback _contextMenuCommandCallback;
-        private readonly OnContextMenuDismissedCallback _contextMenuDismissedCallback;
+        private readonly CefContextMenuHandlerCapiDelegates.OnContextMenuCommandCallback _contextMenuCommandCallback;
+        private readonly CefContextMenuHandlerCapiDelegates.OnContextMenuDismissedCallback _contextMenuDismissedCallback;
 
         public ContextMenuHandler(BrowserDelegate browserDelegate)
             : base(typeof (CefContextMenuHandler)) {
@@ -88,7 +86,7 @@ namespace Crystalbyte.Spectre {
                 Arguments = ContextMenuArgs.FromHandle(@params),
                 Menu = ContextMenu.FromHandle(model)
             };
-            
+
             _browserDelegate.OnContextMenuOpening(e);
             e.Arguments.Dispose();
             e.Menu.Dispose();

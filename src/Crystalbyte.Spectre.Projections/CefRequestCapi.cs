@@ -63,6 +63,8 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefRequestCapiDelegates {
+		public delegate int IsReadOnlyCallback3(IntPtr self);
+		public delegate IntPtr GetUrlCallback3(IntPtr self);
 		public delegate void SetUrlCallback(IntPtr self, IntPtr url);
 		public delegate IntPtr GetMethodCallback(IntPtr self);
 		public delegate void SetMethodCallback(IntPtr self, IntPtr method);
@@ -75,11 +77,13 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate void SetFlagsCallback(IntPtr self, int flags);
 		public delegate IntPtr GetFirstPartyForCookiesCallback(IntPtr self);
 		public delegate void SetFirstPartyForCookiesCallback(IntPtr self, IntPtr url);
+		public delegate int IsReadOnlyCallback4(IntPtr self);
 		public delegate int GetElementCountCallback(IntPtr self);
-		public delegate void GetElementsCallback(IntPtr self, IntPtr elementscount, IntPtr elements);
+		public delegate void GetElementsCallback(IntPtr self, ref int elementscount, IntPtr elements);
 		public delegate int RemoveElementCallback(IntPtr self, IntPtr element);
 		public delegate int AddElementCallback(IntPtr self, IntPtr element);
 		public delegate void RemoveElementsCallback(IntPtr self);
+		public delegate int IsReadOnlyCallback5(IntPtr self);
 		public delegate void SetToEmptyCallback(IntPtr self);
 		public delegate void SetToFileCallback(IntPtr self, IntPtr filename);
 		public delegate void SetToBytesCallback(IntPtr self, int size, IntPtr bytes);

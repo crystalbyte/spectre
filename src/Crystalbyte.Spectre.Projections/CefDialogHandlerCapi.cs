@@ -22,6 +22,7 @@ namespace Crystalbyte.Spectre.Projections
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefDialogHandlerCapiDelegates {
 		public delegate void ContCallback3(IntPtr self, IntPtr filePaths);
+		public delegate void CancelCallback2(IntPtr self);
 		public delegate int OnFileDialogCallback(IntPtr self, IntPtr browser, CefFileDialogMode mode, IntPtr title, IntPtr defaultFileName, IntPtr acceptTypes, IntPtr callback);
 	}
 	

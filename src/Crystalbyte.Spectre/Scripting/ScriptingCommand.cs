@@ -19,6 +19,6 @@
 namespace Crystalbyte.Spectre.Scripting {
     public abstract class ScriptingCommand : JavaScriptHandler {
         public abstract string RegistrationCode { get; }
-        protected internal virtual void OnScriptingContextReleased(ContextEventArgs e) { }
+        protected internal virtual void OnScriptingContextReleased(ContextEventArgs e) {}
     }
 }

@@ -37,6 +37,7 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefFrameCapiDelegates {
+		public delegate int IsValidCallback3(IntPtr self);
 		public delegate void UndoCallback(IntPtr self);
 		public delegate void RedoCallback(IntPtr self);
 		public delegate void CutCallback(IntPtr self);
@@ -53,7 +54,11 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate void ExecuteJavaScriptCallback(IntPtr self, IntPtr code, IntPtr scriptUrl, int startLine);
 		public delegate int IsMainCallback(IntPtr self);
 		public delegate int IsFocusedCallback(IntPtr self);
+		public delegate IntPtr GetNameCallback2(IntPtr self);
 		public delegate long GetIdentifierCallback2(IntPtr self);
+		public delegate IntPtr GetParentCallback2(IntPtr self);
+		public delegate IntPtr GetUrlCallback2(IntPtr self);
+		public delegate IntPtr GetBrowserCallback2(IntPtr self);
 		public delegate IntPtr GetV8contextCallback(IntPtr self);
 		public delegate void VisitDomCallback(IntPtr self, IntPtr visitor);
 	}

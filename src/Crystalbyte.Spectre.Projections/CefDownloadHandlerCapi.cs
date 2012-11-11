@@ -28,6 +28,7 @@ namespace Crystalbyte.Spectre.Projections
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefDownloadHandlerCapiDelegates {
 		public delegate void ContCallback4(IntPtr self, IntPtr downloadPath, int showDialog);
+		public delegate void CancelCallback3(IntPtr self);
 		public delegate void OnBeforeDownloadCallback(IntPtr self, IntPtr browser, IntPtr downloadItem, IntPtr suggestedName, IntPtr callback);
 		public delegate void OnDownloadUpdatedCallback(IntPtr self, IntPtr browser, IntPtr downloadItem, IntPtr callback);
 	}

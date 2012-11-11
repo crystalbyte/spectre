@@ -29,35 +29,40 @@ namespace Crystalbyte.Spectre.Interop {
         public static void Decrement(IntPtr handle) {
             var obj = (CefBase) Marshal.PtrToStructure(handle, typeof (CefBase));
             var function =
-                (ReleaseCallback) Marshal.GetDelegateForFunctionPointer(obj.Release, typeof (ReleaseCallback));
+                (CefBaseCapiDelegates.ReleaseCallback)
+                Marshal.GetDelegateForFunctionPointer(obj.Release, typeof (CefBaseCapiDelegates.ReleaseCallback));
             function(handle);
         }
 
         public static void Decrement(RefCountedNativeObject item) {
             var obj = (CefBase) Marshal.PtrToStructure(item.NativeHandle, typeof (CefBase));
             var function =
-                (ReleaseCallback) Marshal.GetDelegateForFunctionPointer(obj.Release, typeof (ReleaseCallback));
+                (CefBaseCapiDelegates.ReleaseCallback)
+                Marshal.GetDelegateForFunctionPointer(obj.Release, typeof (CefBaseCapiDelegates.ReleaseCallback));
             function(item.NativeHandle);
         }
 
         public static void Increment(RefCountedNativeObject item) {
             var obj = (CefBase) Marshal.PtrToStructure(item.NativeHandle, typeof (CefBase));
             var function =
-                (AddRefCallback) Marshal.GetDelegateForFunctionPointer(obj.AddRef, typeof (AddRefCallback));
+                (CefBaseCapiDelegates.AddRefCallback)
+                Marshal.GetDelegateForFunctionPointer(obj.AddRef, typeof (CefBaseCapiDelegates.AddRefCallback));
             function(item.NativeHandle);
         }
 
         public static void Increment(IntPtr handle) {
             var obj = (CefBase) Marshal.PtrToStructure(handle, typeof (CefBase));
             var function =
-                (AddRefCallback) Marshal.GetDelegateForFunctionPointer(obj.AddRef, typeof (AddRefCallback));
+                (CefBaseCapiDelegates.AddRefCallback)
+                Marshal.GetDelegateForFunctionPointer(obj.AddRef, typeof (CefBaseCapiDelegates.AddRefCallback));
             function(handle);
         }
 
         public static int GetReferenceCounter(IntPtr handle) {
             var obj = (CefBase) Marshal.PtrToStructure(handle, typeof (CefBase));
             var function =
-                (AddRefCallback) Marshal.GetDelegateForFunctionPointer(obj.GetRefct, typeof (AddRefCallback));
+                (CefBaseCapiDelegates.AddRefCallback)
+                Marshal.GetDelegateForFunctionPointer(obj.GetRefct, typeof (CefBaseCapiDelegates.AddRefCallback));
             return function(handle);
         }
     }

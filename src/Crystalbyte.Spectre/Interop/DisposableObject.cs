@@ -69,6 +69,8 @@ namespace Crystalbyte.Spectre.Interop {
             // override
         }
 
-        public bool IsDisposed { get { return _isDisposed; } }
+        public bool IsDisposed {
+            get { return _isDisposed; }
+        }
     }
 }

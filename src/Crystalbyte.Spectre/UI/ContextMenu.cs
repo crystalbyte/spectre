@@ -1,15 +1,34 @@
-﻿using Crystalbyte.Spectre.Interop;
-using Crystalbyte.Spectre.Projections;
+﻿#region Licensing notice
+
+// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as published by
+// the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region Using directives
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
+using Crystalbyte.Spectre.Interop;
+using Crystalbyte.Spectre.Projections;
+
+#endregion
 
 namespace Crystalbyte.Spectre.UI {
     public sealed class ContextMenu : RefCountedNativeObject {
         private ContextMenu(IntPtr handle)
-            : base(typeof(CefMenuModel)) {
+            : base(typeof (CefMenuModel)) {
             NativeHandle = handle;
             _items = new ContextMenuItemCollection(this);
         }
@@ -19,18 +38,25 @@ namespace Crystalbyte.Spectre.UI {
         }
 
         private readonly ContextMenuItemCollection _items;
-        public ContextMenuItemCollection Items { get { return _items; } }
+
+        public ContextMenuItemCollection Items {
+            get { return _items; }
+        }
 
         internal void Clear() {
             var r = MarshalFromNative<CefMenuModel>();
-            var action = (ClearCallback) Marshal.GetDelegateForFunctionPointer(r.Clear, typeof (ClearCallback));
+            var action =
+                (CefMenuModelCapiDelegates.ClearCallback)
+                Marshal.GetDelegateForFunctionPointer(r.Clear, typeof (CefMenuModelCapiDelegates.ClearCallback));
             action(NativeHandle);
         }
 
         internal void AddItem(int commandId, string label) {
             var s = new StringUtf16(label);
             var r = MarshalFromNative<CefMenuModel>();
-            var action = (AddItemCallback)Marshal.GetDelegateForFunctionPointer(r.AddItem, typeof(AddItemCallback));
+            var action =
+                (CefMenuModelCapiDelegates.AddItemCallback)
+                Marshal.GetDelegateForFunctionPointer(r.AddItem, typeof (CefMenuModelCapiDelegates.AddItemCallback));
             action(NativeHandle, commandId, s.NativeHandle);
             s.Free();
         }
@@ -38,14 +64,16 @@ namespace Crystalbyte.Spectre.UI {
         internal int GetCount() {
             var r = MarshalFromNative<CefMenuModel>();
             var function =
-                (GetCountCallback) Marshal.GetDelegateForFunctionPointer(r.GetCount, typeof (GetCountCallback));
+                (CefMenuModelCapiDelegates.GetCountCallback)
+                Marshal.GetDelegateForFunctionPointer(r.GetCount, typeof (CefMenuModelCapiDelegates.GetCountCallback));
             return function(NativeHandle);
         }
 
         public bool Remove(int commandId) {
             var r = MarshalFromNative<CefMenuModel>();
             var function =
-                (RemoveCallback)Marshal.GetDelegateForFunctionPointer(r.Remove, typeof(RemoveCallback));
+                (CefMenuModelCapiDelegates.RemoveCallback)
+                Marshal.GetDelegateForFunctionPointer(r.Remove, typeof (CefMenuModelCapiDelegates.RemoveCallback));
             var result = function(NativeHandle, commandId);
             return Convert.ToBoolean(result);
         }

@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre.Web {
     public abstract class SchemeHandlerFactory : OwnedRefCountedNativeObject {
-        private readonly CreateCallback _createCallback;
+        private readonly CefSchemeCapiDelegates.CreateCallback _createCallback;
 
         protected SchemeHandlerFactory()
             : base(typeof (CefSchemeHandlerFactory)) {

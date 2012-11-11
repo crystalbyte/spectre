@@ -30,14 +30,14 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre {
     public sealed class RenderProcessHandler : OwnedRefCountedNativeObject {
-        private readonly OnBrowserCreatedCallback _browserCreatedCallback;
-        private readonly OnBrowserDestroyedCallback _browserDestroyedCallback;
-        private readonly OnContextCreatedCallback _contextCreatedCallback;
-        private readonly OnContextReleasedCallback _contextReleasedCallback;
+        private readonly CefRenderProcessHandlerCapiDelegates.OnBrowserCreatedCallback _browserCreatedCallback;
+        private readonly CefRenderProcessHandlerCapiDelegates.OnBrowserDestroyedCallback _browserDestroyedCallback;
+        private readonly CefRenderProcessHandlerCapiDelegates.OnContextCreatedCallback _contextCreatedCallback;
+        private readonly CefRenderProcessHandlerCapiDelegates.OnContextReleasedCallback _contextReleasedCallback;
         private readonly AppDelegate _delegate;
-        private readonly OnProcessMessageReceivedCallback _processMessageReceivedCallback;
-        private readonly OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
-        private readonly OnWebKitInitializedCallback _webkitInitializedCallback;
+        private readonly CefClientCapiDelegates.OnProcessMessageReceivedCallback _processMessageReceivedCallback;
+        private readonly CefRenderProcessHandlerCapiDelegates.OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
+        private readonly CefRenderProcessHandlerCapiDelegates.OnWebKitInitializedCallback _webkitInitializedCallback;
 
         public RenderProcessHandler(AppDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {

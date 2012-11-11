@@ -34,17 +34,17 @@ namespace Crystalbyte.Spectre {
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;
         private readonly GeolocationHandler _geolocationHandler;
-        private readonly GetContextMenuHandlerCallback _getContextMenuHandler;
-        private readonly GetDisplayHandlerCallback _getDisplayHandlerCallback;
-        private readonly GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
-        private readonly GetJsdialogHandlerCallback _getJavaScriptdialogHandler;
-        private readonly GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
-        private readonly GetLoadHandlerCallback _getLoadHandlerCallback;
+        private readonly CefClientCapiDelegates.GetContextMenuHandlerCallback _getContextMenuHandler;
+        private readonly CefClientCapiDelegates.GetDisplayHandlerCallback _getDisplayHandlerCallback;
+        private readonly CefClientCapiDelegates.GetGeolocationHandlerCallback _getGeolocationHandlerCallback;
+        private readonly CefClientCapiDelegates.GetJsdialogHandlerCallback _getJavaScriptdialogHandler;
+        private readonly CefClientCapiDelegates.GetLifeSpanHandlerCallback _getLifeSpanHandlerCallback;
+        private readonly CefClientCapiDelegates.GetLoadHandlerCallback _getLoadHandlerCallback;
         private readonly JavaScriptDialogHandler _javaScriptDialogHandler;
         private readonly LifeSpanHandler _lifeSpanHandler;
         private readonly LoadHandler _loadHandler;
 
-        private readonly OnProcessMessageReceivedCallback _processMessageReceivedCallback;
+        private readonly CefClientCapiDelegates.OnProcessMessageReceivedCallback _processMessageReceivedCallback;
 
         public ClientHandler(BrowserDelegate browserDelegate)
             : base(typeof (CefClient)) {

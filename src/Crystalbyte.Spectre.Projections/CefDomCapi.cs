@@ -105,6 +105,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate CefDomNodeType GetTypeCallback2(IntPtr self);
 		public delegate int IsTextCallback(IntPtr self);
 		public delegate int IsElementCallback(IntPtr self);
+		public delegate int IsEditableCallback2(IntPtr self);
 		public delegate int IsFormControlElementCallback(IntPtr self);
 		public delegate IntPtr GetFormControlElementTypeCallback(IntPtr self);
 		public delegate int IsSameCallback(IntPtr self, IntPtr that);
@@ -112,6 +113,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate IntPtr GetValueCallback(IntPtr self);
 		public delegate int SetValueCallback(IntPtr self, IntPtr value);
 		public delegate IntPtr GetAsMarkupCallback(IntPtr self);
+		public delegate IntPtr GetDocumentCallback2(IntPtr self);
 		public delegate IntPtr GetParentCallback(IntPtr self);
 		public delegate IntPtr GetPreviousSiblingCallback(IntPtr self);
 		public delegate IntPtr GetNextSiblingCallback(IntPtr self);
@@ -131,6 +133,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate CefDomEventPhase GetPhaseCallback(IntPtr self);
 		public delegate int CanBubbleCallback(IntPtr self);
 		public delegate int CanCancelCallback(IntPtr self);
+		public delegate IntPtr GetDocumentCallback3(IntPtr self);
 		public delegate IntPtr GetTargetCallback(IntPtr self);
 		public delegate IntPtr GetCurrentTargetCallback(IntPtr self);
 		public delegate void HandleEventCallback(IntPtr self, IntPtr @event);

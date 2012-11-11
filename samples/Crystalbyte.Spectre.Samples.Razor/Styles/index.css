@@ -3,7 +3,7 @@
     margin: 0;
     border: 0;
     color: whitesmoke;
-    -webkit-user-select: none;
+    -webkit-user-select: text;
 }
 
 body {

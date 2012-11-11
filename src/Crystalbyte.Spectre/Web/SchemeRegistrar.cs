@@ -39,8 +39,9 @@ namespace Crystalbyte.Spectre.Web {
 
         public void Register(ISchemeDescriptor descriptor) {
             var r = MarshalFromNative<CefSchemeRegistrar>();
-            var function = (AddCustomSchemeCallback)
-                           Marshal.GetDelegateForFunctionPointer(r.AddCustomScheme, typeof (AddCustomSchemeCallback));
+            var function = (CefSchemeCapiDelegates.AddCustomSchemeCallback)
+                           Marshal.GetDelegateForFunctionPointer(r.AddCustomScheme,
+                                                                 typeof (CefSchemeCapiDelegates.AddCustomSchemeCallback));
 
             var name = new StringUtf16(descriptor.Scheme);
 

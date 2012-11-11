@@ -40,8 +40,9 @@ namespace Crystalbyte.Spectre {
         public int Count {
             get {
                 var r = MarshalFromNative<CefListValue>();
-                var function = (GetSizeCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetSize, typeof (GetSizeCallback));
+                var function = (CefValuesCapiDelegates.GetSizeCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetSize,
+                                                                     typeof (CefValuesCapiDelegates.GetSizeCallback));
                 return function(NativeHandle);
             }
         }
@@ -49,8 +50,9 @@ namespace Crystalbyte.Spectre {
         public bool IsReadOnly {
             get {
                 var r = MarshalFromNative<CefListValue>();
-                var function = (IsReadOnlyCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsReadOnly, typeof (IsReadOnlyCallback));
+                var function = (CefValuesCapiDelegates.IsReadOnlyCallback7)
+                               Marshal.GetDelegateForFunctionPointer(r.IsReadOnly,
+                                                                     typeof (CefValuesCapiDelegates.IsReadOnlyCallback7));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -59,8 +61,9 @@ namespace Crystalbyte.Spectre {
         public bool Clear {
             get {
                 var r = MarshalFromNative<CefListValue>();
-                var function = (ClearCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.Clear, typeof (ClearCallback));
+                var function = (CefValuesCapiDelegates.ClearCallback2)
+                               Marshal.GetDelegateForFunctionPointer(r.Clear,
+                                                                     typeof (CefValuesCapiDelegates.ClearCallback2));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -72,37 +75,28 @@ namespace Crystalbyte.Spectre {
 
         public bool SetBinary(int index, BinaryObject bin) {
             var r = MarshalFromNative<CefListValue>();
-            var function = (SetBinaryListValueCallback)
-                           Marshal.GetDelegateForFunctionPointer(r.SetBinary, typeof (SetBinaryListValueCallback));
+            var function = (CefValuesCapiDelegates.SetBinaryCallback2)
+                           Marshal.GetDelegateForFunctionPointer(r.SetBinary,
+                                                                 typeof (CefValuesCapiDelegates.SetBinaryCallback2));
             var value = function(NativeHandle, index, bin.NativeHandle);
             return Convert.ToBoolean(value);
         }
 
         public BinaryObject GetBinary(int index) {
             var r = MarshalFromNative<CefListValue>();
-            var function = (GetBinaryListValueCallback)
-                           Marshal.GetDelegateForFunctionPointer(r.GetBinary, typeof (GetBinaryListValueCallback));
+            var function = (CefValuesCapiDelegates.GetBinaryCallback2)
+                           Marshal.GetDelegateForFunctionPointer(r.GetBinary,
+                                                                 typeof (CefValuesCapiDelegates.GetBinaryCallback2));
             var handle = function(NativeHandle, index);
             return BinaryObject.FromHandle(handle);
         }
 
         public void SetSize(int size) {
             var r = MarshalFromNative<CefListValue>();
-            var action = (SetSizeCallback)
-                         Marshal.GetDelegateForFunctionPointer(r.SetSize, typeof (SetSizeCallback));
+            var action = (CefValuesCapiDelegates.SetSizeCallback)
+                         Marshal.GetDelegateForFunctionPointer(r.SetSize,
+                                                               typeof (CefValuesCapiDelegates.SetSizeCallback));
             action(NativeHandle, size);
         }
-
-        #region Nested type: GetBinaryListValueCallback
-
-        private delegate IntPtr GetBinaryListValueCallback(IntPtr self, int index);
-
-        #endregion
-
-        #region Nested type: SetBinaryListValueCallback
-
-        private delegate int SetBinaryListValueCallback(IntPtr self, int index, IntPtr value);
-
-        #endregion
     }
 }

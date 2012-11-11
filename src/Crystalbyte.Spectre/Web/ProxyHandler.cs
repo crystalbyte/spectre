@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.Projections;
 namespace Crystalbyte.Spectre.Web {
     public sealed class ProxyHandler : OwnedRefCountedNativeObject {
         private readonly AppDelegate _delegate;
-        private readonly GetProxyForUrlCallback _getProxyForUrlCallback;
+        private readonly CefProxyHandlerCapiDelegates.GetProxyForUrlCallback _getProxyForUrlCallback;
 
         public ProxyHandler(AppDelegate @delegate)
             : base(typeof (CefProxyHandler)) {

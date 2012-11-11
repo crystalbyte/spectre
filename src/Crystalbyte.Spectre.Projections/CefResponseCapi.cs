@@ -29,12 +29,16 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefResponseCapiDelegates {
+		public delegate int IsReadOnlyCallback6(IntPtr self);
 		public delegate int GetStatusCallback(IntPtr self);
 		public delegate void SetStatusCallback(IntPtr self, int status);
 		public delegate IntPtr GetStatusTextCallback(IntPtr self);
 		public delegate void SetStatusTextCallback(IntPtr self, IntPtr statustext);
+		public delegate IntPtr GetMimeTypeCallback2(IntPtr self);
 		public delegate void SetMimeTypeCallback(IntPtr self, IntPtr mimetype);
 		public delegate IntPtr GetHeaderCallback(IntPtr self, IntPtr name);
+		public delegate void GetHeaderMapCallback2(IntPtr self, IntPtr headermap);
+		public delegate void SetHeaderMapCallback2(IntPtr self, IntPtr headermap);
 	}
 	
 }

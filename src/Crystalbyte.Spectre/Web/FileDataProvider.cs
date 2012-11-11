@@ -69,7 +69,7 @@ namespace Crystalbyte.Spectre.Web {
             catch (IOException ex) {
                 e.Response.MimeType = "text/plain";
                 e.Response.StatusCode = 500;
-                e.Response.StatusText = ex.ToString();
+                e.Response.StatusText = string.Format("Access denied. {0}", ex);
             }
             catch (Exception ex) {
                 e.Response.MimeType = "text/plain";

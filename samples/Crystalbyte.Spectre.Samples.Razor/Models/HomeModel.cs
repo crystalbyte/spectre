@@ -27,23 +27,23 @@ namespace Crystalbyte.Spectre.Samples.Models {
     [Serializable]
     public sealed class HomeModel {
         public HomeModel() {
-            Styles = new List<string> { "../Styles/index.css" };
-            Scripts = new List<string> { "../Scripts/jquery-1.8.2.min.js" };
+            Styles = new List<string> {"../Styles/index.css"};
+            Scripts = new List<string> {"../Scripts/jquery-1.8.2.min.js"};
 
             Header = "Razor";
             Description =
-                "Web Pages with Razor syntax provide an alternative " 
-                + "to ASP.NET Web Forms. Web Forms pages center around " 
-                + "Web server controls that generate HTML automatically " 
-                + "and that emulate the event-based programming model " 
-                + "used for client applications. In contrast, Razor pages " 
-                + "work more directly like standard HTML pages, " 
-                + "where you create virtually all of the HTML markup " 
-                + "yourself and where you then add functionality around " 
-                + "that markup using server code. In general, " 
-                + "Razor pages are more lightweight than Web Forms " 
-                + "pages. Because of that and because the syntax is simple" 
-                + ", Razor can be easier for programmers to learn and " 
+                "Web Pages with Razor syntax provide an alternative "
+                + "to ASP.NET Web Forms. Web Forms pages center around "
+                + "Web server controls that generate HTML automatically "
+                + "and that emulate the event-based programming model "
+                + "used for client applications. In contrast, Razor pages "
+                + "work more directly like standard HTML pages, "
+                + "where you create virtually all of the HTML markup "
+                + "yourself and where you then add functionality around "
+                + "that markup using server code. In general, "
+                + "Razor pages are more lightweight than Web Forms "
+                + "pages. Because of that and because the syntax is simple"
+                + ", Razor can be easier for programmers to learn and "
                 + "can be faster for developing dynamic Web pages.";
 
             CreationDate = DateTime.Now;

@@ -74,7 +74,7 @@ namespace Crystalbyte.Spectre.Scripting {
 
         private int OnJsDialog(IntPtr self, IntPtr browser, IntPtr originurl, IntPtr acceptlang,
                                CefJsdialogType dialogtype, IntPtr messagetext, IntPtr defaultprompttext, IntPtr callback,
-                               out int suppressmessage) {
+                               ref int suppressmessage) {
             var e = new JavaScriptDialogOpeningEventArgs {
                 AcceptedLanguage = StringUtf16.ReadString(acceptlang),
                 Browser = Browser.FromHandle(browser),

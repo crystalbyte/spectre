@@ -95,9 +95,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public JavaScriptObject this[int index] {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (GetValueByindexCallback)
+                var function = (CefV8CapiDelegates.GetValueByindexCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetValueByindex,
-                                                                     typeof (GetValueByindexCallback));
+                                                                     typeof (CefV8CapiDelegates.GetValueByindexCallback));
                 var handle = function(NativeHandle, index);
                 return FromHandle(handle);
             }
@@ -110,8 +110,9 @@ namespace Crystalbyte.Spectre.Scripting {
                 }
                 var c = new StringUtf16Collection();
                 var r = MarshalFromNative<CefV8value>();
-                var function = (GetKeysCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetKeys, typeof (GetKeysCallback));
+                var function = (CefV8CapiDelegates.GetKeysCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetKeys,
+                                                                     typeof (CefV8CapiDelegates.GetKeysCallback));
                 function(NativeHandle, c.NativeHandle);
                 return c;
             }
@@ -120,8 +121,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsNull {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsNullCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsNull, typeof (IsNullCallback));
+                var function = (CefV8CapiDelegates.IsNullCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsNull,
+                                                                     typeof (CefV8CapiDelegates.IsNullCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -130,9 +132,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsUndefined {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsUndefinedCallback)
+                var function = (CefV8CapiDelegates.IsUndefinedCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsUndefined,
-                                                                     typeof (IsUndefinedCallback));
+                                                                     typeof (CefV8CapiDelegates.IsUndefinedCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -141,8 +143,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsBoolean {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsBoolCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsBool, typeof (IsBoolCallback));
+                var function = (CefV8CapiDelegates.IsBoolCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsBool,
+                                                                     typeof (CefV8CapiDelegates.IsBoolCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -151,8 +154,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsString {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsStringCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsString, typeof (IsStringCallback));
+                var function = (CefV8CapiDelegates.IsStringCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsString,
+                                                                     typeof (CefV8CapiDelegates.IsStringCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -161,8 +165,8 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsInteger {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsIntCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsInt, typeof (IsIntCallback));
+                var function = (CefV8CapiDelegates.IsIntCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsInt, typeof (CefV8CapiDelegates.IsIntCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -171,8 +175,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsDouble {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsDoubleCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsDouble, typeof (IsDoubleCallback));
+                var function = (CefV8CapiDelegates.IsDoubleCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsDouble,
+                                                                     typeof (CefV8CapiDelegates.IsDoubleCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -181,8 +186,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsArray {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsArrayCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsArray, typeof (IsArrayCallback));
+                var function = (CefV8CapiDelegates.IsArrayCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsArray,
+                                                                     typeof (CefV8CapiDelegates.IsArrayCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -191,8 +197,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsDate {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsDateCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsDate, typeof (IsDateCallback));
+                var function = (CefV8CapiDelegates.IsDateCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsDate,
+                                                                     typeof (CefV8CapiDelegates.IsDateCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -201,8 +208,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsObject {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsObjectCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsObject, typeof (IsObjectCallback));
+                var function = (CefV8CapiDelegates.IsObjectCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsObject,
+                                                                     typeof (CefV8CapiDelegates.IsObjectCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -211,8 +219,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public bool IsFunction {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (IsFunctionCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.IsFunction, typeof (IsFunctionCallback));
+                var function = (CefV8CapiDelegates.IsFunctionCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.IsFunction,
+                                                                     typeof (CefV8CapiDelegates.IsFunctionCallback));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }
@@ -224,9 +233,9 @@ namespace Crystalbyte.Spectre.Scripting {
                     return 0;
                 }
                 var r = MarshalFromNative<CefV8value>();
-                var function = (GetArrayLengthCallback)
+                var function = (CefV8CapiDelegates.GetArrayLengthCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetArrayLength,
-                                                                     typeof (GetArrayLengthCallback));
+                                                                     typeof (CefV8CapiDelegates.GetArrayLengthCallback));
                 return function(NativeHandle);
             }
         }
@@ -234,9 +243,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public JavaScriptObject this[string name] {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (GetValueBykeyCallback)
+                var function = (CefV8CapiDelegates.GetValueBykeyCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetValueBykey,
-                                                                     typeof (GetValueBykeyCallback));
+                                                                     typeof (CefV8CapiDelegates.GetValueBykeyCallback));
                 var s = new StringUtf16(name);
                 var handle = function(NativeHandle, s.NativeHandle);
                 s.Free();
@@ -244,9 +253,9 @@ namespace Crystalbyte.Spectre.Scripting {
             }
             set {
                 var r = MarshalFromNative<CefV8value>();
-                var action = (SetValueBykeyCallback)
+                var action = (CefV8CapiDelegates.SetValueBykeyCallback)
                              Marshal.GetDelegateForFunctionPointer(r.SetValueBykey,
-                                                                   typeof (SetValueBykeyCallback));
+                                                                   typeof (CefV8CapiDelegates.SetValueBykeyCallback));
                 var s = new StringUtf16(name);
 
                 Reference.Increment(value);
@@ -280,8 +289,9 @@ namespace Crystalbyte.Spectre.Scripting {
         string IFunction.Name {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (GetFunctionNameCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetFunctionName, typeof (GetFunctionNameCallback));
+                var function = (CefV8CapiDelegates.GetFunctionNameCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetFunctionName,
+                                                                     typeof (CefV8CapiDelegates.GetFunctionNameCallback));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
@@ -290,9 +300,10 @@ namespace Crystalbyte.Spectre.Scripting {
         JavaScriptHandler IFunction.Handler {
             get {
                 var r = MarshalFromNative<CefV8value>();
-                var function = (GetFunctionHandlerCallback)
+                var function = (CefV8CapiDelegates.GetFunctionHandlerCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFunctionHandler,
-                                                                     typeof (GetFunctionHandlerCallback));
+                                                                     typeof (
+                                                                         CefV8CapiDelegates.GetFunctionHandlerCallback));
                 var handle = function(NativeHandle);
                 return JavaScriptHandler.FromHandle(handle);
             }
@@ -307,8 +318,9 @@ namespace Crystalbyte.Spectre.Scripting {
                 throw new ArgumentNullException("target");
 
             var r = MarshalFromNative<CefV8value>();
-            var function = (ExecuteFunctionCallback)
-                           Marshal.GetDelegateForFunctionPointer(r.ExecuteFunction, typeof (ExecuteFunctionCallback));
+            var function = (CefV8CapiDelegates.ExecuteFunctionCallback)
+                           Marshal.GetDelegateForFunctionPointer(r.ExecuteFunction,
+                                                                 typeof (CefV8CapiDelegates.ExecuteFunctionCallback));
             var handle = arguments.ToUnmanagedArray();
 
             Reference.Increment(target.NativeHandle);
@@ -321,7 +333,7 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         JavaScriptObject IFunction.ExecuteWithContextAndTarget(ScriptingContext context, JavaScriptObject target,
-                                           params JavaScriptObject[] arguments) {
+                                                               params JavaScriptObject[] arguments) {
             if (context == null)
                 throw new ArgumentNullException("context");
 
@@ -330,9 +342,11 @@ namespace Crystalbyte.Spectre.Scripting {
             }
 
             var r = MarshalFromNative<CefV8value>();
-            var function = (ExecuteFunctionWithContextCallback)
+            var function = (CefV8CapiDelegates.ExecuteFunctionWithContextCallback)
                            Marshal.GetDelegateForFunctionPointer(r.ExecuteFunctionWithContext,
-                                                                 typeof (ExecuteFunctionWithContextCallback));
+                                                                 typeof (
+                                                                     CefV8CapiDelegates.
+                                                                     ExecuteFunctionWithContextCallback));
             var handle = arguments.ToUnmanagedArray();
 
             Reference.Increment(context.NativeHandle);
@@ -350,9 +364,9 @@ namespace Crystalbyte.Spectre.Scripting {
 
         public bool ContainsKey(string key) {
             var r = MarshalFromNative<CefV8value>();
-            var function = (HasValueBykeyCallback)
+            var function = (CefV8CapiDelegates.HasValueBykeyCallback)
                            Marshal.GetDelegateForFunctionPointer(r.HasValueBykey,
-                                                                 typeof (HasValueBykeyCallback));
+                                                                 typeof (CefV8CapiDelegates.HasValueBykeyCallback));
             var s = new StringUtf16(key);
             var contains = function(NativeHandle, s.NativeHandle);
             s.Free();
@@ -361,9 +375,9 @@ namespace Crystalbyte.Spectre.Scripting {
 
         public void Add(string key, JavaScriptObject value) {
             var r = MarshalFromNative<CefV8value>();
-            var action = (SetValueBykeyCallback)
+            var action = (CefV8CapiDelegates.SetValueBykeyCallback)
                          Marshal.GetDelegateForFunctionPointer(r.SetValueBykey,
-                                                               typeof (SetValueBykeyCallback));
+                                                               typeof (CefV8CapiDelegates.SetValueBykeyCallback));
             var s = new StringUtf16(key);
             Reference.Increment(value);
             action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
@@ -372,9 +386,9 @@ namespace Crystalbyte.Spectre.Scripting {
 
         public bool Remove(string key) {
             var r = MarshalFromNative<CefV8value>();
-            var function = (DeleteValueBykeyCallback)
+            var function = (CefV8CapiDelegates.DeleteValueBykeyCallback)
                            Marshal.GetDelegateForFunctionPointer(r.DeleteValueBykey,
-                                                                 typeof (DeleteValueBykeyCallback));
+                                                                 typeof (CefV8CapiDelegates.DeleteValueBykeyCallback));
             var s = new StringUtf16(key);
             var success = function(NativeHandle, s.NativeHandle);
             s.Free();
@@ -408,33 +422,45 @@ namespace Crystalbyte.Spectre.Scripting {
 
         public override string ToString() {
             var r = MarshalFromNative<CefV8value>();
-            var function = (GetStringValueCallback)
+            var function = (CefV8CapiDelegates.GetStringValueCallback)
                            Marshal.GetDelegateForFunctionPointer(r.GetStringValue,
-                                                                 typeof (GetStringValueCallback));
+                                                                 typeof (CefV8CapiDelegates.GetStringValueCallback));
             var handle = function(NativeHandle);
             return StringUtf16.ReadString(handle);
         }
 
         public DateTime ToDateTime() {
             var r = MarshalFromNative<CefV8value>();
-            var function = (GetDateValueCallback) Marshal.GetDelegateForFunctionPointer(r.GetDateValue,
-                                                                                        typeof (GetDateValueCallback));
+            var function =
+                (CefV8CapiDelegates.GetDateValueCallback) Marshal.GetDelegateForFunctionPointer(r.GetDateValue,
+                                                                                                typeof (
+                                                                                                    CefV8CapiDelegates.
+                                                                                                    GetDateValueCallback
+                                                                                                    ));
             var handle = function(NativeHandle);
             return Time.FromHandle(handle).ToDateTime();
         }
 
         public bool ToBoolean() {
             var r = MarshalFromNative<CefV8value>();
-            var function = (GetBoolValueCallback) Marshal.GetDelegateForFunctionPointer(r.GetBoolValue,
-                                                                                        typeof (GetBoolValueCallback));
+            var function =
+                (CefV8CapiDelegates.GetBoolValueCallback) Marshal.GetDelegateForFunctionPointer(r.GetBoolValue,
+                                                                                                typeof (
+                                                                                                    CefV8CapiDelegates.
+                                                                                                    GetBoolValueCallback
+                                                                                                    ));
             var b = function(NativeHandle);
             return Convert.ToBoolean(b);
         }
 
         public int ToInteger() {
             var r = MarshalFromNative<CefV8value>();
-            var function = (GetIntValueCallback) Marshal.GetDelegateForFunctionPointer(r.GetIntValue,
-                                                                                       typeof (GetIntValueCallback));
+            var function = (CefV8CapiDelegates.GetIntValueCallback) Marshal.GetDelegateForFunctionPointer(r.GetIntValue,
+                                                                                                          typeof (
+                                                                                                              CefV8CapiDelegates
+                                                                                                              .
+                                                                                                              GetIntValueCallback
+                                                                                                              ));
             return function(NativeHandle);
         }
 
@@ -444,9 +470,9 @@ namespace Crystalbyte.Spectre.Scripting {
 
         public double ToDouble() {
             var r = MarshalFromNative<CefV8value>();
-            var function = (GetDoubleValueCallback)
+            var function = (CefV8CapiDelegates.GetDoubleValueCallback)
                            Marshal.GetDelegateForFunctionPointer(r.GetDoubleValue,
-                                                                 typeof (GetDoubleValueCallback));
+                                                                 typeof (CefV8CapiDelegates.GetDoubleValueCallback));
             return function(NativeHandle);
         }
 

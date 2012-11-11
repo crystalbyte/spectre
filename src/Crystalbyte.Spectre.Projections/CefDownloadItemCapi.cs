@@ -29,6 +29,7 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefDownloadItemCapiDelegates {
+		public delegate int IsValidCallback2(IntPtr self);
 		public delegate int IsInProgressCallback(IntPtr self);
 		public delegate int IsCompleteCallback(IntPtr self);
 		public delegate int IsCanceledCallback(IntPtr self);

@@ -109,8 +109,8 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int SetAcceleratorAtCallback(IntPtr self, int index, int keyCode, int shiftPressed, int ctrlPressed, int altPressed);
 		public delegate int RemoveAcceleratorCallback(IntPtr self, int commandId);
 		public delegate int RemoveAcceleratorAtCallback(IntPtr self, int index);
-		public delegate int GetAcceleratorCallback(IntPtr self, int commandId, IntPtr keyCode, IntPtr shiftPressed, IntPtr ctrlPressed, IntPtr altPressed);
-		public delegate int GetAcceleratorAtCallback(IntPtr self, int index, IntPtr keyCode, IntPtr shiftPressed, IntPtr ctrlPressed, IntPtr altPressed);
+		public delegate int GetAcceleratorCallback(IntPtr self, int commandId, ref int keyCode, ref int shiftPressed, ref int ctrlPressed, ref int altPressed);
+		public delegate int GetAcceleratorAtCallback(IntPtr self, int index, ref int keyCode, ref int shiftPressed, ref int ctrlPressed, ref int altPressed);
 	}
 	
 }

@@ -10,14 +10,14 @@
             if (!commands) {
                 throw "Commands not registered.";
             }
-            $(document).ready(function () {
+            $(document).ready(function() {
                 var pid = window.commands.getPID();
                 $("#pidinfo").text("pid: " + pid);
             });
         </script>
     </head>
     <body>
-        <button onclick="commands.sendMessage('blue');">Send</button>
+        <button onclick="commands.sendMessage('blue'); ">Send</button>
         <div id="pidinfo"></div>
     </body>
 </html>

@@ -66,8 +66,18 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int SeekCallback(IntPtr self, long offset, int whence);
 		public delegate long TellCallback(IntPtr self);
 		public delegate int EofCallback(IntPtr self);
+		public delegate int ReadCallback2(IntPtr self, IntPtr ptr, int size, int n);
+		public delegate int SeekCallback2(IntPtr self, long offset, int whence);
+		public delegate long TellCallback2(IntPtr self);
+		public delegate int EofCallback2(IntPtr self);
 		public delegate int WriteCallback(IntPtr self, IntPtr ptr, int size, int n);
+		public delegate int SeekCallback3(IntPtr self, long offset, int whence);
+		public delegate long TellCallback3(IntPtr self);
 		public delegate int FlushCallback(IntPtr self);
+		public delegate int WriteCallback2(IntPtr self, IntPtr ptr, int size, int n);
+		public delegate int SeekCallback4(IntPtr self, long offset, int whence);
+		public delegate long TellCallback4(IntPtr self);
+		public delegate int FlushCallback2(IntPtr self);
 	}
 	
 }

@@ -41,8 +41,9 @@ namespace Crystalbyte.Spectre.Web {
             get {
                 var r = MarshalFromNative<CefResponse>();
                 var function =
-                    (IsReadOnlyCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.IsReadOnly, typeof (IsReadOnlyCallback));
+                    (CefResponseCapiDelegates.IsReadOnlyCallback6)
+                    Marshal.GetDelegateForFunctionPointer(r.IsReadOnly,
+                                                          typeof (CefResponseCapiDelegates.IsReadOnlyCallback6));
                 var result = function(NativeHandle);
                 return Convert.ToBoolean(result);
             }
@@ -51,16 +52,19 @@ namespace Crystalbyte.Spectre.Web {
         public string MimeType {
             get {
                 var r = MarshalFromNative<CefResponse>();
-                var function = (GetMimeTypeCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetMimeType, typeof (GetMimeTypeCallback));
+                var function = (CefResponseCapiDelegates.GetMimeTypeCallback2)
+                               Marshal.GetDelegateForFunctionPointer(r.GetMimeType,
+                                                                     typeof (
+                                                                         CefResponseCapiDelegates.GetMimeTypeCallback2));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
             set {
                 var s = new StringUtf16(value);
                 var r = MarshalFromNative<CefResponse>();
-                var action = (SetMimeTypeCallback)
-                             Marshal.GetDelegateForFunctionPointer(r.SetMimeType, typeof (SetMimeTypeCallback));
+                var action = (CefResponseCapiDelegates.SetMimeTypeCallback)
+                             Marshal.GetDelegateForFunctionPointer(r.SetMimeType,
+                                                                   typeof (CefResponseCapiDelegates.SetMimeTypeCallback));
                 action(NativeHandle, s.NativeHandle);
             }
         }
@@ -68,14 +72,16 @@ namespace Crystalbyte.Spectre.Web {
         public int StatusCode {
             get {
                 var r = MarshalFromNative<CefResponse>();
-                var function = (GetStatusCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetStatus, typeof (GetStatusCallback));
+                var function = (CefResponseCapiDelegates.GetStatusCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetStatus,
+                                                                     typeof (CefResponseCapiDelegates.GetStatusCallback));
                 return function(NativeHandle);
             }
             set {
                 var r = MarshalFromNative<CefResponse>();
-                var action = (SetStatusCallback)
-                             Marshal.GetDelegateForFunctionPointer(r.SetStatus, typeof (SetStatusCallback));
+                var action = (CefResponseCapiDelegates.SetStatusCallback)
+                             Marshal.GetDelegateForFunctionPointer(r.SetStatus,
+                                                                   typeof (CefResponseCapiDelegates.SetStatusCallback));
                 action(NativeHandle, value);
             }
         }
@@ -83,16 +89,20 @@ namespace Crystalbyte.Spectre.Web {
         public string StatusText {
             get {
                 var r = MarshalFromNative<CefResponse>();
-                var function = (GetStatusTextCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetStatusText, typeof (GetStatusTextCallback));
+                var function = (CefResponseCapiDelegates.GetStatusTextCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetStatusText,
+                                                                     typeof (
+                                                                         CefResponseCapiDelegates.GetStatusTextCallback));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
             set {
                 var s = new StringUtf16(value);
                 var r = MarshalFromNative<CefResponse>();
-                var action = (SetStatusTextCallback)
-                             Marshal.GetDelegateForFunctionPointer(r.SetStatusText, typeof (SetStatusTextCallback));
+                var action = (CefResponseCapiDelegates.SetStatusTextCallback)
+                             Marshal.GetDelegateForFunctionPointer(r.SetStatusText,
+                                                                   typeof (
+                                                                       CefResponseCapiDelegates.SetStatusTextCallback));
                 action(NativeHandle, s.NativeHandle);
             }
         }

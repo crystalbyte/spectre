@@ -42,8 +42,9 @@ namespace Crystalbyte.Spectre {
                 var r = MarshalFromNative<CefPostData>();
 
                 var function =
-                    (IsReadOnlyCallback)
-                    Marshal.GetDelegateForFunctionPointer(r.IsReadOnly, typeof (IsReadOnlyCallback));
+                    (CefRequestCapiDelegates.IsReadOnlyCallback3)
+                    Marshal.GetDelegateForFunctionPointer(r.IsReadOnly,
+                                                          typeof (CefRequestCapiDelegates.IsReadOnlyCallback3));
                 var value = function(NativeHandle);
                 return Convert.ToBoolean(value);
             }

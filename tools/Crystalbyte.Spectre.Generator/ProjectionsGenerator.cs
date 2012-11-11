@@ -207,12 +207,6 @@ namespace Crystalbyte.Spectre
                 var number = 1;
                 while (_delegateArchive.ContainsKey(name))
                 {
-                    var value = _delegateArchive[name];
-                    if (value == @d)
-                    {
-                        Debug.WriteLine("Skipping duplicate delegate '{0}:{1}", name, @d);
-                        break;
-                    }
                     var c = number.ToString().First();
                     name = name.TrimEnd(c) + (number+=1);
                 }

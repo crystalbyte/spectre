@@ -16,7 +16,7 @@ namespace Crystalbyte.Spectre.Projections
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefResourceBundleHandlerCapiDelegates {
 		public delegate int GetLocalizedStringCallback(IntPtr self, int messageId, IntPtr @string);
-		public delegate int GetDataResourceCallback(IntPtr self, int resourceId, IntPtr data, IntPtr dataSize);
+		public delegate int GetDataResourceCallback(IntPtr self, int resourceId, IntPtr data, ref int dataSize);
 	}
 	
 }

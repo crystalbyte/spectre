@@ -29,13 +29,13 @@ using Crystalbyte.Spectre.Projections.Internal;
 namespace Crystalbyte.Spectre.Threading {
     internal sealed class Task : OwnedRefCountedNativeObject {
         private readonly Action _action;
-        private readonly ExecuteCallback _executeCallback;
+        private readonly CefTaskCapiDelegates.ExecuteCallback _executeCallback;
 
         public event EventHandler Executed;
 
         private void OnExecuted(EventArgs e) {
             var handler = Executed;
-            if (handler != null) 
+            if (handler != null)
                 handler(this, e);
         }
 

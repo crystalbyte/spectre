@@ -25,15 +25,14 @@ using Crystalbyte.Spectre.Scripting;
 
 namespace Crystalbyte.Spectre.Samples.Commands {
     public sealed class IncScriptingCommand : ScriptingCommand {
-
         public override string RegistrationCode {
             get {
                 // The following code will synthesize the function accessor.
                 // window.commands.increment = function(value) { ... };
                 return RegistrationCodes.Synthesize(
-                    "commands",     // container object
-                    "increment",    // Function name
-                    "value");       // Argument list
+                    "commands", // container object
+                    "increment", // Function name
+                    "value"); // Argument list
             }
         }
 

@@ -24,7 +24,6 @@ using System;
 
 namespace Crystalbyte.Spectre.UI {
     public class BrowserDelegate {
-
         public event EventHandler<ContextMenuOpeningEventArgs> ContextMenuOpening;
 
         protected internal virtual void OnContextMenuOpening(ContextMenuOpeningEventArgs e) {

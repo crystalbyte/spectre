@@ -32,6 +32,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate void OnContextReleasedCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr context);
 		public delegate void OnUncaughtExceptionCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr context, IntPtr exception, IntPtr stacktrace);
 		public delegate void OnFocusedNodeChangedCallback(IntPtr self, IntPtr browser, IntPtr frame, IntPtr node);
+		public delegate int OnProcessMessageReceivedCallback2(IntPtr self, IntPtr browser, CefProcessId sourceProcess, IntPtr message);
 	}
 	
 }

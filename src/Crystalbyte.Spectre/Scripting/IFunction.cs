@@ -22,7 +22,10 @@ namespace Crystalbyte.Spectre.Scripting {
         JavaScriptHandler Handler { get; }
         JavaScriptObject Execute(params JavaScriptObject[] arguments);
         JavaScriptObject ExecuteWithTarget(JavaScriptObject target, params JavaScriptObject[] arguments);
-        JavaScriptObject ExecuteWithContextAndTarget(ScriptingContext context, JavaScriptObject target, params JavaScriptObject[] arguments);
+
+        JavaScriptObject ExecuteWithContextAndTarget(ScriptingContext context, JavaScriptObject target,
+                                                     params JavaScriptObject[] arguments);
+
         void Dispose();
         bool IsDisposed { get; }
     }

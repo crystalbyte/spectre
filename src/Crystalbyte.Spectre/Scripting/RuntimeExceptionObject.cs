@@ -35,8 +35,9 @@ namespace Crystalbyte.Spectre.Scripting {
         public string Message {
             get {
                 var r = MarshalFromNative<CefV8exception>();
-                var function = (GetMessageCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetMessage, typeof (GetMessageCallback));
+                var function = (CefV8CapiDelegates.GetMessageCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetMessage,
+                                                                     typeof (CefV8CapiDelegates.GetMessageCallback));
                 var handle = function(NativeHandle);
                 return StringUtf16.ReadString(handle);
             }

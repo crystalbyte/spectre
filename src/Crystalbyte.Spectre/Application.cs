@@ -61,9 +61,14 @@ namespace Crystalbyte.Spectre {
         public bool IsInitialized { get; private set; }
         public bool IsRootProcess { get; private set; }
         public bool QuitAfterLastViewClosed { get; set; }
-        public IEnumerable<Viewport> Viewports { get { return _views.Values; } }
 
-        public Dispatcher Dispatcher { get { return Dispatcher.Current; } }
+        public IEnumerable<Viewport> Viewports {
+            get { return _views.Values; }
+        }
+
+        public Dispatcher Dispatcher {
+            get { return Dispatcher.Current; }
+        }
 
         public SchemeHandlerFactoryManager SchemeFactories {
             get { return _schemeHandlerfactoryManager; }
@@ -97,7 +102,9 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-        public AppDelegate Delegate { get { return _app.Delegate; } }
+        public AppDelegate Delegate {
+            get { return _app.Delegate; }
+        }
 
         private bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
             _app = new App(del ?? new AppDelegate());

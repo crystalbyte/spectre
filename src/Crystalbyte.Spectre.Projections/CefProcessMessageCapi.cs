@@ -24,6 +24,10 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefProcessMessageCapiDelegates {
+		public delegate int IsValidCallback4(IntPtr self);
+		public delegate int IsReadOnlyCallback2(IntPtr self);
+		public delegate IntPtr CopyCallback3(IntPtr self);
+		public delegate IntPtr GetNameCallback3(IntPtr self);
 		public delegate IntPtr GetArgumentListCallback(IntPtr self);
 	}
 	

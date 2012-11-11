@@ -28,13 +28,13 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre {
     public sealed class DisplayHandler : OwnedRefCountedNativeObject {
-        private readonly OnAddressChangeCallback _addressChangeCallback;
-        private readonly OnConsoleMessageCallback _consoleMessageCallback;
+        private readonly CefDisplayHandlerCapiDelegates.OnAddressChangeCallback _addressChangeCallback;
+        private readonly CefDisplayHandlerCapiDelegates.OnConsoleMessageCallback _consoleMessageCallback;
         private readonly BrowserDelegate _delegate;
-        private readonly OnLoadingStateChangeCallback _loadingStateChangedCallback;
-        private readonly OnStatusMessageCallback _statusMessageCallback;
-        private readonly OnTitleChangeCallback _titleChangeCallback;
-        private readonly OnTooltipCallback _tooltipCallback;
+        private readonly CefDisplayHandlerCapiDelegates.OnLoadingStateChangeCallback _loadingStateChangedCallback;
+        private readonly CefDisplayHandlerCapiDelegates.OnStatusMessageCallback _statusMessageCallback;
+        private readonly CefDisplayHandlerCapiDelegates.OnTitleChangeCallback _titleChangeCallback;
+        private readonly CefDisplayHandlerCapiDelegates.OnTooltipCallback _tooltipCallback;
 
         public DisplayHandler(BrowserDelegate @delegate)
             : base(typeof (CefDisplayHandler)) {

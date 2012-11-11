@@ -15,7 +15,7 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefKeyboardHandlerCapiDelegates {
-		public delegate int OnPreKeyEventCallback(IntPtr self, IntPtr browser, IntPtr @event, IntPtr osEvent, IntPtr isKeyboardShortcut);
+		public delegate int OnPreKeyEventCallback(IntPtr self, IntPtr browser, IntPtr @event, IntPtr osEvent, ref int isKeyboardShortcut);
 		public delegate int OnKeyEventCallback(IntPtr self, IntPtr browser, IntPtr @event, IntPtr osEvent);
 	}
 	

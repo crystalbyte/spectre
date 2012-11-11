@@ -35,9 +35,11 @@ namespace Crystalbyte.Spectre.Projections
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefUrlrequestCapiDelegates {
 		public delegate IntPtr GetRequestCallback(IntPtr self);
+		public delegate IntPtr GetClientCallback2(IntPtr self);
 		public delegate CefUrlrequestStatus GetRequestStatusCallback(IntPtr self);
 		public delegate CefErrorcode GetRequestErrorCallback(IntPtr self);
 		public delegate IntPtr GetResponseCallback(IntPtr self);
+		public delegate void CancelCallback7(IntPtr self);
 		public delegate void OnRequestCompleteCallback(IntPtr self, IntPtr request);
 		public delegate void OnUploadProgressCallback(IntPtr self, IntPtr request, ulong current, ulong total);
 		public delegate void OnDownloadProgressCallback(IntPtr self, IntPtr request, ulong current, ulong total);

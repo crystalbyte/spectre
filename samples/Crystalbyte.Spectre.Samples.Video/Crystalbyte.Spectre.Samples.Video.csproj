@@ -37,13 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -97,6 +92,7 @@
     <PreBuildEvent>xcopy "$(CHROMIUM_SRC)build\$(Configuration)\*.pak" "$(TargetDir)" /i /y 
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\av*.dll" "$(TargetDir)" /i /y
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\lib*.dll" "$(TargetDir)" /i /y 
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\ff*.dll" "$(TargetDir)" /i /y 
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\locales\*" "$(TargetDir)\locales\" /i /y 
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\av*.dll" "$(TargetDir)" /i /y 
 REM xcopy "$(CHROMIUM_SRC)build\$(Configuration)\lib*.pdb" "$(TargetDir)" /i /y 

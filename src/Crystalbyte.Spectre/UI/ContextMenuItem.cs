@@ -16,8 +16,6 @@
 
 #endregion
 
-using System;
-
 namespace Crystalbyte.Spectre.UI {
     public abstract class ContextMenuItem {
         public virtual string Text { get; set; }

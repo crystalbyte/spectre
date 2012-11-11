@@ -59,6 +59,7 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefWebPluginCapiDelegates {
+		public delegate IntPtr GetNameCallback4(IntPtr self);
 		public delegate IntPtr GetPathCallback(IntPtr self);
 		public delegate IntPtr GetVersionCallback(IntPtr self);
 		public delegate IntPtr GetDescriptionCallback(IntPtr self);

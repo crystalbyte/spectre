@@ -29,12 +29,12 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre.Web {
     public abstract class ResourceHandler : OwnedRefCountedNativeObject {
-        private readonly CanGetCookieCallback _canGetCookieCallback;
-        private readonly CanSetCookieCallback _canSetCookieCallback;
-        private readonly CancelCallback _cancelCallback;
-        private readonly GetResponseHeadersCallback _getResponseHeadersCallback;
-        private readonly ProcessRequestCallback _processRequestCallback;
-        private readonly ReadResponseCallback _readResponseCallback;
+        private readonly CefResourceHandlerCapiDelegates.CanGetCookieCallback _canGetCookieCallback;
+        private readonly CefResourceHandlerCapiDelegates.CanSetCookieCallback _canSetCookieCallback;
+        private readonly CefResourceHandlerCapiDelegates.CancelCallback6 _cancelCallback;
+        private readonly CefResourceHandlerCapiDelegates.GetResponseHeadersCallback _getResponseHeadersCallback;
+        private readonly CefResourceHandlerCapiDelegates.ProcessRequestCallback _processRequestCallback;
+        private readonly CefResourceHandlerCapiDelegates.ReadResponseCallback _readResponseCallback;
 
         protected ResourceHandler()
             : base(typeof (CefResourceHandler)) {
@@ -62,7 +62,7 @@ namespace Crystalbyte.Spectre.Web {
             });
         }
 
-        private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, out int bytesread, IntPtr callback) {
+        private int ReadResponse(IntPtr self, IntPtr dataout, int bytestoread, ref int bytesread, IntPtr callback) {
             using (var writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8)) {
                 var e = new DataBlockReadingEventArgs(writer) {
                     MaxBlockSize = bytestoread,
@@ -122,7 +122,7 @@ namespace Crystalbyte.Spectre.Web {
             }
         }
 
-        private void GetResponseHeaders(IntPtr self, IntPtr response, out int responselength, IntPtr redirecturl) {
+        private void GetResponseHeaders(IntPtr self, IntPtr response, ref long responselength, IntPtr redirecturl) {
             var e = new ResponseHeadersReadingEventArgs {
                 Response = Response.FromHandle(response)
             };

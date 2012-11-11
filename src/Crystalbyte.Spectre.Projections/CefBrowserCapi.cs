@@ -81,7 +81,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate IntPtr GetFrameByidentCallback(IntPtr self, long identifier);
 		public delegate IntPtr GetFrameCallback(IntPtr self, IntPtr name);
 		public delegate int GetFrameCountCallback(IntPtr self);
-		public delegate void GetFrameIdentifiersCallback(IntPtr self, IntPtr identifierscount, IntPtr identifiers);
+		public delegate void GetFrameIdentifiersCallback(IntPtr self, ref int identifierscount, ref long identifiers);
 		public delegate void GetFrameNamesCallback(IntPtr self, IntPtr names);
 		public delegate int SendProcessMessageCallback(IntPtr self, CefProcessId targetProcess, IntPtr message);
 		public delegate void ContCallback(IntPtr self, IntPtr browserHost, IntPtr filePaths);

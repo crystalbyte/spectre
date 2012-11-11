@@ -19,8 +19,6 @@
 #region Using directives
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 #endregion
 
@@ -29,7 +27,7 @@ namespace Crystalbyte.Spectre.UI {
         private readonly ContextMenu _menu;
 
         public ContextMenuItemCollection(ContextMenu menu) {
-            if (menu == null) 
+            if (menu == null)
                 throw new ArgumentNullException("menu");
             _menu = menu;
         }

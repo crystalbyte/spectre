@@ -34,12 +34,15 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int MoveToFirstFileCallback(IntPtr self);
 		public delegate int MoveToNextFileCallback(IntPtr self);
 		public delegate int MoveToFileCallback(IntPtr self, IntPtr filename, int casesensitive);
+		public delegate int CloseCallback2(IntPtr self);
 		public delegate IntPtr GetFileNameCallback(IntPtr self);
 		public delegate long GetFileSizeCallback(IntPtr self);
 		public delegate long GetFileLastModifiedCallback(IntPtr self);
 		public delegate int OpenFileCallback(IntPtr self, IntPtr password);
 		public delegate int CloseFileCallback(IntPtr self);
 		public delegate int ReadFileCallback(IntPtr self, IntPtr buffer, int buffersize);
+		public delegate long TellCallback5(IntPtr self);
+		public delegate int EofCallback3(IntPtr self);
 	}
 	
 }

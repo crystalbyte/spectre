@@ -19,11 +19,10 @@
 #region Using directives
 
 using System;
-using System.Reflection;
-using System.Globalization;
 using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
 using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;
 using Crystalbyte.Spectre.Web;
@@ -45,7 +44,7 @@ namespace Crystalbyte.Spectre {
 
             ConfigureSettings(Application.Current.Settings);
 
-			// Initialize will block sub processes, only the host process will continue.
+            // Initialize will block sub processes, only the host process will continue.
             Application.Current.Initialize(app);
 
             if (!Application.Current.IsRootProcess) {
@@ -75,16 +74,16 @@ namespace Crystalbyte.Spectre {
         }
 
         protected virtual void ConfigureSettings(ApplicationSettings settings) {
-			if (Platform.IsLinux || Platform.IsOsX) {
-				var fullname = Assembly.GetEntryAssembly().Location;
-				settings.BrowserSubprocessPath = string.Format("/usr/bin/mono \"{0}\"", fullname);
-			}
+            if (Platform.IsLinux || Platform.IsOsX) {
+                var fullname = Assembly.GetEntryAssembly().Location;
+                settings.BrowserSubprocessPath = string.Format("/usr/bin/mono \"{0}\"", fullname);
+            }
 
-			var culture = CultureInfo.CurrentCulture.Name;
-			settings.Locale = culture != string.Empty ? culture	: "en-US";
+            var culture = CultureInfo.CurrentCulture.Name;
+            settings.Locale = culture != string.Empty ? culture : "en-US";
 
-			var modulePath = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
-			settings.LocalesDirPath = Path.Combine(modulePath, "locales");
+            var modulePath = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
+            settings.LocalesDirPath = Path.Combine(modulePath, "locales");
 
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;

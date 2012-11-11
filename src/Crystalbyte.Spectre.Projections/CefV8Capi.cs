@@ -168,10 +168,13 @@ namespace Crystalbyte.Spectre.Projections
 	
 	[SuppressUnmanagedCodeSecurity]
 	public static class CefV8CapiDelegates {
+		public delegate int IsValidCallback5(IntPtr self);
+		public delegate IntPtr GetBrowserCallback3(IntPtr self);
 		public delegate IntPtr GetFrameCallback2(IntPtr self);
 		public delegate IntPtr GetGlobalCallback(IntPtr self);
 		public delegate int EnterCallback(IntPtr self);
 		public delegate int ExitCallback(IntPtr self);
+		public delegate int IsSameCallback2(IntPtr self, IntPtr that);
 		public delegate int EvalCallback(IntPtr self, IntPtr code, IntPtr retval, IntPtr exception);
 		public delegate int ExecuteCallback2(IntPtr self, IntPtr name, IntPtr @object, int argumentscount, IntPtr arguments, IntPtr retval, IntPtr exception);
 		public delegate int GetCallback(IntPtr self, IntPtr name, IntPtr @object, IntPtr retval, IntPtr exception);
@@ -184,6 +187,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int GetEndPositionCallback(IntPtr self);
 		public delegate int GetStartColumnCallback(IntPtr self);
 		public delegate int GetEndColumnCallback(IntPtr self);
+		public delegate int IsValidCallback6(IntPtr self);
 		public delegate int IsUndefinedCallback(IntPtr self);
 		public delegate int IsNullCallback(IntPtr self);
 		public delegate int IsBoolCallback(IntPtr self);
@@ -195,6 +199,7 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate int IsObjectCallback(IntPtr self);
 		public delegate int IsArrayCallback(IntPtr self);
 		public delegate int IsFunctionCallback(IntPtr self);
+		public delegate int IsSameCallback3(IntPtr self, IntPtr that);
 		public delegate int GetBoolValueCallback(IntPtr self);
 		public delegate int GetIntValueCallback(IntPtr self);
 		public delegate uint GetUintValueCallback(IntPtr self);
@@ -226,9 +231,14 @@ namespace Crystalbyte.Spectre.Projections
 		public delegate IntPtr GetFunctionHandlerCallback(IntPtr self);
 		public delegate IntPtr ExecuteFunctionCallback(IntPtr self, IntPtr @object, int argumentscount, IntPtr arguments);
 		public delegate IntPtr ExecuteFunctionWithContextCallback(IntPtr self, IntPtr context, IntPtr @object, int argumentscount, IntPtr arguments);
+		public delegate int IsValidCallback7(IntPtr self);
+		public delegate int GetFrameCountCallback2(IntPtr self);
 		public delegate IntPtr GetFrameCallback3(IntPtr self, int index);
+		public delegate int IsValidCallback8(IntPtr self);
 		public delegate IntPtr GetScriptNameCallback(IntPtr self);
 		public delegate IntPtr GetScriptNameOrSourceUrlCallback(IntPtr self);
+		public delegate IntPtr GetFunctionNameCallback2(IntPtr self);
+		public delegate int GetLineNumberCallback2(IntPtr self);
 		public delegate int GetColumnCallback(IntPtr self);
 		public delegate int IsEvalCallback(IntPtr self);
 		public delegate int IsRuctorCallback(IntPtr self);

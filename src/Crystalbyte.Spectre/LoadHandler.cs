@@ -30,9 +30,9 @@ using Crystalbyte.Spectre.UI;
 namespace Crystalbyte.Spectre {
     public sealed class LoadHandler : OwnedRefCountedNativeObject {
         private readonly BrowserDelegate _delegate;
-        private readonly OnLoadEndCallback _loadEndCallback;
-        private readonly OnLoadErrorCallback _loadErrorCallback;
-        private readonly OnLoadStartCallback _loadStartCallback;
+        private readonly CefLoadHandlerCapiDelegates.OnLoadEndCallback _loadEndCallback;
+        private readonly CefLoadHandlerCapiDelegates.OnLoadErrorCallback _loadErrorCallback;
+        private readonly CefLoadHandlerCapiDelegates.OnLoadStartCallback _loadStartCallback;
 
         public LoadHandler(BrowserDelegate @delegate)
             : base(typeof (CefLoadHandler)) {

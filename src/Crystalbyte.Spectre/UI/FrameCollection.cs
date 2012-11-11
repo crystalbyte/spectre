@@ -37,8 +37,9 @@ namespace Crystalbyte.Spectre.UI {
             get {
                 var r = _browser.MarshalFromNative<CefBrowser>();
                 var str = new StringUtf16(name);
-                var function = (GetFrameCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetFrame, typeof (GetFrameCallback));
+                var function = (CefBrowserCapiDelegates.GetFrameCallback)
+                               Marshal.GetDelegateForFunctionPointer(r.GetFrame,
+                                                                     typeof (CefBrowserCapiDelegates.GetFrameCallback));
                 var handle = function(_browser.NativeHandle, str.NativeHandle);
                 str.Free();
                 return Frame.FromHandle(handle);
@@ -48,9 +49,11 @@ namespace Crystalbyte.Spectre.UI {
         public Frame this[int ident] {
             get {
                 var r = _browser.MarshalFromNative<CefBrowser>();
-                var function = (GetFrameByidentCallback)
+                var function = (CefBrowserCapiDelegates.GetFrameByidentCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFrameByident,
-                                                                     typeof (GetFrameByidentCallback));
+                                                                     typeof (
+                                                                         CefBrowserCapiDelegates.GetFrameByidentCallback
+                                                                         ));
                 var handle = function(_browser.NativeHandle, ident);
                 return Frame.FromHandle(handle);
             }
@@ -59,9 +62,10 @@ namespace Crystalbyte.Spectre.UI {
         public int Count {
             get {
                 var r = _browser.MarshalFromNative<CefBrowser>();
-                var function = (GetFrameCountCallback)
+                var function = (CefBrowserCapiDelegates.GetFrameCountCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFrameCount,
-                                                                     typeof (GetFrameCountCallback));
+                                                                     typeof (
+                                                                         CefBrowserCapiDelegates.GetFrameCountCallback));
                 return function(_browser.NativeHandle);
             }
         }
