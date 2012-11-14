@@ -19,6 +19,7 @@
 #region Using directives
 
 using System;
+using System.Runtime.InteropServices;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 
@@ -46,5 +47,22 @@ namespace Crystalbyte.Spectre {
         public static CommandLine FromHandle(IntPtr handle) {
             return new CommandLine(handle);
         }
+
+		public bool IsValid {
+			get {
+				var r = MarshalFromNative<CefCommandLine> ();
+				var function = (CefCommandLineCapiDelegates.IsValidCallback)
+					Marshal.GetDelegateForFunctionPointer (r.IsValid, typeof(CefCommandLineCapiDelegates.IsValidCallback));
+				var isValid = function (NativeHandle);
+				return Convert.ToBoolean (isValid);
+			}
+		}
+
+		internal void Reset() {
+			var r = MarshalFromNative<CefCommandLine> ();
+			var action = (CefCommandLineCapiDelegates.ResetCallback)
+				Marshal.GetDelegateForFunctionPointer (r.Reset, typeof(CefCommandLineCapiDelegates.ResetCallback));
+			action (NativeHandle);
+		}
     }
 }

@@ -96,6 +96,11 @@ namespace Crystalbyte.Spectre {
                         : StringUtf16.ReadString(processtype),
                 CommandLine = CommandLine.FromHandle(commandline)
             };
+
+			if (Platform.IsLinux || Platform.IsOsX) {
+
+			}
+
             _delegate.OnProcessStarted(e);
         }
 

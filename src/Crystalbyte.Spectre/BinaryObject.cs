@@ -31,7 +31,7 @@ namespace Crystalbyte.Spectre {
         public BinaryObject(Stream stream)
             : base(typeof (CefBinaryValue)) {
             if (stream.Length > int.MaxValue) {
-                throw new InvalidOperationException("Stream must not exceed size of an 32bit integer.");
+                throw new InvalidOperationException("Stream must not exceed size of a 32 bit integer.");
             }
             var length = stream.Length;
             var handle = stream.ToUnmanagedMemory();
