@@ -106,7 +106,7 @@ Global
 		{B906D62A-D555-4702-AEC4-FC56CEBF4C8A} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Crystalbyte.Spectre.Samples.Razor\Crystalbyte.Spectre.Samples.Razor.csproj
+		StartupItem = Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

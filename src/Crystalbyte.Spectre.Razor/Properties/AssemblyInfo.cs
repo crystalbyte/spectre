@@ -1,6 +1,4 @@
-﻿#region Licensing notice
-
-// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
+﻿// Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License version 3 as published by
@@ -27,11 +25,16 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Crystalbyte.Spectre.Razor")]
+[assembly: AssemblyTitle("Spectre Razor Library")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Crystalbyte.Spectre.Razor")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+#endif
+
+[assembly: AssemblyCompany("Crystalbyte")]
+[assembly: AssemblyProduct("Spectre Framework")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -44,7 +47,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("6709f238-7452-4935-81f9-0eae54a7b5ba")]
+[assembly: Guid("26fe4305-91a2-492d-9028-f68ad8686e32")]
 
 // Version information for an assembly consists of the following four values:
 //
