@@ -26,10 +26,21 @@ using Crystalbyte.Spectre.UI;
 
 namespace Crystalbyte.Spectre.Samples {
     public sealed class WinformsBootstrapper : Bootstrapper {
+		protected override void ConfigureSettings (ApplicationSettings settings) {
+			base.ConfigureSettings (settings);
+#if DEBUG
+			settings.IsSingleProcess = true;
+#endif
+		}
         protected override IEnumerable<Viewport> CreateViewports() {
             yield return new Viewport(
                 new Window {StartupUri = new Uri("spectre://localhost/Views/index.html")},
                 new BrowserDelegate());
         }
+
+		protected override AppDelegate CreateAppDelegate ()
+		{
+			return new TestAppDelegate();
+		}
     }
 }

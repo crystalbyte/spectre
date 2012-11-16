@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    internal sealed class BrowserHost : RefCountedNativeObject {
+    internal sealed class BrowserHost : RefCountedNativeTypeAdapter {
         private BrowserHost(IntPtr handle)
             : base(typeof (CefBrowserHost)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public IntPtr OpenerWindowHandle {
@@ -40,7 +40,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.
                                                                          GetOpenerWindowHandleCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.GetWindowHandleCallback
                                                                          ));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -62,19 +62,19 @@ namespace Crystalbyte.Spectre.UI {
                 var function = (CefBrowserCapiDelegates.GetBrowserCallback)
                                Marshal.GetDelegateForFunctionPointer(reflection.GetBrowser,
                                                                      typeof (CefBrowserCapiDelegates.GetBrowserCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return Browser.FromHandle(handle);
             }
         }
 
         public static Browser CreateBrowser(BrowserCreationArgs a) {
             var uri = new StringUtf16(a.StartUri.AbsoluteUri);
-            Reference.Increment(a.ClientHandler.NativeHandle);
+            Reference.Increment(a.ClientHandler.Handle);
             var handle = CefBrowserCapi.CefBrowserHostCreateBrowserSync(
-                a.WindowInfo.NativeHandle,
-                a.ClientHandler.NativeHandle,
-                uri.NativeHandle,
-                a.Settings.NativeHandle);
+                a.WindowInfo.Handle,
+                a.ClientHandler.Handle,
+                uri.Handle,
+                a.Settings.Handle);
             uri.Free();
             return Browser.FromHandle(handle);
         }
@@ -90,7 +90,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                typeof (
                                                                    CefBrowserCapiDelegates.ParentWindowWillCloseCallback
                                                                    ));
-            action(NativeHandle);
+            action(Handle);
         }
 
         public void Focus() {
@@ -98,7 +98,7 @@ namespace Crystalbyte.Spectre.UI {
             var action = (CefBrowserCapiDelegates.SetFocusCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.SetFocus,
                                                                typeof (CefBrowserCapiDelegates.SetFocusCallback));
-            action(NativeHandle, 1);
+            action(Handle, 1);
         }
 
         public void CloseBrowser() {
@@ -106,7 +106,7 @@ namespace Crystalbyte.Spectre.UI {
             var action = (CefBrowserCapiDelegates.CloseBrowserCallback)
                          Marshal.GetDelegateForFunctionPointer(reflection.GetOpenerWindowHandle,
                                                                typeof (CefBrowserCapiDelegates.CloseBrowserCallback));
-            action(NativeHandle);
+            action(Handle);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -31,11 +31,11 @@ using Crystalbyte.Spectre.Projections.Internal;
 
 namespace Crystalbyte.Spectre.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
-    public sealed class JavaScriptObject : RefCountedNativeObject, IEnumerable<KeyValuePair<string, JavaScriptObject>>,
+    public sealed class JavaScriptObject : RefCountedNativeTypeAdapter, IEnumerable<KeyValuePair<string, JavaScriptObject>>,
                                            IFunction {
         private JavaScriptObject(IntPtr handle)
             : base(typeof (CefV8value)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         protected override void DisposeNative() {
@@ -45,36 +45,36 @@ namespace Crystalbyte.Spectre.Scripting {
         public JavaScriptObject(bool value)
             : base(typeof (CefV8value)) {
             var i = Convert.ToInt32(value);
-            NativeHandle = CefV8Capi.CefV8valueCreateBool(i);
+            Handle = CefV8Capi.CefV8valueCreateBool(i);
         }
 
         public JavaScriptObject(int value)
             : base(typeof (CefV8value)) {
-            NativeHandle = CefV8Capi.CefV8valueCreateInt(value);
+            Handle = CefV8Capi.CefV8valueCreateInt(value);
         }
 
         public JavaScriptObject(double value)
             : base(typeof (CefV8value)) {
-            NativeHandle = CefV8Capi.CefV8valueCreateDouble(value);
+            Handle = CefV8Capi.CefV8valueCreateDouble(value);
         }
 
         public JavaScriptObject(string value)
             : base(typeof (CefV8value)) {
             var s = new StringUtf16(value);
-            NativeHandle = CefV8Capi.CefV8valueCreateString(s.NativeHandle);
+            Handle = CefV8Capi.CefV8valueCreateString(s.Handle);
             s.Free();
         }
 
         public JavaScriptObject(DateTime time)
             : base(typeof (CefV8value)) {
             var t = new Time(time);
-            NativeHandle = CefV8Capi.CefV8valueCreateDate(t.NativeHandle);
+            Handle = CefV8Capi.CefV8valueCreateDate(t.Handle);
         }
 
         public JavaScriptObject(string name, JavaScriptHandler handler)
             : base(typeof (CefV8value)) {
             var s = new StringUtf16(name);
-            NativeHandle = CefV8Capi.CefV8valueCreateFunction(s.NativeHandle, handler.NativeHandle);
+            Handle = CefV8Capi.CefV8valueCreateFunction(s.Handle, handler.Handle);
             s.Free();
         }
 
@@ -98,7 +98,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.GetValueByindexCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetValueByindex,
                                                                      typeof (CefV8CapiDelegates.GetValueByindexCallback));
-                var handle = function(NativeHandle, index);
+                var handle = function(Handle, index);
                 return FromHandle(handle);
             }
         }
@@ -108,12 +108,12 @@ namespace Crystalbyte.Spectre.Scripting {
                 if (!IsArray) {
                     return null;
                 }
-                var c = new StringUtf16Collection();
+                var c = new StringUtf16List();
                 var r = MarshalFromNative<CefV8value>();
                 var function = (CefV8CapiDelegates.GetKeysCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetKeys,
                                                                      typeof (CefV8CapiDelegates.GetKeysCallback));
-                function(NativeHandle, c.NativeHandle);
+                function(Handle, c.Handle);
                 return c;
             }
         }
@@ -124,7 +124,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsNullCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsNull,
                                                                      typeof (CefV8CapiDelegates.IsNullCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -135,7 +135,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsUndefinedCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsUndefined,
                                                                      typeof (CefV8CapiDelegates.IsUndefinedCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -146,7 +146,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsBoolCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsBool,
                                                                      typeof (CefV8CapiDelegates.IsBoolCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -157,7 +157,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsStringCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsString,
                                                                      typeof (CefV8CapiDelegates.IsStringCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -167,7 +167,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var r = MarshalFromNative<CefV8value>();
                 var function = (CefV8CapiDelegates.IsIntCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsInt, typeof (CefV8CapiDelegates.IsIntCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -178,7 +178,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsDoubleCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsDouble,
                                                                      typeof (CefV8CapiDelegates.IsDoubleCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -189,7 +189,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsArrayCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsArray,
                                                                      typeof (CefV8CapiDelegates.IsArrayCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -200,7 +200,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsDateCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsDate,
                                                                      typeof (CefV8CapiDelegates.IsDateCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -211,7 +211,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsObjectCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsObject,
                                                                      typeof (CefV8CapiDelegates.IsObjectCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -222,7 +222,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.IsFunctionCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsFunction,
                                                                      typeof (CefV8CapiDelegates.IsFunctionCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -236,7 +236,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.GetArrayLengthCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetArrayLength,
                                                                      typeof (CefV8CapiDelegates.GetArrayLengthCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -247,7 +247,7 @@ namespace Crystalbyte.Spectre.Scripting {
                                Marshal.GetDelegateForFunctionPointer(r.GetValueBykey,
                                                                      typeof (CefV8CapiDelegates.GetValueBykeyCallback));
                 var s = new StringUtf16(name);
-                var handle = function(NativeHandle, s.NativeHandle);
+                var handle = function(Handle, s.Handle);
                 s.Free();
                 return FromHandle(handle);
             }
@@ -259,7 +259,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var s = new StringUtf16(name);
 
                 Reference.Increment(value);
-                action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
+                action(Handle, s.Handle, value.Handle, CefV8Propertyattribute.V8PropertyAttributeNone);
                 s.Free();
             }
         }
@@ -292,22 +292,22 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.GetFunctionNameCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFunctionName,
                                                                      typeof (CefV8CapiDelegates.GetFunctionNameCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
         }
 
-        JavaScriptHandler IFunction.Handler {
-            get {
-                var r = MarshalFromNative<CefV8value>();
-                var function = (CefV8CapiDelegates.GetFunctionHandlerCallback)
-                               Marshal.GetDelegateForFunctionPointer(r.GetFunctionHandler,
-                                                                     typeof (
-                                                                         CefV8CapiDelegates.GetFunctionHandlerCallback));
-                var handle = function(NativeHandle);
-                return JavaScriptHandler.FromHandle(handle);
-            }
-        }
+//        JavaScriptHandler IFunction.Handler {
+//            get {
+//                var r = MarshalFromNative<CefV8value>();
+//                var function = (CefV8CapiDelegates.GetFunctionHandlerCallback)
+//                               Marshal.GetDelegateForFunctionPointer(r.GetFunctionHandler,
+//                                                                     typeof (
+//                                                                         CefV8CapiDelegates.GetFunctionHandlerCallback));
+//                var handle = function(Handle);
+//                return JavaScriptHandler.FromHandle(handle);
+//            }
+//        }
 
         JavaScriptObject IFunction.Execute(params JavaScriptObject[] arguments) {
             return (this as IFunction).ExecuteWithTarget(Null, arguments);
@@ -323,10 +323,10 @@ namespace Crystalbyte.Spectre.Scripting {
                                                                  typeof (CefV8CapiDelegates.ExecuteFunctionCallback));
             var handle = arguments.ToUnmanagedArray();
 
-            Reference.Increment(target.NativeHandle);
+            Reference.Increment(target.Handle);
             arguments.ForEach(Reference.Increment);
 
-            var resultHandle = function(NativeHandle, target.NativeHandle, arguments.Length, handle);
+            var resultHandle = function(Handle, target.Handle, arguments.Length, handle);
 
             var result = FromHandle(resultHandle);
             return result;
@@ -349,11 +349,11 @@ namespace Crystalbyte.Spectre.Scripting {
                                                                      ExecuteFunctionWithContextCallback));
             var handle = arguments.ToUnmanagedArray();
 
-            Reference.Increment(context.NativeHandle);
-            Reference.Increment(target.NativeHandle);
+            Reference.Increment(context.Handle);
+            Reference.Increment(target.Handle);
             arguments.ForEach(Reference.Increment);
 
-            var resultHandle = function(NativeHandle, context.NativeHandle, target.NativeHandle, arguments.Length,
+            var resultHandle = function(Handle, context.Handle, target.Handle, arguments.Length,
                                         handle);
 
             var result = FromHandle(resultHandle);
@@ -368,7 +368,7 @@ namespace Crystalbyte.Spectre.Scripting {
                            Marshal.GetDelegateForFunctionPointer(r.HasValueBykey,
                                                                  typeof (CefV8CapiDelegates.HasValueBykeyCallback));
             var s = new StringUtf16(key);
-            var contains = function(NativeHandle, s.NativeHandle);
+            var contains = function(Handle, s.Handle);
             s.Free();
             return Convert.ToBoolean(contains);
         }
@@ -380,7 +380,7 @@ namespace Crystalbyte.Spectre.Scripting {
                                                                typeof (CefV8CapiDelegates.SetValueBykeyCallback));
             var s = new StringUtf16(key);
             Reference.Increment(value);
-            action(NativeHandle, s.NativeHandle, value.NativeHandle, CefV8Propertyattribute.V8PropertyAttributeNone);
+            action(Handle, s.Handle, value.Handle, CefV8Propertyattribute.V8PropertyAttributeNone);
             s.Free();
         }
 
@@ -390,7 +390,7 @@ namespace Crystalbyte.Spectre.Scripting {
                            Marshal.GetDelegateForFunctionPointer(r.DeleteValueBykey,
                                                                  typeof (CefV8CapiDelegates.DeleteValueBykeyCallback));
             var s = new StringUtf16(key);
-            var success = function(NativeHandle, s.NativeHandle);
+            var success = function(Handle, s.Handle);
             s.Free();
             return Convert.ToBoolean(success);
         }
@@ -425,7 +425,7 @@ namespace Crystalbyte.Spectre.Scripting {
             var function = (CefV8CapiDelegates.GetStringValueCallback)
                            Marshal.GetDelegateForFunctionPointer(r.GetStringValue,
                                                                  typeof (CefV8CapiDelegates.GetStringValueCallback));
-            var handle = function(NativeHandle);
+            var handle = function(Handle);
             return StringUtf16.ReadString(handle);
         }
 
@@ -437,7 +437,7 @@ namespace Crystalbyte.Spectre.Scripting {
                                                                                                     CefV8CapiDelegates.
                                                                                                     GetDateValueCallback
                                                                                                     ));
-            var handle = function(NativeHandle);
+            var handle = function(Handle);
             return Time.FromHandle(handle).ToDateTime();
         }
 
@@ -449,7 +449,7 @@ namespace Crystalbyte.Spectre.Scripting {
                                                                                                     CefV8CapiDelegates.
                                                                                                     GetBoolValueCallback
                                                                                                     ));
-            var b = function(NativeHandle);
+            var b = function(Handle);
             return Convert.ToBoolean(b);
         }
 
@@ -461,7 +461,7 @@ namespace Crystalbyte.Spectre.Scripting {
                                                                                                               .
                                                                                                               GetIntValueCallback
                                                                                                               ));
-            return function(NativeHandle);
+            return function(Handle);
         }
 
         public IFunction ToFunction() {
@@ -473,7 +473,7 @@ namespace Crystalbyte.Spectre.Scripting {
             var function = (CefV8CapiDelegates.GetDoubleValueCallback)
                            Marshal.GetDelegateForFunctionPointer(r.GetDoubleValue,
                                                                  typeof (CefV8CapiDelegates.GetDoubleValueCallback));
-            return function(NativeHandle);
+            return function(Handle);
         }
 
         public static JavaScriptObject CreateArray(int length = 4) {

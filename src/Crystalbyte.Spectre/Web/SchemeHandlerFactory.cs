@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public abstract class SchemeHandlerFactory : OwnedRefCountedNativeObject {
+    public abstract class SchemeHandlerFactory : OwnedRefCountedNativeTypeAdapter {
         private readonly CefSchemeCapiDelegates.CreateCallback _createCallback;
 
         protected SchemeHandlerFactory()
@@ -46,7 +46,7 @@ namespace Crystalbyte.Spectre.Web {
                 Frame = Frame.FromHandle(frame),
                 Scheme = StringUtf16.ReadString(schemename)
             };
-            return OnCreateHandler(this, e).NativeHandle;
+            return OnCreateHandler(this, e).Handle;
         }
 
         protected abstract ResourceHandler OnCreateHandler(object sender, CreateHandlerEventArgs e);

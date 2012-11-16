@@ -27,14 +27,14 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class DisplayHandler : OwnedRefCountedNativeObject {
+    public sealed class DisplayHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly CefDisplayHandlerCapiDelegates.OnAddressChangeCallback _addressChangeCallback;
         private readonly CefDisplayHandlerCapiDelegates.OnConsoleMessageCallback _consoleMessageCallback;
-        private readonly BrowserDelegate _delegate;
         private readonly CefDisplayHandlerCapiDelegates.OnLoadingStateChangeCallback _loadingStateChangedCallback;
         private readonly CefDisplayHandlerCapiDelegates.OnStatusMessageCallback _statusMessageCallback;
         private readonly CefDisplayHandlerCapiDelegates.OnTitleChangeCallback _titleChangeCallback;
         private readonly CefDisplayHandlerCapiDelegates.OnTooltipCallback _tooltipCallback;
+		private readonly BrowserDelegate _delegate;
 
         public DisplayHandler(BrowserDelegate @delegate)
             : base(typeof (CefDisplayHandler)) {

@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,12 +26,12 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public class JavaScriptHandler : OwnedRefCountedNativeObject {
+    public class JavaScriptHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly V8ExecuteCallback _executeCallback;
 
         private JavaScriptHandler(IntPtr handle)
             : base(typeof (CefV8handler)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public JavaScriptHandler()
@@ -61,7 +61,7 @@ namespace Crystalbyte.Spectre.Scripting {
             OnExecuted(e);
             if (e.Result != null) {
                 Reference.Increment(e.Result);
-                retvalue = e.Result.NativeHandle;
+                retvalue = e.Result.Handle;
             }
             else {
                 retvalue = IntPtr.Zero;

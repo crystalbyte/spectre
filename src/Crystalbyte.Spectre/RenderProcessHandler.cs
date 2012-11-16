@@ -29,15 +29,15 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class RenderProcessHandler : OwnedRefCountedNativeObject {
+    public sealed class RenderProcessHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly CefRenderProcessHandlerCapiDelegates.OnBrowserCreatedCallback _browserCreatedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnBrowserDestroyedCallback _browserDestroyedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnContextCreatedCallback _contextCreatedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnContextReleasedCallback _contextReleasedCallback;
-        private readonly AppDelegate _delegate;
-        private readonly CefClientCapiDelegates.OnProcessMessageReceivedCallback _processMessageReceivedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnWebKitInitializedCallback _webkitInitializedCallback;
+		private readonly CefRenderProcessHandlerCapiDelegates.OnProcessMessageReceivedCallback2 _processMessageReceivedCallback;
+		private readonly AppDelegate _delegate;
 
         public RenderProcessHandler(AppDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {

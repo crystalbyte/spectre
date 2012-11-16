@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public abstract class ResourceHandler : OwnedRefCountedNativeObject {
+    public abstract class ResourceHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly CefResourceHandlerCapiDelegates.CanGetCookieCallback _canGetCookieCallback;
         private readonly CefResourceHandlerCapiDelegates.CanSetCookieCallback _canSetCookieCallback;
         private readonly CefResourceHandlerCapiDelegates.CancelCallback6 _cancelCallback;
@@ -67,7 +67,7 @@ namespace Crystalbyte.Spectre.Web {
                 var e = new DataBlockReadingEventArgs(writer) {
                     MaxBlockSize = bytestoread,
                     DelayController =
-                        ResponseDelayController.FromHandle(callback)
+                        CallbackObject.FromHandle(callback)
                 };
 
                 OnDataBlockReading(e);

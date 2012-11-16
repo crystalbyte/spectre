@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenu : RefCountedNativeObject {
+    public sealed class ContextMenu : RefCountedNativeTypeAdapter {
         private ContextMenu(IntPtr handle)
             : base(typeof (CefMenuModel)) {
-            NativeHandle = handle;
+            Handle = handle;
             _items = new ContextMenuItemCollection(this);
         }
 
@@ -48,7 +48,7 @@ namespace Crystalbyte.Spectre.UI {
             var action =
                 (CefMenuModelCapiDelegates.ClearCallback)
                 Marshal.GetDelegateForFunctionPointer(r.Clear, typeof (CefMenuModelCapiDelegates.ClearCallback));
-            action(NativeHandle);
+            action(Handle);
         }
 
         internal void AddItem(int commandId, string label) {
@@ -57,7 +57,7 @@ namespace Crystalbyte.Spectre.UI {
             var action =
                 (CefMenuModelCapiDelegates.AddItemCallback)
                 Marshal.GetDelegateForFunctionPointer(r.AddItem, typeof (CefMenuModelCapiDelegates.AddItemCallback));
-            action(NativeHandle, commandId, s.NativeHandle);
+            action(Handle, commandId, s.Handle);
             s.Free();
         }
 
@@ -66,7 +66,7 @@ namespace Crystalbyte.Spectre.UI {
             var function =
                 (CefMenuModelCapiDelegates.GetCountCallback)
                 Marshal.GetDelegateForFunctionPointer(r.GetCount, typeof (CefMenuModelCapiDelegates.GetCountCallback));
-            return function(NativeHandle);
+            return function(Handle);
         }
 
         public bool Remove(int commandId) {
@@ -74,7 +74,7 @@ namespace Crystalbyte.Spectre.UI {
             var function =
                 (CefMenuModelCapiDelegates.RemoveCallback)
                 Marshal.GetDelegateForFunctionPointer(r.Remove, typeof (CefMenuModelCapiDelegates.RemoveCallback));
-            var result = function(NativeHandle, commandId);
+            var result = function(Handle, commandId);
             return Convert.ToBoolean(result);
         }
     }

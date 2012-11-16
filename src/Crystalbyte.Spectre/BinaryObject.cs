@@ -27,20 +27,20 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class BinaryObject : RefCountedNativeObject {
+    public sealed class BinaryObject : RefCountedNativeTypeAdapter {
         public BinaryObject(Stream stream)
             : base(typeof (CefBinaryValue)) {
             if (stream.Length > int.MaxValue) {
-                throw new InvalidOperationException("Stream must not exceed size of a 32 bit integer.");
+                throw new InvalidOperationException("Stream must not exceed size of an 32 bit integer.");
             }
             var length = stream.Length;
             var handle = stream.ToUnmanagedMemory();
-            NativeHandle = CefValuesCapi.CefBinaryValueCreate(handle, (int) length);
+            Handle = CefValuesCapi.CefBinaryValueCreate(handle, (int) length);
         }
 
         public BinaryObject(IntPtr handle)
             : base(typeof (CefBinaryValue)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public bool IsValid {
@@ -50,7 +50,7 @@ namespace Crystalbyte.Spectre {
                     (CefCommandLineCapiDelegates.IsValidCallback)
                     Marshal.GetDelegateForFunctionPointer(r.IsValid,
                                                           typeof (CefCommandLineCapiDelegates.IsValidCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -61,7 +61,7 @@ namespace Crystalbyte.Spectre {
                 var function = (CefValuesCapiDelegates.IsOwnedCallback)
                                Marshal.GetDelegateForFunctionPointer(r.IsOwned,
                                                                      typeof (CefValuesCapiDelegates.IsOwnedCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -72,7 +72,7 @@ namespace Crystalbyte.Spectre {
                 var function =
                     (CefValuesCapiDelegates.GetSizeCallback)
                     Marshal.GetDelegateForFunctionPointer(r.GetSize, typeof (CefValuesCapiDelegates.GetSizeCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Crystalbyte.Spectre {
 
                 var byteSize = Marshal.SizeOf(typeof (byte));
                 var handle = Marshal.AllocHGlobal(byteSize*s);
-                function(NativeHandle, handle, s, 0);
+                function(Handle, handle, s, 0);
 
                 var bytes = new byte[s];
                 Marshal.Copy(handle, bytes, 0, s);

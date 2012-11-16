@@ -22,11 +22,15 @@ using System;
 
 #endregion
 
-namespace Crystalbyte.Spectre {
-    public sealed class ProcessStartedEventArgs : EventArgs {
-        internal ProcessStartedEventArgs() {}
+namespace Crystalbyte.Spectre.Interop {
+    public abstract class RefCountedNativeTypeAdapter : NativeTypeAdapter {
+        protected RefCountedNativeTypeAdapter(Type nativeType)
+            : base(nativeType) {}
 
-        public string ProcessType { get; internal set; }
-        public CommandLine CommandLine { get; internal set; }
+        protected override void DisposeNative() {
+            if (Handle != IntPtr.Zero) {
+                Reference.Decrement(Handle);
+            }
+        }
     }
 }

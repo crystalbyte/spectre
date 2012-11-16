@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Errors.cs" />
-    <Compile Include="Interop\RefCountedNativeObject.cs" />
     <Compile Include="Scripting\DialogResult.cs" />
     <Compile Include="Scripting\DialogType.cs" />
     <Compile Include="Scripting\IFunction.cs" />
@@ -77,9 +76,7 @@
     <Compile Include="Web\IDataProvider.cs" />
     <Compile Include="Web\FileDataProvider.cs" />
     <Compile Include="Web\DataProviders.cs" />
-    <Compile Include="Web\ResponseDelayController.cs" />
     <Compile Include="Web\Schemes.cs" />
-    <Compile Include="Interop\NativeObject.cs" />
     <Compile Include="BinaryObject.cs" />
     <Compile Include="Scripting\RuntimeException.cs" />
     <Compile Include="Web\Response.cs" />
@@ -104,8 +101,6 @@
     <Compile Include="GeolocationRequest.cs" />
     <Compile Include="GeolocationRequestCanceledEventArgs.cs" />
     <Compile Include="IpcMessage.cs" />
-    <Compile Include="ObjectCollection.cs" />
-    <Compile Include="Interop\OwnedRefCountedNativeObject.cs" />
     <Compile Include="Interop\DisposableObject.cs" />
     <Compile Include="IReadOnlyCollection.cs" />
     <Compile Include="IValueCollection.cs" />
@@ -140,8 +135,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StreamExtensions.cs" />
-    <Compile Include="StringUtf16.cs" />
-    <Compile Include="StringUtf16Collection.cs" />
     <Compile Include="Threading\Task.cs" />
     <Compile Include="Threading\Dispatcher.cs" />
     <Compile Include="Time.cs" />
@@ -150,7 +143,6 @@
     <Compile Include="AppArguments.cs" />
     <Compile Include="UI\Browser.cs" />
     <Compile Include="UI\BrowserEventArgs.cs" />
-    <Compile Include="ProcessStartedEventArgs.cs" />
     <Compile Include="ConsoleMessageReceivedEventArgs.cs" />
     <Compile Include="GeolocationRequestedEventArgs.cs" />
     <Compile Include="UI\LoadingStateChangedEventArgs.cs" />
@@ -198,7 +190,17 @@
     <Compile Include="EnumerationExtensions.cs" />
     <Compile Include="Web\ISchemeDescriptor.cs" />
     <Compile Include="Web\SchemeHandlerFactoryManager.cs" />
-    <Compile Include="CommandLineEntryCollection.cs" />
+    <Compile Include="StringUtf16List.cs" />
+    <Compile Include="StringUtf16.cs" />
+    <Compile Include="StringUtf16Map.cs" />
+    <Compile Include="Interop\NativeObject.cs" />
+    <Compile Include="Interop\NativeTypeAdapter.cs" />
+    <Compile Include="Interop\OwnedRefCountedNativeTypeAdapter.cs" />
+    <Compile Include="Interop\RefCountedNativeTypeAdapter.cs" />
+    <Compile Include="ListValue.cs" />
+    <Compile Include="CommandLineProcessingEventArgs.cs" />
+    <Compile Include="ResourceBundleHandler.cs" />
+    <Compile Include="Web\CallbackObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

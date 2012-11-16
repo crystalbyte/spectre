@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -27,7 +27,7 @@ namespace Crystalbyte.Spectre.UI {
     internal sealed class BrowserCreationArgs {
         public Uri StartUri { get; set; }
         public ClientHandler ClientHandler { get; set; }
-        public NativeObject WindowInfo { get; set; }
+        public NativeTypeAdapter WindowInfo { get; set; }
         public BrowserSettings Settings { get; set; }
     }
 }

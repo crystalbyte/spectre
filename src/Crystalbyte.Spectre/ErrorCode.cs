@@ -65,6 +65,6 @@ namespace Crystalbyte.Spectre {
         ErrEmptyResponse = -324,
         ErrResponseHeadersTooBig = -325,
         ErrCacheMiss = -400,
-        ErrInsecureResponse = -501,
+        ErrInsecureResponse = -501
     }
 }

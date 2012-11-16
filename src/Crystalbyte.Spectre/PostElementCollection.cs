@@ -26,15 +26,15 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class PostElementCollection : NativeObject {
+    public sealed class PostElementCollection : NativeTypeAdapter {
         public PostElementCollection()
             : base(typeof (CefPostData)) {
-            NativeHandle = CefRequestCapi.CefPostDataCreate();
+            Handle = CefRequestCapi.CefPostDataCreate();
         }
 
         private PostElementCollection(IntPtr handle)
             : base(typeof (CefPostData)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public bool IsReadOnly {
@@ -45,7 +45,7 @@ namespace Crystalbyte.Spectre {
                     (CefRequestCapiDelegates.IsReadOnlyCallback3)
                     Marshal.GetDelegateForFunctionPointer(r.IsReadOnly,
                                                           typeof (CefRequestCapiDelegates.IsReadOnlyCallback3));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }

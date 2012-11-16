@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -35,8 +35,8 @@ namespace Crystalbyte.Spectre.Web {
             var s = new StringUtf16(descriptor.SchemeName);
             var d = new StringUtf16(descriptor.DomainName);
 
-            CefSchemeCapi.CefRegisterSchemeHandlerFactory(s.NativeHandle, d.NativeHandle,
-                                                          descriptor.Factory.NativeHandle);
+            CefSchemeCapi.CefRegisterSchemeHandlerFactory(s.Handle, d.Handle,
+                                                          descriptor.Factory.Handle);
 
             d.Free();
             s.Free();

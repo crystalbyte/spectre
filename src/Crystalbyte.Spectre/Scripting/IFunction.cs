@@ -19,7 +19,7 @@
 namespace Crystalbyte.Spectre.Scripting {
     public interface IFunction {
         string Name { get; }
-        JavaScriptHandler Handler { get; }
+         
         JavaScriptObject Execute(params JavaScriptObject[] arguments);
         JavaScriptObject ExecuteWithTarget(JavaScriptObject target, params JavaScriptObject[] arguments);
 

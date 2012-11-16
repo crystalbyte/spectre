@@ -27,17 +27,17 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class IpcMessage : RefCountedNativeObject {
+    public sealed class IpcMessage : RefCountedNativeTypeAdapter {
         public IpcMessage(string name)
             : base(typeof (CefProcessMessage)) {
             var s = new StringUtf16(name);
-            NativeHandle = CefProcessMessageCapi.CefProcessMessageCreate(s.NativeHandle);
+            Handle = CefProcessMessageCapi.CefProcessMessageCreate(s.Handle);
             s.Free();
         }
 
         private IpcMessage(IntPtr handle)
             : base(typeof (CefProcessMessage)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public bool IsReadOnly {
@@ -48,7 +48,7 @@ namespace Crystalbyte.Spectre {
                                                                      typeof (
                                                                          CefProcessMessageCapiDelegates.
                                                                          IsReadOnlyCallback2));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -61,7 +61,7 @@ namespace Crystalbyte.Spectre {
                                                                      typeof (
                                                                          CefProcessMessageCapiDelegates.IsValidCallback4
                                                                          ));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -74,12 +74,12 @@ namespace Crystalbyte.Spectre {
                                                                      typeof (
                                                                          CefProcessMessageCapiDelegates.GetNameCallback3
                                                                          ));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return StringUtf16.ReadStringAndFree(handle);
             }
         }
 
-        private ObjectCollection Arguments {
+        private ListValue Arguments {
             get {
                 var r = MarshalFromNative<CefProcessMessage>();
                 var function =
@@ -87,8 +87,8 @@ namespace Crystalbyte.Spectre {
                     Marshal.GetDelegateForFunctionPointer(r.GetArgumentList,
                                                           typeof (CefProcessMessageCapiDelegates.GetArgumentListCallback
                                                               ));
-                var handle = function(NativeHandle);
-                return ObjectCollection.FromHandle(handle);
+                var handle = function(Handle);
+                return ListValue.FromHandle(handle);
             }
         }
 

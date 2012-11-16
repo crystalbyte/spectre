@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,12 +26,12 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class WindowsWindowInfo : NativeObject {
+    public sealed class WindowsWindowInfo : NativeTypeAdapter {
         private readonly bool _isOwned;
 
         public WindowsWindowInfo(IRenderTarget target)
             : base(typeof (WindowsCefWindowInfo)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new WindowsCefWindowInfo {
                 ParentWindow = target.Handle,
                 Style = (uint) (WindowStyles.ChildWindow
@@ -49,7 +49,7 @@ namespace Crystalbyte.Spectre.UI {
 
         private WindowsWindowInfo(IntPtr handle)
             : base(typeof (WindowsCefWindowInfo)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public IntPtr WindowHandle {
@@ -64,8 +64,8 @@ namespace Crystalbyte.Spectre.UI {
         }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero && _isOwned) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero && _isOwned) {
+                Marshal.FreeHGlobal(Handle);
             }
             base.DisposeNative();
         }

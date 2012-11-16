@@ -29,7 +29,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class ClientHandler : OwnedRefCountedNativeObject {
+    internal sealed class ClientHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly ContextMenuHandler _contextMenuHandler;
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;
@@ -85,15 +85,15 @@ namespace Crystalbyte.Spectre {
 
         private ClientHandler(IntPtr handle)
             : base(typeof (CefClient)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         private IntPtr OnGetContextMenuHandler(IntPtr self) {
             if (_contextMenuHandler == null) {
                 return IntPtr.Zero;
             }
-            Reference.Increment(_contextMenuHandler.NativeHandle);
-            return _contextMenuHandler.NativeHandle;
+            Reference.Increment(_contextMenuHandler.Handle);
+            return _contextMenuHandler.Handle;
         }
 
         private int OnProcessMessageReceived(IntPtr self, IntPtr browser, CefProcessId sourceprocess, IntPtr message) {
@@ -110,8 +110,8 @@ namespace Crystalbyte.Spectre {
             if (_javaScriptDialogHandler == null) {
                 return IntPtr.Zero;
             }
-            Reference.Increment(_javaScriptDialogHandler.NativeHandle);
-            return _javaScriptDialogHandler.NativeHandle;
+            Reference.Increment(_javaScriptDialogHandler.Handle);
+            return _javaScriptDialogHandler.Handle;
         }
 
         private IntPtr OnGetGeolocationHandler(IntPtr self) {
@@ -119,8 +119,8 @@ namespace Crystalbyte.Spectre {
                 return IntPtr.Zero;
             }
 
-            Reference.Increment(_geolocationHandler.NativeHandle);
-            return _geolocationHandler.NativeHandle;
+            Reference.Increment(_geolocationHandler.Handle);
+            return _geolocationHandler.Handle;
         }
 
         private IntPtr OnGetLoadHandler(IntPtr self) {
@@ -128,8 +128,8 @@ namespace Crystalbyte.Spectre {
                 return IntPtr.Zero;
             }
 
-            Reference.Increment(_loadHandler.NativeHandle);
-            return _loadHandler.NativeHandle;
+            Reference.Increment(_loadHandler.Handle);
+            return _loadHandler.Handle;
         }
 
         private IntPtr OnGetLifeSpanHandler(IntPtr self) {
@@ -137,8 +137,8 @@ namespace Crystalbyte.Spectre {
                 return IntPtr.Zero;
             }
 
-            Reference.Increment(_lifeSpanHandler.NativeHandle);
-            return _lifeSpanHandler.NativeHandle;
+            Reference.Increment(_lifeSpanHandler.Handle);
+            return _lifeSpanHandler.Handle;
         }
 
         private IntPtr OnGetDisplayHandler(IntPtr self) {
@@ -146,8 +146,8 @@ namespace Crystalbyte.Spectre {
                 return IntPtr.Zero;
             }
 
-            Reference.Increment(_displayHandler.NativeHandle);
-            return _displayHandler.NativeHandle;
+            Reference.Increment(_displayHandler.Handle);
+            return _displayHandler.Handle;
         }
 
         protected override void DisposeNative() {

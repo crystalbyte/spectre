@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class GeolocationRequest : NativeObject {
+    public sealed class GeolocationRequest : NativeTypeAdapter {
         private GeolocationRequest(IntPtr handle)
             : base(typeof (CefGeolocationCallback)) {
-            NativeHandle = handle;
+            Handle = handle;
             IsDecisionPending = true;
         }
 
@@ -54,7 +54,7 @@ namespace Crystalbyte.Spectre {
             var action =
                 (CefPermissionContCallback)
                 Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (CefPermissionContCallback));
-            action(NativeHandle, allow);
+            action(Handle, allow);
             IsDecisionPending = false;
         }
 

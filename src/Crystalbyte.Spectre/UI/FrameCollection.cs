@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -40,7 +40,7 @@ namespace Crystalbyte.Spectre.UI {
                 var function = (CefBrowserCapiDelegates.GetFrameCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFrame,
                                                                      typeof (CefBrowserCapiDelegates.GetFrameCallback));
-                var handle = function(_browser.NativeHandle, str.NativeHandle);
+                var handle = function(_browser.Handle, str.Handle);
                 str.Free();
                 return Frame.FromHandle(handle);
             }
@@ -54,7 +54,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.GetFrameByidentCallback
                                                                          ));
-                var handle = function(_browser.NativeHandle, ident);
+                var handle = function(_browser.Handle, ident);
                 return Frame.FromHandle(handle);
             }
         }
@@ -66,7 +66,7 @@ namespace Crystalbyte.Spectre.UI {
                                Marshal.GetDelegateForFunctionPointer(r.GetFrameCount,
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.GetFrameCountCallback));
-                return function(_browser.NativeHandle);
+                return function(_browser.Handle);
             }
         }
 

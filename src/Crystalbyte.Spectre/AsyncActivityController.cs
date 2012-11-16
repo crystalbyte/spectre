@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class AsyncActivityController : RefCountedNativeObject {
+    public sealed class AsyncActivityController : RefCountedNativeTypeAdapter {
         private AsyncActivityController(IntPtr handle)
             : base(typeof (CefCallback)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public bool IsCanceled { get; private set; }
@@ -44,7 +44,7 @@ namespace Crystalbyte.Spectre {
             var action =
                 (CefCallbackCapiDelegates.ContCallback2)
                 Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (CefCallbackCapiDelegates.ContCallback2));
-            action(NativeHandle);
+            action(Handle);
         }
 
         public void Cancel() {
@@ -52,7 +52,7 @@ namespace Crystalbyte.Spectre {
             var action =
                 (CefCallbackCapiDelegates.CancelCallback)
                 Marshal.GetDelegateForFunctionPointer(r.Cancel, typeof (CefCallbackCapiDelegates.CancelCallback));
-            action(NativeHandle);
+            action(Handle);
             IsCanceled = true;
         }
 

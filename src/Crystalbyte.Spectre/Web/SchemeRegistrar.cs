@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -27,10 +27,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public sealed class SchemeRegistrar : OwnedRefCountedNativeObject {
+    public sealed class SchemeRegistrar : OwnedRefCountedNativeTypeAdapter {
         private SchemeRegistrar(IntPtr handle)
             : base(typeof (CefSchemeRegistrar)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public static SchemeRegistrar FromHandle(IntPtr handle) {
@@ -49,7 +49,7 @@ namespace Crystalbyte.Spectre.Web {
             var isLocal = descriptor.SchemeProperties.HasFlag(SchemeProperties.Local) ? 1 : 0;
             var isDisplayIsolated = descriptor.SchemeProperties.HasFlag(SchemeProperties.DisplayIsolated) ? 1 : 0;
 
-            var result = function(NativeHandle, name.NativeHandle, isStandard, isLocal, isDisplayIsolated);
+            var result = function(Handle, name.Handle, isStandard, isLocal, isDisplayIsolated);
             var success = Convert.ToBoolean(result);
             if (!success) {
                 Debug.WriteLine("Error registering custom scheme '{0}'. See debug.log for details.", descriptor.Scheme);

@@ -26,12 +26,12 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class LinuxWindowInfo : NativeObject {
+    public sealed class LinuxWindowInfo : NativeTypeAdapter {
         private readonly bool _isOwned;
 
         public LinuxWindowInfo(IRenderTarget target)
             : base(typeof (LinuxCefWindowInfo)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new LinuxCefWindowInfo {
                 ParentWidget = target.Handle
             });
@@ -39,8 +39,8 @@ namespace Crystalbyte.Spectre.UI {
         }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero && _isOwned) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero && _isOwned) {
+                Marshal.FreeHGlobal(Handle);
             }
             base.DisposeNative();
         }

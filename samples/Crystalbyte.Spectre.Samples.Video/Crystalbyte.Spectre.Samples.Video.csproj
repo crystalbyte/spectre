@@ -38,6 +38,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="BeforeExecute" command="../copy_cef_dependencies.sh ${ProjectConfigName}" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -78,6 +83,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="App.config" />
+    <Compile Include="TestAppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Styles\index.css">
