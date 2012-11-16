@@ -27,11 +27,11 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class LifeSpanHandler : OwnedRefCountedNativeObject {
+    public sealed class LifeSpanHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly CefLifeSpanHandlerCapiDelegates.OnBeforeCloseCallback _beforeCloseCallback;
         private readonly CefLifeSpanHandlerCapiDelegates.OnBeforePopupCallback _beforePopupCallback;
-        private readonly BrowserDelegate _delegate;
         private readonly CefLifeSpanHandlerCapiDelegates.DoCloseCallback _doCloseCallback;
+		private readonly BrowserDelegate _delegate;
 
         public LifeSpanHandler(BrowserDelegate @delegate)
             : base(typeof (CefLifeSpanHandler)) {

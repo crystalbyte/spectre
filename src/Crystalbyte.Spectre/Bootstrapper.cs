@@ -38,11 +38,12 @@ namespace Crystalbyte.Spectre {
         protected abstract IEnumerable<Viewport> CreateViewports();
 
         public virtual void Run() {
+
+			ConfigureSettings(Application.Current.Settings);
+
             var app = CreateAppDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
-
-            ConfigureSettings(Application.Current.Settings);
 
             // Initialize will block sub processes, only the host process will continue.
             Application.Current.Initialize(app);
@@ -73,22 +74,11 @@ namespace Crystalbyte.Spectre {
             e.SchemeDescriptors.AddRange(descriptors);
         }
 
-        protected virtual void ConfigureSettings(ApplicationSettings settings) {
-            if (Platform.IsLinux || Platform.IsOsX) {
-                var fullname = Assembly.GetEntryAssembly().Location;
-                settings.BrowserSubprocessPath = string.Format("/usr/bin/mono \"{0}\"", fullname);
-            }
+        protected virtual void ConfigureSettings(ApplicationSettings settings) {  
 
-            var culture = CultureInfo.CurrentCulture.Name;
-            settings.Locale = culture != string.Empty ? culture : "en-US";
-
-            var modulePath = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
-            settings.LocalesDirPath = Path.Combine(modulePath, "locales");
-
+			settings.Locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name) ? CultureInfo.CurrentCulture.Name : "en-US";
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;
-#else
-            settings.LogSeverity = LogSeverity.LogseverityInfo;
 #endif
         }
 

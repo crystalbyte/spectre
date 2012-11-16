@@ -30,7 +30,7 @@ namespace Crystalbyte.Spectre.Interop {
     ///   This class does manage the objects lifecycle allocating unmanaged memory on construction.
     ///   Memory is released once the reference counter reaches zero.
     /// </summary>
-    public abstract class OwnedRefCountedNativeObject : RefCountedNativeObject {
+    public abstract class OwnedRefCountedNativeTypeAdapter : RefCountedNativeTypeAdapter {
         private readonly CefBaseCapiDelegates.ReleaseCallback _decrementDelegate;
         private readonly CefBaseCapiDelegates.GetRefctCallback _getRefCountDelegate;
         private readonly CefBaseCapiDelegates.AddRefCallback _incrementDelegate;
@@ -38,7 +38,7 @@ namespace Crystalbyte.Spectre.Interop {
         private readonly object _mutex;
         private int _referenceCounter;
 
-        protected OwnedRefCountedNativeObject(Type nativeType)
+        protected OwnedRefCountedNativeTypeAdapter(Type nativeType)
             : base(nativeType) {
             _mutex = new object();
             _referenceCounter = 1;
@@ -46,7 +46,7 @@ namespace Crystalbyte.Spectre.Interop {
             _decrementDelegate = Decrement;
             _getRefCountDelegate = GetReferenceCount;
             _dedicatedBase = CreateBase(NativeSize);
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
         }
 
         internal CefBase DedicatedBase {
@@ -58,11 +58,11 @@ namespace Crystalbyte.Spectre.Interop {
         }
 
         internal void Increment() {
-            Increment(NativeHandle);
+            Increment(Handle);
         }
 
         internal void Decrement() {
-            Decrement(NativeHandle);
+            Decrement(Handle);
         }
 
         private int Increment(IntPtr self) {
@@ -86,8 +86,8 @@ namespace Crystalbyte.Spectre.Interop {
         }
 
         private void Free() {
-            if (NativeHandle != IntPtr.Zero) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero) {
+                Marshal.FreeHGlobal(Handle);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Crystalbyte.Spectre.Interop {
         }
 
         private void VerifyHandle(IntPtr handle) {
-            if (handle != NativeHandle) {
+            if (handle != Handle) {
                 throw new InvalidOperationException("Ref count handle is invalid.");
             }
         }

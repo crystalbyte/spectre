@@ -109,15 +109,15 @@ namespace Crystalbyte.Spectre {
         private bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
             _app = new App(del ?? new AppDelegate());
 
-            Reference.Increment(_app.NativeHandle);
-            var exitCode = CefAppCapi.CefExecuteProcess(mainArgs, _app.NativeHandle);
+            Reference.Increment(_app.Handle);
+            var exitCode = CefAppCapi.CefExecuteProcess(mainArgs, _app.Handle);
             IsRootProcess = exitCode < 0;
             if (!IsRootProcess) {
                 return true;
             }
 
-            Reference.Increment(_app.NativeHandle);
-            var result = CefAppCapi.CefInitialize(mainArgs, Settings.NativeHandle, _app.NativeHandle);
+            Reference.Increment(_app.Handle);
+            var result = CefAppCapi.CefInitialize(mainArgs, Settings.Handle, _app.Handle);
             IsInitialized = Convert.ToBoolean(result);
             return IsInitialized;
         }

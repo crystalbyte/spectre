@@ -29,17 +29,22 @@ using Crystalbyte.Spectre.Projections.Internal;
 
 namespace Crystalbyte.Spectre {
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class StringUtf16Collection : DisposableObject, IValueCollection<string> {
-        public StringUtf16Collection() {
-            NativeHandle = CefStringListClass.CefStringListAlloc();
-        }
+    public sealed class StringUtf16List : NativeObject, IValueCollection<string> {
 
-        internal IntPtr NativeHandle { get; private set; }
+		private StringUtf16List (IntPtr handle) 
+			: base(handle) { }
+
+        public StringUtf16List() 
+			: this(CefStringListClass.CefStringListAlloc()) { }
+
+		public static StringUtf16List FromHandle(IntPtr handle) {
+			return new StringUtf16List(handle);
+		}
 
         #region IValueCollection<string> Members
 
         public int Count {
-            get { return CefStringListClass.CefStringListSize(NativeHandle); }
+            get { return CefStringListClass.CefStringListSize(Handle); }
         }
 
         public string this[int index] {
@@ -54,7 +59,7 @@ namespace Crystalbyte.Spectre {
         }
 
         public IEnumerator<string> GetEnumerator() {
-            return new StringUtf16CollectionEnumerator(this);
+            return new StringUtf16ListEnumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
@@ -68,7 +73,7 @@ namespace Crystalbyte.Spectre {
             }
 
             var nativeDestination = new StringUtf16();
-            var result = CefStringListClass.CefStringListValue(NativeHandle, index, nativeDestination.NativeHandle);
+            var result = CefStringListClass.CefStringListValue(Handle, index, nativeDestination.Handle);
             var success = Convert.ToBoolean(result);
             if (!success) {
                 value = null;
@@ -81,28 +86,28 @@ namespace Crystalbyte.Spectre {
 
         public void Add(string value) {
             var nativeSource = new StringUtf16(value);
-            CefStringListClass.CefStringListAppend(NativeHandle, nativeSource.NativeHandle);
+            CefStringListClass.CefStringListAppend(Handle, nativeSource.Handle);
         }
 
         public void Clear() {
             // TODO: Not sure if clear actually frees memory from its children or merely clears the list across the native boundary.
-            CefStringListClass.CefStringListClear(NativeHandle);
+            CefStringListClass.CefStringListClear(Handle);
         }
 
         #endregion
 
         protected override void DisposeNative() {
-            CefStringListClass.CefStringListClear(NativeHandle);
+            CefStringListClass.CefStringListClear(Handle);
         }
 
         #region Nested type: StringUtf16CollectionEnumerator
 
-        private sealed class StringUtf16CollectionEnumerator : IEnumerator<string> {
+        private sealed class StringUtf16ListEnumerator : IEnumerator<string> {
             private readonly int _itemCount;
-            private readonly StringUtf16Collection _list;
+            private readonly StringUtf16List _list;
             private int _currentIndex = -1;
 
-            public StringUtf16CollectionEnumerator(StringUtf16Collection list) {
+            public StringUtf16ListEnumerator(StringUtf16List list) {
                 _list = list;
                 _itemCount = list.Count;
                 _currentIndex = -1;

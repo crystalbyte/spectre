@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -34,7 +34,7 @@ namespace Crystalbyte.Spectre.Scripting {
             var count = enumerable.Count();
             var handle = Marshal.AllocHGlobal(count*PointerSize);
             var i = 0;
-            enumerable.ForEach(x => Marshal.WriteIntPtr(handle, i++*PointerSize, x.NativeHandle));
+            enumerable.ForEach(x => Marshal.WriteIntPtr(handle, i++*PointerSize, x.Handle));
             return handle;
         }
     }

@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -38,7 +38,7 @@ namespace Crystalbyte.Spectre.Scripting {
 
             var n = new StringUtf16(name);
             var j = new StringUtf16(command.RegistrationCode);
-            var result = CefV8Capi.CefRegisterExtension(n.NativeHandle, j.NativeHandle, command.NativeHandle);
+            var result = CefV8Capi.CefRegisterExtension(n.Handle, j.Handle, command.Handle);
             return Convert.ToBoolean(result);
         }
     }

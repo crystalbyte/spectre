@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 
 namespace Crystalbyte.Spectre {
     [DebuggerDisplay("Text = {Text}")]
-    internal sealed class StringUtf16 : NativeObject {
+    internal sealed class StringUtf16 : NativeTypeAdapter {
         public StringUtf16(string value)
             : this() {
             Text = value;
@@ -36,7 +36,7 @@ namespace Crystalbyte.Spectre {
 
         public StringUtf16(IntPtr handle)
             : base(typeof (CefStringUtf16)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public StringUtf16()
@@ -82,11 +82,11 @@ namespace Crystalbyte.Spectre {
         }
 
         public void Free() {
-            CefStringTypesClass.CefStringUserfreeUtf16Free(NativeHandle);
+            CefStringTypesClass.CefStringUserfreeUtf16Free(Handle);
         }
 
         public void Clear() {
-            CefStringTypesClass.CefStringUtf16Clear(NativeHandle);
+            CefStringTypesClass.CefStringUtf16Clear(Handle);
         }
     }
 }

@@ -19,7 +19,10 @@
 #region Using directives
 
 using System;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Web;
@@ -27,24 +30,30 @@ using Crystalbyte.Spectre.Web;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class App : OwnedRefCountedNativeObject {
+    internal sealed class App : OwnedRefCountedNativeTypeAdapter {
         private readonly CefAppCapiDelegates.OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
-        private readonly BrowserProcessHandler _browserProcessHandler;
-        private readonly AppDelegate _delegate;
         private readonly CefAppCapiDelegates.GetBrowserProcessHandlerCallback _getBrowserProcessHandlerCallback;
         private readonly CefAppCapiDelegates.GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
         private readonly CefAppCapiDelegates.OnRegisterCustomSchemesCallback _registerCustomSchemeCallback;
+		private readonly CefAppCapiDelegates.GetResourceBundleHandlerCallback _getResourceBundleHandlerCallback;
+		private readonly BrowserProcessHandler _browserProcessHandler;
         private readonly RenderProcessHandler _renderProcessHandler;
+		private readonly ResourceBundleHandler _resourceBundleHandler;
+		private readonly AppDelegate _delegate;
 
         public App(AppDelegate appDelegate)
             : base(typeof (CefApp)) {
             _delegate = appDelegate;
             _browserProcessHandler = new BrowserProcessHandler(appDelegate);
             _renderProcessHandler = new RenderProcessHandler(appDelegate);
+			_resourceBundleHandler = new ResourceBundleHandler(appDelegate);
+
+			_getResourceBundleHandlerCallback = OnGetResourceBundleHandler;
             _getRenderProcessHandlerCallback = GetRenderProcessHandler;
-            _beforeCommandLineProcessingCallback = OnCommandLineProcessing;
+			_getBrowserProcessHandlerCallback = OnGetBrowserProcessHandler;
+
+            _beforeCommandLineProcessingCallback = OnBeforeCommandLineProcessing;
             _registerCustomSchemeCallback = OnRegisterCustomScheme;
-            _getBrowserProcessHandlerCallback = OnGetBrowserProcessHandler;
 
             MarshalToNative(new CefApp {
                 Base = DedicatedBase,
@@ -55,7 +64,9 @@ namespace Crystalbyte.Spectre {
                 OnRegisterCustomSchemes =
                     Marshal.GetFunctionPointerForDelegate(_registerCustomSchemeCallback),
                 CefCallbackGetBrowserProcessHandler =
-                    Marshal.GetFunctionPointerForDelegate(_getBrowserProcessHandlerCallback)
+                    Marshal.GetFunctionPointerForDelegate(_getBrowserProcessHandlerCallback),
+				CefCallbackGetResourceBundleHandler =
+					Marshal.GetFunctionPointerForDelegate(_getResourceBundleHandlerCallback)
             });
         }
 
@@ -72,31 +83,54 @@ namespace Crystalbyte.Spectre {
             }
         }
 
+		private IntPtr OnGetResourceBundleHandler(IntPtr self) {
+			if (_resourceBundleHandler == null) {
+				return IntPtr.Zero;
+			}
+			Reference.Increment(_resourceBundleHandler);
+			return _resourceBundleHandler.Handle;
+		}
+
         private IntPtr OnGetBrowserProcessHandler(IntPtr self) {
             if (_browserProcessHandler == null) {
                 return IntPtr.Zero;
             }
-            Reference.Increment(_browserProcessHandler.NativeHandle);
-            return _browserProcessHandler.NativeHandle;
+            Reference.Increment(_browserProcessHandler);
+            return _browserProcessHandler.Handle;
         }
 
         private IntPtr GetRenderProcessHandler(IntPtr self) {
             if (_renderProcessHandler == null) {
                 return IntPtr.Zero;
             }
-            Reference.Increment(_renderProcessHandler.NativeHandle);
-            return _renderProcessHandler.NativeHandle;
+            Reference.Increment(_renderProcessHandler);
+            return _renderProcessHandler.Handle;
         }
 
-        private void OnCommandLineProcessing(IntPtr self, IntPtr processtype, IntPtr commandline) {
-            var e = new ProcessStartedEventArgs {
+        private void OnBeforeCommandLineProcessing(IntPtr self, IntPtr processtype, IntPtr commandline) {
+
+			var cl = CommandLine.FromHandle(commandline);
+
+			// TODO: currently on linux platform location of locales and pack files are determined
+            // incorrectly (relative to main module instead of libcef.so module).
+            // Once issue http://code.google.com/p/chromiumembedded/issues/detail?id=668 will be resolved
+            // this code can be removed.
+			if (Platform.IsLinux || Platform.IsOsX) {
+				var directory = new FileInfo(Assembly.GetEntryAssembly().CodeBase).DirectoryName;
+				Debug.WriteLine(directory);
+				cl.AppendSwitchWithValue("resources-dir-path", directory);
+				cl.AppendSwitchWithValue("locales-dir-path", Path.Combine(directory, "locales"));
+			}
+
+            var e = new CommandLineProcessingEventArgs {
                 ProcessType =
                     processtype == IntPtr.Zero
                         ? string.Empty
                         : StringUtf16.ReadString(processtype),
-                CommandLine = CommandLine.FromHandle(commandline)
-            };
-            _delegate.OnProcessStarted(e);
+                CommandLine = cl
+            };		
+
+            _delegate.OnCommandLineProcessing(e);
         }
 
         protected override void DisposeNative() {

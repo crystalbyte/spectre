@@ -26,15 +26,15 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class ObjectCollection : RefCountedNativeObject {
-        public ObjectCollection()
+    internal sealed class ListValue : RefCountedNativeTypeAdapter {
+        public ListValue()
             : base(typeof (CefListValue)) {
-            NativeHandle = CefValuesCapi.CefListValueCreate();
+            Handle = CefValuesCapi.CefListValueCreate();
         }
 
-        private ObjectCollection(IntPtr handle)
+        private ListValue(IntPtr handle)
             : base(typeof (CefListValue)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public int Count {
@@ -43,7 +43,7 @@ namespace Crystalbyte.Spectre {
                 var function = (CefValuesCapiDelegates.GetSizeCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetSize,
                                                                      typeof (CefValuesCapiDelegates.GetSizeCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Crystalbyte.Spectre {
                 var function = (CefValuesCapiDelegates.IsReadOnlyCallback7)
                                Marshal.GetDelegateForFunctionPointer(r.IsReadOnly,
                                                                      typeof (CefValuesCapiDelegates.IsReadOnlyCallback7));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -64,13 +64,13 @@ namespace Crystalbyte.Spectre {
                 var function = (CefValuesCapiDelegates.ClearCallback2)
                                Marshal.GetDelegateForFunctionPointer(r.Clear,
                                                                      typeof (CefValuesCapiDelegates.ClearCallback2));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
 
-        public static ObjectCollection FromHandle(IntPtr handle) {
-            return new ObjectCollection(handle);
+        public static ListValue FromHandle(IntPtr handle) {
+            return new ListValue(handle);
         }
 
         public bool SetBinary(int index, BinaryObject bin) {
@@ -78,7 +78,7 @@ namespace Crystalbyte.Spectre {
             var function = (CefValuesCapiDelegates.SetBinaryCallback2)
                            Marshal.GetDelegateForFunctionPointer(r.SetBinary,
                                                                  typeof (CefValuesCapiDelegates.SetBinaryCallback2));
-            var value = function(NativeHandle, index, bin.NativeHandle);
+            var value = function(Handle, index, bin.Handle);
             return Convert.ToBoolean(value);
         }
 
@@ -87,7 +87,7 @@ namespace Crystalbyte.Spectre {
             var function = (CefValuesCapiDelegates.GetBinaryCallback2)
                            Marshal.GetDelegateForFunctionPointer(r.GetBinary,
                                                                  typeof (CefValuesCapiDelegates.GetBinaryCallback2));
-            var handle = function(NativeHandle, index);
+            var handle = function(Handle, index);
             return BinaryObject.FromHandle(handle);
         }
 
@@ -96,7 +96,7 @@ namespace Crystalbyte.Spectre {
             var action = (CefValuesCapiDelegates.SetSizeCallback)
                          Marshal.GetDelegateForFunctionPointer(r.SetSize,
                                                                typeof (CefValuesCapiDelegates.SetSizeCallback));
-            action(NativeHandle, size);
+            action(Handle, size);
         }
     }
 }

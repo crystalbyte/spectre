@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -28,11 +28,11 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class LoadHandler : OwnedRefCountedNativeObject {
-        private readonly BrowserDelegate _delegate;
+    public sealed class LoadHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly CefLoadHandlerCapiDelegates.OnLoadEndCallback _loadEndCallback;
         private readonly CefLoadHandlerCapiDelegates.OnLoadErrorCallback _loadErrorCallback;
         private readonly CefLoadHandlerCapiDelegates.OnLoadStartCallback _loadStartCallback;
+		private readonly BrowserDelegate _delegate;
 
         public LoadHandler(BrowserDelegate @delegate)
             : base(typeof (CefLoadHandler)) {

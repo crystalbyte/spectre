@@ -26,12 +26,12 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class BrowserSettings : NativeObject {
+    public sealed class BrowserSettings : NativeTypeAdapter {
         private readonly bool _isOwned;
 
         internal BrowserSettings()
             : base(typeof (CefBrowserSettings)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefBrowserSettings {
                 Size = NativeSize
             });
@@ -40,7 +40,7 @@ namespace Crystalbyte.Spectre.UI {
 
         private BrowserSettings(IntPtr handle)
             : base(typeof (CefBrowserSettings)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public bool IsFileAccessfromUrlsAllowed {
@@ -93,8 +93,8 @@ namespace Crystalbyte.Spectre.UI {
 
         protected override void DisposeNative() {
             base.DisposeNative();
-            if (NativeHandle != IntPtr.Zero && _isOwned) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero && _isOwned) {
+                Marshal.FreeHGlobal(Handle);
             }
         }
 

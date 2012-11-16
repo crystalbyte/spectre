@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -29,11 +29,11 @@ using Crystalbyte.Spectre.Scripting;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class Browser : RefCountedNativeObject {
+    public sealed class Browser : RefCountedNativeTypeAdapter {
         private Browser(IntPtr handle)
             : base(typeof (CefBrowser)) {
             Frames = new FrameCollection(this);
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         internal BrowserHost Host {
@@ -42,7 +42,7 @@ namespace Crystalbyte.Spectre.UI {
                 var function = (CefBrowserCapiDelegates.GetHostCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetHost,
                                                                      typeof (CefBrowserCapiDelegates.GetHostCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return BrowserHost.FromHandle(handle);
             }
         }
@@ -56,8 +56,8 @@ namespace Crystalbyte.Spectre.UI {
                              Marshal.GetDelegateForFunctionPointer(r.GetFrameNames,
                                                                    typeof (CefBrowserCapiDelegates.GetFrameNamesCallback
                                                                        ));
-                var target = new StringUtf16Collection();
-                action(NativeHandle, target.NativeHandle);
+                var target = new StringUtf16List();
+                action(Handle, target.Handle);
                 return target;
             }
         }
@@ -70,10 +70,10 @@ namespace Crystalbyte.Spectre.UI {
                                                                    typeof (
                                                                        CefBrowserCapiDelegates.
                                                                        GetFrameIdentifiersCallback));
-                var target = new StringUtf16Collection();
+                var target = new StringUtf16List();
                 var count = 0;
-                var identifiers = target.NativeHandle.ToInt64();
-                action(NativeHandle, ref count, ref identifiers);
+                var identifiers = target.Handle.ToInt64();
+                action(Handle, ref count, ref identifiers);
                 return target;
             }
         }
@@ -86,7 +86,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.GetFocusedFrameCallback
                                                                          ));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return Frame.FromHandle(handle);
             }
         }
@@ -98,7 +98,7 @@ namespace Crystalbyte.Spectre.UI {
                                Marshal.GetDelegateForFunctionPointer(r.GetMainFrame,
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.GetMainFrameCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return Frame.FromHandle(handle);
             }
         }
@@ -109,7 +109,7 @@ namespace Crystalbyte.Spectre.UI {
                 var function = (CefBrowserCapiDelegates.CanGoBackCallback)
                                Marshal.GetDelegateForFunctionPointer(r.CanGoBack,
                                                                      typeof (CefBrowserCapiDelegates.CanGoBackCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -121,7 +121,7 @@ namespace Crystalbyte.Spectre.UI {
                                Marshal.GetDelegateForFunctionPointer(r.CanGoForward,
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.CanGoForwardCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -133,7 +133,7 @@ namespace Crystalbyte.Spectre.UI {
                                Marshal.GetDelegateForFunctionPointer(r.HasDocument,
                                                                      typeof (CefBrowserCapiDelegates.HasDocumentCallback
                                                                          ));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -145,7 +145,7 @@ namespace Crystalbyte.Spectre.UI {
                                Marshal.GetDelegateForFunctionPointer(r.GetIdentifier,
                                                                      typeof (
                                                                          CefBrowserCapiDelegates.GetIdentifierCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -153,7 +153,7 @@ namespace Crystalbyte.Spectre.UI {
             var r = MarshalFromNative<CefBrowser>();
             var action = (CefBrowserCapiDelegates.GoBackCallback)
                          Marshal.GetDelegateForFunctionPointer(r.GoBack, typeof (CefBrowserCapiDelegates.GoBackCallback));
-            action(NativeHandle);
+            action(Handle);
         }
 
         public void GoForward() {
@@ -161,7 +161,7 @@ namespace Crystalbyte.Spectre.UI {
             var action = (CefBrowserCapiDelegates.GoForwardCallback)
                          Marshal.GetDelegateForFunctionPointer(r.GoForward,
                                                                typeof (CefBrowserCapiDelegates.GoForwardCallback));
-            action(NativeHandle);
+            action(Handle);
         }
 
         public void CancelNavigation() {
@@ -169,7 +169,7 @@ namespace Crystalbyte.Spectre.UI {
             var action = (CefBrowserCapiDelegates.StopLoadCallback)
                          Marshal.GetDelegateForFunctionPointer(r.StopLoad,
                                                                typeof (CefBrowserCapiDelegates.StopLoadCallback));
-            action(NativeHandle);
+            action(Handle);
         }
 
         public void Refresh(bool ignoreCache = false) {
@@ -184,7 +184,7 @@ namespace Crystalbyte.Spectre.UI {
                 action = (CefBrowserCapiDelegates.ReloadCallback)
                          Marshal.GetDelegateForFunctionPointer(r.Reload, typeof (CefBrowserCapiDelegates.ReloadCallback));
             }
-            action(NativeHandle);
+            action(Handle);
         }
 
         public static Browser Current {
@@ -197,7 +197,7 @@ namespace Crystalbyte.Spectre.UI {
                          Marshal.GetDelegateForFunctionPointer(r.SendProcessMessage,
                                                                typeof (
                                                                    CefBrowserCapiDelegates.SendProcessMessageCallback));
-            action(NativeHandle, (CefProcessId) target, message.NativeHandle);
+            action(Handle, (CefProcessId) target, message.Handle);
         }
 
         public static Browser FromHandle(IntPtr handle) {

@@ -31,7 +31,7 @@ namespace Crystalbyte.Spectre.Web {
 
         public int MaxBlockSize { get; internal set; }
         public BinaryWriter ResponseWriter { get; private set; }
-        public ResponseDelayController DelayController { get; internal set; }
+        public CallbackObject DelayController { get; internal set; }
         public bool IsCompleted { get; set; }
     }
 }

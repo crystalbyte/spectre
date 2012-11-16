@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class RuntimeExceptionObject : NativeObject {
+    public sealed class RuntimeExceptionObject : NativeTypeAdapter {
         public RuntimeExceptionObject()
             : base(typeof (CefV8exception)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
         }
 
         public string Message {
@@ -38,14 +38,14 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.GetMessageCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetMessage,
                                                                      typeof (CefV8CapiDelegates.GetMessageCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return StringUtf16.ReadString(handle);
             }
         }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero) {
+                Marshal.FreeHGlobal(Handle);
             }
             base.DisposeNative();
         }

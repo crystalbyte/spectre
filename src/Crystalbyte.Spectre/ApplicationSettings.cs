@@ -26,15 +26,27 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class ApplicationSettings : NativeObject {
+    public sealed class ApplicationSettings : NativeTypeAdapter {
         public ApplicationSettings()
             : base(typeof (CefSettings)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefSettings {
                 Size = NativeSize,
                 LogSeverity = CefLogSeverity.LogseverityInfo
             });
         }
+
+		public bool IsPackLoadingDisabled {
+			get {
+				var r = MarshalFromNative<CefSettings> ();
+				return r.PackLoadingDisabled;
+			}
+			set{
+				var r = MarshalFromNative<CefSettings>();
+				r.PackLoadingDisabled = value;
+				MarshalToNative(r);
+			}
+		}
 
         public string BrowserSubprocessPath {
             get {
@@ -107,19 +119,19 @@ namespace Crystalbyte.Spectre {
 
         public bool IsSingleProcess {
             get {
-                var reflection = MarshalFromNative<CefSettings>();
-                return reflection.SingleProcess;
+                var r = MarshalFromNative<CefSettings>();
+                return r.SingleProcess;
             }
             set {
-                var reflection = MarshalFromNative<CefSettings>();
-                reflection.SingleProcess = value;
-                MarshalToNative(reflection);
+                var r = MarshalFromNative<CefSettings>();
+                r.SingleProcess = value;
+                MarshalToNative(r);
             }
         }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero) {
+                Marshal.FreeHGlobal(Handle);
             }
             base.DisposeNative();
         }

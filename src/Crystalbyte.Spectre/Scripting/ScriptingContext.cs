@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -27,14 +27,14 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class ScriptingContext : RefCountedNativeObject, IEquatable<ScriptingContext> {
+    public sealed class ScriptingContext : RefCountedNativeTypeAdapter, IEquatable<ScriptingContext> {
         public override int GetHashCode() {
-            return NativeHandle.ToInt32() ^ 4;
+            return Handle.ToInt32() ^ 4;
         }
 
         private ScriptingContext(IntPtr handle)
             : base(typeof (CefV8context)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public static ScriptingContext Current {
@@ -57,7 +57,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefBrowserCapiDelegates.GetBrowserCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetBrowser,
                                                                      typeof (CefBrowserCapiDelegates.GetBrowserCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return Browser.FromHandle(handle);
             }
         }
@@ -68,7 +68,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (GetContextFrameCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetFrame,
                                                                      typeof (GetContextFrameCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return Frame.FromHandle(handle);
             }
         }
@@ -79,7 +79,7 @@ namespace Crystalbyte.Spectre.Scripting {
                 var function = (CefV8CapiDelegates.GetGlobalCallback)
                                Marshal.GetDelegateForFunctionPointer(r.GetGlobal,
                                                                      typeof (CefV8CapiDelegates.GetGlobalCallback));
-                var handle = function(NativeHandle);
+                var handle = function(Handle);
                 return JavaScriptObject.FromHandle(handle);
             }
         }
@@ -89,13 +89,13 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         public bool TryEnter() {
-            if (NativeHandle == IntPtr.Zero || IsDisposed) {
+            if (Handle == IntPtr.Zero || IsDisposed) {
                 return false;
             }
             var r = MarshalFromNative<CefV8context>();
             var function = (CefV8CapiDelegates.EnterCallback)
                            Marshal.GetDelegateForFunctionPointer(r.Enter, typeof (CefV8CapiDelegates.EnterCallback));
-            var value = function(NativeHandle);
+            var value = function(Handle);
             return Convert.ToBoolean(value);
         }
 
@@ -114,13 +114,13 @@ namespace Crystalbyte.Spectre.Scripting {
         }
 
         public bool TryExit() {
-            if (NativeHandle == IntPtr.Zero || IsDisposed) {
+            if (Handle == IntPtr.Zero || IsDisposed) {
                 return false;
             }
             var r = MarshalFromNative<CefV8context>();
             var function = (CefV8CapiDelegates.ExitCallback)
                            Marshal.GetDelegateForFunctionPointer(r.Exit, typeof (CefV8CapiDelegates.ExitCallback));
-            var value = function(NativeHandle);
+            var value = function(Handle);
             return Convert.ToBoolean(value);
         }
 
@@ -134,7 +134,7 @@ namespace Crystalbyte.Spectre.Scripting {
 
             Reference.Increment(other);
 
-            var value = function(NativeHandle, other.NativeHandle);
+            var value = function(Handle, other.Handle);
             return Convert.ToBoolean(value);
         }
 
@@ -147,10 +147,10 @@ namespace Crystalbyte.Spectre.Scripting {
             var function = (CefV8CapiDelegates.EvalCallback)
                            Marshal.GetDelegateForFunctionPointer(r.Eval, typeof (CefV8CapiDelegates.EvalCallback));
 
-            Reference.Increment(result.NativeHandle);
-            Reference.Increment(exception.NativeHandle);
+            Reference.Increment(result.Handle);
+            Reference.Increment(exception.Handle);
 
-            var success = function(NativeHandle, str.NativeHandle, result.NativeHandle, exception.NativeHandle);
+            var success = function(Handle, str.Handle, result.Handle, exception.Handle);
             return Convert.ToBoolean(success);
         }
 

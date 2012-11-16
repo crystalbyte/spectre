@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class JavaScriptDialogHandler : OwnedRefCountedNativeObject {
+    public sealed class JavaScriptDialogHandler : OwnedRefCountedNativeTypeAdapter {
         private readonly CefJsdialogHandlerCapiDelegates.OnBeforeUnloadDialogCallback _beforeUnloadDialogCallback;
         private readonly CefJsdialogHandlerCapiDelegates.OnJsdialogCallback _jsDialogCallback;
         private readonly CefJsdialogHandlerCapiDelegates.OnResetDialogStateCallback _resetDialogStateCallback;

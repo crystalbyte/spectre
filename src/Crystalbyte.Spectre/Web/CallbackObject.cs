@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,23 +26,23 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public sealed class ResponseDelayController : RefCountedNativeObject {
-        private ResponseDelayController(IntPtr handle)
+    public sealed class CallbackObject : RefCountedNativeTypeAdapter {
+        private CallbackObject(IntPtr handle)
             : base(typeof (CefCallback)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public bool IsPaused { get; private set; }
 
-        public static ResponseDelayController FromHandle(IntPtr handle) {
-            return new ResponseDelayController(handle);
+        public static CallbackObject FromHandle(IntPtr handle) {
+            return new CallbackObject(handle);
         }
 
         public void Resume() {
             var r = MarshalFromNative<CefCallback>();
             var action = (CefCallbackCapiDelegates.ContCallback2)
                          Marshal.GetDelegateForFunctionPointer(r.Cont, typeof (CefCallbackCapiDelegates.ContCallback2));
-            action(NativeHandle);
+            action(Handle);
         }
 
         public void Pause() {

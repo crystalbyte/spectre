@@ -26,12 +26,12 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class Time : NativeObject {
+    public sealed class Time : NativeTypeAdapter {
         private readonly bool _isOwned;
 
         public Time(DateTime time)
             : base(typeof (CefTime)) {
-            NativeHandle = Marshal.AllocHGlobal(NativeSize);
+            Handle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefTime {
                 Millisecond = time.Millisecond,
                 Second = time.Second,
@@ -47,7 +47,7 @@ namespace Crystalbyte.Spectre {
 
         private Time(IntPtr handle)
             : base(typeof (CefTime)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public static Time FromHandle(IntPtr handle) {
@@ -66,8 +66,8 @@ namespace Crystalbyte.Spectre {
         }
 
         protected override void DisposeNative() {
-            if (NativeHandle != IntPtr.Zero && _isOwned) {
-                Marshal.FreeHGlobal(NativeHandle);
+            if (Handle != IntPtr.Zero && _isOwned) {
+                Marshal.FreeHGlobal(Handle);
             }
             base.DisposeNative();
         }

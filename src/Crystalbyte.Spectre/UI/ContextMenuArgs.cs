@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenuArgs : RefCountedNativeObject {
+    public sealed class ContextMenuArgs : RefCountedNativeTypeAdapter {
         private ContextMenuArgs(IntPtr handle)
             : base(typeof (CefContextMenuParams)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public int X {
@@ -40,7 +40,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetXcoordCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetYcoordCallback));
-                return function(NativeHandle);
+                return function(Handle);
             }
         }
 
@@ -64,7 +64,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetTypeFlagsCallback));
-                return (NodeTypes) function(NativeHandle);
+                return (NodeTypes) function(Handle);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetLinkUrlCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -89,7 +89,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetUnfilteredLinkUrlCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -102,7 +102,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetSourceUrlCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -115,7 +115,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          IsImageBlockedCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -128,7 +128,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetPageUrlCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -141,7 +141,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetFrameUrlCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -154,7 +154,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetFrameCharsetCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -167,7 +167,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetMediaTypeCallback));
-                return (MediaType) function(NativeHandle);
+                return (MediaType) function(Handle);
             }
         }
 
@@ -179,7 +179,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetMediaStateFlagsCallback));
-                return (MediaStates) function(NativeHandle);
+                return (MediaStates) function(Handle);
             }
         }
 
@@ -191,7 +191,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetSelectionTextCallback));
-                var s = function(NativeHandle);
+                var s = function(Handle);
                 return StringUtf16.ReadStringAndFree(s);
             }
         }
@@ -204,7 +204,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          IsEditableCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -217,7 +217,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          IsSpeechInputEnabledCallback));
-                var value = function(NativeHandle);
+                var value = function(Handle);
                 return Convert.ToBoolean(value);
             }
         }
@@ -230,7 +230,7 @@ namespace Crystalbyte.Spectre.UI {
                                                                      typeof (
                                                                          CefContextMenuHandlerCapiDelegates.
                                                                          GetEditStateFlagsCallback));
-                return (EditStates) function(NativeHandle);
+                return (EditStates) function(Handle);
             }
         }
 

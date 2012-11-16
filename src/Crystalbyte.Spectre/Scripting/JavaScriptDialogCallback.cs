@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -26,10 +26,10 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class JavaScriptDialogCallback : NativeObject {
+    public sealed class JavaScriptDialogCallback : NativeTypeAdapter {
         private JavaScriptDialogCallback(IntPtr handle)
             : base(typeof (CefJsdialogCallback)) {
-            NativeHandle = handle;
+            Handle = handle;
         }
 
         public void Resume(bool success, string message = "") {
@@ -38,7 +38,7 @@ namespace Crystalbyte.Spectre.Scripting {
                          Marshal.GetDelegateForFunctionPointer(r.Cont,
                                                                typeof (CefJsdialogHandlerCapiDelegates.ContCallback6));
             var input = new StringUtf16(message);
-            action(NativeHandle, Convert.ToInt32(success), input.NativeHandle);
+            action(Handle, Convert.ToInt32(success), input.Handle);
             input.Free();
         }
 

@@ -34,20 +34,20 @@ namespace Crystalbyte.Spectre.Interop {
             function(handle);
         }
 
-        public static void Decrement(RefCountedNativeObject item) {
-            var obj = (CefBase) Marshal.PtrToStructure(item.NativeHandle, typeof (CefBase));
+        public static void Decrement(RefCountedNativeTypeAdapter item) {
+            var obj = (CefBase) Marshal.PtrToStructure(item.Handle, typeof (CefBase));
             var function =
                 (CefBaseCapiDelegates.ReleaseCallback)
                 Marshal.GetDelegateForFunctionPointer(obj.Release, typeof (CefBaseCapiDelegates.ReleaseCallback));
-            function(item.NativeHandle);
+            function(item.Handle);
         }
 
-        public static void Increment(RefCountedNativeObject item) {
-            var obj = (CefBase) Marshal.PtrToStructure(item.NativeHandle, typeof (CefBase));
+        public static void Increment(RefCountedNativeTypeAdapter item) {
+            var obj = (CefBase) Marshal.PtrToStructure(item.Handle, typeof (CefBase));
             var function =
                 (CefBaseCapiDelegates.AddRefCallback)
                 Marshal.GetDelegateForFunctionPointer(obj.AddRef, typeof (CefBaseCapiDelegates.AddRefCallback));
-            function(item.NativeHandle);
+            function(item.Handle);
         }
 
         public static void Increment(IntPtr handle) {
