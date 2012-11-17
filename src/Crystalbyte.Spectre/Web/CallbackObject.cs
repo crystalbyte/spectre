@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public sealed class CallbackObject : RefCountedNativeTypeAdapter {
+    public sealed class CallbackObject : RefCountedCefTypeAdapter {
         private CallbackObject(IntPtr handle)
             : base(typeof (CefCallback)) {
             Handle = handle;

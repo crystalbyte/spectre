@@ -25,7 +25,7 @@ using System.Runtime.Serialization;
 
 namespace Crystalbyte.Spectre.Scripting {
     [Serializable]
-    public class RuntimeException : Exception {
+    public class ScriptingException : Exception {
         //
         // For guidelines regarding the creation of new exception types, see
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
@@ -33,13 +33,13 @@ namespace Crystalbyte.Spectre.Scripting {
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public RuntimeException() {}
+        public ScriptingException() {}
 
-        public RuntimeException(string message) : base(message) {}
+        public ScriptingException(string message) : base(message) {}
 
-        public RuntimeException(string message, Exception inner) : base(message, inner) {}
+        public ScriptingException(string message, Exception inner) : base(message, inner) {}
 
-        protected RuntimeException(
+        protected ScriptingException(
             SerializationInfo info,
             StreamingContext context) : base(info, context) {}
     }

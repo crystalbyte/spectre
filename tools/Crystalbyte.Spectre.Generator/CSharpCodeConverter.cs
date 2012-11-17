@@ -250,7 +250,11 @@ namespace Crystalbyte.Spectre {
             return name == "GetType" ? "GetElementType" : name;
         }
 
-        internal static string ConvertMember(string member, out bool isFunctionPointer) {
+        internal static string ConvertMember(string member, out bool isFunctionPointer, out IEnumerable<string> attributes)
+        {
+            var attributeList = new List<string>();
+            attributes = attributeList;
+
             if (member.Contains("(")) {
                 isFunctionPointer = true;
                 var name = ExtractFunctionPointerName(member);
@@ -259,8 +263,13 @@ namespace Crystalbyte.Spectre {
 
             isFunctionPointer = false;
             var splitBySpace = member.Trim().TrimEnd(';').Split(' ');
-            if (splitBySpace.Length == 2) {
+            if (splitBySpace.Length == 2)
+            {
                 var type = ConvertType(splitBySpace.First());
+                if (type == "bool")
+                {
+                    attributeList.Add(string.Format("[MarshalAs(UnmanagedType.U1)]{0}", Environment.NewLine));
+                }
                 var name = ConvertTypeName(splitBySpace.Last());
                 return string.Format("public {0} {1};", type, AdjustFunctionName(name));
             }

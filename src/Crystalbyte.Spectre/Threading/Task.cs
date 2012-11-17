@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.Threading {
-    internal sealed class Task : OwnedRefCountedNativeTypeAdapter {
+    internal sealed class Task : OwnedRefCountedCefTypeAdapter {
         private readonly Action _action;
         private readonly CefTaskCapiDelegates.ExecuteCallback _executeCallback;
 

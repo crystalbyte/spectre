@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public class JavaScriptHandler : OwnedRefCountedNativeTypeAdapter {
+    public class JavaScriptHandler : OwnedRefCountedCefTypeAdapter {
         private readonly V8ExecuteCallback _executeCallback;
 
         private JavaScriptHandler(IntPtr handle)
@@ -56,7 +56,7 @@ namespace Crystalbyte.Spectre.Scripting {
             };
             var message = StringUtf16.ReadString(exception);
             if (string.IsNullOrWhiteSpace(message)) {
-                e.Exception = new RuntimeException(message);
+                e.Exception = new ScriptingException(message);
             }
             OnExecuted(e);
             if (e.Result != null) {

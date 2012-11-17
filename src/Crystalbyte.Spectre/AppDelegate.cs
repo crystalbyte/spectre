@@ -36,10 +36,10 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-        public event EventHandler<CommandLineProcessingEventArgs> ProcessStarted;
+        public event EventHandler<CommandLineProcessingEventArgs> CommandLineProcessing;
 
         protected internal virtual void OnCommandLineProcessing(CommandLineProcessingEventArgs e) {
-            var handler = ProcessStarted;
+            var handler = CommandLineProcessing;
             if (handler != null) {
                 handler(this, e);
             }
@@ -112,6 +112,15 @@ namespace Crystalbyte.Spectre {
 
         protected internal virtual void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
             var handler = IpcMessageReceived;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<ProcessLaunchingEventArgs> ChildProcessLaunching;
+
+        protected internal virtual void OnChildProcessLaunching(ProcessLaunchingEventArgs e) {
+            var handler = ChildProcessLaunching;
             if (handler != null) {
                 handler(this, e);
             }

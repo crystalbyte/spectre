@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class GeolocationHandler : OwnedRefCountedNativeTypeAdapter {
+    internal sealed class GeolocationHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefGeolocationHandlerCapiDelegates.OnCancelGeolocationPermissionCallback
             _cancelGeolocationPermission;
 

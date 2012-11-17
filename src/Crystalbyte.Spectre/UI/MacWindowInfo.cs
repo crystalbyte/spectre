@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class MacWindowInfo : NativeTypeAdapter {
+    public sealed class MacWindowInfo : CefTypeAdapter {
         private readonly bool _isOwned;
 
         public MacWindowInfo(IRenderTarget target)

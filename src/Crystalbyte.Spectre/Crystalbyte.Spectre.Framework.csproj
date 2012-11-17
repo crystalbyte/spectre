@@ -13,9 +13,9 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -23,14 +23,14 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>True</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>Spectre.snk</AssemblyOriginatorKeyFile>
@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Errors.cs" />
+    <Compile Include="ProcessLaunchingEventArgs.cs" />
     <Compile Include="Scripting\DialogResult.cs" />
     <Compile Include="Scripting\DialogType.cs" />
     <Compile Include="Scripting\IFunction.cs" />
@@ -78,7 +79,7 @@
     <Compile Include="Web\DataProviders.cs" />
     <Compile Include="Web\Schemes.cs" />
     <Compile Include="BinaryObject.cs" />
-    <Compile Include="Scripting\RuntimeException.cs" />
+    <Compile Include="Scripting\ScriptingException.cs" />
     <Compile Include="Web\Response.cs" />
     <Compile Include="Web\ResponseHeadersReadingEventArgs.cs" />
     <Compile Include="Web\ResourceRequestedEventArgs.cs" />
@@ -121,7 +122,7 @@
     <Compile Include="Scripting\JavaScriptObjectCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\RuntimeExceptionObject.cs" />
+    <Compile Include="Scripting\ScriptingExceptionObject.cs" />
     <Compile Include="Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -194,9 +195,9 @@
     <Compile Include="StringUtf16.cs" />
     <Compile Include="StringUtf16Map.cs" />
     <Compile Include="Interop\NativeObject.cs" />
-    <Compile Include="Interop\NativeTypeAdapter.cs" />
-    <Compile Include="Interop\OwnedRefCountedNativeTypeAdapter.cs" />
-    <Compile Include="Interop\RefCountedNativeTypeAdapter.cs" />
+    <Compile Include="Interop\CefTypeAdapter.cs" />
+    <Compile Include="Interop\OwnedRefCountedCefTypeAdapter.cs" />
+    <Compile Include="Interop\RefCountedCefTypeAdapter.cs" />
     <Compile Include="ListValue.cs" />
     <Compile Include="CommandLineProcessingEventArgs.cs" />
     <Compile Include="ResourceBundleHandler.cs" />

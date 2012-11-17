@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public sealed class Request : NativeTypeAdapter {
+    public sealed class Request : CefTypeAdapter {
         public Request()
             : base(typeof (CefRequest)) {
             Handle = CefRequestCapi.CefRequestCreate();

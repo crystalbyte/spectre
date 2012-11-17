@@ -5,7 +5,7 @@ using Crystalbyte.Spectre.Interop;
 
 namespace Crystalbyte.Spectre
 {
-	public sealed class ResourceBundleHandler : OwnedRefCountedNativeTypeAdapter
+	public sealed class ResourceBundleHandler : OwnedRefCountedCefTypeAdapter
 	{
 		private readonly CefResourceBundleHandlerCapiDelegates.GetDataResourceCallback _getDataResourceCallback;
 		private readonly CefResourceBundleHandlerCapiDelegates.GetLocalizedStringCallback _getlocalizedStringCallback;

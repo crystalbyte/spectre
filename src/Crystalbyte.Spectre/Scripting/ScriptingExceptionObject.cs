@@ -26,8 +26,8 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class RuntimeExceptionObject : NativeTypeAdapter {
-        public RuntimeExceptionObject()
+    public sealed class ScriptingExceptionObject : CefTypeAdapter {
+        public ScriptingExceptionObject()
             : base(typeof (CefV8exception)) {
             Handle = Marshal.AllocHGlobal(NativeSize);
         }

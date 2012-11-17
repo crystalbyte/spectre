@@ -9,9 +9,12 @@ namespace Crystalbyte.Spectre.Projections.Internal
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefSettings {
 		public int Size;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool SingleProcess;
 		public CefStringUtf16 BrowserSubprocessPath;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool MultiThreadedMessageLoop;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool CommandLineArgsDisabled;
 		public CefStringUtf16 CachePath;
 		public CefStringUtf16 UserAgent;
@@ -20,9 +23,11 @@ namespace Crystalbyte.Spectre.Projections.Internal
 		public CefStringUtf16 LogFile;
 		public CefLogSeverity LogSeverity;
 		public CefStringUtf16 JavascriptFlags;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AutoDetectProxySettingsEnabled;
 		public CefStringUtf16 ResourcesDirPath;
 		public CefStringUtf16 LocalesDirPath;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool PackLoadingDisabled;
 		public int RemoteDebuggingPort;
 		public int UncaughtExceptionStackSize;
@@ -42,43 +47,79 @@ namespace Crystalbyte.Spectre.Projections.Internal
 		public int DefaultFixedFontSize;
 		public int MinimumFontSize;
 		public int MinimumLogicalFontSize;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool RemoteFontsDisabled;
 		public CefStringUtf16 DefaultEncoding;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool EncodingDetectorEnabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool JavascriptDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool JavascriptOpenWindowsDisallowed;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool JavascriptCloseWindowsDisallowed;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool JavascriptAccessClipboardDisallowed;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool DomPasteDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool CaretBrowsingEnabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool JavaDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool PluginsDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool UniversalAccessFromFileUrlsAllowed;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool FileAccessFromFileUrlsAllowed;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool WebSecurityDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool XssAuditorEnabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool ImageLoadDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool ShrinkStandaloneImagesToFit;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool SiteSpecificQuirksDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool TextAreaResizeDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool PageCacheDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool TabToLinksDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool HyperlinkAuditingDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool UserStyleSheetEnabled;
 		public CefStringUtf16 UserStyleSheetLocation;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AuthorAndUserStylesDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool LocalStorageDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool DatabasesDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool ApplicationCacheDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool WebglDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AcceleratedCompositingDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AcceleratedLayersDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AcceleratedVideoDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Accelerated2DCanvasDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AcceleratedPaintingEnabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AcceleratedFiltersEnabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool AcceleratedPluginsDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool DeveloperToolsDisabled;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool FullscreenEnabled;
 	}
 	
@@ -100,10 +141,13 @@ namespace Crystalbyte.Spectre.Projections.Internal
 		public CefStringUtf16 Value;
 		public CefStringUtf16 Domain;
 		public CefStringUtf16 Path;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Secure;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Httponly;
 		public IntPtr Creation;
 		public IntPtr LastAccess;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool HasExpires;
 		public IntPtr Expires;
 	}
@@ -122,29 +166,43 @@ namespace Crystalbyte.Spectre.Projections.Internal
 		public int Modifiers;
 		public int WindowsKeyCode;
 		public int NativeKeyCode;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool IsSystemKey;
 		public char Character;
 		public char UnmodifiedCharacter;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool FocusOnEditableField;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CefPopupFeatures {
 		public int X;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Xset;
 		public int Y;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Yset;
 		public int Width;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Widthset;
 		public int Height;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Heightset;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Menubarvisible;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Statusbarvisible;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Toolbarvisible;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Locationbarvisible;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Scrollbarsvisible;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Resizable;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Fullscreen;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool Dialog;
 		public IntPtr Additionalfeatures;
 	}

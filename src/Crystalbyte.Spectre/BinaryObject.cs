@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class BinaryObject : RefCountedNativeTypeAdapter {
+    public sealed class BinaryObject : RefCountedCefTypeAdapter {
         public BinaryObject(Stream stream)
             : base(typeof (CefBinaryValue)) {
             if (stream.Length > int.MaxValue) {

@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class Time : NativeTypeAdapter {
+    public sealed class Time : CefTypeAdapter {
         private readonly bool _isOwned;
 
         public Time(DateTime time)

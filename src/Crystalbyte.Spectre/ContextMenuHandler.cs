@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class ContextMenuHandler : OwnedRefCountedNativeTypeAdapter {
+    public sealed class ContextMenuHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefContextMenuHandlerCapiDelegates.OnBeforeContextMenuCallback _beforeContextMenuCallback;
         private readonly BrowserDelegate _browserDelegate;
         private readonly CefContextMenuHandlerCapiDelegates.OnContextMenuCommandCallback _contextMenuCommandCallback;

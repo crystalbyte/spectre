@@ -27,9 +27,9 @@ namespace Crystalbyte.Spectre.Interop {
     /// <summary>
     ///   This class is a managed access point for native cef objects.
     /// </summary>
-    public abstract class NativeTypeAdapter : NativeObject {
+    public abstract class CefTypeAdapter : NativeObject {
 
-        protected NativeTypeAdapter(Type nativeType) {
+        protected CefTypeAdapter(Type nativeType) {
             if (nativeType == null) {
                 throw new ArgumentNullException("nativeType");
             }
@@ -39,8 +39,6 @@ namespace Crystalbyte.Spectre.Interop {
             NativeType = nativeType;
             NativeSize = Marshal.SizeOf(nativeType);
         }
-
-      
 
         protected internal int NativeSize { get; private set; }
         protected Type NativeType { get; private set; }

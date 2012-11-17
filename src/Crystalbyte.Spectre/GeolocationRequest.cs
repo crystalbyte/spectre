@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class GeolocationRequest : NativeTypeAdapter {
+    public sealed class GeolocationRequest : CefTypeAdapter {
         private GeolocationRequest(IntPtr handle)
             : base(typeof (CefGeolocationCallback)) {
             Handle = handle;

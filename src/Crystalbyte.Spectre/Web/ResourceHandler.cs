@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public abstract class ResourceHandler : OwnedRefCountedNativeTypeAdapter {
+    public abstract class ResourceHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefResourceHandlerCapiDelegates.CanGetCookieCallback _canGetCookieCallback;
         private readonly CefResourceHandlerCapiDelegates.CanSetCookieCallback _canSetCookieCallback;
         private readonly CefResourceHandlerCapiDelegates.CancelCallback6 _cancelCallback;

@@ -29,7 +29,7 @@ using Crystalbyte.Spectre.Scripting;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class Browser : RefCountedNativeTypeAdapter {
+    public sealed class Browser : RefCountedCefTypeAdapter {
         private Browser(IntPtr handle)
             : base(typeof (CefBrowser)) {
             Frames = new FrameCollection(this);

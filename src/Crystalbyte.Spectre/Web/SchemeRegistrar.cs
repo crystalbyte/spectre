@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Web {
-    public sealed class SchemeRegistrar : OwnedRefCountedNativeTypeAdapter {
+    public sealed class SchemeRegistrar : OwnedRefCountedCefTypeAdapter {
         private SchemeRegistrar(IntPtr handle)
             : base(typeof (CefSchemeRegistrar)) {
             Handle = handle;

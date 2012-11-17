@@ -29,7 +29,7 @@ namespace Crystalbyte.Spectre.Samples {
 		protected override void ConfigureSettings (ApplicationSettings settings) {
 			base.ConfigureSettings (settings);
 #if DEBUG
-			settings.IsSingleProcess = true;
+			//settings.IsSingleProcess = true;
 #endif
 		}
         protected override IEnumerable<Viewport> CreateViewports() {

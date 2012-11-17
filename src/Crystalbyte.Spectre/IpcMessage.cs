@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class IpcMessage : RefCountedNativeTypeAdapter {
+    public sealed class IpcMessage : RefCountedCefTypeAdapter {
         public IpcMessage(string name)
             : base(typeof (CefProcessMessage)) {
             var s = new StringUtf16(name);

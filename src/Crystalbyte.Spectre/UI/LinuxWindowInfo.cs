@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class LinuxWindowInfo : NativeTypeAdapter {
+    public sealed class LinuxWindowInfo : CefTypeAdapter {
         private readonly bool _isOwned;
 
         public LinuxWindowInfo(IRenderTarget target)

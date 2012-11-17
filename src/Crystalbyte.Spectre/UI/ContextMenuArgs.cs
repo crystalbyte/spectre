@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class ContextMenuArgs : RefCountedNativeTypeAdapter {
+    public sealed class ContextMenuArgs : RefCountedCefTypeAdapter {
         private ContextMenuArgs(IntPtr handle)
             : base(typeof (CefContextMenuParams)) {
             Handle = handle;

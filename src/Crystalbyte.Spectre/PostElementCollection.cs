@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class PostElementCollection : NativeTypeAdapter {
+    public sealed class PostElementCollection : CefTypeAdapter {
         public PostElementCollection()
             : base(typeof (CefPostData)) {
             Handle = CefRequestCapi.CefPostDataCreate();

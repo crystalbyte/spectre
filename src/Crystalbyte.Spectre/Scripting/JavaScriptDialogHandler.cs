@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class JavaScriptDialogHandler : OwnedRefCountedNativeTypeAdapter {
+    public sealed class JavaScriptDialogHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefJsdialogHandlerCapiDelegates.OnBeforeUnloadDialogCallback _beforeUnloadDialogCallback;
         private readonly CefJsdialogHandlerCapiDelegates.OnJsdialogCallback _jsDialogCallback;
         private readonly CefJsdialogHandlerCapiDelegates.OnResetDialogStateCallback _resetDialogStateCallback;

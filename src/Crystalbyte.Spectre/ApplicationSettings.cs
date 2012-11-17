@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class ApplicationSettings : NativeTypeAdapter {
+    public sealed class ApplicationSettings : CefTypeAdapter {
         public ApplicationSettings()
             : base(typeof (CefSettings)) {
             Handle = Marshal.AllocHGlobal(NativeSize);
@@ -34,6 +34,56 @@ namespace Crystalbyte.Spectre {
                 Size = NativeSize,
                 LogSeverity = CefLogSeverity.LogseverityInfo
             });
+
+            // TODO: Implementation is incomplete, must implement free calls for all containing strings on dispose
+        }
+
+        public string ProductVersion {
+            get {
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.ProductVersion.Str);
+            }
+            set {
+                var r = MarshalFromNative<CefSettings>();
+                r.ProductVersion = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+                MarshalToNative(r);
+            }
+        }
+
+        public string CacheDirectory {
+            get {
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.CachePath.Str);
+            }
+            set {
+                var r = MarshalFromNative<CefSettings>();
+                r.CachePath = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+                MarshalToNative(r);
+            }
+        }
+
+        public string UserAgent {
+            get {
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.UserAgent.Str);
+            }
+            set {
+                var r = MarshalFromNative<CefSettings>();
+                r.UserAgent = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+                MarshalToNative(r);
+            }
         }
 
 		public bool IsPackLoadingDisabled {
@@ -56,6 +106,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.BrowserSubprocessPath = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -63,7 +114,7 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-        public string LocalesDirPath {
+        public string LocalesDirectory {
             get {
                 var r = MarshalFromNative<CefSettings>();
                 return Marshal.PtrToStringUni(r.LocalesDirPath.Str);
@@ -71,6 +122,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.LocalesDirPath = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -86,6 +138,23 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.Locale = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    Length = value.Length,
+                    Str = Marshal.StringToHGlobalUni(value)
+                };
+                MarshalToNative(r);
+            }
+        }
+
+        public string ResourceDirectory {
+            get {
+                var r = MarshalFromNative<CefSettings>();
+                return Marshal.PtrToStringUni(r.ResourcesDirPath.Str);
+            }
+            set {
+                var r = MarshalFromNative<CefSettings>();
+                r.ResourcesDirPath = new CefStringUtf16 {
+                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };

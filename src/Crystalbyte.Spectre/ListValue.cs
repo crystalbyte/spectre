@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class ListValue : RefCountedNativeTypeAdapter {
+    internal sealed class ListValue : RefCountedCefTypeAdapter {
         public ListValue()
             : base(typeof (CefListValue)) {
             Handle = CefValuesCapi.CefListValueCreate();

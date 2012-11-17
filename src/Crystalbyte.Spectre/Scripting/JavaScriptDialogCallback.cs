@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class JavaScriptDialogCallback : NativeTypeAdapter {
+    public sealed class JavaScriptDialogCallback : CefTypeAdapter {
         private JavaScriptDialogCallback(IntPtr handle)
             : base(typeof (CefJsdialogCallback)) {
             Handle = handle;

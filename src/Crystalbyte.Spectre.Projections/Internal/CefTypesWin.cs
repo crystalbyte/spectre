@@ -22,6 +22,7 @@ namespace Crystalbyte.Spectre.Projections.Internal
 		public int Height;
 		public IntPtr ParentWindow;
 		public IntPtr Menu;
+		[MarshalAs(UnmanagedType.U1)]
 		public bool TransparentPainting;
 		public IntPtr Window;
 	}

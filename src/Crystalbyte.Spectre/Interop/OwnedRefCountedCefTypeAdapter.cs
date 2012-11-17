@@ -30,7 +30,7 @@ namespace Crystalbyte.Spectre.Interop {
     ///   This class does manage the objects lifecycle allocating unmanaged memory on construction.
     ///   Memory is released once the reference counter reaches zero.
     /// </summary>
-    public abstract class OwnedRefCountedNativeTypeAdapter : RefCountedNativeTypeAdapter {
+    public abstract class OwnedRefCountedCefTypeAdapter : RefCountedCefTypeAdapter {
         private readonly CefBaseCapiDelegates.ReleaseCallback _decrementDelegate;
         private readonly CefBaseCapiDelegates.GetRefctCallback _getRefCountDelegate;
         private readonly CefBaseCapiDelegates.AddRefCallback _incrementDelegate;
@@ -38,14 +38,16 @@ namespace Crystalbyte.Spectre.Interop {
         private readonly object _mutex;
         private int _referenceCounter;
 
-        protected OwnedRefCountedNativeTypeAdapter(Type nativeType)
+        protected OwnedRefCountedCefTypeAdapter(Type nativeType)
             : base(nativeType) {
+
             _mutex = new object();
             _referenceCounter = 1;
             _incrementDelegate = Increment;
             _decrementDelegate = Decrement;
             _getRefCountDelegate = GetReferenceCount;
             _dedicatedBase = CreateBase(NativeSize);
+
             Handle = Marshal.AllocHGlobal(NativeSize);
         }
 

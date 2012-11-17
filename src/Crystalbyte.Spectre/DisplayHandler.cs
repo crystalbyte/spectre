@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class DisplayHandler : OwnedRefCountedNativeTypeAdapter {
+    public sealed class DisplayHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefDisplayHandlerCapiDelegates.OnAddressChangeCallback _addressChangeCallback;
         private readonly CefDisplayHandlerCapiDelegates.OnConsoleMessageCallback _consoleMessageCallback;
         private readonly CefDisplayHandlerCapiDelegates.OnLoadingStateChangeCallback _loadingStateChangedCallback;
@@ -45,6 +45,7 @@ namespace Crystalbyte.Spectre {
             _addressChangeCallback = OnAddressChange;
             _consoleMessageCallback = OnConsoleMessage;
             _loadingStateChangedCallback = OnLoadingStateChange;
+
             MarshalToNative(new CefDisplayHandler {
                 Base = DedicatedBase,
                 OnAddressChange =

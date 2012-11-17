@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.Scripting;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class Frame : RefCountedNativeTypeAdapter {
+    public sealed class Frame : RefCountedCefTypeAdapter {
         private readonly StringUtf16 _aboutBlank;
 
         private Frame(IntPtr handle)

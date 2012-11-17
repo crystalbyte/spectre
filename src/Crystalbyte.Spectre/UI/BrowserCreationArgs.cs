@@ -27,7 +27,7 @@ namespace Crystalbyte.Spectre.UI {
     internal sealed class BrowserCreationArgs {
         public Uri StartUri { get; set; }
         public ClientHandler ClientHandler { get; set; }
-        public NativeTypeAdapter WindowInfo { get; set; }
+        public CefTypeAdapter WindowInfo { get; set; }
         public BrowserSettings Settings { get; set; }
     }
 }

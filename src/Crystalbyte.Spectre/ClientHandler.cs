@@ -29,7 +29,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class ClientHandler : OwnedRefCountedNativeTypeAdapter {
+    internal sealed class ClientHandler : OwnedRefCountedCefTypeAdapter {
         private readonly ContextMenuHandler _contextMenuHandler;
         private readonly BrowserDelegate _delegate;
         private readonly DisplayHandler _displayHandler;

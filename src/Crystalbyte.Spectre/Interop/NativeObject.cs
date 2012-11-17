@@ -1,16 +1,15 @@
 using System;
-using Crystalbyte.Spectre.Interop;
 
-namespace Crystalbyte.Spectre
+namespace Crystalbyte.Spectre.Interop
 {
 	public abstract class NativeObject : DisposableObject
 	{
-		public NativeObject ()
+	    protected NativeObject ()
 		{
-//			vionis sinner datensaervice regio data
+
 		}
 
-		public NativeObject (IntPtr handle)
+	    protected NativeObject (IntPtr handle)
 		{
 			Handle = handle;
 		}

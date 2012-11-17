@@ -27,7 +27,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre.Scripting {
-    public sealed class ScriptingContext : RefCountedNativeTypeAdapter, IEquatable<ScriptingContext> {
+    public sealed class ScriptingContext : RefCountedCefTypeAdapter, IEquatable<ScriptingContext> {
         public override int GetHashCode() {
             return Handle.ToInt32() ^ 4;
         }
@@ -102,14 +102,14 @@ namespace Crystalbyte.Spectre.Scripting {
         public void Enter() {
             var success = TryEnter();
             if (!success) {
-                throw new RuntimeException("Failed to enter context.");
+                throw new ScriptingException("Failed to enter context.");
             }
         }
 
         public void Exit() {
             var success = TryExit();
             if (!success) {
-                throw new RuntimeException("Failed to exit context.");
+                throw new ScriptingException("Failed to exit context.");
             }
         }
 
@@ -138,9 +138,9 @@ namespace Crystalbyte.Spectre.Scripting {
             return Convert.ToBoolean(value);
         }
 
-        internal bool Evaluate(string code, out JavaScriptObject result, out RuntimeExceptionObject exception) {
+        internal bool Evaluate(string code, out JavaScriptObject result, out ScriptingExceptionObject exception) {
             result = JavaScriptObject.Null;
-            exception = new RuntimeExceptionObject();
+            exception = new ScriptingExceptionObject();
             var str = new StringUtf16(code);
 
             var r = MarshalFromNative<CefV8context>();

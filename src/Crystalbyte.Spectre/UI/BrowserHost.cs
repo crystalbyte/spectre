@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    internal sealed class BrowserHost : RefCountedNativeTypeAdapter {
+    internal sealed class BrowserHost : RefCountedCefTypeAdapter {
         private BrowserHost(IntPtr handle)
             : base(typeof (CefBrowserHost)) {
             Handle = handle;

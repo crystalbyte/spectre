@@ -31,7 +31,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 
 namespace Crystalbyte.Spectre.Scripting {
     [DebuggerDisplay("Value = {ToString()}")]
-    public sealed class JavaScriptObject : RefCountedNativeTypeAdapter, IEnumerable<KeyValuePair<string, JavaScriptObject>>,
+    public sealed class JavaScriptObject : RefCountedCefTypeAdapter, IEnumerable<KeyValuePair<string, JavaScriptObject>>,
                                            IFunction {
         private JavaScriptObject(IntPtr handle)
             : base(typeof (CefV8value)) {

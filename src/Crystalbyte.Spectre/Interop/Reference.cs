@@ -34,7 +34,7 @@ namespace Crystalbyte.Spectre.Interop {
             function(handle);
         }
 
-        public static void Decrement(RefCountedNativeTypeAdapter item) {
+        public static void Decrement(RefCountedCefTypeAdapter item) {
             var obj = (CefBase) Marshal.PtrToStructure(item.Handle, typeof (CefBase));
             var function =
                 (CefBaseCapiDelegates.ReleaseCallback)
@@ -42,7 +42,7 @@ namespace Crystalbyte.Spectre.Interop {
             function(item.Handle);
         }
 
-        public static void Increment(RefCountedNativeTypeAdapter item) {
+        public static void Increment(RefCountedCefTypeAdapter item) {
             var obj = (CefBase) Marshal.PtrToStructure(item.Handle, typeof (CefBase));
             var function =
                 (CefBaseCapiDelegates.AddRefCallback)

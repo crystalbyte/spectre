@@ -181,8 +181,13 @@ namespace Crystalbyte.Spectre
                 var members = FindStructMembers(@struct);
                 foreach (var member in members)
                 {
+                    IEnumerable<string> attributes;
                     bool isFunctionPointer;
-                    var convertedMember = CSharpCodeConverter.ConvertMember(member, out isFunctionPointer);
+                    var convertedMember = CSharpCodeConverter.ConvertMember(member, out isFunctionPointer, out attributes);
+                    foreach (var attribute in attributes)
+                    {
+                        cw.Write(attribute);
+                    }
                     cw.WriteLine(convertedMember);
                     if (isFunctionPointer)
                     {

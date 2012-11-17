@@ -23,8 +23,8 @@ using System;
 #endregion
 
 namespace Crystalbyte.Spectre.Interop {
-    public abstract class RefCountedNativeTypeAdapter : NativeTypeAdapter {
-        protected RefCountedNativeTypeAdapter(Type nativeType)
+    public abstract class RefCountedCefTypeAdapter : CefTypeAdapter {
+        protected RefCountedCefTypeAdapter(Type nativeType)
             : base(nativeType) {}
 
         protected override void DisposeNative() {

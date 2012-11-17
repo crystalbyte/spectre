@@ -28,14 +28,14 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class BrowserProcessHandler : OwnedRefCountedNativeTypeAdapter {
+    internal sealed class BrowserProcessHandler : OwnedRefCountedCefTypeAdapter {
         private readonly AppDelegate _appDelegate;
 
         private readonly CefBrowserProcessHandlerCapiDelegates.OnBeforeChildProcessLaunchCallback
             _beforeChildProcessLaunchCallback;
 
         public BrowserProcessHandler(AppDelegate appDelegate)
-            : base(typeof (CefBrowserProcessHandler)) {
+            : base(typeof(CefBrowserProcessHandler)) {
             _appDelegate = appDelegate;
 
             _beforeChildProcessLaunchCallback = OnBeforeChildProcessLaunch;
@@ -48,23 +48,33 @@ namespace Crystalbyte.Spectre {
 
         private void OnBeforeChildProcessLaunch(IntPtr self, IntPtr commandLine) {
 
-			var cl = CommandLine.FromHandle(commandLine);
+            var cl = CommandLine.FromHandle(commandLine);
 
-      		// .NET in Windows treat assemblies as native images, so no magic required.
+            // .NET in Windows treat assemblies as native images, so no magic required.
             // Mono on any platform usually located far away from entry assembly, so we want prepare command line to call it correctly.
-            if (Type.GetType("Mono.Runtime") != null)
-            {
-                if (!cl.HasSwitch("mono"))
-                {
-                    cl.Program = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
-
-                    var mono = (Platform.IsLinux || Platform.IsOsX)  
-						? "/usr/bin/mono" 
-							: @"C:\Program Files\Mono-2.10.8\bin\monow.exe";
-                    cl.PrependWrapper(mono);
-					cl.AppendSwitch("mono");
-                }
+            if (Type.GetType("Mono.Runtime") == null || (!Platform.IsLinux && !Platform.IsOsX)) {
+                return;
             }
+
+            if (cl.HasSwitch("mono")) {
+                return;
+            }
+
+            cl.Program = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
+#if DEBUG
+
+            const string mono = "/usr/var/mono --debug";
+#else
+            const string mono = "/usr/var/mono";
+#endif
+            cl.PrependWrapper(mono);
+            cl.AppendSwitch("mono");
+
+            var e = new ProcessLaunchingEventArgs {
+                CommandLine = cl
+            };
+
+            _appDelegate.OnChildProcessLaunching(e);
         }
     }
 }

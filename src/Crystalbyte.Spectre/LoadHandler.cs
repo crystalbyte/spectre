@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class LoadHandler : OwnedRefCountedNativeTypeAdapter {
+    public sealed class LoadHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefLoadHandlerCapiDelegates.OnLoadEndCallback _loadEndCallback;
         private readonly CefLoadHandlerCapiDelegates.OnLoadErrorCallback _loadErrorCallback;
         private readonly CefLoadHandlerCapiDelegates.OnLoadStartCallback _loadStartCallback;

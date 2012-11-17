@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class AsyncActivityController : RefCountedNativeTypeAdapter {
+    public sealed class AsyncActivityController : RefCountedCefTypeAdapter {
         private AsyncActivityController(IntPtr handle)
             : base(typeof (CefCallback)) {
             Handle = handle;

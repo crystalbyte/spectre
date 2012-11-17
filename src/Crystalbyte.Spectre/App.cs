@@ -30,7 +30,7 @@ using Crystalbyte.Spectre.Web;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    internal sealed class App : OwnedRefCountedNativeTypeAdapter {
+    internal sealed class App : OwnedRefCountedCefTypeAdapter {
         private readonly CefAppCapiDelegates.OnBeforeCommandLineProcessingCallback _beforeCommandLineProcessingCallback;
         private readonly CefAppCapiDelegates.GetBrowserProcessHandlerCallback _getBrowserProcessHandlerCallback;
         private readonly CefAppCapiDelegates.GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
@@ -109,33 +109,22 @@ namespace Crystalbyte.Spectre {
 
         private void OnBeforeCommandLineProcessing(IntPtr self, IntPtr processtype, IntPtr commandline) {
 
-			var cl = CommandLine.FromHandle(commandline);
-
-			// TODO: currently on linux platform location of locales and pack files are determined
-            // incorrectly (relative to main module instead of libcef.so module).
-            // Once issue http://code.google.com/p/chromiumembedded/issues/detail?id=668 will be resolved
-            // this code can be removed.
-			if (Platform.IsLinux || Platform.IsOsX) {
-				var directory = new FileInfo(Assembly.GetEntryAssembly().CodeBase).DirectoryName;
-				Debug.WriteLine(directory);
-				cl.AppendSwitchWithValue("resources-dir-path", directory);
-				cl.AppendSwitchWithValue("locales-dir-path", Path.Combine(directory, "locales"));
-			}
-
             var e = new CommandLineProcessingEventArgs {
                 ProcessType =
                     processtype == IntPtr.Zero
                         ? string.Empty
                         : StringUtf16.ReadString(processtype),
-                CommandLine = cl
+                CommandLine = CommandLine.FromHandle(commandline)
             };		
 
             _delegate.OnCommandLineProcessing(e);
         }
 
-        protected override void DisposeNative() {
+        protected override void DisposeManaged() {
+            base.DisposeManaged();
+            _resourceBundleHandler.Dispose();
+            _browserProcessHandler.Dispose();
             _renderProcessHandler.Dispose();
-            base.DisposeNative();
         }
     }
 }

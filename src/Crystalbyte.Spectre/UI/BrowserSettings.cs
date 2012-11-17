@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 #endregion
 
 namespace Crystalbyte.Spectre.UI {
-    public sealed class BrowserSettings : NativeTypeAdapter {
+    public sealed class BrowserSettings : CefTypeAdapter {
         private readonly bool _isOwned;
 
         internal BrowserSettings()

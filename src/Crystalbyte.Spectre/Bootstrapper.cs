@@ -44,7 +44,7 @@ namespace Crystalbyte.Spectre {
             var app = CreateAppDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
-
+            app.CommandLineProcessing += OnCommandLineProcessing;
             // Initialize will block sub processes, only the host process will continue.
             Application.Current.Initialize(app);
 
@@ -65,6 +65,11 @@ namespace Crystalbyte.Spectre {
             Application.Current.Shutdown();
         }
 
+        protected virtual void OnCommandLineProcessing(object sender, CommandLineProcessingEventArgs e)
+        {
+
+        }
+
         protected virtual void OnStarting(object sender, EventArgs e) {
             // override
         }
@@ -76,7 +81,16 @@ namespace Crystalbyte.Spectre {
 
         protected virtual void ConfigureSettings(ApplicationSettings settings) {  
 
-			settings.Locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name) ? CultureInfo.CurrentCulture.Name : "en-US";
+			settings.Locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name) 
+                ? CultureInfo.CurrentCulture.Name : "en-US";
+
+            var program = Assembly.GetEntryAssembly().Location;
+            if (Platform.IsLinux || Platform.IsOsX)
+            {
+                // TODO: can mono be installed someplace else ?
+                const string mono = "/var/usr/mono";
+                settings.BrowserSubprocessPath = string.Format("{0} {1}", mono, program);
+            }
 #if DEBUG
             settings.LogSeverity = LogSeverity.LogseverityVerbose;
 #endif

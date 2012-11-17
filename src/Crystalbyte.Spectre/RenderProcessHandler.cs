@@ -29,7 +29,7 @@ using Crystalbyte.Spectre.UI;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public sealed class RenderProcessHandler : OwnedRefCountedNativeTypeAdapter {
+    public sealed class RenderProcessHandler : OwnedRefCountedCefTypeAdapter {
         private readonly CefRenderProcessHandlerCapiDelegates.OnBrowserCreatedCallback _browserCreatedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnBrowserDestroyedCallback _browserDestroyedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnContextCreatedCallback _contextCreatedCallback;
