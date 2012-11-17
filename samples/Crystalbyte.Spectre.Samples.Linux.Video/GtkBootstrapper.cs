@@ -21,22 +21,23 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Forms;
 using Crystalbyte.Spectre.UI;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples {
-    public sealed class WinformsBootstrapper : Bootstrapper {
+    public sealed class GtkBootstrapper : Bootstrapper {
 		protected override void ConfigureSettings (ApplicationSettings settings) {
 			base.ConfigureSettings (settings);
 #if DEBUG
 			settings.IsSingleProcess = true;
 #endif
+			settings.LogSeverity = LogSeverity.LogseverityVerbose;
+
 		}
         protected override IEnumerable<Viewport> CreateViewports() {
             yield return new Viewport(
-                new Window {StartupUri = new Uri("spectre://localhost/Views/index.html")},
+                new MainWindow {StartupUri = new Uri("spectre://localhost/Views/index.html")},
                 new BrowserDelegate());
         }
     }

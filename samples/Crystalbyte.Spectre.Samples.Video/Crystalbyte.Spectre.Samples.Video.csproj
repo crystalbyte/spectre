@@ -83,7 +83,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="App.config" />
-    <Compile Include="TestAppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Styles\index.css">
