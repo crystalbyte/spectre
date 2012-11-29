@@ -47,31 +47,8 @@ namespace Crystalbyte.Spectre {
         }
 
         private void OnBeforeChildProcessLaunch(IntPtr self, IntPtr commandLine) {
-
-            var cl = CommandLine.FromHandle(commandLine);
-
-            // .NET in Windows treat assemblies as native images, so no magic required.
-            // Mono on any platform usually located far away from entry assembly, so we want prepare command line to call it correctly.
-            if (Type.GetType("Mono.Runtime") == null || (!Platform.IsLinux && !Platform.IsOsX)) {
-                return;
-            }
-
-            if (cl.HasSwitch("mono")) {
-                return;
-            }
-
-            cl.Program = new Uri(Assembly.GetEntryAssembly().CodeBase).LocalPath;
-#if DEBUG
-
-            const string mono = "/usr/var/mono --debug";
-#else
-            const string mono = "/usr/var/mono";
-#endif
-            cl.PrependWrapper(mono);
-            cl.AppendSwitch("mono");
-
             var e = new ProcessLaunchingEventArgs {
-                CommandLine = cl
+                CommandLine = CommandLine.FromHandle(commandLine)
             };
 
             _appDelegate.OnChildProcessLaunching(e);

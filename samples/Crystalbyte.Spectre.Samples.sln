@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.RemoteDebugging", "Crystalbyte.Spectre.Samples.RemoteDebugging\Crystalbyte.Spectre.Samples.RemoteDebugging.csproj", "{B906D62A-D555-4702-AEC4-FC56CEBF4C8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Linux.Video", "Crystalbyte.Spectre.Samples.Linux.Video\Crystalbyte.Spectre.Samples.Linux.Video.csproj", "{40F37414-4142-4CE6-B4AA-A63B814E8AC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -50,6 +52,12 @@ Global
 		{33125B62-B19A-45F8-B546-66C1BC03C8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33125B62-B19A-45F8-B546-66C1BC03C8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33125B62-B19A-45F8-B546-66C1BC03C8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.CodeCoverage|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.CodeCoverage|Any CPU.Build.0 = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
 		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
 		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -104,9 +112,10 @@ Global
 		{33125B62-B19A-45F8-B546-66C1BC03C8E5} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
 		{D2BF38B9-83AE-4B4A-9ECE-6AA8E46EC024} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
 		{B906D62A-D555-4702-AEC4-FC56CEBF4C8A} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj
+		StartupItem = Crystalbyte.Spectre.Samples.Linux.Video\Crystalbyte.Spectre.Samples.Linux.Video.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

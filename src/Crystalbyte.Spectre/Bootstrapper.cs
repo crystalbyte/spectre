@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Diagnostics;
 using System.Reflection;
 using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;
@@ -67,6 +68,24 @@ namespace Crystalbyte.Spectre {
 
         protected virtual void OnCommandLineProcessing(object sender, CommandLineProcessingEventArgs e)
         {
+			var program = Assembly.GetEntryAssembly().Location;
+			var codebase = new FileInfo(program).DirectoryName;
+
+			if (!e.CommandLine.HasSwitch("lang")) {
+				var locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name) 
+					? CultureInfo.CurrentCulture.Name 
+					: "en-US";
+				e.CommandLine.AppendSwitchWithValue("lang", locale);			
+			}
+
+			if (!e.CommandLine.HasSwitch("locales-dir-path")) {
+				e.CommandLine.AppendSwitchWithValue("locales-dir-path", Path.Combine(codebase, "locales"));			
+			}
+
+			if (!e.CommandLine.HasSwitch("resources-dir-path")) {
+				e.CommandLine.AppendSwitchWithValue("resources-dir-path", codebase);			
+			}
+
 
         }
 
@@ -81,18 +100,20 @@ namespace Crystalbyte.Spectre {
 
         protected virtual void ConfigureSettings(ApplicationSettings settings) {  
 
-			settings.Locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name) 
-                ? CultureInfo.CurrentCulture.Name : "en-US";
+			var program = Assembly.GetEntryAssembly().Location;
 
-            var program = Assembly.GetEntryAssembly().Location;
-            if (Platform.IsLinux || Platform.IsOsX)
-            {
-                // TODO: can mono be installed someplace else ?
-                const string mono = "/var/usr/mono";
-                settings.BrowserSubprocessPath = string.Format("{0} {1}", mono, program);
-            }
+			var isMonoHosted = Type.GetType("Mono.Runtime") != null;
+			if (isMonoHosted) {
 #if DEBUG
-            settings.LogSeverity = LogSeverity.LogseverityVerbose;
+
+			settings.BrowserSubprocessPath = string.Format("/usr/bin/mono --debug {0}", program);
+#else
+			settings.BrowserSubprocessPath = string.Format("/usr/bin/mono {0}", program);
+#endif
+			}
+
+#if DEBUG
+			settings.LogSeverity = LogSeverity.LogseverityVerbose;
 #endif
         }
 

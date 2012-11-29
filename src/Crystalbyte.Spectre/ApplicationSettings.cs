@@ -46,7 +46,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.ProductVersion = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -62,7 +62,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.CachePath = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -78,7 +78,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.UserAgent = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -106,7 +106,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.BrowserSubprocessPath = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -122,7 +122,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.LocalesDirPath = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -138,7 +138,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.Locale = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
@@ -154,7 +154,7 @@ namespace Crystalbyte.Spectre {
             set {
                 var r = MarshalFromNative<CefSettings>();
                 r.ResourcesDirPath = new CefStringUtf16 {
-                    Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
+                    //Dtor = Marshal.GetFunctionPointerForDelegate(StringUtf16.FreeCallback),
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
