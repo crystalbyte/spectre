@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Video</title>
+        <link href="../Styles/index.css" rel="stylesheet" />
+        <script type="text/javascript">
+            function Player(document) {
+                this.document = document;
+                this.value = 0;
+                this.play = function() {
+                    var bunny = document.getElementById('bunny');
+                    bunny.play();
+                };
+                this.pause = function() {
+                    var bunny = document.getElementById('bunny');
+                    bunny.pause();
+                };
+                this.stop = function() {
+                    var bunny = document.getElementById('bunny');
+                    bunny.pause();
+                    bunny.currentTime = 0;
+                };
+            }
+
+            var player = new Player(document);
+        </script>
+    </head>
+    <body>
+        <div id="content" >
+            <video id="bunny" width="853" height="480"
+                   src="http://ie.microsoft.com/testdrive/graphics/videoformatsupport/big_buck_bunny_trailer_480p.webm" 
+                   preload="metadata"></video>
+            <div style="position: absolute; bottom: 20px; right: 20px;">
+                <button onclick="player.play(); ">Play</button>
+                <button onclick=" player.pause();">Pause</button>
+                <button onclick="player.stop();">Stop</button>                
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: whitesmoke;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: #252525;
+    font-family: 'Segoe UI';
+    font-size: 1em;
+}
+
+#content {
+    width: 80px;
+    height: 25px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}

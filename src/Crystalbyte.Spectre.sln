@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(spectre)", "(spectre)", "{6A1A7CD3-7675-4A46-B598-A4FD457E3112}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(tests)", "(tests)", "{EFBAF148-9E65-4913-9769-795D16077A40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Framework", "Crystalbyte.Spectre\Crystalbyte.Spectre.Framework.csproj", "{DC202E77-073A-4881-84C9-94B6BC7469B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Projections", "Crystalbyte.Spectre.Projections\Crystalbyte.Spectre.Projections.csproj", "{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC202E77-073A-4881-84C9-94B6BC7469B4} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14} = {6A1A7CD3-7675-4A46-B598-A4FD457E3112}
+	EndGlobalSection
+EndGlobal

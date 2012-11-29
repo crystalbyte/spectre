@@ -1,0 +1,34 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: whitesmoke;
+    -webkit-user-select: text;
+}
+
+body {
+    background-color: #252525;
+    font-family: 'Segoe UI';
+    font-size: 1em;
+}
+
+span {
+    font-size: 0.8em;
+}
+
+h1 {
+    font-size: 1em;
+    color: orange;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.content {
+    padding: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
