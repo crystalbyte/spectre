@@ -19,24 +19,19 @@
 #region Using directives
 
 using System;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 
 #endregion
 
-namespace Crystalbyte.Spectre {
-    public static class StringExtensions {
-        public static string ToFileExtension(this string input) {
-            if (input == null) {
-                throw new ArgumentNullException("input");
-            }
-
-            return input.Split('.').LastOrDefault();
-        }
-
-        public static MemoryStream ToUtf8Stream(this string input) {
-            return new MemoryStream(Encoding.UTF8.GetBytes(input));
+namespace Crystalbyte.Spectre.Samples {
+    internal static class Program {
+        /// <summary>
+        ///   The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        private static void Main() {
+            var bootstrapper = new WinformsBootstrapper();
+            bootstrapper.Run();
         }
     }
 }

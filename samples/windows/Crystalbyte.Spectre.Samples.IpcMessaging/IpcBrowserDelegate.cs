@@ -19,24 +19,36 @@
 #region Using directives
 
 using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Linq;
+using Crystalbyte.Spectre.UI;
 using System.Text;
 
 #endregion
 
-namespace Crystalbyte.Spectre {
-    public static class StringExtensions {
-        public static string ToFileExtension(this string input) {
-            if (input == null) {
-                throw new ArgumentNullException("input");
-            }
+namespace Crystalbyte.Spectre.Samples {
+    internal class IpcBrowserDelegate : BrowserDelegate {
+        private readonly Window _window;
 
-            return input.Split('.').LastOrDefault();
+        public IpcBrowserDelegate(Window window) {
+            _window = window;
         }
 
-        public static MemoryStream ToUtf8Stream(this string input) {
-            return new MemoryStream(Encoding.UTF8.GetBytes(input));
+        protected override void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
+            base.OnIpcMessageReceived(e);
+
+            if (!e.Message.IsValid) {
+                return;
+            }
+
+            var title = e.Message.Payload.ToUtf8String();
+
+            if (_window.InvokeRequired) {
+                _window.BeginInvoke(new Action(()=> _window.Text = title));
+            } else {
+                _window.Text = title;
+            }
         }
     }
 }

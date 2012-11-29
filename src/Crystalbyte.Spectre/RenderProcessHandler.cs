@@ -37,9 +37,9 @@ namespace Crystalbyte.Spectre {
         private readonly CefRenderProcessHandlerCapiDelegates.OnRenderThreadCreatedCallback _renderThreadCreatedCallback;
         private readonly CefRenderProcessHandlerCapiDelegates.OnWebKitInitializedCallback _webkitInitializedCallback;
 		private readonly CefRenderProcessHandlerCapiDelegates.OnProcessMessageReceivedCallback2 _processMessageReceivedCallback;
-		private readonly AppDelegate _delegate;
+		private readonly RendererDelegate _delegate;
 
-        public RenderProcessHandler(AppDelegate @delegate)
+        public RenderProcessHandler(RendererDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {
             _delegate = @delegate;
             _contextCreatedCallback = OnContextCreated;

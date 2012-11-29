@@ -111,9 +111,9 @@ namespace Crystalbyte.Spectre {
         }
 
         protected override void DisposeNative() {
-            // TODO: Check thread for progress.
+            // FIXME: Disposing throws AccessViolationException, object must be disposed internally. 
             // http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=766
-            base.DisposeNative();
+            //base.DisposeNative();
         }
     }
 }

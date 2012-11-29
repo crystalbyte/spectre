@@ -27,10 +27,10 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre.Web {
     public sealed class ProxyHandler : OwnedRefCountedCefTypeAdapter {
-        private readonly AppDelegate _delegate;
+        private readonly RendererDelegate _delegate;
         private readonly CefProxyHandlerCapiDelegates.GetProxyForUrlCallback _getProxyForUrlCallback;
 
-        public ProxyHandler(AppDelegate @delegate)
+        public ProxyHandler(RendererDelegate @delegate)
             : base(typeof (CefProxyHandler)) {
             _delegate = @delegate;
             _getProxyForUrlCallback = GetProxyForUrl;

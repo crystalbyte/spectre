@@ -32,8 +32,8 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre {
     public abstract class Bootstrapper {
-        protected virtual AppDelegate CreateAppDelegate() {
-            return new AppDelegate();
+        protected virtual RendererDelegate CreateAppDelegate() {
+            return new RendererDelegate();
         }
 
         protected abstract IEnumerable<Viewport> CreateViewports();

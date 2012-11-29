@@ -29,12 +29,12 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre {
     internal sealed class BrowserProcessHandler : OwnedRefCountedCefTypeAdapter {
-        private readonly AppDelegate _appDelegate;
+        private readonly RendererDelegate _appDelegate;
 
         private readonly CefBrowserProcessHandlerCapiDelegates.OnBeforeChildProcessLaunchCallback
             _beforeChildProcessLaunchCallback;
 
-        public BrowserProcessHandler(AppDelegate appDelegate)
+        public BrowserProcessHandler(RendererDelegate appDelegate)
             : base(typeof(CefBrowserProcessHandler)) {
             _appDelegate = appDelegate;
 

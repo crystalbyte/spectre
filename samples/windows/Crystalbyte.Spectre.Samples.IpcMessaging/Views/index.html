@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Spectre - IPC Messaging Sample</title>
+    <link href="../Styles/index.css" rel="stylesheet"/>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 100px;">
+        <p>Change Window Title</p>
+        <form action="#">
+            <input id="input" type="text"  />
+        </form>
+    </div>
+    <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script>
+        if (!commands) {
+            throw "Commands not registered.";
+        }
+        $(document).ready(function () {
+            var input = $('#input');
+            input.keyup(function (e) {
+                // invoked for all keys on webkit
+                if (e.keyCode == 8 || e.keyCode == 46) {
+                    e.preventDefault();
+                    commands.changeWindowTitle(this.value);
+                }
+            });
+            input.keypress(function (e) {
+                // invoked for printable keys on webkit
+                commands.changeWindowTitle(this.value + String.fromCharCode(e.which));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -102,12 +102,12 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-        public AppDelegate Delegate {
+        public RendererDelegate Delegate {
             get { return _app.Delegate; }
         }
 
-        private bool Initialize(IntPtr mainArgs, AppDelegate del = null) {
-            _app = new App(del ?? new AppDelegate());
+        private bool Initialize(IntPtr mainArgs, RendererDelegate del = null) {
+            _app = new App(del ?? new RendererDelegate());
 
             Reference.Increment(_app.Handle);
             var exitCode = CefAppCapi.CefExecuteProcess(mainArgs, _app.Handle);
@@ -122,7 +122,7 @@ namespace Crystalbyte.Spectre {
             return IsInitialized;
         }
 
-        public bool Initialize(AppDelegate del = null) {
+        public bool Initialize(RendererDelegate del = null) {
             var handle = IntPtr.Zero;
 
             if (Platform.IsLinux) {

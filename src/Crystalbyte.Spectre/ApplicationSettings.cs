@@ -28,7 +28,7 @@ using Crystalbyte.Spectre.Projections.Internal;
 namespace Crystalbyte.Spectre {
     public sealed class ApplicationSettings : CefTypeAdapter {
         public ApplicationSettings()
-            : base(typeof (CefSettings)) {
+            : base(typeof(CefSettings)) {
             Handle = Marshal.AllocHGlobal(NativeSize);
             MarshalToNative(new CefSettings {
                 Size = NativeSize,
@@ -50,6 +50,18 @@ namespace Crystalbyte.Spectre {
                     Length = value.Length,
                     Str = Marshal.StringToHGlobalUni(value)
                 };
+                MarshalToNative(r);
+            }
+        }
+
+        public int RemoteDebuggingPort {
+            get {
+                var r = MarshalFromNative<CefSettings>();
+                return r.RemoteDebuggingPort;
+            }
+            set {
+                var r = MarshalFromNative<CefSettings>();
+                r.RemoteDebuggingPort = value;
                 MarshalToNative(r);
             }
         }
@@ -86,17 +98,17 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-		public bool IsPackLoadingDisabled {
-			get {
-				var r = MarshalFromNative<CefSettings> ();
-				return r.PackLoadingDisabled;
-			}
-			set{
-				var r = MarshalFromNative<CefSettings>();
-				r.PackLoadingDisabled = value;
-				MarshalToNative(r);
-			}
-		}
+        public bool IsPackLoadingDisabled {
+            get {
+                var r = MarshalFromNative<CefSettings>();
+                return r.PackLoadingDisabled;
+            }
+            set {
+                var r = MarshalFromNative<CefSettings>();
+                r.PackLoadingDisabled = value;
+                MarshalToNative(r);
+            }
+        }
 
         public string BrowserSubprocessPath {
             get {
@@ -165,11 +177,11 @@ namespace Crystalbyte.Spectre {
         public LogSeverity LogSeverity {
             get {
                 var r = MarshalFromNative<CefSettings>();
-                return (LogSeverity) r.LogSeverity;
+                return (LogSeverity)r.LogSeverity;
             }
             set {
                 var reflection = MarshalFromNative<CefSettings>();
-                reflection.LogSeverity = (CefLogSeverity) value;
+                reflection.LogSeverity = (CefLogSeverity)value;
                 MarshalToNative(reflection);
             }
         }

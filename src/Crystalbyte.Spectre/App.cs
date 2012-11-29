@@ -39,9 +39,9 @@ namespace Crystalbyte.Spectre {
 		private readonly BrowserProcessHandler _browserProcessHandler;
         private readonly RenderProcessHandler _renderProcessHandler;
 		private readonly ResourceBundleHandler _resourceBundleHandler;
-		private readonly AppDelegate _delegate;
+		private readonly RendererDelegate _delegate;
 
-        public App(AppDelegate appDelegate)
+        public App(RendererDelegate appDelegate)
             : base(typeof (CefApp)) {
             _delegate = appDelegate;
             _browserProcessHandler = new BrowserProcessHandler(appDelegate);
@@ -70,7 +70,7 @@ namespace Crystalbyte.Spectre {
             });
         }
 
-        public AppDelegate Delegate {
+        public RendererDelegate Delegate {
             get { return _delegate; }
         }
 

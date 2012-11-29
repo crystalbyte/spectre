@@ -140,7 +140,7 @@
     <Compile Include="Threading\Dispatcher.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="AppDelegate.cs" />
+    <Compile Include="RendererDelegate.cs" />
     <Compile Include="AppArguments.cs" />
     <Compile Include="UI\Browser.cs" />
     <Compile Include="UI\BrowserEventArgs.cs" />

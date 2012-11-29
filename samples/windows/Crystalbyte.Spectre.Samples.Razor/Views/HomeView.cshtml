@@ -1,0 +1,32 @@
+﻿@using Crystalbyte.Spectre.Samples.Support
+@inherits  Crystalbyte.Spectre.Razor.Templates.RazorFolderHostTemplate
+               
+@{
+    var model = (Crystalbyte.Spectre.Samples.Models.HomeModel) Context;
+}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Spectre - Razor Sample</title>
+        @foreach (var style in model.Styles) {
+            @Style.Link(style)
+        }
+    </head>
+    <body>
+        <div class="content" >
+            <div>
+                @Html.Header(model.Header)
+            </div>
+            <div>
+                @Html.Span(model.Description)
+            </div>
+            <footer>
+                <span>created on: @model.CreationDate.ToShortDateString()</span>
+            </footer>
+        </div>
+        @foreach (var script in model.Scripts) {
+            @Script.Reference(script)
+        }
+    </body>
+</html>
