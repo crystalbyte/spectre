@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -73,6 +75,7 @@
     <EmbeddedResource Include="Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,6 +109,7 @@
     <PreBuildEvent>xcopy "$(CHROMIUM_SRC)build\$(Configuration)\*.pak" "$(TargetDir)" /i /y 
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\av*.dll" "$(TargetDir)" /i /y
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\lib*.dll" "$(TargetDir)" /i /y 
+xcopy "$(CHROMIUM_SRC)build\$(Configuration)\ff*.dll" "$(TargetDir)" /i /y 
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\locales\*" "$(TargetDir)\locales\" /i /y 
 xcopy "$(CHROMIUM_SRC)build\$(Configuration)\av*.dll" "$(TargetDir)" /i /y 
 REM xcopy "$(CHROMIUM_SRC)build\$(Configuration)\lib*.pdb" "$(TargetDir)" /i /y 

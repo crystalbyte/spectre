@@ -16,9 +16,18 @@
 
 #endregion
 
+using System;
+
 namespace Crystalbyte.Spectre.Scripting {
     public abstract class ScriptingCommand : JavaScriptHandler {
         public abstract string RegistrationCode { get; }
-        protected internal virtual void OnScriptingContextReleased(ContextEventArgs e) {}
+
+        public event EventHandler<ContextEventArgs> ScriptingContextReleased;
+        protected internal virtual void OnScriptingContextReleased(ContextEventArgs e) {
+            var handler = ScriptingContextReleased;
+            if (handler != null) {
+                handler(this, e);
+            }
+        }
     }
 }
