@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(spectre)", "(spectre)", "{7C8FE5E1-03DE-48EE-94DE-E47048925824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Framework", "..\..\src\Crystalbyte.Spectre\Crystalbyte.Spectre.Framework.csproj", "{DC202E77-073A-4881-84C9-94B6BC7469B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Projections", "..\..\src\Crystalbyte.Spectre.Projections\Crystalbyte.Spectre.Projections.csproj", "{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Razor", "..\..\src\Crystalbyte.Spectre.Razor\Crystalbyte.Spectre.Razor.csproj", "{50708109-E81F-4451-A7DF-DBEB4A1B0750}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(samples)", "(samples)", "{0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Video", "Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj", "{40F37414-4142-4CE6-B4AA-A63B814E8AC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Commands", "Crystalbyte.Spectre.Samples.Commands\Crystalbyte.Spectre.Samples.Commands.csproj", "{40F37414-4142-4CE6-B4AA-A63B814E8AC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CodeCoverage|Any CPU = CodeCoverage|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.CodeCoverage|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.CodeCoverage|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.CodeCoverage|Any CPU.Build.0 = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.CodeCoverage|Any CPU.Build.0 = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC202E77-073A-4881-84C9-94B6BC7469B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC202E77-073A-4881-84C9-94B6BC7469B4} = {7C8FE5E1-03DE-48EE-94DE-E47048925824}
+		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14} = {7C8FE5E1-03DE-48EE-94DE-E47048925824}
+		{50708109-E81F-4451-A7DF-DBEB4A1B0750} = {7C8FE5E1-03DE-48EE-94DE-E47048925824}
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Crystalbyte.Spectre.Samples.Commands\Crystalbyte.Spectre.Samples.Commands.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -39,7 +39,6 @@ namespace Crystalbyte.Spectre {
         protected abstract IEnumerable<Viewport> CreateViewports();
 
         public virtual void Run() {
-
 			ConfigureSettings(Application.Current.Settings);
 
             var app = CreateAppDelegate();
@@ -85,8 +84,6 @@ namespace Crystalbyte.Spectre {
 			if (!e.CommandLine.HasSwitch("resources-dir-path")) {
 				e.CommandLine.AppendSwitchWithValue("resources-dir-path", codebase);			
 			}
-
-
         }
 
         protected virtual void OnStarting(object sender, EventArgs e) {
