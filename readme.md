@@ -34,7 +34,7 @@ The first thing to do is building the [Chromium Embedded Framework](http://code.
 The CEF project exposes the regular chromium libraries and provides a C based access point to it's internal commands.  
 Chromium itself is then statically linked into the CEF output assembly (libcef.dll/libcef.so/libcef.dylib).
 
-Detailed build instrucions can be found here: [Building the Chromium Embedded Framework](http://code.google.com/p/chromiumembedded/wiki/BranchesAndBuilding).  
+Detailed build instructions can be found [here](http://code.google.com/p/chromiumembedded/wiki/BranchesAndBuilding).  
 I'd recommend the automated approach, since it is the easiest way.  
 Spectre is currently build against the CEF3 trunk in revision 906, so the url to use with the automated tool will look like this:
     http://chromiumembedded.googlecode.com/svn/trunk/cef3@906  
