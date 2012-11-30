@@ -6,11 +6,12 @@ Since the framework is build on top of Chromium, it naturally inherits some of i
 
 * Multi-Process Architecture
 * Great HTML5/CSS3 support
-* Full JavaScript support using Google's V8 JS engine
-* Native video support using the WebM format
+* Complete JavaScript support
+* Native WebM video support
 * NPAPI Plugin support
 * Native WebGL support
 * Great rendering performance
+* Intrinsic Web Debugger
 
 The CLR library exposes many of chromium's internal commands, enabling us to use the browser as a UI rendering system.  
 These commands include, but are not limited to:
