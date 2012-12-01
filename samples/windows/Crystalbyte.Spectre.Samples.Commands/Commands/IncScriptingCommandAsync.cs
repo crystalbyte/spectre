@@ -2,17 +2,17 @@
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License version 3 as published by
-// the Free Software Foundation.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 // 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+//    http://www.apache.org/licenses/LICENSE-2.0
 // 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #endregion
 
@@ -20,17 +20,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Crystalbyte.Spectre.Scripting;
-using System.Diagnostics;
 
 #endregion
 
 namespace Crystalbyte.Spectre.Samples.Commands {
     public sealed class IncScriptingCommandAsync : ScriptingCommand {
-
         public override string RegistrationCode {
             get { return RegistrationCodes.Synthesize("commands", "incrementAsync", "callback", "value"); }
         }
@@ -57,7 +56,7 @@ namespace Crystalbyte.Spectre.Samples.Commands {
 
                 // Store the current context;
                 EntryContext = ScriptingContext.Current;
-                
+
                 // Keep strong references to the passed arguments.
                 Callback = e.Arguments.ElementAt(0).ToFunction();
                 Value = e.Arguments.ElementAt(1).ToInteger();
@@ -77,10 +76,10 @@ namespace Crystalbyte.Spectre.Samples.Commands {
                 // Cancel the running task gracefully and wait for its completion.
                 CancellationTokenSource.Cancel();
                 try {
-                    Current.Wait(CancellationTokenSource.Token);    
+                    Current.Wait(CancellationTokenSource.Token);
                 }
                 catch (OperationCanceledException) {
-                    Debug.WriteLine("Task has been canceled by user.", "Info");       
+                    Debug.WriteLine("Task has been canceled by user.", "Info");
                 }
                 finally {
                     // Dispose all Javascript objects, V8 needs them back ;)

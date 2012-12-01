@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(spectre)", "(spectre)", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(samples)", "(samples)", "{0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Scripting", "Crystalbyte.Spectre.Samples.Commands\Crystalbyte.Spectre.Samples.Scripting.csproj", "{A139C4DB-F916-4C55-9DCC-6120301B897C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Commands", "Crystalbyte.Spectre.Samples.Commands\Crystalbyte.Spectre.Samples.Commands.csproj", "{A139C4DB-F916-4C55-9DCC-6120301B897C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Video", "Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj", "{28ED3A84-319C-4271-80A4-7F9D45C668C6}"
 EndProject
