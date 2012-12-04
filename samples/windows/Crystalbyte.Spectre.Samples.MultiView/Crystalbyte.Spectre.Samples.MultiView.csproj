@@ -44,7 +44,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\InfoCommand.cs" />
+    <Compile Include="Extensions\ProcessExtension.cs" />
     <Compile Include="Frame.cs">
       <SubType>UserControl</SubType>
     </Compile>

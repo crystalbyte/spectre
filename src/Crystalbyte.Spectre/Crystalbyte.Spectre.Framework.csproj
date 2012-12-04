@@ -126,7 +126,7 @@
     <Compile Include="Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingCommand.cs">
+    <Compile Include="Scripting\Extension.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\JavaScriptHandler.cs">
@@ -218,6 +218,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Spectre.Framework.cd" />
     <None Include="Spectre.snk" />
   </ItemGroup>
 </Project>

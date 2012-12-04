@@ -26,13 +26,13 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre.Scripting {
     public static class ScriptingRuntime {
-        private static readonly List<ScriptingCommand> _commands = new List<ScriptingCommand>();
+        private static readonly List<Extension> _commands = new List<Extension>();
 
-        public static IEnumerable<ScriptingCommand> RegisteredCommands {
+        public static IEnumerable<Extension> RegisteredCommands {
             get { return _commands; }
         }
 
-        public static bool RegisterCommand(string name, ScriptingCommand command) {
+        public static bool RegisterCommand(string name, Extension command) {
             // keep strong reference
             _commands.Add(command);
 

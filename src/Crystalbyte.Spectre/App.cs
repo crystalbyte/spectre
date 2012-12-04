@@ -2,27 +2,24 @@
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License version 3 as published by
-// the Free Software Foundation.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 // 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+//    http://www.apache.org/licenses/LICENSE-2.0
 // 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #endregion
 
 #region Using directives
 
 using System;
-using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 using Crystalbyte.Spectre.Interop;
 using Crystalbyte.Spectre.Projections;
 using Crystalbyte.Spectre.Web;
@@ -35,22 +32,22 @@ namespace Crystalbyte.Spectre {
         private readonly CefAppCapiDelegates.GetBrowserProcessHandlerCallback _getBrowserProcessHandlerCallback;
         private readonly CefAppCapiDelegates.GetRenderProcessHandlerCallback _getRenderProcessHandlerCallback;
         private readonly CefAppCapiDelegates.OnRegisterCustomSchemesCallback _registerCustomSchemeCallback;
-		private readonly CefAppCapiDelegates.GetResourceBundleHandlerCallback _getResourceBundleHandlerCallback;
-		private readonly BrowserProcessHandler _browserProcessHandler;
+        private readonly CefAppCapiDelegates.GetResourceBundleHandlerCallback _getResourceBundleHandlerCallback;
+        private readonly BrowserProcessHandler _browserProcessHandler;
         private readonly RenderProcessHandler _renderProcessHandler;
-		private readonly ResourceBundleHandler _resourceBundleHandler;
-		private readonly RendererDelegate _delegate;
+        private readonly ResourceBundleHandler _resourceBundleHandler;
+        private readonly RendererDelegate _delegate;
 
         public App(RendererDelegate appDelegate)
             : base(typeof (CefApp)) {
             _delegate = appDelegate;
             _browserProcessHandler = new BrowserProcessHandler(appDelegate);
             _renderProcessHandler = new RenderProcessHandler(appDelegate);
-			_resourceBundleHandler = new ResourceBundleHandler(appDelegate);
+            _resourceBundleHandler = new ResourceBundleHandler(appDelegate);
 
-			_getResourceBundleHandlerCallback = OnGetResourceBundleHandler;
+            _getResourceBundleHandlerCallback = OnGetResourceBundleHandler;
             _getRenderProcessHandlerCallback = GetRenderProcessHandler;
-			_getBrowserProcessHandlerCallback = OnGetBrowserProcessHandler;
+            _getBrowserProcessHandlerCallback = OnGetBrowserProcessHandler;
 
             _beforeCommandLineProcessingCallback = OnBeforeCommandLineProcessing;
             _registerCustomSchemeCallback = OnRegisterCustomScheme;
@@ -65,8 +62,8 @@ namespace Crystalbyte.Spectre {
                     Marshal.GetFunctionPointerForDelegate(_registerCustomSchemeCallback),
                 CefCallbackGetBrowserProcessHandler =
                     Marshal.GetFunctionPointerForDelegate(_getBrowserProcessHandlerCallback),
-				CefCallbackGetResourceBundleHandler =
-					Marshal.GetFunctionPointerForDelegate(_getResourceBundleHandlerCallback)
+                CefCallbackGetResourceBundleHandler =
+                    Marshal.GetFunctionPointerForDelegate(_getResourceBundleHandlerCallback)
             });
         }
 
@@ -83,13 +80,13 @@ namespace Crystalbyte.Spectre {
             }
         }
 
-		private IntPtr OnGetResourceBundleHandler(IntPtr self) {
-			if (_resourceBundleHandler == null) {
-				return IntPtr.Zero;
-			}
-			Reference.Increment(_resourceBundleHandler);
-			return _resourceBundleHandler.Handle;
-		}
+        private IntPtr OnGetResourceBundleHandler(IntPtr self) {
+            if (_resourceBundleHandler == null) {
+                return IntPtr.Zero;
+            }
+            Reference.Increment(_resourceBundleHandler);
+            return _resourceBundleHandler.Handle;
+        }
 
         private IntPtr OnGetBrowserProcessHandler(IntPtr self) {
             if (_browserProcessHandler == null) {
@@ -108,14 +105,13 @@ namespace Crystalbyte.Spectre {
         }
 
         private void OnBeforeCommandLineProcessing(IntPtr self, IntPtr processtype, IntPtr commandline) {
-
             var e = new CommandLineProcessingEventArgs {
                 ProcessType =
                     processtype == IntPtr.Zero
                         ? string.Empty
                         : StringUtf16.ReadString(processtype),
                 CommandLine = CommandLine.FromHandle(commandline)
-            };		
+            };
 
             _delegate.OnCommandLineProcessing(e);
         }

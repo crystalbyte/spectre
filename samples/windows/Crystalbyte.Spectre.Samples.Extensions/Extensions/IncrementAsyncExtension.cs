@@ -28,8 +28,8 @@ using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Spectre.Samples.Commands {
-    public sealed class IncScriptingCommandAsync : ScriptingCommand {
+namespace Crystalbyte.Spectre.Samples.Extensions {
+    public sealed class IncScriptingCommandAsync : Extension {
         public override string RegistrationCode {
             get { return RegistrationCodes.Synthesize("commands", "incrementAsync", "callback", "value"); }
         }
@@ -46,9 +46,9 @@ namespace Crystalbyte.Spectre.Samples.Commands {
             private IFunction Callback { get; set; }
             private int Value { get; set; }
             private Task Current { get; set; }
-            private ScriptingCommand Command { get; set; }
+            private Extension Command { get; set; }
 
-            public Worker(ScriptingCommand c, ExecutedEventArgs e) {
+            public Worker(Extension c, ExecutedEventArgs e) {
                 // Keep this worker alive after leaving local scope using a strong reference.
                 Workers.Register(this);
 

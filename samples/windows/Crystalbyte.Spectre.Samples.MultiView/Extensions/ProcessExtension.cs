@@ -18,34 +18,21 @@
 
 #region Using directives
 
-using System;
-using Crystalbyte.Spectre.UI;
+using System.Diagnostics;
+using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Spectre.Samples {
-    internal class IpcBrowserDelegate : BrowserDelegate {
-        private readonly Window _window;
-
-        public IpcBrowserDelegate(Window window) {
-            _window = window;
+namespace Crystalbyte.Spectre.Samples.Extensions {
+    internal class ProcessExtension : Extension {
+        public override string RegistrationCode {
+            get { return RegistrationCodes.Synthesize("commands", "getPID"); }
         }
 
-        protected override void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
-            base.OnIpcMessageReceived(e);
-
-            if (!e.Message.IsValid) {
-                return;
-            }
-
-            var title = e.Message.Payload.ToUtf8String();
-
-            if (_window.InvokeRequired) {
-                _window.BeginInvoke(new Action(() => _window.Text = title));
-            }
-            else {
-                _window.Text = title;
-            }
+        protected override void OnExecuted(ExecutedEventArgs e) {
+            var id = Process.GetCurrentProcess().Id;
+            e.Result = new JavaScriptObject(id);
+            e.IsHandled = true;
         }
     }
 }

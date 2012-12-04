@@ -19,32 +19,19 @@
 #region Using directives
 
 using System;
-using Crystalbyte.Spectre.UI;
 
 #endregion
 
-namespace Crystalbyte.Spectre.Samples {
-    internal class IpcBrowserDelegate : BrowserDelegate {
-        private readonly Window _window;
+namespace Crystalbyte.Spectre.Scripting {
+    public abstract class Extension : JavaScriptHandler {
+        public abstract string RegistrationCode { get; }
 
-        public IpcBrowserDelegate(Window window) {
-            _window = window;
-        }
+        public event EventHandler<ContextEventArgs> ScriptingContextReleased;
 
-        protected override void OnIpcMessageReceived(IpcMessageReceivedEventArgs e) {
-            base.OnIpcMessageReceived(e);
-
-            if (!e.Message.IsValid) {
-                return;
-            }
-
-            var title = e.Message.Payload.ToUtf8String();
-
-            if (_window.InvokeRequired) {
-                _window.BeginInvoke(new Action(() => _window.Text = title));
-            }
-            else {
-                _window.Text = title;
+        protected internal virtual void OnScriptingContextReleased(ContextEventArgs e) {
+            var handler = ScriptingContextReleased;
+            if (handler != null) {
+                handler(this, e);
             }
         }
     }

@@ -18,21 +18,27 @@
 
 #region Using directives
 
-using System;
+using System.Linq;
+using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Spectre.Scripting {
-    public abstract class ScriptingCommand : JavaScriptHandler {
-        public abstract string RegistrationCode { get; }
+namespace Crystalbyte.Spectre.Samples.Extensions {
+    public sealed class IncrementExtension : Extension {
+        public override string RegistrationCode {
+            get { return RegistrationCodes.Synthesize("commands", "increment", "value"); }
+        }
 
-        public event EventHandler<ContextEventArgs> ScriptingContextReleased;
-
-        protected internal virtual void OnScriptingContextReleased(ContextEventArgs e) {
-            var handler = ScriptingContextReleased;
-            if (handler != null) {
-                handler(this, e);
+        protected override void OnExecuted(ExecutedEventArgs e) {
+            if (e.Arguments.Count < 1) {
+                e.Result = new JavaScriptObject(1);
             }
+            else {
+                var b = e.Arguments.First().ToInteger();
+                e.Result = new JavaScriptObject(b + 1);
+            }
+
+            e.IsHandled = true;
         }
     }
 }

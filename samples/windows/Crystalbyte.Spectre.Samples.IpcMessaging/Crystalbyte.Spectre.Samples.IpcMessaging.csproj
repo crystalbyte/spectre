@@ -45,7 +45,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ChangeWindowTitleCommand.cs" />
+    <Compile Include="Extensions\ChangeWindowTitleExtension.cs" />
     <Compile Include="IpcBrowserDelegate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
