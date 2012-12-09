@@ -36,10 +36,6 @@ namespace Crystalbyte.Spectre.Samples {
 #endif
         }
 
-        protected override RenderDelegate CreateRenderDelegate() {
-            return base.CreateRenderDelegate();
-        }
-
         public WinformsBootstrapper() {
             _window = new Window {
                 StartupUri = new Uri("spectre://localhost/Views/index.html")

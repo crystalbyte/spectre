@@ -29,7 +29,7 @@ using Crystalbyte.Spectre.Scripting;
 #endregion
 
 namespace Crystalbyte.Spectre.Samples.Extensions {
-    public sealed class IncScriptingCommandAsync : Extension {
+    public sealed class IncrementAsyncExtension : Extension {
         public override string RegistrationCode {
             get { return RegistrationCodes.Synthesize("commands", "incrementAsync", "callback", "value"); }
         }
