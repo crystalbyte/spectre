@@ -13,9 +13,9 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -23,14 +23,14 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>True</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>Spectre.snk</AssemblyOriginatorKeyFile>
@@ -126,7 +126,7 @@
     <Compile Include="Scripting\ScriptingContext.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Scripting\ScriptingCommand.cs">
+    <Compile Include="Scripting\Extension.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scripting\JavaScriptHandler.cs">
@@ -140,7 +140,7 @@
     <Compile Include="Threading\Dispatcher.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="RendererDelegate.cs" />
+    <Compile Include="RenderDelegate.cs" />
     <Compile Include="AppArguments.cs" />
     <Compile Include="UI\Browser.cs" />
     <Compile Include="UI\BrowserEventArgs.cs" />
@@ -218,6 +218,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Spectre.Framework.cd" />
     <None Include="Spectre.snk" />
   </ItemGroup>
 </Project>

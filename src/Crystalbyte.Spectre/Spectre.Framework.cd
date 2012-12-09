@@ -1,0 +1,1057 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Crystalbyte.Spectre.App" Collapsed="true">
+    <Position X="59.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAUCAAAAEBAAAAAAAAABAAACAgBIEAAAAgYABAAA=</HashCode>
+      <FileName>App.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.AppArguments" Collapsed="true">
+    <Position X="109.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAgAAAAIAAEAAQAAAAAAAA=</HashCode>
+      <FileName>AppArguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Application" Collapsed="true">
+    <Position X="111" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIgAABAEAAEAQABAACAAQACAUiQAAAEgSCABAAAEAo=</HashCode>
+      <FileName>Application.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ApplicationSettings" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEAAECAAgAAQEACACBCAAAAAAABAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>ApplicationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.AsyncActivityController" Collapsed="true">
+    <Position X="48.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAAAQAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAQA=</HashCode>
+      <FileName>AsyncActivityController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.BinaryObject" Collapsed="true">
+    <Position X="50.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAAAAAAgAAAAAgAAAAAAAAAEBAAAAAAAAAAAAA=</HashCode>
+      <FileName>BinaryObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Bootstrapper">
+    <Position X="104" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAABAAAAAAAAAAAAAIAAAgQAAABiAAQAEAAAAI=</HashCode>
+      <FileName>Bootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.BrowserProcessHandler">
+    <Position X="81.25" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>BrowserProcessHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ClientHandler">
+    <Position X="82" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oABRAAAAAGEAAAEAgBAEAAQAAACAMEggABAAIQAAABA=</HashCode>
+      <FileName>ClientHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.CommandLine" Collapsed="true">
+    <Position X="97.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAABEB0AAiBAAAAAgQAECAAAAAAAACABEE=</HashCode>
+      <FileName>CommandLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.CommandLineProcessingEventArgs" Collapsed="true">
+    <Position X="109.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandLineProcessingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ConsoleMessageReceivedEventArgs" Collapsed="true">
+    <Position X="111" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAABAAAAAAAAAAAAAAAAAIAAFAAA=</HashCode>
+      <FileName>ConsoleMessageReceivedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ContextMenuHandler" Collapsed="true">
+    <Position X="93.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAABAAEEAAAAAACAAgAAAAAQAAAA=</HashCode>
+      <FileName>ContextMenuHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.DisplayHandler" Collapsed="true">
+    <Position X="61.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAACAABAAQAAIAAAAAIABAASAEAgAAAAEAAAAAAA=</HashCode>
+      <FileName>DisplayHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.EnumerationExtensions" Collapsed="true">
+    <Position X="118" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>EnumerationExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Errors" Collapsed="true">
+    <Position X="119.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Errors.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.GeolocationHandler" Collapsed="true">
+    <Position X="68.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAgAAACAAgAAAAQAAAAAAAA=</HashCode>
+      <FileName>GeolocationHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.GeolocationRequest" Collapsed="true">
+    <Position X="34.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAIAAAAAAAgAAAAAAAAAAEAAAAAEAAAAAAAA=</HashCode>
+      <FileName>GeolocationRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.GeolocationRequestCanceledEventArgs" Collapsed="true">
+    <Position X="112.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAEAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>GeolocationRequestCanceledEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.GeolocationRequestedEventArgs" Collapsed="true">
+    <Position X="114.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAEAAAAAAgAAAAAAAAAAEAAA=</HashCode>
+      <FileName>GeolocationRequestedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.IpcMessage">
+    <Position X="57.25" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAQAAgQAAQAAAAAEAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IpcMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.IpcMessageReceivedEventArgs" Collapsed="true">
+    <Position X="116.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIEAEAAA=</HashCode>
+      <FileName>IpcMessageReceivedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.LifeSpanHandler" Collapsed="true">
+    <Position X="95.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAQAAEAAgAAAAAAAAAAEAAAACAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>LifeSpanHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ListValue" Collapsed="true">
+    <Position X="39.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAEAAAAQAAAIAAQAAAAAEAAAAAAAAABAAAA=</HashCode>
+      <FileName>ListValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.LoadHandler" Collapsed="true">
+    <Position X="64" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAgAABEAAAAAAAAAAEACAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>LoadHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Platform" Collapsed="true">
+    <Position X="111" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIIAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Platform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.PostElementCollection" Collapsed="true">
+    <Position X="30.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PostElementCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ProcessLaunchingEventArgs" Collapsed="true">
+    <Position X="114.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProcessLaunchingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.RenderDelegate">
+    <Position X="121.5" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAoEAAABCAgAAEAAABQACCABACCAEAACAQIAAAAAyA=</HashCode>
+      <FileName>RenderDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.RenderProcessHandler">
+    <Position X="84.25" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAEoCBEAAAAAAAAAAACCAAAgACYAAAAAABA=</HashCode>
+      <FileName>RenderProcessHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.ResourceBundleHandler" Collapsed="true">
+    <Position X="90" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAACAAAACAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ResourceBundleHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.StatusMessageReceivedEventArgs" Collapsed="true">
+    <Position X="111" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEAAA=</HashCode>
+      <FileName>StatusMessageReceivedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.StreamExtensions" Collapsed="true">
+    <Position X="112.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StreamExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.StringExtensions" Collapsed="true">
+    <Position X="114.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StringExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.StringUtf16" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAgAAAAAAAAQAAAEAACABAAAI=</HashCode>
+      <FileName>StringUtf16.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.StringUtf16List" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iAIAAAAAAAAAABAACAAAAAQAAAAAEAAEAAAAAABAAAA=</HashCode>
+      <FileName>StringUtf16List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.StringUtf16Map" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StringUtf16Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Time" Collapsed="true">
+    <Position X="23.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQIAA=</HashCode>
+      <FileName>Time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Interop.CefTypeAdapter" Collapsed="true">
+    <Position X="57.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAACAAEAAA=</HashCode>
+      <FileName>Interop\CefTypeAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Interop.DisposableObject" Collapsed="true">
+    <Position X="56" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACAABAAAAAAAABCAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interop\DisposableObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Interop.NativeObject" Collapsed="true">
+    <Position X="55" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Interop\NativeObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Interop.OwnedRefCountedCefTypeAdapter" Collapsed="true">
+    <Position X="84.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIBACAAAAAAAAAAgIAACABIAAAAAIAAAACBAAAAgAAI=</HashCode>
+      <FileName>Interop\OwnedRefCountedCefTypeAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Interop.RefCountedCefTypeAdapter" Collapsed="true">
+    <Position X="71.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interop\RefCountedCefTypeAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Interop.Reference" Collapsed="true">
+    <Position X="118" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Interop\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.ContextEventArgs" Collapsed="true">
+    <Position X="112.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAE=</HashCode>
+      <FileName>Scripting\ContextEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.DialogResult" Collapsed="true">
+    <Position X="114.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Scripting\DialogResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.ExecutedEventArgs" Collapsed="true">
+    <Position X="121.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAACACQAAAAAAAAAIABAAAAAAAA=</HashCode>
+      <FileName>Scripting\ExecutedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptDialogCallback" Collapsed="true">
+    <Position X="25.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Scripting\JavaScriptDialogCallback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptDialogHandler" Collapsed="true">
+    <Position X="70.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAIQAAAAAACAAAAAAAEAAAAQBAAA=</HashCode>
+      <FileName>Scripting\JavaScriptDialogHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptEnumerationExtensions" Collapsed="true">
+    <Position X="119.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Scripting\JavaScriptEnumerationExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptHandler">
+    <Position X="77.5" Y="7.5" Width="2.5" />
+    <NestedTypes>
+      <Delegate Name="Crystalbyte.Spectre.Scripting.JavaScriptHandler.V8ExecuteCallback" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Scripting\JavaScriptHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAhAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Scripting\JavaScriptHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptObject">
+    <Position X="55" Y="6.25" Width="2" />
+    <NestedTypes>
+      <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptObject.ScriptableObjectEnumerator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Scripting\JavaScriptObject.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>iAICAAAIAAAUARBcCAABBARAAIwAEAAMAJIAERIQCCA=</HashCode>
+      <FileName>Scripting\JavaScriptObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.JavaScriptObjectCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="121.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Scripting\JavaScriptObjectCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.RegistrationCodes" Collapsed="true">
+    <Position X="119.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scripting\RegistrationCodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.Extension">
+    <Position X="77.5" Y="10.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scripting\Extension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.ScriptingContext">
+    <Position X="99" Y="7.25" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Crystalbyte.Spectre.Scripting.ScriptingContext.GetContextFrameCallback" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Scripting\ScriptingContext.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgACAAwAAAAAEEKAiIAAAAAAUAAE=</HashCode>
+      <FileName>Scripting\ScriptingContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.ScriptingException" Collapsed="true">
+    <Position X="116.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scripting\ScriptingException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.ScriptingExceptionObject" Collapsed="true">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Scripting\ScriptingExceptionObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Scripting.ScriptingRuntime" Collapsed="true">
+    <Position X="118" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scripting\ScriptingRuntime.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Threading.Dispatcher" Collapsed="true">
+    <Position X="116.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAgAAQAAAACCAAAAAAAAAAAQAAAAAAAAACA=</HashCode>
+      <FileName>Threading\Dispatcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Threading.Task" Collapsed="true">
+    <Position X="73" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAhAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAA=</HashCode>
+      <FileName>Threading\Task.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.Browser">
+    <Position X="52.75" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAEBAUAAAAACIRAAAAAAAGAEAAIIAAAABAAE=</HashCode>
+      <FileName>UI\Browser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserClosedEventArgs" Collapsed="true">
+    <Position X="114.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>UI\BrowserClosedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserClosingEventArgs" Collapsed="true">
+    <Position X="116.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAQA=</HashCode>
+      <FileName>UI\BrowserClosingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserCreationArgs" Collapsed="true">
+    <Position X="118" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEACAAAAAAA=</HashCode>
+      <FileName>UI\BrowserCreationArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserDelegate">
+    <Position X="106.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAQSCAAAgASAgABgoqwBwBgAGAAAAB4AAKQwQA=</HashCode>
+      <FileName>UI\BrowserDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserEventArgs" Collapsed="true">
+    <Position X="121.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>UI\BrowserEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserHost">
+    <Position X="100" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAQAAAAAABAAAAAAAAAAAAAAAAEAAAAAAAAABEQAA=</HashCode>
+      <FileName>UI\BrowserHost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.BrowserSettings" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAAAAAAAQAABAAAAAAAAEAEAAAAAAAAAAAIAA=</HashCode>
+      <FileName>UI\BrowserSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenu" Collapsed="true">
+    <Position X="41.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAACAAAAAAABAAAgBAAEAAAAAAAAABAAAA=</HashCode>
+      <FileName>UI\ContextMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenuArgs" Collapsed="true">
+    <Position X="43.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAQAAAABAQgwAAAAAIAAAAAAA2AAAAACAAAAAYiA=</HashCode>
+      <FileName>UI\ContextMenuArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenuClosedEventArgs" Collapsed="true">
+    <Position X="114.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAE=</HashCode>
+      <FileName>UI\ContextMenuClosedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenuCommandEventArgs" Collapsed="true">
+    <Position X="116.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAABAAAAAAAAAAAIAAAAAAEAAE=</HashCode>
+      <FileName>UI\ContextMenuCommandEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenuItem" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>UI\ContextMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenuItemCollection" Collapsed="true">
+    <Position X="118" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAQAAAABAQAAAAAAAAAAAAAACBAAAA=</HashCode>
+      <FileName>UI\ContextMenuItemCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.ContextMenuOpeningEventArgs" Collapsed="true">
+    <Position X="119.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAIAAAAAAEAAE=</HashCode>
+      <FileName>UI\ContextMenuOpeningEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.CreateHandlerEventArgs" Collapsed="true">
+    <Position X="121.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAE=</HashCode>
+      <FileName>UI\CreateHandlerEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.Frame">
+    <Position X="100" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQCBAAAAiIBBAAQAAgAQQQBAgEAEQAACAAQAAAEAAA=</HashCode>
+      <FileName>UI\Frame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.FrameCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="111" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAACAAAAEQAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>UI\FrameCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.JavaScriptDialogOpeningEventArgs" Collapsed="true">
+    <Position X="118" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAQAAAAAAAAAQAAAAAAABAAAAAIAgGAQA=</HashCode>
+      <FileName>UI\JavaScriptDialogOpeningEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.LabelMenuItem" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\LabelMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.LinuxWindowInfo" Collapsed="true">
+    <Position X="32.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>UI\LinuxWindowInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.LinuxWindowResizer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="109.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UI\LinuxWindowResizer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.LoadingStateChangedEventArgs" Collapsed="true">
+    <Position X="111" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAFAAI=</HashCode>
+      <FileName>UI\LoadingStateChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.MacWindowInfo" Collapsed="true">
+    <Position X="37" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>UI\MacWindowInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.MacWindowResizer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="112.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UI\MacWindowResizer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.NavigatedEventArgs" Collapsed="true">
+    <Position X="116.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAEAAE=</HashCode>
+      <FileName>UI\NavigatedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.PageChangeNotificationDialogOpeningEventArgs" Collapsed="true">
+    <Position X="118" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAAAAAIAAEQAA=</HashCode>
+      <FileName>UI\PageChangeNotificationDialogOpening.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.PageLoadedEventArgs" Collapsed="true">
+    <Position X="119.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAE=</HashCode>
+      <FileName>UI\PageLoadedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.PageLoadingEventArgs" Collapsed="true">
+    <Position X="121.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAE=</HashCode>
+      <FileName>UI\PageLoadingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.PageLoadingFailedEventArgs" Collapsed="true">
+    <Position X="109.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAIAAEAAE=</HashCode>
+      <FileName>UI\PageLoadingFailedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.PopupCreatingEventArgs" Collapsed="true">
+    <Position X="112.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACgAAAAEAAAQA=</HashCode>
+      <FileName>UI\PopupCreatingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.SizeChangedEventArgs" Collapsed="true">
+    <Position X="119.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\SizeChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.TitleChangedEventArgs" Collapsed="true">
+    <Position X="116.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>UI\TitleChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.TooltipRequestedEventArgs" Collapsed="true">
+    <Position X="118" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAEAQA=</HashCode>
+      <FileName>UI\TooltipRequestedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.Viewport" Collapsed="true">
+    <Position X="106.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAABEAAABAAAoAEACEAARCAAAAQAgAAAAIAAQAQ=</HashCode>
+      <FileName>UI\Viewport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.WindowsWindowInfo" Collapsed="true">
+    <Position X="16.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAABAAAAAAAAAAAAAAAAEAAAAAAAAAAAIAA=</HashCode>
+      <FileName>UI\WindowsWindowInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.UI.WindowsWindowResizer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="119.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UI\WindowsWindowResizer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.CallbackObject" Collapsed="true">
+    <Position X="46" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAgAAAA=</HashCode>
+      <FileName>Web\CallbackObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.CustomSchemesRegisteringEventArgs" Collapsed="true">
+    <Position X="109.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Web\CustomSchemesRegisteringEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.DataBlockReadingEventArgs" Collapsed="true">
+    <Position X="111" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAABBAAAAAAAABAAA=</HashCode>
+      <FileName>Web\DataBlockReadingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.DataProviders" Collapsed="true">
+    <Position X="112.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\DataProviders.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.FileDataProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="109.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAABQQAAAACAAAAAAAAAAAAAAAEAAAI=</HashCode>
+      <FileName>Web\FileDataProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.MimeMapper" Collapsed="true">
+    <Position X="114.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\MimeMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.ProxyHandler" Collapsed="true">
+    <Position X="91" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIEAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\ProxyHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.ProxyUrlEventArgs" Collapsed="true">
+    <Position X="116.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Web\ProxyUrlEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.Request" Collapsed="true">
+    <Position X="19" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAQAAEgAAAACAAAEAAACAAAAAAAAAA=</HashCode>
+      <FileName>Web\Request.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.ResourceHandler" Collapsed="true">
+    <Position X="66.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQQBALAAABgRAAAAAAAGAQCAAAAAAAAAEAkAI=</HashCode>
+      <FileName>Web\ResourceHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.RequestProcessingEventArgs" Collapsed="true">
+    <Position X="109.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Web\ResourceRequestedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.Response" Collapsed="true">
+    <Position X="28" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQSAAAAAAAAAAAAEAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Web\Response.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.ResponseHeadersReadingEventArgs" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="111" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\ResponseHeadersReadingEventArgs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SchemeHandlerFactory" Collapsed="true">
+    <Position X="75.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAACAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\SchemeHandlerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SchemeHandlerFactoryManager" Collapsed="true">
+    <Position X="112.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Web\SchemeHandlerFactoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SchemeRegistrar" Collapsed="true">
+    <Position X="88.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\SchemeRegistrar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.Schemes" Collapsed="true">
+    <Position X="114.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\Schemes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SpectreSchemeDescriptor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="117" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\SpectreSchemeDescriptor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SpectreSchemeHandler" Collapsed="true">
+    <Position X="66.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Web\SpectreSchemeHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SpectreSchemeHandlerFactory" Collapsed="true">
+    <Position X="75.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\SpectreSchemeHandlerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crystalbyte.Spectre.Web.SpectreSchemeHandlerFactoryDescriptor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="109.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAIAAABAAAAAAACAAAAQAA=</HashCode>
+      <FileName>Web\SpectreSchemeHandlerFactoryDescriptor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="Crystalbyte.Spectre.UI.Point" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="109.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAIAAQAAAAAgAIAAAAAAAAAAIAAAAAAAAAAYAA=</HashCode>
+      <FileName>UI\Point.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="Crystalbyte.Spectre.UI.Rectangle" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="111" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAgAAAAEAAAAAAEIAAAAAAAAAAYAA=</HashCode>
+      <FileName>UI\Rectangle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="Crystalbyte.Spectre.UI.Size" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="112.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAABACAAAAAgAIAAEAAABAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Size.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Interface Name="Crystalbyte.Spectre.IReadOnlyCollection&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IReadOnlyCollection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.IValueCollection&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>IValueCollection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.Scripting.IFunction" Collapsed="true">
+    <Position X="111" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAQAAAAAABQAAAAAACAAAAAAgAAAAAA=</HashCode>
+      <FileName>Scripting\IFunction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.Threading.ISynchronizable" Collapsed="true">
+    <Position X="119.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Threading\ISynchronizable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.UI.IRenderTarget">
+    <Position X="101.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAAAAAAAAAAAAAAEQIIAAAAAAAAAIAA=</HashCode>
+      <FileName>UI\IRenderTarget.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.UI.IWindowResizer" Collapsed="true">
+    <Position X="116.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>UI\IWindowResizer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.Web.IDataProvider" Collapsed="true">
+    <Position X="109.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Web\IDataProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.Web.IResponseContext" Collapsed="true">
+    <Position X="114.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\IResponseContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.Web.ISchemeDescriptor" Collapsed="true">
+    <Position X="116.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\ISchemeDescriptor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Crystalbyte.Spectre.Web.ISchemeHandlerFactoryDescriptor" Collapsed="true">
+    <Position X="118" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAIAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Web\SchemeHandlerFactoryDescriptor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Crystalbyte.Spectre.ErrorCode" Collapsed="true">
+    <Position X="114.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>yRCAiBCgQSgMQAgIASCRAEgAAAYAACCBEAAwQsAhCCE=</HashCode>
+      <FileName>ErrorCode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.LogSeverity" Collapsed="true">
+    <Position X="118" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAA4AAAAAAAAABAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>LogSeverity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.ProcessType" Collapsed="true">
+    <Position X="111" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAEAAA=</HashCode>
+      <FileName>ProcessType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UrlRequestFlags" Collapsed="true">
+    <Position X="114.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAAAAAAAAAAAACAACAAAAAAAAAAAAgQAEQQAA=</HashCode>
+      <FileName>UrlRequestFlags.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.Scripting.DialogType" Collapsed="true">
+    <Position X="109.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Scripting\DialogType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.Threading.DispatcherQueue" Collapsed="true">
+    <Position X="111" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAEAAAAAQAAAAAAAAAAAEAAAAAgCAAAAAEBA=</HashCode>
+      <FileName>Threading\DispatcherQueue.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UI.EditStates" Collapsed="true">
+    <Position X="112.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAABAQAAAAAAAAAAAAAAAAAAAQAAAIBAAEACAA=</HashCode>
+      <FileName>UI\EditStates.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UI.KeyModifiers" Collapsed="true">
+    <Position X="116.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAhQAAAIAAgAAAAACAABAAAAAAAgAAAAAAEEAAA=</HashCode>
+      <FileName>UI\KeyModifiers.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UI.MediaStates" Collapsed="true">
+    <Position X="119.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAQIAAAAAQEAAAAAAAACAggAAAABAAAAAAEAAIA=</HashCode>
+      <FileName>UI\MediaStates.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UI.MediaType" Collapsed="true">
+    <Position X="116" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEEAAAAAAAEABAAAAAAAAEAAAg=</HashCode>
+      <FileName>UI\MediaType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UI.NodeTypes" Collapsed="true">
+    <Position X="109.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAACQAEAQAU=</HashCode>
+      <FileName>UI\NodeTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.UI.WindowStyles" Collapsed="true">
+    <Position X="116.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAkEAABAAAAAAAMjAARAAAAACAAkIGAICAAQAAwQ=</HashCode>
+      <FileName>UI\WindowStyles.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Crystalbyte.Spectre.Web.SchemeProperties" Collapsed="true">
+    <Position X="112.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAIBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\SchemeProperties.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

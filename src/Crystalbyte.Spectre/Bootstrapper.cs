@@ -2,17 +2,17 @@
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License version 3 as published by
-// the Free Software Foundation.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 // 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+//    http://www.apache.org/licenses/LICENSE-2.0
 // 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #endregion
 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Diagnostics;
 using System.Reflection;
 using Crystalbyte.Spectre.Scripting;
 using Crystalbyte.Spectre.UI;
@@ -32,17 +32,16 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre {
     public abstract class Bootstrapper {
-        protected virtual RendererDelegate CreateAppDelegate() {
-            return new RendererDelegate();
+        protected virtual RenderDelegate CreateRenderDelegate() {
+            return new RenderDelegate();
         }
 
         protected abstract IEnumerable<Viewport> CreateViewports();
 
         public virtual void Run() {
+            ConfigureSettings(Application.Current.Settings);
 
-			ConfigureSettings(Application.Current.Settings);
-
-            var app = CreateAppDelegate();
+            var app = CreateRenderDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
             app.CommandLineProcessing += OnCommandLineProcessing;
@@ -66,27 +65,27 @@ namespace Crystalbyte.Spectre {
             Application.Current.Shutdown();
         }
 
-        protected virtual void OnCommandLineProcessing(object sender, CommandLineProcessingEventArgs e)
-        {
-			var program = Assembly.GetEntryAssembly().Location;
-			var codebase = new FileInfo(program).DirectoryName;
+        protected virtual void OnCommandLineProcessing(object sender, CommandLineProcessingEventArgs e) {
+            var program = Assembly.GetEntryAssembly().Location;
+            var codebase = new FileInfo(program).DirectoryName;
+            if (codebase == null) {
+                throw new NullReferenceException("codebase must not be null");
+            }
 
-			if (!e.CommandLine.HasSwitch("lang")) {
-				var locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name) 
-					? CultureInfo.CurrentCulture.Name 
-					: "en-US";
-				e.CommandLine.AppendSwitchWithValue("lang", locale);			
-			}
+            if (!e.CommandLine.HasSwitch("lang")) {
+                var locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name)
+                                 ? CultureInfo.CurrentCulture.Name
+                                 : "en-US";
+                e.CommandLine.AppendSwitchWithValue("lang", locale);
+            }
 
-			if (!e.CommandLine.HasSwitch("locales-dir-path")) {
-				e.CommandLine.AppendSwitchWithValue("locales-dir-path", Path.Combine(codebase, "locales"));			
-			}
+            if (!e.CommandLine.HasSwitch("locales-dir-path")) {
+                e.CommandLine.AppendSwitchWithValue("locales-dir-path", Path.Combine(codebase, "locales"));
+            }
 
-			if (!e.CommandLine.HasSwitch("resources-dir-path")) {
-				e.CommandLine.AppendSwitchWithValue("resources-dir-path", codebase);			
-			}
-
-
+            if (!e.CommandLine.HasSwitch("resources-dir-path")) {
+                e.CommandLine.AppendSwitchWithValue("resources-dir-path", codebase);
+            }
         }
 
         protected virtual void OnStarting(object sender, EventArgs e) {
@@ -98,19 +97,18 @@ namespace Crystalbyte.Spectre {
             e.SchemeDescriptors.AddRange(descriptors);
         }
 
-        protected virtual void ConfigureSettings(ApplicationSettings settings) {  
+        protected virtual void ConfigureSettings(ApplicationSettings settings) {
+            var program = Assembly.GetEntryAssembly().Location;
 
-			var program = Assembly.GetEntryAssembly().Location;
-
-			var isMonoHosted = Type.GetType("Mono.Runtime") != null;
-			if (isMonoHosted) {
+            var isMonoHosted = Type.GetType("Mono.Runtime") != null;
+            if (isMonoHosted) {
 #if DEBUG
 
 			settings.BrowserSubprocessPath = string.Format("/usr/bin/mono --debug {0}", program);
 #else
-			settings.BrowserSubprocessPath = string.Format("/usr/bin/mono {0}", program);
+                settings.BrowserSubprocessPath = string.Format("/usr/bin/mono {0}", program);
 #endif
-			}
+            }
 
 #if DEBUG
 			settings.LogSeverity = LogSeverity.LogseverityVerbose;
@@ -129,20 +127,20 @@ namespace Crystalbyte.Spectre {
             };
         }
 
-        protected virtual IList<ScriptingCommand> RegisterScriptingCommands() {
-            return new List<ScriptingCommand>();
+        protected virtual IList<Extension> RegisterScriptingExtensions() {
+            return new List<Extension>();
         }
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
-            var extensions = RegisterScriptingCommands();
+            var extensions = RegisterScriptingExtensions();
             if (extensions != null) {
-                extensions.ForEach(RegisterScriptingCommand);
+                extensions.ForEach(RegisterScriptingExtension);
             }
         }
 
-        private static void RegisterScriptingCommand(ScriptingCommand extension) {
+        private static void RegisterScriptingExtension(Extension extension) {
             var name = Guid.NewGuid().ToString();
-            ScriptingRuntime.RegisterCommand(name, extension);
+            ScriptingRuntime.RegisterExtension(name, extension);
         }
     }
 }
