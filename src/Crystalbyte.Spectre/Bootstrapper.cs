@@ -32,7 +32,7 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre {
     public abstract class Bootstrapper {
-        protected virtual RenderDelegate CreateAppDelegate() {
+        protected virtual RenderDelegate CreateRenderDelegate() {
             return new RenderDelegate();
         }
 
@@ -41,7 +41,7 @@ namespace Crystalbyte.Spectre {
         public virtual void Run() {
             ConfigureSettings(Application.Current.Settings);
 
-            var app = CreateAppDelegate();
+            var app = CreateRenderDelegate();
             app.CustomSchemesRegistering += OnCustomSchemesRegistering;
             app.Initialized += OnFrameworkInitialized;
             app.CommandLineProcessing += OnCommandLineProcessing;
