@@ -40,9 +40,9 @@ namespace Crystalbyte.Spectre {
         private readonly CefRenderProcessHandlerCapiDelegates.OnProcessMessageReceivedCallback2
             _processMessageReceivedCallback;
 
-        private readonly RendererDelegate _delegate;
+        private readonly RenderDelegate _delegate;
 
-        public RenderProcessHandler(RendererDelegate @delegate)
+        public RenderProcessHandler(RenderDelegate @delegate)
             : base(typeof (CefRenderProcessHandler)) {
             _delegate = @delegate;
             _contextCreatedCallback = OnContextCreated;
@@ -96,7 +96,7 @@ namespace Crystalbyte.Spectre {
                 Context = ScriptingContext.FromHandle(context)
             };
 
-            ScriptingRuntime.RegisteredCommands.ForEach(x => x.OnScriptingContextReleased(e));
+            ScriptingRuntime.RegisteredExtensions.ForEach(x => x.OnScriptingContextReleased(e));
             _delegate.OnScriptingContextReleased(e);
         }
 

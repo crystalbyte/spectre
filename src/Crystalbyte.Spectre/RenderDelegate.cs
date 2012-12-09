@@ -26,7 +26,7 @@ using Crystalbyte.Spectre.Web;
 #endregion
 
 namespace Crystalbyte.Spectre {
-    public class RendererDelegate {
+    public class RenderDelegate {
         public event EventHandler<BrowserEventArgs> BrowserDestroyed;
 
         protected internal virtual void OnBrowserDestroyed(BrowserEventArgs e) {

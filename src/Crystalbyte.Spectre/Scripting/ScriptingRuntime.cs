@@ -26,19 +26,19 @@ using Crystalbyte.Spectre.Projections;
 
 namespace Crystalbyte.Spectre.Scripting {
     public static class ScriptingRuntime {
-        private static readonly List<Extension> _commands = new List<Extension>();
+        private static readonly List<Extension> _extensions = new List<Extension>();
 
-        public static IEnumerable<Extension> RegisteredCommands {
-            get { return _commands; }
+        public static IEnumerable<Extension> RegisteredExtensions {
+            get { return _extensions; }
         }
 
-        public static bool RegisterCommand(string name, Extension command) {
+        public static bool RegisterExtension(string name, Extension extension) {
             // keep strong reference
-            _commands.Add(command);
+            _extensions.Add(extension);
 
             var n = new StringUtf16(name);
-            var j = new StringUtf16(command.RegistrationCode);
-            var result = CefV8Capi.CefRegisterExtension(n.Handle, j.Handle, command.Handle);
+            var j = new StringUtf16(extension.RegistrationCode);
+            var result = CefV8Capi.CefRegisterExtension(n.Handle, j.Handle, extension.Handle);
             return Convert.ToBoolean(result);
         }
     }

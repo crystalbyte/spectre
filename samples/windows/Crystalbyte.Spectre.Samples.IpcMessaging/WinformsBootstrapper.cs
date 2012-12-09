@@ -42,8 +42,8 @@ namespace Crystalbyte.Spectre.Samples {
             };
         }
 
-        protected override IList<Scripting.Extension> RegisterScriptingCommands() {
-            var commands = base.RegisterScriptingCommands();
+        protected override IList<Scripting.Extension> RegisterScriptingExtensions() {
+            var commands = base.RegisterScriptingExtensions();
             commands.Add(new ChangeWindowTitleExtension());
             return commands;
         }

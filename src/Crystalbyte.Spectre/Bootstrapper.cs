@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -31,8 +32,8 @@ using Crystalbyte.Spectre.Web;
 
 namespace Crystalbyte.Spectre {
     public abstract class Bootstrapper {
-        protected virtual RendererDelegate CreateAppDelegate() {
-            return new RendererDelegate();
+        protected virtual RenderDelegate CreateAppDelegate() {
+            return new RenderDelegate();
         }
 
         protected abstract IEnumerable<Viewport> CreateViewports();
@@ -67,6 +68,9 @@ namespace Crystalbyte.Spectre {
         protected virtual void OnCommandLineProcessing(object sender, CommandLineProcessingEventArgs e) {
             var program = Assembly.GetEntryAssembly().Location;
             var codebase = new FileInfo(program).DirectoryName;
+            if (codebase == null) {
+                throw new NullReferenceException("codebase must not be null");
+            }
 
             if (!e.CommandLine.HasSwitch("lang")) {
                 var locale = !string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name)
@@ -123,20 +127,20 @@ namespace Crystalbyte.Spectre {
             };
         }
 
-        protected virtual IList<Extension> RegisterScriptingCommands() {
+        protected virtual IList<Extension> RegisterScriptingExtensions() {
             return new List<Extension>();
         }
 
         private void OnFrameworkInitialized(object sender, EventArgs e) {
-            var extensions = RegisterScriptingCommands();
+            var extensions = RegisterScriptingExtensions();
             if (extensions != null) {
-                extensions.ForEach(RegisterScriptingCommand);
+                extensions.ForEach(RegisterScriptingExtension);
             }
         }
 
-        private static void RegisterScriptingCommand(Extension extension) {
+        private static void RegisterScriptingExtension(Extension extension) {
             var name = Guid.NewGuid().ToString();
-            ScriptingRuntime.RegisterCommand(name, extension);
+            ScriptingRuntime.RegisterExtension(name, extension);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Crystalbyte.Spectre {
         private readonly CefResourceBundleHandlerCapiDelegates.GetLocalizedStringCallback _getlocalizedStringCallback;
         //private readonly AppDelegate _appDelegate;
 
-        public ResourceBundleHandler(RendererDelegate appDelegate)
+        public ResourceBundleHandler(RenderDelegate appDelegate)
             : base(typeof (CefResourceBundleHandler)) {
             //_appDelegate = appDelegate;
             _getDataResourceCallback = OnGetDataResource;
