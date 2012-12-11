@@ -18,27 +18,29 @@
 
 #region Using directives
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Crystalbyte.Spectre.UI;
+using System.Linq;
+using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
-namespace Crystalbyte.Spectre.Samples {
-    public sealed class GtkBootstrapper : Bootstrapper {
-		protected override void ConfigureSettings (ApplicationSettings settings) {
-			base.ConfigureSettings (settings);
-#if DEBUG
-			settings.IsSingleProcess = true;
-#endif
-			settings.LogSeverity = LogSeverity.LogseverityVerbose;
+namespace Crystalbyte.Spectre.Samples.Commands {
+    public sealed class IncrementExtension : Extension {
+        public override string RegistrationCode {
+            get {
+                return RegistrationCodes.Synthesize("commands", "increment", "value");
+            }
+        }
 
-		}
-        protected override IEnumerable<Viewport> CreateViewports() {
-            yield return new Viewport(
-                new MainWindow {StartupUri = new Uri("spectre://localhost/Views/index.html")},
-                new BrowserDelegate());
+        protected override void OnExecuted(ExecutedEventArgs e) {
+            if (e.Arguments.Count < 1) {
+                e.Result = new JavaScriptObject(1);
+            }
+            else {
+                var b = e.Arguments.First().ToInteger();
+                e.Result = new JavaScriptObject(b + 1);
+            }
+
+            e.IsHandled = true;
         }
     }
 }

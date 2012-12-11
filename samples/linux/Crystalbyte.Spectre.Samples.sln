@@ -9,11 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Project
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Razor", "..\..\src\Crystalbyte.Spectre.Razor\Crystalbyte.Spectre.Razor.csproj", "{50708109-E81F-4451-A7DF-DBEB4A1B0750}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(samples)", "(samples)", "{0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{21612323-C158-4011-8733-E856B75E08B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Video", "Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj", "{40F37414-4142-4CE6-B4AA-A63B814E8AC7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Video", "Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj", "{40F37414-4142-4CE6-B4AA-A63B814E8AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crystalbyte.Spectre.Samples.Extensions", "Crystalbyte.Spectre.Samples.Extensions\Crystalbyte.Spectre.Samples.Extensions.csproj", "{40F37414-4142-4CE6-B4AA-A63B814E8AC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,11 +49,10 @@ Global
 		{DC202E77-073A-4881-84C9-94B6BC7469B4} = {7C8FE5E1-03DE-48EE-94DE-E47048925824}
 		{8CCC057C-FA77-4F49-BACD-5F6EBAB13C14} = {7C8FE5E1-03DE-48EE-94DE-E47048925824}
 		{50708109-E81F-4451-A7DF-DBEB4A1B0750} = {7C8FE5E1-03DE-48EE-94DE-E47048925824}
-		{40F37414-4142-4CE6-B4AA-A63B814E8AC7} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
-		{40F37414-4142-4CE6-B4AA-A63B814E8AC7} = {0F0138AB-9695-4BF7-9C9D-F23115AE5AD0}
+		{40F37414-4142-4CE6-B4AA-A63B814E8AC7} = {21612323-C158-4011-8733-E856B75E08B7}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Crystalbyte.Spectre.Samples.Video\Crystalbyte.Spectre.Samples.Video.csproj
+		StartupItem = Crystalbyte.Spectre.Samples.Extensions\Crystalbyte.Spectre.Samples.Extensions.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

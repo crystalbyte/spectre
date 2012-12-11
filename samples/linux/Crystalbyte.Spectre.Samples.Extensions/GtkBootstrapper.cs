@@ -1,4 +1,4 @@
-﻿#region Licensing notice
+#region Licensing notice
 
 // Copyright (C) 2012, Alexander Wieser-Kuciel <alexander.wieser@crystalbyte.de>
 // 
@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using Crystalbyte.Spectre.Samples.Commands;
+using Crystalbyte.Spectre.Scripting;
 
 #endregion
 
@@ -37,11 +38,11 @@ namespace Crystalbyte.Spectre.Samples {
 
 		}
 
-		protected override IList<Crystalbyte.Spectre.Scripting.ScriptingCommand> RegisterScriptingCommands ()
+		protected override IList<Extension> RegisterScriptingExtensions ()
 		{
-			var commands = base.RegisterScriptingCommands ();
-			commands.Add(new IncScriptingCommand());
-			commands.Add(new IncScriptingCommandAsync());
+			var commands = base.RegisterScriptingExtensions ();
+			commands.Add(new IncrementExtension());
+			commands.Add(new IncrementExtensionAsync());
 			return commands;
 		}
 

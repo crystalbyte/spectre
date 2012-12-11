@@ -11,27 +11,23 @@
     <AssemblyName>Crystalbyte.Spectre.Samples.Commands</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="BeforeExecute" command="../copy_cef_dependencies.sh ${ProjectConfigName}" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
+    <ConsolePause>False</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CustomCommands>
       <CustomCommands>
         <Command type="BeforeExecute" command="../copy_cef_dependencies.sh ${ProjectConfigName}" workingdir="${TargetDir}" />
@@ -60,8 +56,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="GtkBootstrapper.cs" />
-    <Compile Include="Commands\IncScriptingCommand.cs" />
-    <Compile Include="Commands\IncScriptingCommandAsync.cs" />
+    <Compile Include="Extensions\IncrementExtension.cs" />
+    <Compile Include="Extensions\IncrementExtensionAsync.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -74,7 +70,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Scripts\" />
     <Folder Include="Styles\" />
     <Folder Include="Views\" />
